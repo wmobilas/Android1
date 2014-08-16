@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="M:\android\test1\app\build\intermediates\pre-dexed\debug\classes-d0cbb11205f69a8ad005cb0720ccddb2e31d9454.jar"
+        jar="M:\android\test1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\5.0.89\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="d71573c9c5ea98a8db47ad6ff993a63d492b3bfa"/>
+    <item
+        dex="M:\android\test1\app\build\intermediates\pre-dexed\debug\support-v13-19.1.0-8e51bc11855c42398b911a96b16274f7b1f8635d.jar"
+        jar="C:\android\sdk\extras\android\m2repository\com\android\support\support-v13\19.1.0\support-v13-19.1.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="6b852a232f642c75a7fdfc7212b841b8c8f8959c"/>
+    <item
+        dex="M:\android\test1\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-5cf530e9160d069452ee3b60a727af2da442d9c2.jar"
+        jar="C:\android\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+
+</pre-dex-items>
