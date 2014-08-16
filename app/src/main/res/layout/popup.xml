@@ -11,7 +11,7 @@
         android:layout_gravity="center_vertical"
         android:padding="2dip"
         android:src="@drawable/ic_launcher"
-        android:contentDescription="@string/icon"/>
+        android:contentDescription="icon"/>
 
     <LinearLayout
         android:layout_width="match_parent"

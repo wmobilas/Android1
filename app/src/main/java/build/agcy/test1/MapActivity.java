@@ -46,6 +46,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
     Marker marker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
        // MyLocationListener.SetUpLocationListener(this);
 //        final Context mainContext = this;
 //        new Thread(new Runnable() {
@@ -70,42 +71,15 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
     }
     private void init() {
 
-//        MyLocationListener.LocationResult locationResult = new MyLocationListener.LocationResult() {
-//            @Override
-//            public void gotLocation(Location location) {
-//                //Got the location!
-//            }
-//        };
         MyLocationListener myLocation = new MyLocationListener(this);
-        if (myLocation.canGetLocation()) {
-            Log.d("Your Location", "latitude:" + myLocation.getLatitude() + ", longitude: " + myLocation.getLongitude());
-            latitude=myLocation.getLatitude();
-            longitude=myLocation.getLongitude();
-        } else {
-            // Can't get user's current location
-            // stop executing code by return
-            return;
-        }
-//        MyLocationListener myLocation = new MyLocationListener();
-       // myLocation.getLocation(this, locationResult);
-     //   latitude = myLocation.latitude;
-     //   longitude = myLocation.longitude;
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(latitude, longitude))
-                .zoom(16)
-                .bearing(45)
-                .tilt(30)
-                .build();
 //        marker = map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("I am here!"));
-        map.setMyLocationEnabled(false);
+        map.setMyLocationEnabled(true);
         map.getUiSettings().setAllGesturesEnabled(true);
         map.getUiSettings().setMyLocationButtonEnabled(true);
         map.setInfoWindowAdapter(new PopupAdapter(getLayoutInflater()));
         map.setOnInfoWindowClickListener(this);
         map.setBuildingsEnabled(true);
         map.setOnInfoWindowClickListener(this);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
-        map.animateCamera(cameraUpdate);
         //   map.setClustering(new ClusteringSettings().enabled(false).addMarkersDynamically(true));
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
@@ -173,15 +147,32 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
             }
         });
 
+        if (myLocation.canGetLocation()) {
+            Log.d("Your Location", "latitude:" + myLocation.getLatitude() + ", longitude: " + myLocation.getLongitude());
+            latitude=myLocation.getLatitude();
+            longitude=myLocation.getLongitude();
+        } else {
+            // Can't get user's current location
+            // stop executing code by return
+            return;
+        }
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(latitude, longitude))
+                .zoom(16)
+                .bearing(45)
+                .tilt(30)
+                .build();
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        map.animateCamera(cameraUpdate);
     }
 
     public void onClickTest(View view) {
         map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude))
-                .zoom(16)
-                .bearing(45)
-                .tilt(30)
+                .zoom(12)
+                //.bearing(45)
+              //  .tilt(30)
                 .build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         map.animateCamera(cameraUpdate);

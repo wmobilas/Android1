@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="test">Test</string>
-    <string name="test2">test2</string>
-    <string name="app_name">test1</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="button_send" >Send</string>
-    <string name="Login">text</string>
-    <string name="text">Login</string>
-    <string name="map">Map</string>
-    <string name="timepicker">timepicker</string>
-    <string name="icon">icon</string>
     <color name="color1">#222</color>
 
+    <string name="text_here">Text here</string>
+    <string name="send">Send</string>
 </resources>
