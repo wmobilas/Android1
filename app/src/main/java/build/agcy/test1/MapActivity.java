@@ -1,14 +1,13 @@
 package build.agcy.test1;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,19 +15,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesClient;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -43,7 +38,8 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
     double longitude;
     LatLng currentPosition;
     Marker myMarker;
-    Marker marker;
+    LocationManager locationManager;
+    String provider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -63,6 +59,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         map = mapFragment.getMap();
+
         if (map == null) {
             finish();
             return;
@@ -71,7 +68,9 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
     }
     private void init() {
 
-        MyLocationListener myLocation = new MyLocationListener(this);
+        final MyLocationListener myLocationService = new MyLocationListener(this){
+
+        };
 //        marker = map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("I am here!"));
         map.setMyLocationEnabled(true);
         map.getUiSettings().setAllGesturesEnabled(true);
@@ -80,63 +79,253 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
         map.setOnInfoWindowClickListener(this);
         map.setBuildingsEnabled(true);
         map.setOnInfoWindowClickListener(this);
+
+
+//        if (myLocationService.canGetLocation()) {
+//            Log.d("Your Location", "latitude:" + myLocationService.getLatitude() + ", longitude: " + myLocationService.getLongitude());
+//            latitude=myLocationService.getLatitude();
+//            longitude=myLocationService.getLongitude();
+//        } else {
+            // Can't get user's current location
+            // stop executing code by return
+//            LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+//            Location location = null;
+//            if (lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)!=null){
+//                location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+//            }
+//            else{
+//                if (lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)!=null){
+//                    location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//                }
+//                else {
+//                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//                        startActivity(intent);
+//                    }
+//
+//            }}
+
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            // Define the criteria how to select the locatioin provider -> use
+            // default
+            Criteria criteria = new Criteria();
+            provider = locationManager.getBestProvider(criteria, false);
+        Location location = null;
+        if (locationManager.getLastKnownLocation(provider)!=null){
+                    location = locationManager.getLastKnownLocation(provider);
+
+            latitude=location.getLatitude();
+            longitude=location.getLongitude();
+                }
+                else {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
+            latitude=myLocationService.getLatitude();
+            longitude=myLocationService.getLongitude();
+                    }
+            //return;
+
+
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(latitude, longitude))
+                .zoom(16)
+                .bearing(45)
+                .tilt(30)
+                .build();
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        map.animateCamera(cameraUpdate);
         //   map.setClustering(new ClusteringSettings().enabled(false).addMarkersDynamically(true));
+//        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//
+//            @Override
+//            public void onMapClick(LatLng latLng) {
+//                if((myMarker!=null)
+//                          && (Math.abs(myMarker.getPosition().latitude - latLng.latitude) < 0.05
+//                          && Math.abs(myMarker.getPosition().longitude - latLng.longitude) < 0.05)) {
+//                    myMarker.setVisible(false);
+//                }
+//            }
+//        });
+        map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+            public String address = null;
+            public LatLng lastCoords = null;
+
+            // Use default InfoWindow frame
+            @Override
+            public View getInfoWindow(Marker arg0) {
+                return null;
+            }
+
+            // Defines the contents of the InfoWindow
+            @Override
+            public View getInfoContents(final Marker marker) {
+                // Getting view from the layout file info_window_layout
+                final View rootView = getLayoutInflater().inflate(R.layout.info_window_layout, null);
+
+                // Getting the position from the marker
+                LatLng newCoords = marker.getPosition();//стой)мб вот это
+                // Getting reference to the TextView to set latitude
+                final TextView tv_lng = (TextView) rootView.findViewById(R.id.tv_lat);
+
+                // Getting reference to the TextView to set longitude
+                final TextView tv_lat = (TextView) rootView.findViewById(R.id.tv_lng);
+                //TextView mAddress = (TextView) findViewById(R.id.tv_lng);
+
+                //ImageView image = (ImageView) findViewById(R.id.info_window_icon);
+                // image.setVisibility(View.VISIBLE);
+                // Display the results of the lookup.
+                //}
+                // Setting the latitude
+                // сюда суем объект того класса, и в doInBackground суем вот это то не надо? ддо этого работало?показывало координаты а как ты поменял вью?класс
+                // как бы тебе объяснить... Короче когда мы берём маркер, то у нас должны быть новые координаты ( второе условие ). если же координаты одни и те же,
+                // значт это мы повторили вызов маркера. Раз повторили вызов, то скорее всего адрес уже не нуль, поэтому мы биндим его. андроид иногда такой сложный -_- угу
+                // поверь, записная книжка и синхронизация куда сложнее. это я тебе за 20 минут разобрался, там я ебал мозг неделю.ужс, а что такое записная книга... эм...
+                // записная книгка андроидовская, там же контакты, всякие номера, имейлы, имена, там связываются эти контакты, если система видит, что одинаковые имена\телефоны\имейлы
+                // тоже синхронизации, там пиздос) а зачем тебе понадобились контакты? надо было) ок для проекта того? да.эх) спасиб!)
+                if (address == null || !newCoords.equals(lastCoords)) {
+//                    GeoPoint newCurrent = new GeoPoint(59529200, 18071400);
+                    Location current = new Location("reverseGeocoded");
+                    current.setLatitude(marker.getPosition().latitude);
+                    current.setLongitude(marker.getPosition().longitude);
+                    current.setAccuracy(3333);
+                    current.setBearing(333);
+                    Location loc = current;
+
+                    // myLocationService.getLocation(); // это не та лок, кстати. нужно как-то подругому из маркера брать
+                    // Set activity indicator visibility to "gone"
+
+
+                    final ProgressBar mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.address_progress);
+
+//                    try{
+//                        mActivityIndicator.post(new Runnable() {
+//                            public void run() {
+//                                mActivityIndicator.requestFocus();
+                                mActivityIndicator.setVisibility(View.VISIBLE); // Or: btn.setVisibility(View.VISIBLE)
+//                            }});
+//                    }catch (Exception e) {
+//                        Log.d("test", e.toString());
+//
+//                    }
+                    //tv_lat.setText("Loading adress");
+                    new GetAddressTask(getBaseContext()) {
+
+
+                        @Override
+                        protected void onPostExecute(final String s) {
+                            address = s;
+
+                            marker.showInfoWindow(); // повторный вызов маркера, потому что иначе он не обновляется.
+
+                        }
+                    }.execute(loc);
+                } else {
+                    final ProgressBar mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.address_progress);
+//                        try {
+//                            mActivityIndicator.post(new Runnable() {
+//                                public void run() {
+//                                    mActivityIndicator.requestFocus();
+                                    mActivityIndicator.setVisibility(View.GONE); // Or: btn.setVisibility(View.VISIBLE)
+//                                }
+//                            });
+//                        } catch (Exception e) {
+//                            Log.d("test", e.toString());
+//
+//                        }
+
+
+                    if (!address.equals("No address found")) {
+                        String[] adresses = address.split(",");
+                        String adres = "";
+                        if ((!adresses[0].equals(" null")) && (!adresses[0].equals("")))
+                            adres += "Street:" + adresses[0];
+                        if ((!adresses[1].equals(" null")) && (!adresses[1].equals("")))
+                            adres += " City:" + adresses[1];
+                        if ((!adresses[2].equals(" null")) && (!adresses[2].equals("")))
+                            adres += " Country:" + adresses[2];
+                        tv_lat.setText(adres);
+                        // Setting the longitude почему не ставится н мб чтото с лейаутом
+                        tv_lng.setText("Longitude:" + lastCoords.longitude + " Lattitude:" + lastCoords.latitude);
+                    }
+                }
+
+            lastCoords=newCoords;
+
+
+            // Returning the view containing InfoWindow contents
+            return rootView;
+
+        }
+        });
+
+        // Adding and showing marker while touching the GoogleMap
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
-            public void onMapClick(LatLng latLng) {
-                if((myMarker!=null)
-                          && (Math.abs(myMarker.getPosition().latitude - latLng.latitude) < 0.05
-                          && Math.abs(myMarker.getPosition().longitude - latLng.longitude) < 0.05)) {
-                    myMarker.setVisible(false);
-                }
+            public void onMapClick(LatLng arg0) {
+                // Clears any existing markers from the GoogleMap
+                map.clear();
+
+                // Creating an instance of MarkerOptions to set position
+                MarkerOptions markerOptions = new MarkerOptions();
+
+                // Setting position on the MarkerOptions
+                markerOptions.position(arg0);
+
+                // Animating to the currently touched position
+                map.animateCamera(CameraUpdateFactory.newLatLng(arg0));
+
+                // Adding marker on the GoogleMap
+                Marker marker = map.addMarker(markerOptions);
+
+                // Showing InfoWindow on the GoogleMap
+                marker.showInfoWindow();
+
+
             }
         });
         map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
 
-            public void addMyMarker(LatLng latLng){
-
-                myMarker = map.addMarker(new MarkerOptions()
-                        .position(currentPosition)
-                        .title("Hello world")
-                        .snippet("This is my spot!")
-                        .draggable(true)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-                //.fromResource(R.drawable.pin))
-
-//                map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+//            public void addMyMarker(LatLng latlng){
+//                myMarker = map.addMarker(new MarkerOptions()
+//                        .position(currentPosition)
+//                        .title("Hello world")
+//                        .snippet("This is my spot!")
+//                        .draggable(true)
+//                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+//                //.fromResource(R.drawable.pin))
 //
-//                    @Override
-//                    public View getInfoWindow(Marker marker) {
 ////
-//                        TextView tv = new TextView(MapActivity.this);
-//                        tv.setText("Test getInfoContents");
-//                        return tv;
-//                    }
+//            }
+            @Override
+            public void onMapLongClick(LatLng arg0) {
+
+//                if (myMarker != null) {
 //
-//                    @Override
-//                    public View getInfoContents(Marker marker) {
-////                        if (marker.getId().equals(MapActivity.this.marker.getId())) {
-//                            TextView tv = new TextView(MapActivity.this);
-//                            tv.setText("Test getInfoWindow");
-//                            tv.setTextColor(Color.RED);
-//                            return tv;
-////                        } else
-////                            return null;
-//                    }
-//                });
+//                    myMarker.setVisible(false);
+//                }
+//                currentPosition = new LatLng(latLng.latitude, latLng.longitude);
+//                addMyMarker(latLng);
+
+                // Clears any existing markers from the GoogleMap
+                map.clear();
+
+                // Creating an instance of MarkerOptions to set position
+                MarkerOptions markerOptions = new MarkerOptions();
+
+                // Setting position on the MarkerOptions
+                markerOptions.position(arg0);
+
+                // Animating to the currently touched position
+                map.animateCamera(CameraUpdateFactory.newLatLng(arg0));
+
+                // Adding marker on the GoogleMap
+                Marker marker = map.addMarker(markerOptions);
+
+                // Showing InfoWindow on the GoogleMap
+                marker.showInfoWindow();
 
             }
-            @Override
-            public void onMapLongClick(LatLng latLng) {
-
-                if (myMarker != null) {
-
-                    myMarker.setVisible(false);
-                }
-                currentPosition = new LatLng(latLng.latitude, latLng.longitude);
-                addMyMarker(latLng);
-                }
         });
 
         map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
@@ -146,24 +335,6 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
                 Log.d(TAG, "onCameraChange: " + camera.target.latitude + "," + camera.target.longitude);
             }
         });
-
-        if (myLocation.canGetLocation()) {
-            Log.d("Your Location", "latitude:" + myLocation.getLatitude() + ", longitude: " + myLocation.getLongitude());
-            latitude=myLocation.getLatitude();
-            longitude=myLocation.getLongitude();
-        } else {
-            // Can't get user's current location
-            // stop executing code by return
-            return;
-        }
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(latitude, longitude))
-                .zoom(16)
-                .bearing(45)
-                .tilt(30)
-                .build();
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
-        map.animateCamera(cameraUpdate);
     }
 
     public void onClickTest(View view) {
@@ -171,8 +342,8 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude))
                 .zoom(12)
-                //.bearing(45)
-              //  .tilt(30)
+                .bearing(45)
+                .tilt(30)
                 .build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         map.animateCamera(cameraUpdate);
