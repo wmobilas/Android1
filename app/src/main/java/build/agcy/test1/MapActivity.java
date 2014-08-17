@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -121,6 +122,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
                         startActivity(intent);
             latitude=myLocationService.getLatitude();
             longitude=myLocationService.getLongitude();
+            Toast.makeText(getApplicationContext(), "Please Turn GPS On",Toast.LENGTH_LONG );
                     }
             //return;
 
