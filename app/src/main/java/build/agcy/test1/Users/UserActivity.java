@@ -3,6 +3,7 @@ package build.agcy.test1.Users;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,20 +11,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.TextView;
 
+import build.agcy.test1.Api.Users.UserTask;
+import build.agcy.test1.Models.Meeting;
+import build.agcy.test1.Models.User;
 import build.agcy.test1.R;
 
 public class UserActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);// айдишники у нас везде стринг
+
         setContentView(R.layout.activity_user);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
     }
 
 
@@ -51,13 +58,45 @@ public class UserActivity extends Activity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+        private String userid;
+        public User user;
         public PlaceholderFragment() {
+
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_user, container, false);
+            final View rootView = inflater.inflate(R.layout.fragment_user, container, false);
+            Activity activity = getActivity();
+            if(activity!=null) {
+                Intent intent = activity.getIntent();
+                Bundle bundle = intent.getExtras();
+                String id = bundle.getString("userid");
+                this.userid = id;
+            }else{
+                userid = null;
+            }
+            UserTask task = new UserTask(userid) {
+
+
+                @Override
+                public void onSuccess(User user) {
+                    PlaceholderFragment.this.user = user;
+                    ((TextView) rootView.findViewById(R.id.name)).setText(user.name);
+                    ((TextView) rootView.findViewById(R.id.status)).setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onError(Exception exp) {
+                    ((TextView) rootView.findViewById(R.id.status)).setText("Error");
+                    // обработка ошибки тоже нужна подробная, надеюсь, это не нужно объяснять?
+                    // во всяком случае пока можно оставить так, мы ведь не продакшн делаем, где каждый левый еррор будет сказываться на
+                    // количестве пользователей xD
+                }
+            };
+            task.start();
+            // теперь жди пока я прикручу апи) сделай пока каких-то фиктивных юзеров, чтобы раставить все по местами
             return rootView;
         }
     }

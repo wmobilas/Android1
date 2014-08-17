@@ -18,7 +18,7 @@
         android:label="App"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Tabbd"
+            android:name=".Start.StartActivity"
             android:label="App"
             android:theme="@style/AnimationActivity" >
             <intent-filter>
@@ -32,7 +32,7 @@
             android:label="Chat"
             android:theme="@style/AnimationActivity" />
         <activity
-            android:name=".PeopleActivity"
+            android:name=".Meetings.MeetingsListActivity"
             android:label="Eaters"
             android:theme="@style/AnimationActivity" />
         <activity

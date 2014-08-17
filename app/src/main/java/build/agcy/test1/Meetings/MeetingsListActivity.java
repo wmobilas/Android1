@@ -7,6 +7,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -33,7 +34,7 @@ public class MeetingsListActivity extends Activity {
                               ArrayList<HashMap<String, String>> meetingsList = new ArrayList<HashMap<String, String>>();
                               HashMap<String, String> map = new HashMap<String, String>();
                               map.put("textreference", "peopleference");
-                              map.put("textname","peoplename");
+                              map.put("textname", "peoplename");
                               meetingsList.add(map);
                               meetingsList.add(map);
                               ListView lv = (ListView) findViewById(R.id.list);
@@ -41,15 +42,17 @@ public class MeetingsListActivity extends Activity {
                                       R.layout.item_meeting,
                                       new String[]{"textreference", "textname"}, new int[]{
                                       R.id.reference, R.id.name});
-                            lv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    startActivity(new Intent(getBaseContext(), MeetingActivity.class));
-                                }
-                            });
-                            // todo: open an MeetingActivity normally
-                          // Adding data into listview
-                          lv.setAdapter(adapter);
+
+                              lv.setAdapter(adapter);
+                              lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                  @Override
+                                  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                      startActivity(new Intent(getBaseContext(), MeetingActivity.class));
+                                  }
+                              });
+                              // todo: open an MeetingActivity normally
+                              // Adding data into listview прежде чем перенаправлять на активити
+                              // ну я еще не умеюнастроек нужно сделать диалог, что у юзера отключен гпс
                           }
                       });
 

@@ -1,5 +1,6 @@
 package build.agcy.test1.Start;
 
+import java.net.SocketException;
 import java.util.HashMap;
 
 import android.support.v4.app.DialogFragment;
@@ -19,17 +20,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import build.agcy.test1.Api.Errors.ApiError;
 import build.agcy.test1.Core.Helpers.JsonHelper;
 import build.agcy.test1.Fragments.TimePickerFragment;
 import build.agcy.test1.Meetings.MeetingsListActivity;
 import build.agcy.test1.Models.CurrentUser;
 import build.agcy.test1.R;
+import build.agcy.test1.Users.UserActivity;
 
 
 public class StartActivity extends FragmentActivity {
@@ -71,6 +75,7 @@ public class StartActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         /*
+        что тут происходит? чВ должно fragments_tabbd прикрутить
         ApiTaskBase task = new ApiTaskBase("", new ArrayList<NameValuePair>()// это аргументы, раз их нет, то не надо их писать.
                 , false, false) {
             @Override
@@ -104,13 +109,43 @@ public class StartActivity extends FragmentActivity {
         // в котором вызывалось, и делает onPostExecute() теперь надо чтобы ты потренировался со всякими вьюшками, фрагментами, списками, адаптерами. лол. ты ведь что-то знаешь?смотря что
         // то есть сейчас этот постЭкзекьют - полноценный колбьек, о котором тогода у нас шла речьясн
         // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+        // primary sections of the activity.*/
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        */
+        LoginTask task = new LoginTask("wmobilas","123qweASD") {
+            @Override
+            public void onSuccess(CurrentUser response) {
+                // todo: remove progressbar
+                // todo: мы залогинились, переходим дальше, и сохраняем данные, которые дали ок
+            }
+
+            @Override
+            public void onError(Exception exp) {
+                // а нет, норм, туплю
+                if (exp instanceof ApiError) {
+                    int code = ((ApiError) exp).getCode();
+                    if (code == ApiError.BADCREDITS) {
+                        Toast.makeText(getApplicationContext(), "Check your login and password", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    if (exp instanceof SocketException) {
+                        Toast.makeText(getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        Toast.makeText(getApplicationContext(), "Unexpected error", Toast.LENGTH_SHORT).show();
+                    }
+                    // удали дурацкий иврит, ты им пользуешься? нередк
+                    // ты понял как вообще должно происходить?что именно? ну запрос
+                }
+            }
+        };
+        // todo: show progress bar
+        task.start();
+        // точно так же делаются запросы с юзерами и тд. тоже пример покажу сейчас, чтобы было наглядно.
     }
 
 
@@ -247,13 +282,22 @@ public class StartActivity extends FragmentActivity {
 
             }
         };
+
         Bundle bundle = new Bundle();
         bundle.putStringArray("1",message);
         intent.putExtras(bundle);
         startActivity(intent);
     }
     public void showTimePickerDialog(View v) {
+        /*
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
+        */
+
+        Bundle bundle = new Bundle();
+        bundle.putString("userid","c68fe120-f4f4-41ff-b885-9cb97884704f");// вот такие айдишники будут у юзеров
+        Intent intent= new Intent(getBaseContext(), UserActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

@@ -26,7 +26,7 @@ import build.agcy.test1.Api.Errors.ApiParseError;
  * Created by kiolt_000 on 06-May-14.
  */
 public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> {
-    private static final String LOG_TAG = "Application Tag";
+    private static final String LOG_TAG = "API TASK";
     private static final String apiUrl = "http://eathwithme.agcy.co.il/api/";
     private final String methodName;
     private final boolean post;
@@ -96,4 +96,8 @@ public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> {
     protected abstract T parse(String json) throws JSONException, FileNotFoundException;//new Gson().fromJson(jsonObject.getString("response"), YOURCLASS);
     public abstract void onSuccess(T response);
     public abstract void onError(Exception exp);
+
+    public void start(){
+        execute();
+    }
 }
