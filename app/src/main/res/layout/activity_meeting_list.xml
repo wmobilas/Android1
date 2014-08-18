@@ -8,14 +8,14 @@
     <Button android:id="@+id/btn_show_map"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Show People on Map"
+        android:text="Show Meetings on Map"
         android:layout_alignParentTop="true"
         android:layout_marginTop="10dip"
         android:onClick="mapOpen"/>
 
     <!--  List view -->
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/meeting_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_show_map"/>

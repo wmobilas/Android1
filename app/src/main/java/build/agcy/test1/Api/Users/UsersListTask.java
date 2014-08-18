@@ -20,7 +20,7 @@ public abstract class UsersListTask extends ApiTaskBase<User[]> {
 
     // отправляем int offset, int count, float latitude, float longtitude
     // или отправляем массив ids
-    public UsersListTask(String methodName, List<NameValuePair> nameValuePairs, boolean post, Boolean loginRequred) {
+    public UsersListTask(List<NameValuePair> nameValuePairs) {
         super("user/list", nameValuePairs, false, false);
     }
 

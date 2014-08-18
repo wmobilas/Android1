@@ -33,7 +33,7 @@
             android:theme="@style/AnimationActivity" />
         <activity
             android:name=".Meetings.MeetingsListActivity"
-            android:label="Eaters"
+            android:label="Meetings"
             android:theme="@style/AnimationActivity" />
         <activity
             android:name=".Meetings.MapActivity"

@@ -1,7 +1,6 @@
 package build.agcy.test1.Users;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.TextView;
 
 import build.agcy.test1.Api.Users.UserTask;
-import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.Models.User;
 import build.agcy.test1.R;
 
@@ -61,7 +58,6 @@ public class UserActivity extends Activity {
         private String userid;
         public User user;
         public PlaceholderFragment() {
-
         }
 
         @Override
@@ -82,9 +78,6 @@ public class UserActivity extends Activity {
 
                 @Override
                 public void onSuccess(User user) {
-                    PlaceholderFragment.this.user = user;
-                    ((TextView) rootView.findViewById(R.id.name)).setText(user.name);
-                    ((TextView) rootView.findViewById(R.id.status)).setVisibility(View.GONE);
                 }
 
                 @Override
@@ -95,7 +88,11 @@ public class UserActivity extends Activity {
                     // количестве пользователей xD
                 }
             };
-            task.start();
+            //task.start();
+            user = new User(){{ id = "123"; name = "Ivan";}};
+            PlaceholderFragment.this.user = user;
+            ((TextView) rootView.findViewById(R.id.description)).setText(user.name);
+            ((TextView) rootView.findViewById(R.id.status)).setVisibility(View.GONE);
             // теперь жди пока я прикручу апи) сделай пока каких-то фиктивных юзеров, чтобы раставить все по местами
             return rootView;
         }

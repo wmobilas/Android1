@@ -1,42 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    style="@style/AnimationActivity"
-    android:focusable="true"
-    android:longClickable="true"
-    android:theme="@style/AppTheme"
-    android:clickable="true"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:gravity="center_vertical"
-    android:layout_weight="0.8"
-    android:background="@drawable/border">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical">
+   <!-- android:transitionGroup="false"-->
 
-    <TextView android:id="@+id/reference"
-        android:visibility="gone"
-        android:layout_width="fill_parent"
+
+    <ImageView
+        android:id="@+id/meeting_photo"
+        android:src="@drawable/pin"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp" />
+    <TextView
+        android:id="@+id/meeting_description"
+        android:text="description"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginStart="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp" />
-
-   <TextView android:id="@+id/name"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:textStyle="bold"
-        android:textSize="16sp"
-       android:layout_alignParentLeft="true"
-       android:layout_alignParentStart="true"
-       android:layout_marginLeft="0dp"
-       android:layout_marginStart="0dp"
-       android:layout_alignParentTop="true"
-       android:layout_marginTop="0dp" />
+        android:autoText="false"/>
+    <TextView
+        android:id="@+id/meeting_creator"
+        android:text="creator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 
-</RelativeLayout>
+</LinearLayout>

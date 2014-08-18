@@ -3,14 +3,28 @@ package build.agcy.test1.Users;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+
+import java.util.ArrayList;
+
+import build.agcy.test1.Api.Users.UsersListTask;
+import build.agcy.test1.Chat.AndyChatActivity;
+import build.agcy.test1.Meetings.MapActivity;
+import build.agcy.test1.Models.User;
 import build.agcy.test1.R;
 
 public class UserListActivity extends Activity {
@@ -58,7 +72,68 @@ public class UserListActivity extends Activity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_user_list, container, false);
+            final ListView listView = (ListView) rootView.findViewById(R.id.list);
+            UsersListTask task = new UsersListTask(new ArrayList<NameValuePair>()) {
+                @Override
+                public void onSuccess(User[] response) {
+//                    listView.setAdapter(new UserAdapter(getActivity(), new ArrayList<User>(response)));
+                    // короче как-то биндим тоже тут, когда будет работать апи
+                }
+
+                @Override
+                public void onError(Exception exp) {
+                    // Toast
+
+                }
+            };
+            listView.setAdapter(new UserAdapter(getActivity(), null));
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userid", "c68fe120-f4f4-41ff-b885-9cb97884704f");// вот такие айдишники будут у юзеров
+                    Intent intent= new Intent(getActivity(), UserActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
             return rootView;
         }
     }
 }
+//    }
+//    Bundle bundle = this.getIntent().getExtras();
+//    //        Object message = getIntent().getStringExtra("EXTRA_MESSAGE");
+////        String[] mess = new String[2];
+//    String[] mess =(bundle.getStringArray("1"));
+//    if ((mess[1]!="") || (mess[0]!="")){
+//        CToast(mess[1], mess[0], "red");}
+//    else{CToast("no", "thing", "red");}
+//
+//    public void chatOpen(View view) {
+//        Intent intent = new Intent(this,AndyChatActivity.class);
+//        startActivity(intent);
+//    }
+//
+//
+//    public void CToast(String t1, String t2, String c) {
+//        if (c == "same") {
+//            c = "444444";
+//        } else if (c == "blue") {
+//            c = "0099cc";
+//        } else if (c == "red") {
+//            c = "cc0000";
+//        }
+//
+//        LayoutInflater inflater = getLayoutInflater();
+//        View layout = inflater.inflate(R.layout.toast_layout,
+//                (ViewGroup) findViewById(R.id.toast_layout_root));
+//        TextView textCToast = (TextView) layout.findViewById(R.id.text);
+//
+//        String text2 = "<font color=#ffffff>" + t1 + "</font> <font color=#" + c + ">" + t2 + "</font";
+//        textCToast.setText(Html.fromHtml(text2));
+//
+//        Toast toast = new Toast(this);
+//        toast.setDuration(Toast.LENGTH_SHORT);
+//        toast.setView(layout);
+//        toast.show();

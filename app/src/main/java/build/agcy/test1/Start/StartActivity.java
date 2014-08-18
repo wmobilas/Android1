@@ -30,10 +30,12 @@ import org.json.JSONTokener;
 import build.agcy.test1.Api.Errors.ApiError;
 import build.agcy.test1.Core.Helpers.JsonHelper;
 import build.agcy.test1.Fragments.TimePickerFragment;
+import build.agcy.test1.Meetings.MeetingActivity;
 import build.agcy.test1.Meetings.MeetingsListActivity;
 import build.agcy.test1.Models.CurrentUser;
 import build.agcy.test1.R;
 import build.agcy.test1.Users.UserActivity;
+import build.agcy.test1.Users.UserListActivity;
 
 
 public class StartActivity extends FragmentActivity {
@@ -262,7 +264,7 @@ public class StartActivity extends FragmentActivity {
 //        return ipAddressString;
 //    }
 
-    public void peopleOpen(View view) {Intent intent = new Intent(this, MeetingsListActivity.class);
+    public void showUsers(View view) {Intent intent = new Intent(this, UserListActivity.class);
         EditText usrnm = (EditText) findViewById(R.id.usrnm);
         EditText pass = (EditText) findViewById(R.id.pass);
         String[] message = new String[3];
@@ -288,16 +290,16 @@ public class StartActivity extends FragmentActivity {
         intent.putExtras(bundle);
         startActivity(intent);
     }
-    public void showTimePickerDialog(View v) {
-        /*
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
-        */
+    public void showMeetings(View v) {
 
         Bundle bundle = new Bundle();
-        bundle.putString("userid","c68fe120-f4f4-41ff-b885-9cb97884704f");// вот такие айдишники будут у юзеров
-        Intent intent= new Intent(getBaseContext(), UserActivity.class);
+        //bundle.putString("userid", "c68fe120-f4f4-41ff-b885-9cb97884704f");// вот такие айдишники будут у юзеров
+        bundle.putString("meetingid", "c68fe120-f4f4-41ff-b885-9cb97884704f");// вот такие айдишники будут у юзеров
+        //Intent intent= new Intent(getBaseContext(), UserActivity.class);
+        Intent intent= new Intent(getBaseContext(), MeetingActivity.class);
         intent.putExtras(bundle);
-        startActivity(intent);
+     //   startActivity(intent);
+        //startActivity(new Intent(getBaseContext(), UserListActivity.class));
+        startActivity(new Intent(getBaseContext(), MeetingsListActivity.class));
     }
 }
