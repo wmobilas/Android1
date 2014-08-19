@@ -2,28 +2,10 @@
 <pre-dex-items>
 
     <item
-        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\classes-7ad26760678a8f29511f9b157f3c11a99fe7a1fd.jar"
-        jar="D:\EathWithMe\Client\Android1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\5.0.89\classes.jar"
+        dex="M:\Eatwithme\Android1\app\build\intermediates\pre-dexed\debug\gcm-cf8cf7de09d00afb6e980d0be2fbd625f2cbc201.jar"
+        jar="M:\Eatwithme\Android1\app\libs\gcm.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="d71573c9c5ea98a8db47ad6ff993a63d492b3bfa"/>
-    <item
-        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-40d000a0b7475b1e9f6c8854608ee7d557a712e9.jar"
-        jar="C:\Users\kiolt_000\AppData\Local\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
-    <item
-        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\support-v13-19.1.0-70a4a34365ed2635fce0e909515aeb7545454a55.jar"
-        jar="C:\Users\kiolt_000\AppData\Local\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-v13\19.1.0\support-v13-19.1.0.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="6b852a232f642c75a7fdfc7212b841b8c8f8959c"/>
-    <item
-        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\gson-2.2.4-cefef37643be7985147a80871a20fd2c582ee918.jar"
-        jar="D:\EathWithMe\Client\Android1\app\libs\gson-2.2.4.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="973e832af433b44c3ed11c426f2f390b29f3f3f8"/>
+        sha1="4d0117d182651806601f67fcf52fe8f6307b9446"/>
 
 </pre-dex-items>
