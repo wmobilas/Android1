@@ -89,9 +89,9 @@ public class UserActivity extends Activity {
                 }
             };
             //task.start();
-            user = new User(){{ id = "123"; name = "Ivan";}};
+            user = new User(){{ id = "123"; username = "Ivan";}};
             PlaceholderFragment.this.user = user;
-            ((TextView) rootView.findViewById(R.id.description)).setText(user.name);
+            ((TextView) rootView.findViewById(R.id.description)).setText(user.username);
             ((TextView) rootView.findViewById(R.id.status)).setVisibility(View.GONE);
             // теперь жди пока я прикручу апи) сделай пока каких-то фиктивных юзеров, чтобы раставить все по местами
             return rootView;

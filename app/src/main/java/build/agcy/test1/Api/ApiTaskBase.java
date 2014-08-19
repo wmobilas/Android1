@@ -11,27 +11,31 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
+import java.net.CookieStore;
 import java.util.List;
 
 import build.agcy.test1.Api.Errors.ApiError;
 import build.agcy.test1.Api.Errors.ApiParseError;
+import build.agcy.test1.EatWithMeApp;
 
 /**
  * Created by kiolt_000 on 06-May-14.
  */
 public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> {
-    private static final String LOG_TAG = "API TASK";
-    private static final String apiUrl = "http://eathwithme.agcy.co.il/api/";
-    private final String methodName;
-    private final boolean post;
-    private final Boolean loginRequred;
-    List<NameValuePair> nameValuePairs;
+    protected static final String LOG_TAG = "API TASK";
+    protected static final String apiUrl = "http://eatwithme.azurewebsites.net/api/";
+    protected final String methodName;
+    protected final boolean post;
+    protected final Boolean loginRequred;
+    protected List<NameValuePair> nameValuePairs;
 
     //посмотри что внутри метода происходит
     public ApiTaskBase(String methodName, List<NameValuePair> nameValuePairs, boolean post, Boolean loginRequred) {
@@ -53,11 +57,13 @@ public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> {
                 ((HttpPost) request).setEntity(new UrlEncodedFormEntity(nameValuePairs));
             } else {
                 String args = URLEncodedUtils.format(nameValuePairs, "utf-8");
-                url += args;
+                url += "?" + args;
                 request = new HttpGet(url);
             }
             if(loginRequred){
-                // todo: Token передаётся через куки. Чуть позже разберусь как конкретно.
+                BasicCookieStore cookies = new BasicCookieStore();
+                cookies.addCookie(new BasicClientCookie(".AspNet.ApplicationCookie", EatWithMeApp.token));
+                httpClient.setCookieStore(cookies);
             }
             HttpResponse httpResponse = httpClient.execute(request);
             HttpEntity httpEntity = httpResponse.getEntity();

@@ -26,6 +26,6 @@ public abstract class UsersListTask extends ApiTaskBase<User[]> {
 
     @Override
     protected User[] parse(String json) throws JSONException, FileNotFoundException {
-        return new Gson().fromJson(new FileReader(json), User[].class);
+        return new Gson().fromJson((json), User[].class);
     }
 }

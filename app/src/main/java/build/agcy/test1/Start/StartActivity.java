@@ -3,7 +3,6 @@ package build.agcy.test1.Start;
 import java.net.SocketException;
 import java.util.HashMap;
 
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import java.util.Locale;
 import java.util.Map;
@@ -29,12 +28,10 @@ import org.json.JSONTokener;
 
 import build.agcy.test1.Api.Errors.ApiError;
 import build.agcy.test1.Core.Helpers.JsonHelper;
-import build.agcy.test1.Fragments.TimePickerFragment;
 import build.agcy.test1.Meetings.MeetingActivity;
 import build.agcy.test1.Meetings.MeetingsListActivity;
 import build.agcy.test1.Models.CurrentUser;
 import build.agcy.test1.R;
-import build.agcy.test1.Users.UserActivity;
 import build.agcy.test1.Users.UserListActivity;
 
 
@@ -76,6 +73,7 @@ public class StartActivity extends FragmentActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        // todo: если токен загружен, то это окно нужно сразу же закрыть и открыть главное меню. пока можно оставить
         /*
         что тут происходит? чВ должно fragments_tabbd прикрутить
         ApiTaskBase task = new ApiTaskBase("", new ArrayList<NameValuePair>()// это аргументы, раз их нет, то не надо их писать.
@@ -117,37 +115,7 @@ public class StartActivity extends FragmentActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        LoginTask task = new LoginTask("wmobilas","123qweASD") {
-            @Override
-            public void onSuccess(CurrentUser response) {
-                // todo: remove progressbar
-                // todo: мы залогинились, переходим дальше, и сохраняем данные, которые дали ок
-            }
 
-            @Override
-            public void onError(Exception exp) {
-                // а нет, норм, туплю
-                if (exp instanceof ApiError) {
-                    int code = ((ApiError) exp).getCode();
-                    if (code == ApiError.BADCREDITS) {
-                        Toast.makeText(getApplicationContext(), "Check your login and password", Toast.LENGTH_SHORT).show();
-                    }
-
-                } else {
-                    if (exp instanceof SocketException) {
-                        Toast.makeText(getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
-                    } else {
-
-                        Toast.makeText(getApplicationContext(), "Unexpected error", Toast.LENGTH_SHORT).show();
-                    }
-                    // удали дурацкий иврит, ты им пользуешься? нередк
-                    // ты понял как вообще должно происходить?что именно? ну запрос
-                }
-            }
-        };
-        // todo: show progress bar
-        task.start();
-        // точно так же делаются запросы с юзерами и тд. тоже пример покажу сейчас, чтобы было наглядно.
     }
 
 
@@ -185,7 +153,11 @@ public class StartActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            if(position==2){
+                return new LoginFragment();
+            }
+            //todo: send data to fragment
+            return WelcomeFragment.newInstance(R.drawable.doge, R.string.hello_world);
         }
 
         @Override
@@ -212,36 +184,45 @@ public class StartActivity extends FragmentActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class WelcomeFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
          */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+        private static final String ARG_IMG_RES = "img_res";
+        private static final String ARG_TXT_RES = "txt_res";
 
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static WelcomeFragment newInstance(int imageResourceId, int textResourceId) {
+            WelcomeFragment fragment = new WelcomeFragment();
             Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putInt(ARG_IMG_RES, imageResourceId);
+            args.putInt(ARG_TXT_RES, textResourceId);
             fragment.setArguments(args);
             return fragment;
         }
 
-        public PlaceholderFragment() {
-        }
 
         @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_login, container, false);
-        return rootView;
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
+            Bundle args = getArguments();
+            // todo: bind args
+            return rootView;
+        }
     }
-}
 
+    public static class LoginFragment extends Fragment{
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_login, container, false);
+            return rootView;
+        }
+    }
 //    protected String wifiIpAddress(Context context) {
 //        WifiManager wifiManager = (WifiManager) context.getSystemService(WIFI_SERVICE);
 //        int ipAddress = wifiManager.getConnectionInfo().getIpAddress();
@@ -264,31 +245,18 @@ public class StartActivity extends FragmentActivity {
 //        return ipAddressString;
 //    }
 
-    public void showUsers(View view) {Intent intent = new Intent(this, UserListActivity.class);
+    public void showUsers(View view) {
+        /*
         EditText usrnm = (EditText) findViewById(R.id.usrnm);
         EditText pass = (EditText) findViewById(R.id.pass);
         String[] message = new String[3];
         message[0]=usrnm.getText().toString();
         message[1]=pass.getText().toString();
         message[2]=ids;
+        */
 
-        LoginTask loginTask = new LoginTask("superuser","superuser") {
-            @Override
-            public void onSuccess(CurrentUser response) {
-                // todo: save curre
 
-            }
-
-            @Override
-            public void onError(Exception exp) {
-
-            }
-        };
-
-        Bundle bundle = new Bundle();
-        bundle.putStringArray("1",message);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        startActivity(new Intent(this, UserListActivity.class));
     }
     public void showMeetings(View v) {
 
@@ -302,4 +270,49 @@ public class StartActivity extends FragmentActivity {
         //startActivity(new Intent(getBaseContext(), UserListActivity.class));
         startActivity(new Intent(getBaseContext(), MeetingsListActivity.class));
     }
+
+    public void login(View v){
+        if(mViewPager.getCurrentItem()<2){
+            mViewPager.setCurrentItem(2, true);
+        }else {
+            LoginTask task = new LoginTask("wmobilas", "123qweASD") {
+                @Override
+                public void onSuccess(CurrentUser response) {
+                    // todo: remove progressbar
+                    // todo: мы залогинились, переходим дальше, и сохраняем данные, которые дали ок
+                }
+
+                @Override
+                public void onError(Exception exp) {
+                    // а нет, норм, туплю
+                    if (exp instanceof ApiError) {
+                        int code = ((ApiError) exp).getCode();
+                        if (code == ApiError.BADCREDITS) {
+                            Toast.makeText(getApplicationContext(), "Check your login and password", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else {
+                        if (exp instanceof SocketException) {
+                            Toast.makeText(getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Unexpected error", Toast.LENGTH_SHORT).show();
+                        }
+                        // удали дурацкий иврит, ты им пользуешься? нередк
+                        // ты понял как вообще должно происходить?что именно? ну запрос
+                    }
+                }
+
+                @Override
+                public void onTokenRecieved(String token) {
+                    //todo: надо сохранить этот токен в SharedPreferences чтобы не логиниться каждый раз,
+                    // а при запущенном приложении держать его в EatWithMeApp.token, чтобы легко можно
+                    // получать к нему доступ.
+                }
+            };
+            // todo: show progress bar
+            task.start();
+        }
+    }
+
 }

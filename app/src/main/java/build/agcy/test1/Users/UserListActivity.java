@@ -20,6 +20,7 @@ import android.widget.Toast;
 import org.apache.http.NameValuePair;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import build.agcy.test1.Api.Users.UsersListTask;
 import build.agcy.test1.Chat.AndyChatActivity;
@@ -76,8 +77,19 @@ public class UserListActivity extends Activity {
             UsersListTask task = new UsersListTask(new ArrayList<NameValuePair>()) {
                 @Override
                 public void onSuccess(User[] response) {
-//                    listView.setAdapter(new UserAdapter(getActivity(), new ArrayList<User>(response)));
-                    // короче как-то биндим тоже тут, когда будет работать апи
+
+                    listView.setAdapter(new UserAdapter(getActivity(), new ArrayList<User>(Arrays.asList(response))));
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("userid", "c68fe120-f4f4-41ff-b885-9cb97884704f");// вот такие айдишники будут у юзеров
+                            Intent intent= new Intent(getActivity(), UserActivity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    });
+
                 }
 
                 @Override
@@ -86,17 +98,7 @@ public class UserListActivity extends Activity {
 
                 }
             };
-            listView.setAdapter(new UserAdapter(getActivity(), null));
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("userid", "c68fe120-f4f4-41ff-b885-9cb97884704f");// вот такие айдишники будут у юзеров
-                    Intent intent= new Intent(getActivity(), UserActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-            });
+            task.start();
             return rootView;
         }
     }

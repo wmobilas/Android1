@@ -21,16 +21,7 @@ public class UserAdapter extends BaseAdapter {
     private final Context context;
      public UserAdapter(Context context, ArrayList<User> users){
         this.context = context;
-        this.users = new ArrayList<User>(){{
-            add(new User(){{
-                id = "123";
-                name = "Ivan";
-            }});
-            add(new User(){{
-                id= "321";
-                name = "Petr";
-            }});
-        }};
+        this.users = users;
     }
     @Override
     public int getCount() {
@@ -56,7 +47,7 @@ public class UserAdapter extends BaseAdapter {
         ImageView imageView = (ImageView) rootView.findViewById(R.id.user_photo);
         User user = getItem(position);
 
-        nameView.setText(user.name);
+        nameView.setText(user.username);
         // imageView и биндим как-то картинку, не важно
 
         return rootView;
