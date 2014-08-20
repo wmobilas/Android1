@@ -29,7 +29,7 @@ import build.agcy.test1.EatWithMeApp;
 /**
  * Created by kiolt_000 on 06-May-14.
  */
-public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> {
+public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> implements TaskCallback<T> {
     protected static final String LOG_TAG = "API TASK";
     protected static final String apiUrl = "http://eatwithme.azurewebsites.net/api/";
     protected final String methodName;
@@ -100,8 +100,6 @@ public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> {
         }
     }
     protected abstract T parse(String json) throws JSONException, FileNotFoundException;//new Gson().fromJson(jsonObject.getString("response"), YOURCLASS);
-    public abstract void onSuccess(T response);
-    public abstract void onError(Exception exp);
 
     public void start(){
         execute();

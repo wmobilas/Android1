@@ -24,11 +24,14 @@ import java.util.List;
 import build.agcy.test1.Api.ApiTaskBase;
 import build.agcy.test1.Models.CurrentUser;
 
-/**
- * Created by kiolt_000 on 17/08/2014.
- */
+
 public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
     private String token;
+
+    public LoginTask(String methodName, ArrayList<NameValuePair> args){
+        super(methodName, args, true, false);
+
+    }
 
     public LoginTask(final String login, final String password) {
         super("account/login", new ArrayList<NameValuePair>(){{

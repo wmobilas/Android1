@@ -18,9 +18,15 @@
     <string name="explore_new_world">Explore</string>
     <string name="lookingFor">What are ylu looking for</string>
     <string name="login">Login</string>
-        <string name="type1">Date</string>
-        <string name="type2">Eat Out</string>
-        <string name="type3">Meet Interesting People</string>
-        <string name="type4">Hang Out</string>
+    <string name="type1">Date</string>
+    <string name="type2">Eat Out</string>
+    <string name="type3">Meet Interesting People</string>
+    <string name="type4">Hang Out</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
 
 </resources>

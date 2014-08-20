@@ -86,7 +86,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
         map.getUiSettings().setMyLocationButtonEnabled(true);
         map.setInfoWindowAdapter(new MeetingPopupAdapter(getBaseContext()));
         map.setOnInfoWindowClickListener(this);
-        map.setBuildingsEnabled(true);
+        //map.setBuildingsEnabled(true);
         map.setOnInfoWindowClickListener(this);
 
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);

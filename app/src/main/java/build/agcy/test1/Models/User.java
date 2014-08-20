@@ -8,4 +8,5 @@ public class User {
     public String username;
     public float latittude;
     public float longtitude;
+    public String photo;
 }

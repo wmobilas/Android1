@@ -1,6 +1,12 @@
 # Android studio files
+.idea
+build
 .idea/
 build/
+/.idea
+/build
+/.idea/
+/build/
 
 # Windows image file caches
 Thumbs.db

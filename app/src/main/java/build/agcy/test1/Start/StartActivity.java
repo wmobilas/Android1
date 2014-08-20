@@ -1,20 +1,20 @@
 package build.agcy.test1.Start;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import java.util.Locale;
@@ -33,7 +33,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -43,15 +42,11 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
 import build.agcy.test1.Api.Errors.ApiError;
-import build.agcy.test1.BuildConfig;
-import build.agcy.test1.Core.Helpers.JsonHelper;
 //import build.agcy.test1.GCM.GCMRegistrarCompat;
+import build.agcy.test1.Core.GCM.GCMRegistrationTask;
+import build.agcy.test1.EatWithMeApp;
+import build.agcy.test1.Main.MainActivity;
 import build.agcy.test1.Meetings.MeetingActivity;
 import build.agcy.test1.Meetings.MeetingsListActivity;
 import build.agcy.test1.Models.CurrentUser;
@@ -79,103 +74,55 @@ public class StartActivity extends FragmentActivity {
     public static final String EXTRA_MESSAGE = "11";
     public static final String PROPERTY_REG_ID = "11";
     private static final String PROPERTY_APP_VERSION = "application_version_code";
-    String SENDER_ID = "AIzaSyAo8u9dVTxGrgxMqM9PMfz_RnUQNptGgLc";// норм? а какой должен быть
-    // Денис
-    // давай мой
-    // AIzaSyAo8u9dVTxGrgxMqM9PMfz_RnUQNptGgLc
-    // вот тебе ключ апи эм
+
     ViewPager mViewPager;
-    //String ids=new String();
-    Map<String, Object> map = new HashMap<String,Object>();
-    String TAG="StartActivity";
-    TextView mDisplay;
+    Map<String, Object> map = new HashMap<String, Object>();
+    String TAG = "StartActivity";
     GoogleCloudMessaging gcm;
     AtomicInteger msgId = new AtomicInteger();
     SharedPreferences prefs;
     Context context;
-    String regid="";
-    private void saveData(String response) {
-        try {
-            JSONObject json= (JSONObject) new JSONTokener(response).nextValue();
-//            JSONArray json2 = json.getJSONArray("response");
-            map = JsonHelper.toMap(json);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
+    String regid = "";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-      //  GCMRegistrarCompat.checkDevice(this);
+        //  GCMRegistrarCompat.checkDevice(this);
         //if (BuildConfig.DEBUG) {
-       //     GCMRegistrarCompat.checkManifest(this);}
+        //     GCMRegistrarCompat.checkManifest(this);}
         context = getApplicationContext();
         if (checkPlayServices()) {
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
 
-            //if (regid.isEmpty())
-            {
+            if (regid.isEmpty()) {
                 registerInBackground();
             }
         } else {
             Log.e(TAG, "No valid Google Play Services APK found.");
         }
-        // todo: если токен загружен, то это окно нужно сразу же закрыть и открыть главное меню. пока можно оставить
-//        {
-//            что тут происходит ? чВ должно fragments_tabbd прикрутить
-//            ApiTaskBase task = new ApiTaskBase("", new ArrayList<NameValuePair>()// это аргументы, раз их нет, то не надо их писать.
-//                    , false, false) {
-//                @Override
-//                protected void onPostExecute(Object response) {
-////                Toast.makeText(getBaseContext(), (CharSequence) response, Toast.LENGTH_SHORT).show();
-//                    saveData(response.toString());
-////                TextView myAwesomeTextView = (TextView)findViewById(R.id.usrnm);
-//                    //List<Object> listid2 = new ArrayList<Object>();
-//                    ArrayList arrlist = (ArrayList) activity_map.get("response");
-//                    Map innermap;
-//                    int j = arrlist.size(); //чтобы не уменьшался лист в 2 раза
-//                    for (int i = 0; i < j; i++) {
-//                        //Object object=list.remove(list.size()-1) + " , ";
-//                        innermap = (HashMap) arrlist.get(i);
-//                        //innermap=(HashMap)innermap.get(0);
-//                        Map.Entry entry = (Map.Entry) innermap.entrySet().iterator().next();
-//                        ids += entry.getValue() + " , ";
-//
-////                myAwesomeTextView.append(listid.remove(listid.size()-1));
-////                myAwesomeTextView.append(" , ");
-//                    }
-//                    ids = ids.substring(0, ids.length() - 3);
-//                }
-//            };
-//
-//
-//            task.execute();
-//        }
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.}
+        if (EatWithMeApp.token != null) {
+            //finish();
+            //startActivity(new Intent(this, MainActivity.class));
+        }
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
-        // я сейчас немного тебе покажу и пойду спать, мне пиздец херово.
-        // Ночью проснусь, хочу видеть твой комит, доделаю так, чтобы Ване было что показывать.
-        // А ты будешь рефакторить потом всё, ок?ок
-        // потому что много кода писал ты, много я, я хочу, чтобы ты понимал как пишется
-        // правильно. ты ведь видишь как я структурно делаю?угу
-        // вот и ты должен так уметь. поэтому разберёшь весь код, что я писал в доль и поперёк
-        // и тоже смотри todo ок?
-        // Set up the ViewPager with the sections adapter.
+
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
     }
 
 
-    private SharedPreferences getGCMPreferences(Context context) {
+    private SharedPreferences getGCMPreferences() {
         // This sample app persists the registration ID in shared preferences, but
         // how you store the regID in your app is up to you.
-        return getSharedPreferences(StartActivity.class.getSimpleName(),
-                Context.MODE_PRIVATE);
+        return PreferenceManager.getDefaultSharedPreferences(this);
     }
+
     private static int getAppVersion(Context context) {
         try {
             PackageInfo packageInfo = context.getPackageManager()
@@ -207,13 +154,11 @@ public class StartActivity extends FragmentActivity {
     }
 
 
-
-
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    private class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -223,10 +168,10 @@ public class StartActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            if(position==1){
-                return new MeetingFragment();
+            if (position == 1) {
+                return new RegisterFragment();
             }
-            if(position==2){
+            if (position == 2) {
                 return new LoginFragment();
             }
             //todo: send data to fragment
@@ -289,41 +234,22 @@ public class StartActivity extends FragmentActivity {
         }
     }
 
-    public static class LoginFragment extends Fragment{
+    public static class LoginFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_login, container, false);
             return rootView;
         }
     }
-    public static class MeetingFragment extends Fragment{
+
+    public static class RegisterFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_explore, container, false);
             return rootView;
         }
     }
-//    protected String wifiIpAddress(Context context) {
-//        WifiManager wifiManager = (WifiManager) context.getSystemService(WIFI_SERVICE);
-//        int ipAddress = wifiManager.getConnectionInfo().getIpAddress();
-//
-//        // Convert little-endian to big-endianif needed
-//        if (ByteOrder.nativeOrder().equals(ByteOrder.LITTLE_ENDIAN)) {
-//            ipAddress = Integer.reverseBytes(ipAddress);
-//        }
-//
-//        byte[] ipByteArray = BigInteger.valueOf(ipAddress).toByteArray();
-//
-//        String ipAddressString;
-//        try {
-//            ipAddressString = InetAddress.getByAddress(ipByteArray).getHostAddress();
-//        } catch (UnknownHostException ex) {
-//            Log.e("WIFIIP", "Unable to get host address.");
-//            ipAddressString = null;
-//        }
-//
-//        return ipAddressString;
-//    }
+
 
     public void showUsers(View view) {
         /*
@@ -338,39 +264,48 @@ public class StartActivity extends FragmentActivity {
 
         startActivity(new Intent(this, UserListActivity.class));
     }
+
     public void showMeetings(View v) {
 
         Bundle bundle = new Bundle();
         //bundle.putString("userid", "c68fe120-f4f4-41ff-b885-9cb97884704f");// вот такие айдишники будут у юзеров
         bundle.putString("meetingid", "c68fe120-f4f4-41ff-b885-9cb97884704f");// вот такие айдишники будут у юзеров
         //Intent intent= new Intent(getBaseContext(), UserActivity.class);
-        Intent intent= new Intent(getBaseContext(), MeetingActivity.class);
+        Intent intent = new Intent(getBaseContext(), MeetingActivity.class);
         intent.putExtras(bundle);
-     //   startActivity(intent);
+        //   startActivity(intent);
         //startActivity(new Intent(getBaseContext(), UserListActivity.class));
         startActivity(new Intent(getBaseContext(), MeetingsListActivity.class));
     }
-public void registerProfile(View v){
-    final View rootView = getLayoutInflater().inflate(R.layout.fragment_explore, null);
-    final ProgressBar mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.login_progress);
 
-}
-    public void getImage(View v){
+    public void registerProfile(View v) {
+        final View rootView = getLayoutInflater().inflate(R.layout.fragment_explore, null);
+        final ProgressBar mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.login_progress);
+
+    }
+
+    public void getImage(View v) {
         startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
-        }
-    public void login(View v){
+    }
 
-        if(mViewPager.getCurrentItem()<2){
+    public void login(View v) {
+
+        if (mViewPager.getCurrentItem() < 2) {
             mViewPager.setCurrentItem(2, true);
-        }else {
+        } else {
+            final ProgressDialog dialog = new ProgressDialog(this);
+            dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.setTitle("Logging in");
+            dialog.setMessage("Please wait");
+            dialog.show();
             LoginTask task = new LoginTask("wmobilas", "123qweASD") {
                 @Override
-                public void onSuccess(CurrentUser response) {
-                    final View rootView = getLayoutInflater().inflate(R.layout.fragment_login, null);
-                    final ProgressBar mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.login_progress);
-                    mActivityIndicator.setVisibility(View.GONE);
-
-                    // todo: мы залогинились, переходим дальше, и сохраняем данные, которые дали ок
+                public void onSuccess(CurrentUser currentUser) {
+                    dialog.dismiss();
+                    EatWithMeApp.saveCurrentUser(currentUser);
+                    startActivity(new Intent(getBaseContext(), MainActivity.class));
+                    finish();
                 }
 
                 @Override
@@ -396,10 +331,7 @@ public void registerProfile(View v){
 
                 @Override
                 public void onTokenRecieved(String token) {
-                    //todo: надо сохранить этот токен в SharedPreferences чтобы не логиниться каждый раз,
-                    // а при запущенном приложении держать его в EatWithMeApp.token, чтобы легко можно
-                    // получать к нему доступ.
-                    getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE).edit().putString("application_token", token).commit();
+                    EatWithMeApp.saveToken(token);
                 }
             };
 
@@ -409,11 +341,14 @@ public void registerProfile(View v){
             task.start();
         }
     }
+
     public void register(View view) {
     }
+
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS) {
+
             if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
                 GooglePlayServicesUtil.getErrorDialog(resultCode, this,
                         PLAY_SERVICES_RESOLUTION_REQUEST).show();
@@ -425,8 +360,9 @@ public void registerProfile(View v){
         }
         return true;
     }
+
     private String getRegistrationId(Context context) {
-        final SharedPreferences prefs = getGCMPreferences(context);
+        final SharedPreferences prefs = getGCMPreferences();
         String registrationId = prefs.getString(PROPERTY_REG_ID, "");
         if (registrationId.isEmpty()) {
             Log.w(TAG, "Registration not found.");
@@ -443,53 +379,30 @@ public void registerProfile(View v){
         }
         return registrationId;
     }
+
     private void registerInBackground() {
-        new AsyncTask<Void, Void, String>() {
+        GCMRegistrationTask task = new GCMRegistrationTask(this) {
             @Override
-            protected String doInBackground(Void... params) {
-                String msg = "";
-                try {
-                    if (gcm == null) {
-                        gcm = GoogleCloudMessaging.getInstance(context);
-                    }
-                    regid = gcm.register(SENDER_ID);
-                    msg = "Device registered, registration ID=" + regid;
-
-                    // You should send the registration ID to your server over HTTP, so it
-                    // can use GCM/HTTP or CCS to send messages to your app.
-                    sendRegistrationIdToBackend();
-
-                    // For this demo: we don't need to send it because the device will send
-                    // upstream messages to a server that echo back the message using the
-                    // 'from' address in the message.
-
-                    // Persist the regID - no need to register again.
-                    storeRegistrationId(context, regid);
-                } catch (IOException ex) {
-                    msg = "Error :" + ex.getMessage();
-                    // If there is an error, don't just keep trying to register.
-                    // Require the user to click a button again, or perform
-                    // exponential back-off.
-                }
-                return msg;
+            public void onSuccess(String regid) {
+                storeRegistrationId(regid);
+                sendRegistrationIdToBackend(regid);
             }
 
             @Override
-            protected void onPostExecute(String msg) {
-                final View rootView = getLayoutInflater().inflate(R.layout.fragment_login, null);
-                final TextView mDisplay = (TextView) rootView.findViewById(R.id.response);
-                // што это ну кудато вывод хотело иначе эррор на mdisplay
-                mDisplay.append(msg);
+            public void onError(Exception exp) {
+                Toast.makeText(getBaseContext(),"Cant get register id: " + exp.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
             }
-        }.execute(null, null, null);
+        };
+        task.execute();
     }
-    private void sendRegistrationIdToBackend() {
-        // Your implementation here.
+
+    private void sendRegistrationIdToBackend(String regid) {
         Log.i(TAG, "sendRegistrationIdToBackend");
 
     }
-    private void storeRegistrationId(Context context, String regId) {
-        final SharedPreferences prefs = getGCMPreferences(context);
+
+    private void storeRegistrationId(String regId) {
+        final SharedPreferences prefs = getGCMPreferences();
         int appVersion = getAppVersion(context);
         Log.i(TAG, "Saving regId on app version " + appVersion);
         SharedPreferences.Editor editor = prefs.edit();
@@ -497,13 +410,14 @@ public void registerProfile(View v){
         editor.putInt(PROPERTY_APP_VERSION, appVersion);
         editor.commit();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
 
         //Detects request codes
-        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+        if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
             Bitmap bitmap = null;
             try {
