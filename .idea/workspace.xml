@@ -33,14 +33,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: build.agcy.test1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88f9a1c8-6eb3-46f4-9365-6d400a93a17e" name="Default" comment="сделан пуш">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/GCMBroadcastReceiver.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/GCMIntentService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/GCMRegistrationTask.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/NavigationDrawerFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/TaskCallback.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+    <list default="true" id="88f9a1c8-6eb3-46f4-9365-6d400a93a17e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="test1.iws" />
@@ -1440,7 +1433,11 @@
       <created>1408521651056</created>
       <updated>1408521651056</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="сделан пуш нормальный коммит">
+      <created>1408549603629</created>
+      <updated>1408549603629</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1517,7 +1514,8 @@
     </option>
     <MESSAGE value="Refactoring&#10;Смотри todo и что куда переползло" />
     <MESSAGE value="сделан пуш" />
-    <option name="LAST_COMMIT_MESSAGE" value="сделан пуш" />
+    <MESSAGE value="сделан пуш нормальный коммит" />
+    <option name="LAST_COMMIT_MESSAGE" value="сделан пуш нормальный коммит" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
