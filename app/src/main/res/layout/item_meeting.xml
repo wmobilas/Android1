@@ -1,47 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="72dp"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:background="@color/bg_color"
     >
-
     <ImageView
         android:id="@+id/meeting_photo"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="16dp"
         android:src="@drawable/pin"
-        />
-
+        android:padding="10dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp" />
+    <!--<TextView-->
+        <!--android:id="@+id/user_name"-->
+        <!--android:text="Name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_toRightOf="@+id/meeting_photo"
-        android:layout_toEndOf="@+id/meeting_photo"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true">
-
-        <TextView
-            android:id="@+id/meeting_description"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#111111"
-            android:paddingRight="16dp"
-            android:paddingLeft="0dp"
-            android:text="Description" />
-        <TextView
+        android:gravity="center_vertical">
+    <TextView
+    android:id="@+id/meeting_description"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/color1"
+    android:text="Description" />
+    <TextView
         android:id="@+id/meeting_creator"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/bg_color"
-        android:paddingRight="16dp"
-        android:paddingLeft="0dp"
+        android:textColor="@color/color1"
         android:text="Creator" />
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
+</LinearLayout>

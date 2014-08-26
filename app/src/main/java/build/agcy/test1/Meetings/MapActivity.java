@@ -3,17 +3,23 @@ package build.agcy.test1.Meetings;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.InflateException;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -28,68 +34,197 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import build.agcy.test1.Meetings.MapHelpers.MeetingPopupAdapter;
 import build.agcy.test1.Core.MyLocationListener;
+import build.agcy.test1.Meetings.MapHelpers.MeetingPopupAdapter;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
 
 /**
  * Created by Freeman on 14.08.2014.
  */
-public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener {
-    SupportMapFragment mapFragment;
-    GoogleMap map;
-    final String TAG = "myLogs";
+public class MapActivity extends Fragment implements GoogleMap.OnInfoWindowClickListener {
+    private SupportMapFragment mapFragment;
+    private GoogleMap map;
+    final String TAG = "agcy.test";
     double latitude;
     double longitude;
     LatLng currentPosition;
     Marker myMarker;
     LocationManager locationManager;
     String provider;
+    private FragmentActivity myContext;
+    public MapActivity(){}
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onAttach(Activity activity) {
 
-       // MyLocationListener.SetUpLocationListener(this);
-//        final Context mainContext = this;
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                MyLocationListener.SetUpLocationListener(mainContext);
-//            }
-//        }).start();
-      //  LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-      //  Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        super.onAttach(activity);
+        Log.d(TAG, "mapfragment onAttach");
+        myContext=(FragmentActivity) activity;
+    }
+    private static View view;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null)
+                parent.removeView(view);
+        }
+        try {
+            view = inflater.inflate(R.layout.activity_map, container, false);
+        } catch (InflateException e) {
+        /* map is already there, just return view as it is */
+        }
+
+        final Button testButtonMap = (Button) view.findViewById(R.id.btnTest);
+        testButtonMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(latitude, longitude))
+                        .zoom(12)
+                        .bearing(45)
+                        .tilt(30)
+                        .build();
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+                map.animateCamera(cameraUpdate);
+
+            }
+        });
+
+        return view;
+    }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d(TAG, "Fragment1 onActivityCreated");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "Fragment1 onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "Fragment1 onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "Fragment1 onPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "Fragment1 onStop");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "Fragment1 onDestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "Fragment1 onDestroy");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d(TAG, "Fragment1 onDetach");
+        try {
+            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+            childFragmentManager.setAccessible(true);
+            childFragmentManager.set(this, null);
+
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+
+//        GoogleMapOptions options = new GoogleMapOptions().camera(CameraPosition.fromLatLngZoom(new LatLng(37.4005502611301, -5.98233461380005), 16))
+//                .compassEnabled(false).mapType(GoogleMap.MAP_TYPE_NORMAL).rotateGesturesEnabled(false).scrollGesturesEnabled(false).tiltGesturesEnabled(false)
+//                .zoomControlsEnabled(false).zoomGesturesEnabled(false);
+//        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+//        if (mapFragment == null) {
+//            mapFragment = SupportMapFragment.newInstance(options);
+//            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+//            fragmentTransaction.replace(R.id.map, mapFragment);
+//            fragmentTransaction.commit();
+//        }
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
-        mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        map = mapFragment.getMap();
+        Log.d(TAG, "mapfragment onCreate");
+        FragmentManager fm = getChildFragmentManager();
+        mapFragment = (SupportMapFragment) fm.findFragmentById(R.id.map);
+        if (mapFragment == null) {
+            mapFragment = SupportMapFragment.newInstance();
+            fm.beginTransaction().replace(R.id.map, mapFragment).commit();}
+        setUpMapIfNeeded();
+    }
 
-        if (map == null) {
-            finish();
-            return;
+    private void setUpMapIfNeeded() {
+        // Do a null check to confirm that we have not already instantiated the
+        // map.
+        if(map == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // Do something after 5s = 5000ms
+                    if(map == null) {
+                        // Try to obtain the map from the SupportMapFragment.
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Do something after 5s = 5000ms
+                                map = mapFragment.getMap();
+                                init();
+                            }
+                        }, 1000);
+                    map = mapFragment.getMap();
+                    init();}
+                }
+            }, 100);
+            // Check if we were successful in obtaining the map.
         }
-        init();
+
+        if (map != null) {
+            init();}
     }
     private void init() {
 
-        final MyLocationListener myLocationService = new MyLocationListener(this){
+        final MyLocationListener myLocationService = new MyLocationListener(myContext){
 
         };
 //        marker = activity_map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("I am here!"));
         map.setMyLocationEnabled(true);
+        Log.d(TAG,"map!=null!!!!");
         map.getUiSettings().setAllGesturesEnabled(true);
         map.getUiSettings().setMyLocationButtonEnabled(true);
-        map.setInfoWindowAdapter(new MeetingPopupAdapter(getBaseContext()));
+        map.setInfoWindowAdapter(new MeetingPopupAdapter(myContext.getBaseContext()));
         map.setOnInfoWindowClickListener(this);
         //map.setBuildingsEnabled(true);
         map.setOnInfoWindowClickListener(this);
 
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager = (LocationManager) myContext.getSystemService(Context.LOCATION_SERVICE);
             // Define the criteria how to select the locatioin provider -> use
             // default
             Criteria criteria = new Criteria();
@@ -106,9 +241,9 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
                         startActivity(intent);
             latitude=myLocationService.getLatitude();
             longitude=myLocationService.getLongitude();
-            Toast.makeText(getApplicationContext(), "Please Turn GPS On",Toast.LENGTH_LONG );
+            Toast.makeText(myContext.getApplicationContext(), "Please Turn GPS On", Toast.LENGTH_LONG);
                     }
-        addMeetings(map, this);
+//        addMeetings(map, myContext);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude))
                 .zoom(16)
@@ -117,6 +252,14 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
                 .build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         map.animateCamera(cameraUpdate);
+
+//        EatWithMeApp app =  new EatWithMeApp();
+//        SharedPreferences prefs = app.getSharedPreferences("auth_prefs", Activity.MODE_MULTI_PROCESS);
+        SharedPreferences prefs = myContext.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE);
+        prefs.edit()
+                .putString("user_lat", Double.toString(latitude))
+                .putString("user_lng", Double.toString(longitude));
+
         //   activity_map.setClustering(new ClusteringSettings().enabled(false).addMarkersDynamically(true));
 //        activity_map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 //
@@ -130,7 +273,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
 //            }
 //        });
         map.setInfoWindowAdapter(
-                new MeetingPopupAdapter(getBaseContext()));
+                new MeetingPopupAdapter(myContext.getBaseContext()));
         // Adding and showing marker while touching the GoogleMap
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
@@ -222,24 +365,24 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
         map.animateCamera(cameraUpdate);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.tabbd, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.tabbd, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void onInfoWindowClick(Marker marker) {

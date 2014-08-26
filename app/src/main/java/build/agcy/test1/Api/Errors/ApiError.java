@@ -9,10 +9,13 @@ public class ApiError extends Exception {
     public static final int BADCREDITS = 401;
 
     private final String response;
-    private final int code;
+    private int code;
 
     public ApiError(int code, String response) {
         this.code = code;
+        this.response = response;
+    }
+    public ApiError(String response) {
         this.response = response;
     }
 

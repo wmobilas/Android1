@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import build.agcy.test1.Api.Meetings.MeetingGetTask;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
@@ -95,9 +93,5 @@ public class MeetingActivity extends Activity {
             return rootView;
         }
     }
-//    public void showTimePicker(View v) {
-//        DialogFragment newFragment = new TimePickerFragment();
-//        newFragment.show(getSupportFragmentManager(), "timePicker");
-//
-//    }
+
 }

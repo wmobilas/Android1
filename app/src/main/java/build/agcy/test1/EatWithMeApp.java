@@ -3,9 +3,6 @@ package build.agcy.test1;
 import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
-import org.apache.http.auth.AUTH;
 
 import build.agcy.test1.Models.CurrentUser;
 
@@ -48,4 +45,5 @@ public class EatWithMeApp extends Application {
                 .putString(PHOTO_PREFERENCES_KEY, currentUser.photo)
                 .commit();
     }
+
 }

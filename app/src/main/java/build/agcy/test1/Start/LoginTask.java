@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import build.agcy.test1.Api.ApiTaskBase;
+import build.agcy.test1.Api.Errors.ApiError;
 import build.agcy.test1.Models.CurrentUser;
 
 
@@ -44,6 +45,11 @@ public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
     protected CurrentUser parse(String json) throws JSONException {
         return new Gson().fromJson(json, CurrentUser.class);
     }
+    public class MyException extends Exception {
+        public MyException(String message) {
+            super(message);
+        }
+    }
     @Override
     protected Object doInBackground(Object... params) {
         try {
@@ -62,7 +68,11 @@ public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
             HttpResponse httpResponse = httpClient.execute(request);
             HttpEntity httpEntity = httpResponse.getEntity();
             String responseStr = EntityUtils.toString(httpEntity);
-
+            if (responseStr.equals("http://eatwithme.azurewebsites.net/api/account/login?login=+&password=+")){
+                ApiError exp = new ApiError("no_such_account");
+                return exp;
+//                onError(null);
+            }
             String token = "";
             List<Cookie> cookies = httpClient.getCookieStore().getCookies();
             for(Cookie cookie: cookies){
@@ -75,7 +85,6 @@ public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
             this.token = token;
             Log.i(LOG_TAG, "Server response " + responseStr);
             return responseStr;
-
         } catch (Exception exp) {
             Log.e(LOG_TAG, "Loader error " + exp.toString());
             return exp;

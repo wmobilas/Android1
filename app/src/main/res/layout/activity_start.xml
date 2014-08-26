@@ -3,47 +3,12 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
+
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
         />
-    <LinearLayout
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Show Users"
-            android:id="@+id/bttn"
-            android:onClick="showUsers"
-            android:layout_below="@+id/pass"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Show Meetings"
-            android:id="@+id/bttn3"
-            android:onClick="showMeetings"
-            android:layout_alignTop="@+id/bttn"
-            android:layout_toRightOf="@+id/bttn"
-            android:layout_toEndOf="@+id/bttn" />
-        <Button
-            android:onClick="login"
-            android:text="login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:onClick="register"
-            android:text="register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 </RelativeLayout>
-
+    <!--тут верхний слой приветствующей крутилки, для превью-->

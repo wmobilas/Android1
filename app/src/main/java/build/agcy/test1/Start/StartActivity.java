@@ -1,31 +1,17 @@
 package build.agcy.test1.Start;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.SocketException;
-import java.util.HashMap;
-
-import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.preference.PreferenceManager;
-import android.provider.MediaStore;
-import android.support.v4.app.FragmentActivity;
-import java.util.Locale;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.content.Intent;
-import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,8 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,16 +26,18 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import java.net.SocketException;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import build.agcy.test1.Api.Errors.ApiError;
-//import build.agcy.test1.GCM.GCMRegistrarCompat;
 import build.agcy.test1.Core.GCM.GCMRegistrationTask;
 import build.agcy.test1.EatWithMeApp;
 import build.agcy.test1.Main.MainActivity;
-import build.agcy.test1.Meetings.MeetingActivity;
-import build.agcy.test1.Meetings.MeetingsListActivity;
 import build.agcy.test1.Models.CurrentUser;
 import build.agcy.test1.R;
-import build.agcy.test1.Users.UserListActivity;
 
 
 public class StartActivity extends FragmentActivity {
@@ -77,14 +63,16 @@ public class StartActivity extends FragmentActivity {
 
     ViewPager mViewPager;
     Map<String, Object> map = new HashMap<String, Object>();
-    String TAG = "StartActivity";
+    String TAG = "agcy.test";
     GoogleCloudMessaging gcm;
     AtomicInteger msgId = new AtomicInteger();
     SharedPreferences prefs;
     Context context;
     String regid = "";
-
-
+    String username="";
+    String password="";
+    TextView username_login;
+    TextView password_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,8 +94,9 @@ public class StartActivity extends FragmentActivity {
             Log.e(TAG, "No valid Google Play Services APK found.");
         }
         if (EatWithMeApp.token != null) {
-            //finish();
-            //startActivity(new Intent(this, MainActivity.class));
+            //todo
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
         }
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
@@ -245,42 +234,18 @@ public class StartActivity extends FragmentActivity {
     public static class RegisterFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_explore, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_register, container, false);
             return rootView;
         }
     }
 
 
-    public void showUsers(View view) {
-        /*
-        EditText usrnm = (EditText) findViewById(R.id.usrnm);
-        EditText pass = (EditText) findViewById(R.id.pass);
-        String[] message = new String[3];
-        message[0]=usrnm.getText().toString();
-        message[1]=pass.getText().toString();
-        message[2]=ids;
-        */
-
-
-        startActivity(new Intent(this, UserListActivity.class));
-    }
-
-    public void showMeetings(View v) {
-
-        Bundle bundle = new Bundle();
-        //bundle.putString("userid", "c68fe120-f4f4-41ff-b885-9cb97884704f");// вот такие айдишники будут у юзеров
-        bundle.putString("meetingid", "c68fe120-f4f4-41ff-b885-9cb97884704f");// вот такие айдишники будут у юзеров
-        //Intent intent= new Intent(getBaseContext(), UserActivity.class);
-        Intent intent = new Intent(getBaseContext(), MeetingActivity.class);
-        intent.putExtras(bundle);
-        //   startActivity(intent);
-        //startActivity(new Intent(getBaseContext(), UserListActivity.class));
-        startActivity(new Intent(getBaseContext(), MeetingsListActivity.class));
-    }
 
     public void registerProfile(View v) {
-        final View rootView = getLayoutInflater().inflate(R.layout.fragment_explore, null);
-        final ProgressBar mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.login_progress);
+//        final View rootView = getLayoutInflater().inflate(R.layout.fragment_register, null);
+        Toast.makeText(getApplicationContext(), "Registration...", Toast.LENGTH_SHORT).show();
+
+//        final ProgressBar mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.login_progress);
 
     }
 
@@ -290,16 +255,28 @@ public class StartActivity extends FragmentActivity {
 
     public void login(View v) {
 
-        if (mViewPager.getCurrentItem() < 2) {
-            mViewPager.setCurrentItem(2, true);
-        } else {
+//        if (mViewPager.getCurrentItem() < 2) {
+//            mViewPager.setCurrentItem(2, true);
+//        } else {
+        //wmobilas,123qweASD
+        final View rootView = getLayoutInflater().inflate(R.layout.fragment_welcome, null);
+        username_login= (TextView) findViewById(R.id.username_login);
+        username= username_login.getText().toString();
+        password_login= (TextView) findViewById(R.id.password_login);
+        password= password_login.getText().toString();
+        if (username.equals("") || password.equals("")){
+//          username="wmobilas"; password="123qweASD";
+            Toast.makeText(getApplicationContext(), "Please fill form", Toast.LENGTH_SHORT).show();
+            return;
+        }
             final ProgressDialog dialog = new ProgressDialog(this);
             dialog.setCancelable(false);
             dialog.setCanceledOnTouchOutside(false);
             dialog.setTitle("Logging in");
             dialog.setMessage("Please wait");
             dialog.show();
-            LoginTask task = new LoginTask("wmobilas", "123qweASD") {
+
+            LoginTask task = new LoginTask(username, password) {
                 @Override
                 public void onSuccess(CurrentUser currentUser) {
                     dialog.dismiss();
@@ -310,22 +287,20 @@ public class StartActivity extends FragmentActivity {
 
                 @Override
                 public void onError(Exception exp) {
-                    // а нет, норм, туплю
+                    dialog.dismiss();
                     if (exp instanceof ApiError) {
-                        int code = ((ApiError) exp).getCode();
-                        if (code == ApiError.BADCREDITS) {
+//                        int code = ((ApiError) exp).getCode();
+//                        if (code == ApiError.BADCREDITS) {
                             Toast.makeText(getApplicationContext(), "Check your login and password", Toast.LENGTH_SHORT).show();
-                        }
+//                        }
 
                     } else {
                         if (exp instanceof SocketException) {
                             Toast.makeText(getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
                         } else {
-
+//                            Toast.makeText(getApplicationContext(), "Check your login and password", Toast.LENGTH_SHORT).show();
                             Toast.makeText(getApplicationContext(), "Unexpected error", Toast.LENGTH_SHORT).show();
                         }
-                        // удали дурацкий иврит, ты им пользуешься? нередк
-                        // ты понял как вообще должно происходить?что именно? ну запрос
                     }
                 }
 
@@ -335,14 +310,15 @@ public class StartActivity extends FragmentActivity {
                 }
             };
 
-            final View rootView = getLayoutInflater().inflate(R.layout.fragment_login, null);
-            final ProgressBar mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.login_progress);
-            mActivityIndicator.setVisibility(View.VISIBLE);
+
+//            final ProgressBar mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.login_progress);
+//            mActivityIndicator.setVisibility(View.VISIBLE);
             task.start();
-        }
+//        }
     }
 
     public void register(View view) {
+        mViewPager.setCurrentItem(1, true);
     }
 
     private boolean checkPlayServices() {
@@ -411,26 +387,5 @@ public class StartActivity extends FragmentActivity {
         editor.commit();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-
-        //Detects request codes
-        if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
-            Uri selectedImage = data.getData();
-            Bitmap bitmap = null;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                ImageButton dogeButton = (ImageButton) findViewById(R.id.dogeButton);
-                dogeButton.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }
 }
