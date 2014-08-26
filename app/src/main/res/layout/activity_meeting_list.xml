@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <!-- Show on Map button -->
-    <Button android:id="@+id/btn_show_map"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Show Meetings on Map"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dip"
-        android:onClick="mapOpen"/>
 
-    <!--  List view -->
+      <!--List view -->
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mapMeeting"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        />
+
     <ListView
         android:id="@+id/meeting_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_show_map"/>
-</RelativeLayout>
+        android:layout_weight="1.00" />
+
+</LinearLayout>

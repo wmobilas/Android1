@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
     <ImageView
         android:src="@drawable/pttr"
         android:scaleType = "centerCrop"
@@ -19,7 +20,8 @@
     <LinearLayout android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="6dp">
+        android:padding="6dp"
+        android:animateLayoutChanges="true">
         <ImageView
             android:src="@drawable/doge"
             android:layout_width="wrap_content"
@@ -67,10 +69,23 @@
             android:background="@drawable/nowbutton"
             android:layout_marginTop="6dp"
             android:textSize="20sp"
-            android:hapticFeedbackEnabled="true"/>
+            android:hapticFeedbackEnabled="true"
+            android:visibility="visible"/>
+
+        <Button
+            android:text="Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_button"
+            android:onClick="registerProfile"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/nowbutton"
+            android:layout_marginTop="6dp"
+            android:textSize="20sp"
+            android:hapticFeedbackEnabled="true"
+            android:visibility="gone"/>
         <Button
             android:text="Join now! It`s free"
-            android:onClick="register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/join_button"
@@ -78,7 +93,8 @@
             android:background="@drawable/buttonshape"
             android:layout_marginTop="6dp"
             android:textSize="20sp"
-            android:hapticFeedbackEnabled="true"/>
+            android:hapticFeedbackEnabled="true"
+            android:visibility="visible"/>
 
 
         <!--<TextView-->

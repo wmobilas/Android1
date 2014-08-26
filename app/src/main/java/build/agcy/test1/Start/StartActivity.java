@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentActivity;
@@ -19,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -102,7 +104,6 @@ public class StartActivity extends FragmentActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
     }
 
 
@@ -158,10 +159,10 @@ public class StartActivity extends FragmentActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if (position == 1) {
-                return new RegisterFragment();
+                return new SecondPageFragment();
             }
             if (position == 2) {
-                return new LoginFragment();
+                return new ThirdPageFragment();
             }
             //todo: send data to fragment
             return WelcomeFragment.newInstance(R.drawable.doge, R.string.hello_world);
@@ -216,14 +217,30 @@ public class StartActivity extends FragmentActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
+            final View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
+
+            final Button testButtonMap = (Button) rootView.findViewById(R.id.join_button);
+            testButtonMap.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+//                    final View rootView = getLayoutInflater().inflate(R.layout.fragment_welcome, null);
+
+                            ((Button) rootView.findViewById(R.id.login_button)).setVisibility(View.GONE);
+                            ((Button) rootView.findViewById(R.id.join_button)).setVisibility(View.GONE);
+                            ((Button) rootView.findViewById(R.id.register_button)).setVisibility(View.VISIBLE);
+                            Log.d("build.agcy","textbuttonclick");
+//                    mSectionsPagerAdapter.notifyDataSetChanged();
+
+                        }
+                    });
             Bundle args = getArguments();
             // todo: bind args
             return rootView;
         }
     }
 
-    public static class LoginFragment extends Fragment {
+    public static class SecondPageFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_login, container, false);
@@ -231,20 +248,26 @@ public class StartActivity extends FragmentActivity {
         }
     }
 
-    public static class RegisterFragment extends Fragment {
+    public static class ThirdPageFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_register, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_login, container, false);
             return rootView;
         }
     }
 
-
-
     public void registerProfile(View v) {
 //        final View rootView = getLayoutInflater().inflate(R.layout.fragment_register, null);
         Toast.makeText(getApplicationContext(), "Registration...", Toast.LENGTH_SHORT).show();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                Toast.makeText(getApplicationContext(), "Registration failed. Please try later", Toast.LENGTH_SHORT).show();
 
+            }
+        }, 5000);
 //        final ProgressBar mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.login_progress);
 
     }
@@ -315,10 +338,6 @@ public class StartActivity extends FragmentActivity {
 //            mActivityIndicator.setVisibility(View.VISIBLE);
             task.start();
 //        }
-    }
-
-    public void register(View view) {
-        mViewPager.setCurrentItem(1, true);
     }
 
     private boolean checkPlayServices() {

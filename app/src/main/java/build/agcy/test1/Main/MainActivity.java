@@ -15,12 +15,14 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import build.agcy.test1.EatWithMeApp;
+import build.agcy.test1.Fragments.MeetingListFragment;
 import build.agcy.test1.Fragments.TimePickerFragment;
-import build.agcy.test1.Meetings.MapActivity;
 import build.agcy.test1.Meetings.MeetingActivity;
-import build.agcy.test1.Meetings.MeetingsListActivity;
 import build.agcy.test1.R;
 import build.agcy.test1.Users.UserListActivity;
 
@@ -41,8 +43,23 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     ViewPager mViewPager;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main1);
+        final View rootView = getLayoutInflater().inflate(R.layout.activity_main1, null);
 
+
+        if (EatWithMeApp.isProfileUpdated()){
+            ((FrameLayout) rootView.findViewById(R.id.fragment_profile)).setVisibility(View.GONE);}
+        if (!EatWithMeApp.isProfileUpdated()){
+            final Button updateButton = (Button) rootView.findViewById(R.id.update_button);
+            updateButton.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((FrameLayout) rootView.findViewById(R.id.fragment_profile)).setVisibility(View.GONE);
+                    EatWithMeApp.profileUpdate();
+                }});
+        }
+
+
+        setContentView(rootView);
         // Create the adapter that will return a fragment for each of the three primary sections
         // of the app.
         mAppSectionsPagerAdapter = new AppSectionsPagerAdapter(getSupportFragmentManager());
@@ -87,6 +104,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                             .setText(s[i]));
 
         }
+
     }
 
 
@@ -120,11 +138,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 case 0:
                     // The first section of the app is the most interesting -- it offers
                     // a launchpad into the other demonstrations in this example application.
-                    return new MapActivity();
+                    return new MeetingListFragment();
                 case 1:
                     // The first section of the app is the most interesting -- it offers
                     // a launchpad into the other demonstrations in this example application.
-                    return new FirstFragment();
+                    return new CreateMeetingFragment();
                 case 2:
                     // The first section of the app is the most interesting -- it offers
                     // a launchpad into the other demonstrations in this example application.
@@ -154,12 +172,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     /**
      * A fragment that launches other parts of the demo application.
      */
-    public static class LaunchpadSectionFragment extends Fragment {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+//    public static class LaunchpadSectionFragment extends Fragment {
+//
+//        @Override
+//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                Bundle savedInstanceState) {
+//            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
             // Demonstration of a collection-browsing activity.
 //            rootView.findViewById(R.id.demo_collection_button)
@@ -188,9 +206,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 //                        }
 //                    });
 
-            return rootView;
-        }
-    }
+//            return rootView;
+//        }
+//    }
 
     /**
      * A dummy fragment representing a section of the app, but that simply displays dummy text.
@@ -202,7 +220,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_section_dummy, container, false);
+            final View rootView = inflater.inflate(R.layout.fragment_section_dummy, container, false);
             Bundle args = getArguments();
             ((TextView) rootView.findViewById(android.R.id.text1)).setText(
                     getString(R.string.explore_new_world, args.getInt(ARG_SECTION_NUMBER)));
@@ -217,14 +235,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
-             View rootView = inflater.inflate(R.layout.fragment_meeting, container, false);
+             View rootView = inflater.inflate(R.layout.fragment_user, container, false);
 
             return rootView;
         }
     }
-    public static class SecondFragment extends Fragment {
+    public static class CreateMeetingFragment extends Fragment {
 
-        public SecondFragment(){}
+        public CreateMeetingFragment(){}
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -259,7 +277,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         intent.putExtras(bundle);
         //   startActivity(intent);
         //startActivity(new Intent(getBaseContext(), UserListActivity.class));
-        startActivity(new Intent(getBaseContext(), MeetingsListActivity.class));
+        startActivity(intent);
     }
 
     public void showUsers(View view) {

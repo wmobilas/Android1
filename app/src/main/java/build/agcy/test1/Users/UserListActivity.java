@@ -1,21 +1,16 @@
 package build.agcy.test1.Users;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 
@@ -23,8 +18,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import build.agcy.test1.Api.Users.UsersListTask;
-import build.agcy.test1.Chat.AndyChatActivity;
-import build.agcy.test1.Meetings.MapActivity;
 import build.agcy.test1.Models.User;
 import build.agcy.test1.R;
 

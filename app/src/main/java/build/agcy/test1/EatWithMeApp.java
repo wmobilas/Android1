@@ -18,11 +18,11 @@ public class EatWithMeApp extends Application {
     private final static String USERNAME_PREFERENCES_KEY = "username_preferences_key";
     private final static String USERID_PREFERENCES_KEY = "userid_preferences_key";
     private final static String PHOTO_PREFERENCES_KEY = "PHOTO_preferences_key";
+    private final static String UPDATED_PROFILE_COUNT = "UPDATED_PROFILE_COUNT".toLowerCase();
 
     @Override
     public void onCreate() {
         super.onCreate();
-
         SharedPreferences prefs = getSharedPreferences(AUTH_PREFS, Activity.MODE_MULTI_PROCESS);
         if (prefs.contains(TOKEN_PREFERENCES_KEY)) {
             token = prefs.getString(TOKEN_PREFERENCES_KEY, null);
@@ -35,6 +35,14 @@ public class EatWithMeApp extends Application {
     public static void saveToken(String token) {
         SharedPreferences prefs = app.getSharedPreferences(AUTH_PREFS, Activity.MODE_MULTI_PROCESS);
         prefs.edit().putString(TOKEN_PREFERENCES_KEY, token).commit();
+    }
+    public static void profileUpdate() {
+        SharedPreferences prefs = app.getSharedPreferences(AUTH_PREFS, Activity.MODE_MULTI_PROCESS);
+        prefs.edit().putString(UPDATED_PROFILE_COUNT, "1").commit();
+    }
+    public static boolean isProfileUpdated() {
+        SharedPreferences prefs = app.getSharedPreferences(AUTH_PREFS, Activity.MODE_MULTI_PROCESS);
+        if (!prefs.contains(UPDATED_PROFILE_COUNT)) {return false;}return true;
     }
 
     public static void saveCurrentUser(CurrentUser currentUser) {
