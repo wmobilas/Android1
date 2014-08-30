@@ -7,26 +7,27 @@ import android.os.Parcelable;
  * Created by kiolt_000 on 17/08/2014.
  */
 public class Meeting implements Parcelable {
-    public String meeting_id;
+    public String Id;
     public String description;
     public String creator;
-    public String longitude;
+    public String longtitude;
     public String latitude;
     public int time;
 
-    public Meeting(String meeting_id, String description,String creator,String longtitude,String latitude,int time) {
-        this.meeting_id = meeting_id;
+    public Meeting(String Id, String description,String creator,String longtitude,String latitude,int time) {
+        this.Id = Id;
         this.description = description;
         this.creator = creator;
-        this.longitude = longtitude;
+        this.longtitude = longtitude;
         //todo:исправить на серверн на longitude
+        //id не получаю
         this.latitude = latitude;
         this.time = time;
     }
-    public void setMeetingId(String meeting_id) {
-        this.meeting_id = meeting_id;}
+    public void setMeetingId(String Id) {
+        this.Id = Id;}
     public String getMeetingId() {
-        return meeting_id;}
+        return Id;}
     public void setDescription(String description) {
         this.description = description;}
     public String getDescription() {
@@ -34,15 +35,15 @@ public class Meeting implements Parcelable {
     public void setCreator(String creator) {
         this.creator = creator;}
     public String getCreator() {
-        return meeting_id;}
+        return creator;}
     public void setLatitude(String latitude) {
         this.latitude = latitude;}
     public String getLatitude() {
         return latitude;}
     public void setLongitude(String longitude) {
-        this.longitude = longitude;}
+        this.longtitude = longitude;}
     public String getLongitude() {
-        return longitude;}
+        return longtitude;}
     public void setTime(int time) {
         this.time = time;}
     public int getTime() {
@@ -56,10 +57,10 @@ public class Meeting implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(meeting_id);
+        dest.writeString(Id);
         dest.writeString(description);
         dest.writeString(creator);
-        dest.writeString(longitude);
+        dest.writeString(longtitude);
         dest.writeString(latitude);
         dest.writeInt(time);
     }
@@ -68,13 +69,13 @@ public class Meeting implements Parcelable {
 
         @Override
         public Meeting createFromParcel(Parcel source) {
-            String meeting_id = source.readString();
+            String Id = source.readString();
             String description = source.readString();
             String creator = source.readString();
             String latitude = source.readString();
-            String longitude = source.readString();
+            String longtitude = source.readString();
             int time = source.readInt();
-            return new Meeting(meeting_id, description,creator, latitude, longitude, time );
+            return new Meeting(Id, description,creator, latitude, longtitude, time );
         }
 
         @Override

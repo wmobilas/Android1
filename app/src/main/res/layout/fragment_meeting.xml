@@ -12,13 +12,15 @@ tools:context="build.agcy.test1.Meetings.MeetingActivity$PlaceholderFragment"
         android:layout_height="match_parent"
         android:id="@+id/container"
         android:orientation="vertical">
-<ImageView
-    android:id="@+id/meeting_big_photo"
-    android:src="@drawable/pin"
-    android:layout_width="match_parent"
-    android:layout_height="236dp"
-    android:layout_gravity="top" />
-<TextView
+
+        <ImageView
+            android:id="@+id/meeting_big_photo"
+            android:src="@drawable/pin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
     android:id="@+id/meeting_description1"
     android:textAppearance="?android:attr/textAppearanceLarge"
     android:text="Description"
@@ -39,7 +41,39 @@ tools:context="build.agcy.test1.Meetings.MeetingActivity$PlaceholderFragment"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
     android:layout_gravity="center_horizontal" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/accept_message"
+            android:text=""
+            android:textSize="18sp"
+            android:hint="Say hello!"/>
+        <Button
+            android:text="Accept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/accept_button"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/buttonshape"
+            android:layout_marginTop="6dp"
+            android:textSize="20sp"
+            android:hapticFeedbackEnabled="true"
+            android:visibility="visible"/>
 
+        <TextView
+            android:id="@+id/user_accepted_list_status"
+            android:text="loading..."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <ListView
+        android:id="@+id/user_accepted_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     </LinearLayout>
+
 </LinearLayout>
 

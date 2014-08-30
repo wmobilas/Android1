@@ -29,12 +29,10 @@ import java.util.Calendar;
 
 import build.agcy.test1.Api.Errors.ApiError;
 import build.agcy.test1.Api.Meetings.MeetingCreateTask;
-import build.agcy.test1.Api.Meetings.MeetingGetTask;
 import build.agcy.test1.EatWithMeApp;
 import build.agcy.test1.Fragmentes.MeetingListFragment;
 import build.agcy.test1.Fragmentes.TimePickerFragment;
 import build.agcy.test1.Meetings.MeetingActivity;
-import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
 import build.agcy.test1.Users.UserListActivity;
 
@@ -208,8 +206,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 //        public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //                Bundle savedInstanceState) {
 //            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-            // Demonstration of a collection-browsing activity.
+//
+//            Demonstration of a collection-browsing activity.
 //            rootView.findViewById(R.id.demo_collection_button)
 //                    .setOnClickListener(new View.OnClickListener() {
 //                        @Override
@@ -235,7 +233,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 //                            startActivity(externalActivityIntent);
 //                        }
 //                    });
-
+//
 //            return rootView;
 //        }
 //    }
@@ -288,6 +286,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             final Button createMeetingButton = (Button) rootView.findViewById(R.id.create_meeting);
             final Button  timePickButton = (Button) rootView.findViewById(R.id.time_picker);
             final Button  cancelButton = (Button) rootView.findViewById(R.id.cancel_meeting);
+            final Button  viewCreatedMeetingButton = (Button) rootView.findViewById(R.id.created_meeting_button);
             final TextView waitingAnswer = (TextView) rootView.findViewById(R.id.waiting);
             final int gon=View.GONE;
             final int vis=View.VISIBLE;
@@ -297,6 +296,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 timePickButton.setVisibility(gon);
                 waitingAnswer.setVisibility(vis);
                 cancelButton.setVisibility(vis);
+                viewCreatedMeetingButton.setVisibility(vis);
+
             }
             cancelButton.setOnClickListener( new View.OnClickListener() {
                 @Override
@@ -305,8 +306,25 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                     timePickButton.setVisibility(vis);
                     waitingAnswer.setVisibility(gon);
                     cancelButton.setVisibility(gon);
+                    viewCreatedMeetingButton.setVisibility(gon);
                     getActivity().getSharedPreferences("auth_prefs", Activity.MODE_PRIVATE).edit().remove("user_meeting_id").commit();
+                    getActivity().getSharedPreferences("auth_prefs", Activity.MODE_PRIVATE).edit().remove("user_meeting_time").commit();
                     //todo сделать удаление на сервере
+                }
+            });
+            viewCreatedMeetingButton.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SharedPreferences prefs = getActivity().getSharedPreferences("auth_prefs", Context.MODE_PRIVATE);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("meeting_id", prefs.getString("created_meeting_id", "id"));
+                    bundle.putString("meeting_creator", EatWithMeApp.currentUser.username);
+                    bundle.putString("meeting_description", prefs.getString("created_meeting_description", "description"));
+                    bundle.putString("meeting_latitude", prefs.getString("created_meeting_latitude", "latitude"));
+                    bundle.putString("meeting_longitude", prefs.getString("created_meeting_longitude", "longitude"));
+                    Intent intent = new Intent(getActivity(), MeetingActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             });
             createMeetingButton.setOnClickListener( new View.OnClickListener() {
@@ -317,21 +335,23 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                         timePickButton.setVisibility(gon);
                         waitingAnswer.setVisibility(vis);
                         cancelButton.setVisibility(vis);
-                    Spinner mySpinner =(Spinner) rootView.findViewById(R.id.MeetingType);
-                    String latitude=prefs.getString("user_lat", "33.333333");
-                    String longitude=prefs.getString("user_lng", "33.333333");
-                    String selectedType="Date";
-                    try {selectedType = mySpinner.getSelectedItem().toString();}
-                    catch (Exception e){
-                        Toast.makeText(getActivity().getApplicationContext(), "no spinner item selected", Toast.LENGTH_SHORT).show();
-                    }
-                    final ProgressDialog dialog = new ProgressDialog(getActivity());
-                    dialog.setCancelable(false);
-                    dialog.setCanceledOnTouchOutside(false);
-                    dialog.setTitle("Creating meeting...");
-                    dialog.setMessage("Please wait");
-                    dialog.show();
-                        String hour, minute,time;
+                        viewCreatedMeetingButton.setVisibility(vis);
+                        Spinner mySpinner =(Spinner) rootView.findViewById(R.id.MeetingType);
+                        final String latitude=prefs.getString("user_lat", "33.333333");
+                        final String longitude=prefs.getString("user_lng", "33.333333");
+                        String selectedType="Date";
+                        try {selectedType = mySpinner.getSelectedItem().toString();}
+                        catch (Exception e){
+                            Toast.makeText(getActivity().getApplicationContext(), "no spinner item selected", Toast.LENGTH_SHORT).show();
+                        }
+                        final String finalSelectedType = selectedType;
+                        final ProgressDialog dialog = new ProgressDialog(getActivity());
+                        dialog.setCancelable(false);
+                        dialog.setCanceledOnTouchOutside(false);
+                        dialog.setTitle("Creating meeting...");
+                        dialog.setMessage("Please wait");
+                        dialog.show();
+                        String time;
                         if (!prefs.contains("user_meeting_time")){
                             Calendar c = Calendar.getInstance();
                             time=String.valueOf((c.get(Calendar.HOUR_OF_DAY)))+""+String.valueOf(c.get(Calendar.MINUTE));
@@ -341,35 +361,22 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                         }
                         if (time.equals("00")){time="0000";}
                         if (time.length()<4){time="0"+time;}
-                    MeetingCreateTask task = new MeetingCreateTask(latitude, longitude, time,selectedType) {
+                        MeetingCreateTask task = new MeetingCreateTask(latitude, longitude, time, finalSelectedType) {
                         @Override
                         public void onSuccess(final String i) {
-                            MeetingGetTask task = new MeetingGetTask(i) {
-                                @Override
-                                public void onSuccess(Meeting response) {
-                                    dialog.dismiss();
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("meeting_id", response.meeting_id);
-                                    bundle.putString("meeting_creator", EatWithMeApp.currentUser.username);
-                                    bundle.putString("meeting_description", response.description);
-                                    bundle.putString("meeting_latitude", response.latitude);
-                                    bundle.putString("meeting_longitude", response.longitude);
-                                    Intent intent = new Intent(getActivity(), MeetingActivity.class);
-                                    intent.putExtras(bundle);
-                                    startActivity(intent);
-                                }
-                                @Override
-                                public void onError(Exception exp) {
-                                    Toast.makeText(getActivity().getApplicationContext(),exp.toString(),Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getActivity().getBaseContext(), MeetingActivity.class);
-                                    intent.putExtra("meeting_id", i);
-                                    SharedPreferences prefs = getActivity().getSharedPreferences("auth_prefs", Context.MODE_PRIVATE);
-                                    prefs.edit().putString("user_meeting_id", i).commit();
-                                    Toast.makeText(getActivity().getApplicationContext(),"Meeting id:"+i,Toast.LENGTH_SHORT).show();
-                                    startActivity(intent);
-                                    }
-                            };
-                            task.start();
+                            dialog.dismiss();
+                            SharedPreferences prefs = getActivity().getSharedPreferences("auth_prefs", Context.MODE_PRIVATE);
+                            prefs.edit().putString("user_meeting_id", i).commit();
+                            prefs.edit().putString("meeting_selected_creator",  EatWithMeApp.currentUser.username).commit();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("meeting_id", i);
+                            bundle.putString("meeting_creator", EatWithMeApp.currentUser.username);
+                            bundle.putString("meeting_description", finalSelectedType);
+                            bundle.putString("meeting_latitude", latitude);
+                            bundle.putString("meeting_longitude", longitude);
+                            Intent intent = new Intent(getActivity(), MeetingActivity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
                             //current user id in prefs userid_preferences_key
                         }
                         @Override

@@ -454,7 +454,7 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
             meeting_name=meetingsList.get(i).description;
             meeting_creator=meetingsList.get(i).creator;
             parseLat=Double.parseDouble(meetingsList.get(i).latitude);
-            parseLng=Double.parseDouble(meetingsList.get(i).longitude);
+            parseLng=Double.parseDouble(meetingsList.get(i).longtitude);
 
             cordinats = new LatLng(parseLat, parseLng);
             Marker marker = map.addMarker(new MarkerOptions()

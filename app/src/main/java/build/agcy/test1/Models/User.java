@@ -8,5 +8,6 @@ public class User {
     public String username;
     public String latitude;
     public String longtitude;
+    //todo longitude
     public String photo;
 }

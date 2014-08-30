@@ -33,12 +33,14 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: build.agcy.test1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88f9a1c8-6eb3-46f4-9365-6d400a93a17e" name="Default" comment="Сделаны таски&#10;много улучшений">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MapFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/TimePickerFragment.java" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\java\build\agcy\test1\fragments\TimePickerFragment.java" afterPath="" />
+    <list default="true" id="88f9a1c8-6eb3-46f4-9365-6d400a93a17e" name="Default" comment="Fragmentes">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_map.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_map.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MapActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MapActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MapFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MapFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/Meeting.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/Meeting.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/User.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_meeting.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_meeting.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="test1.iws" />
@@ -778,9 +780,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/GCMRegistrationTask.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/GCMIntentService.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_map.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_map.xml" />
@@ -793,13 +792,11 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_meeting.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/CurrentUser.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_meeting.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/ApiTaskBase.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/EatWithMeApp.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/NavigationDrawerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragments/TimePickerFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_meeting.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_meeting.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/Meetings/MeetingGetTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/MeetingsAccept.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/Meetings/MeetingAcceptsListTask.java" />
@@ -807,8 +804,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/Meetings/MeetingAcceptTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/Meetings/MeetingConfirmTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragments/MapFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/Meeting.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/User.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/Meetings/MeetingListTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/Users/UsersListTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/Users/UserTask.java" />
@@ -818,17 +813,24 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_user_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_explore.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_meeting_list.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Users/UserListActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Users/UserActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Users/UserAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragments/MeetingListFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MapActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Start/StartActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Start/LoginTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Start/RegisterTask.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MapHelpers/MeetingPopupAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_meeting.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_meeting.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/Meeting.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/User.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MapFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MeetingListFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MapActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java" />
       </list>
     </option>
   </component>
@@ -944,6 +946,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1293,7 +1321,11 @@
       <created>1409423996910</created>
       <updated>1409423996910</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fragmentes">
+      <created>1409424328385</created>
+      <updated>1409424328385</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1334,7 +1366,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31738436" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19515885" sideWeight="0.5012346" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31647635" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.903752" sideWeight="0.8139357" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.56769985" sideWeight="0.8139357" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1405,7 +1437,8 @@
     <MESSAGE value="Карта как фрагмент&#10;другие улучшения интерфейса" />
     <MESSAGE value="Улучшено окно встречи&#10;теперь как фрагмент" />
     <MESSAGE value="Сделаны таски&#10;много улучшений" />
-    <option name="LAST_COMMIT_MESSAGE" value="Сделаны таски&#10;много улучшений" />
+    <MESSAGE value="Fragmentes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fragmentes" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1587,9 +1620,51 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MeetingListFragment.java</url>
-          <line>117</line>
+          <line>118</line>
           <properties />
           <option name="timeStamp" value="470" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java</url>
+          <line>102</line>
+          <properties />
+          <option name="timeStamp" value="494" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java</url>
+          <line>100</line>
+          <properties />
+          <option name="timeStamp" value="495" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java</url>
+          <line>106</line>
+          <properties />
+          <option name="timeStamp" value="496" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java</url>
+          <line>109</line>
+          <properties />
+          <option name="timeStamp" value="497" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MeetingListFragment.java</url>
+          <line>103</line>
+          <properties />
+          <option name="timeStamp" value="498" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MeetingListFragment.java</url>
+          <line>104</line>
+          <properties />
+          <option name="timeStamp" value="499" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MeetingListFragment.java</url>
+          <line>108</line>
+          <properties />
+          <option name="timeStamp" value="500" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/ApiTaskBase.java</url>
@@ -1598,32 +1673,10 @@
           <option name="timeStamp" value="74" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="494" />
+      <option name="time" value="501" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="799" max-vertical-offset="1734">
-          <caret line="43" column="49" selection-start-line="43" selection-start-column="49" selection-end-line="43" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MapHelpers/MeetingPopupAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11774744" vertical-offset="798" max-vertical-offset="1547">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/GCMIntentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="175" max-vertical-offset="1496">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build/generated/source/r/debug/build/agcy/test1/R.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36328125" vertical-offset="4276" max-vertical-offset="11220">
@@ -1632,28 +1685,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_create_meeting.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18579236" vertical-offset="374" max-vertical-offset="1819">
-          <caret line="26" column="44" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-19/android/content/SharedPreferences.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7918089" vertical-offset="3140" max-vertical-offset="6154">
           <caret line="227" column="13" selection-start-line="227" selection-start-column="13" selection-end-line="227" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/TimePickerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7679181" vertical-offset="383" max-vertical-offset="969">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1689,19 +1724,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/MeetingsAccept.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20307167" vertical-offset="0" max-vertical-offset="586">
-          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/Meetings/MeetingAcceptsListTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30375427" vertical-offset="315" max-vertical-offset="1326">
           <caret line="29" column="76" selection-start-line="29" selection-start-column="76" selection-end-line="29" selection-end-column="76" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1712,27 +1740,6 @@
           <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/Meetings/MeetingAcceptTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="980" max-vertical-offset="1581">
-          <caret line="65" column="81" selection-start-line="65" selection-start-column="81" selection-end-line="65" selection-end-column="81" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_meeting.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
-          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_user.xml">
@@ -1746,30 +1753,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MapFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2181501" vertical-offset="5791" max-vertical-offset="7021">
-          <caret line="420" column="73" selection-start-line="420" selection-start-column="73" selection-end-line="420" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/Meeting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26109216" vertical-offset="187" max-vertical-offset="1445">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1450512" vertical-offset="0" max-vertical-offset="586">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/build/agcy/test1/BuildConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2715655" vertical-offset="0" max-vertical-offset="313">
@@ -1781,28 +1764,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2356021" vertical-offset="27405" max-vertical-offset="33728">
           <caret line="1680" column="25" selection-start-line="1680" selection-start-column="25" selection-end-line="1680" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/Meetings/MeetingGetTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6518771" vertical-offset="298" max-vertical-offset="884">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding>
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_meeting.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51428574" vertical-offset="307" max-vertical-offset="867">
-          <caret line="35" column="16" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="16" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/ApiTaskBase.java">
@@ -1847,19 +1810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main1.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1638" max-vertical-offset="3587">
-          <caret line="113" column="32" selection-start-line="113" selection-start-column="32" selection-end-line="113" selection-end-column="32" />
-          <folding>
-            <element signature="e#7213#7233#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_user.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45357144" vertical-offset="273" max-vertical-offset="833">
@@ -1883,17 +1833,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33392859" vertical-offset="0" max-vertical-offset="560">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_user_list.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5615616" vertical-offset="0" max-vertical-offset="493">
-          <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="15" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -1958,55 +1897,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Users/UserListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="957" max-vertical-offset="1649">
-          <caret line="86" column="33" selection-start-line="86" selection-start-column="33" selection-end-line="86" selection-end-column="33" />
-          <folding>
-            <element signature="e#4096#4097#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6352531" vertical-offset="4073" max-vertical-offset="6936">
-          <caret line="308" column="54" selection-start-line="308" selection-start-column="54" selection-end-line="308" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MeetingListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6055" max-vertical-offset="7939">
-          <caret line="405" column="46" selection-start-line="405" selection-start-column="46" selection-end-line="405" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2416#2425#0" expanded="true" />
-            <element signature="e#18765#18774#0" expanded="true" />
-            <element signature="e#18862#18870#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MapActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3777" max-vertical-offset="4845">
-          <caret line="294" column="141" selection-start-line="294" selection-start-column="141" selection-end-line="294" selection-end-column="141" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="983" max-vertical-offset="1666">
-          <caret line="70" column="13" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.29522184" vertical-offset="677" max-vertical-offset="1309">
@@ -2047,27 +1937,222 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_meeting.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/TimePickerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.3703072" vertical-offset="47" max-vertical-offset="969">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MapHelpers/MeetingPopupAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18771331" vertical-offset="604" max-vertical-offset="1547">
+          <caret line="56" column="36" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Start/StartActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2303665" vertical-offset="5223" max-vertical-offset="7871">
-          <caret line="315" column="87" selection-start-line="315" selection-start-column="87" selection-end-line="315" selection-end-column="87" />
+        <state vertical-scroll-proportion="0.60907507" vertical-offset="2949" max-vertical-offset="7021">
+          <caret line="239" column="56" selection-start-line="236" selection-start-column="25" selection-end-line="239" selection-end-column="56" />
           <folding>
-            <element signature="imports" expanded="false" />
             <element signature="e#2384#2400#0" expanded="true" />
-            <element signature="e#6090#6091#0" expanded="true" />
-            <element signature="e#6123#6124#0" expanded="true" />
-            <element signature="e#6655#6675#0" expanded="true" />
-            <element signature="e#7009#7033#0" expanded="true" />
-            <element signature="e#7101#7138#0" expanded="true" />
-            <element signature="e#7206#7231#0" expanded="true" />
             <element signature="e#8590#9147#0" expanded="true" />
             <element signature="e#9124#9125#0" expanded="true" />
-            <element signature="e#13184#13185#0" expanded="true" />
-            <element signature="e#13245#13246#0" expanded="true" />
-            <element signature="e#15491#15492#0" expanded="true" />
-            <element signature="e#15560#15561#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_welcome.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.83928573" vertical-offset="1162" max-vertical-offset="2193">
+          <caret line="96" column="42" selection-start-line="86" selection-start-column="8" selection-end-line="96" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main1.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33214286" vertical-offset="2296" max-vertical-offset="3587">
+          <caret line="146" column="16" selection-start-line="146" selection-start-column="16" selection-end-line="156" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/Meetings/MeetingAcceptTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.71727747" vertical-offset="558" max-vertical-offset="1207">
+          <caret line="77" column="41" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_create_meeting.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33214286" vertical-offset="1072" max-vertical-offset="2023">
+          <caret line="74" column="63" selection-start-line="74" selection-start-column="63" selection-end-line="74" selection-end-column="63" />
+          <folding>
+            <element signature="e#1048#1068#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Users/UserListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1008" max-vertical-offset="1649">
+          <caret line="109" column="43" selection-start-line="70" selection-start-column="12" selection-end-line="109" selection-end-column="43" />
+          <folding>
+            <element signature="e#3130#4119#0" expanded="true" />
+            <element signature="e#4096#4097#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_user_list.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.60714287" vertical-offset="0" max-vertical-offset="560">
+          <caret line="20" column="49" selection-start-line="9" selection-start-column="5" selection-end-line="20" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Api/Meetings/MeetingGetTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="850">
+          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/CurrentUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1450512" vertical-offset="0" max-vertical-offset="586">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/Meeting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.70989764" vertical-offset="808" max-vertical-offset="1462">
+          <caret line="75" column="52" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/MeetingsAccept.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20307167" vertical-offset="0" max-vertical-offset="586">
+          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2901024" vertical-offset="0" max-vertical-offset="586">
+          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MapFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6402" max-vertical-offset="7021">
+          <caret line="457" column="0" selection-start-line="457" selection-start-column="0" selection-end-line="457" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MapActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42757416" vertical-offset="4226" max-vertical-offset="4845">
+          <caret line="319" column="45" selection-start-line="319" selection-start-column="45" selection-end-line="319" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4804" max-vertical-offset="6596">
+          <caret line="312" column="124" selection-start-line="312" selection-start-column="124" selection-end-line="312" selection-end-column="124" />
+          <folding>
+            <element signature="e#7885#7886#0" expanded="true" />
+            <element signature="e#7943#7944#0" expanded="true" />
+            <element signature="e#12756#13505#0" expanded="true" />
+            <element signature="e#13490#13491#0" expanded="true" />
+            <element signature="e#13565#14589#0" expanded="true" />
+            <element signature="e#14574#14575#0" expanded="true" />
+            <element signature="e#14644#19514#0" expanded="true" />
+            <element signature="e#19512#19513#0" expanded="true" />
+            <marker date="1409439219281" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MeetingListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1530" max-vertical-offset="7548">
+          <caret line="104" column="26" selection-start-line="103" selection-start-column="27" selection-end-line="104" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2416#2425#0" expanded="true" />
+            <element signature="e#3826#5185#0" expanded="true" />
+            <element signature="e#5162#5163#0" expanded="true" />
+            <element signature="e#7070#7220#0" expanded="false" />
+            <element signature="e#10293#10359#0" expanded="false" />
+            <element signature="e#18138#18187#0" expanded="false" />
+            <element signature="e#18879#18888#0" expanded="true" />
+            <element signature="e#18976#18984#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16928446" vertical-offset="1212" max-vertical-offset="2057">
+          <caret line="102" column="31" selection-start-line="102" selection-start-column="31" selection-end-line="102" selection-end-column="31" />
+          <folding>
+            <element signature="e#5174#6717#0" expanded="true" />
+            <element signature="e#6690#6691#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_meeting.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8839286" vertical-offset="729" max-vertical-offset="1445">
+          <caret line="72" column="43" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
   </component>
