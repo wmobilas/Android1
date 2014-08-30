@@ -45,7 +45,7 @@
             android:label="Chat"
             android:theme="@style/AnimationActivity" />
         <activity
-            android:name=".Meetings.MeetingsListActivity"
+            android:name=".Meetings.MapActivity"
             android:label="Meetings"
             android:theme="@style/AnimationActivity" />
         <activity

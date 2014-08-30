@@ -29,10 +29,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import build.agcy.test1.Meetings.MapHelpers.MeetingPopupAdapter;
 import build.agcy.test1.Core.MyLocationListener;
+import build.agcy.test1.Meetings.MapHelpers.MeetingPopupAdapter;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
 
@@ -106,9 +105,9 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
                         startActivity(intent);
             latitude=myLocationService.getLatitude();
             longitude=myLocationService.getLongitude();
-            Toast.makeText(getApplicationContext(), "Please Turn GPS On",Toast.LENGTH_LONG );
+            Toast.makeText(getApplicationContext(), "Please Turn GPS On",Toast.LENGTH_LONG).show();
                     }
-        addMeetings(map, this);
+//        addMeetings(map, this);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude))
                 .zoom(16)
@@ -275,7 +274,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
 //            String meeting_name=meetingsList.getItem(i).description;
 //            String meeting_creator=meetingsList.getItem(i).creator;
 //            double parseLat=Double.parseDouble(meetingsList.getItem(i).latitude);
-//            double parseLng=Double.parseDouble(meetingsList.getItem(i).longtitude);
+//            double parseLng=Double.parseDouble(meetingsList.getItem(i).lontitude);
 //
 //            LatLng cordinats = new LatLng(parseLat, parseLng);
 //            Marker marker = map.addMarker(new MarkerOptions()
@@ -292,7 +291,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
             Intent intent = activity.getIntent();
             meetingsList=intent.getParcelableArrayListExtra("meetings");
            // Object object= bundle.get("meetings");
-
+            //todo показать все маркеры на карте в поле зрения, центрировать по переданному маркеру, отобразить данные по встерече из маркера
 
         }else{
             Log.d("e","error no activity");

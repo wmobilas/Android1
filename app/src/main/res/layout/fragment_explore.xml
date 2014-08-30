@@ -2,65 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content" android:id="@+id/fragment_explore" >
-    <ImageButton android:id="@+id/dogeButton"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:layout_marginTop="50dip"
-        android:layout_marginLeft="50dip"
-        android:src="@drawable/doge"
-        android:layout_gravity="center_horizontal"
-        android:onClick="getImage"/>
-    <TextView
-        android:id="@+id/TextViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Welcome, dear! Please introduce!"
-        android:textSize="10pt" />
-    <EditText
-        android:id="@+id/EditTextName"
-        android:layout_height="wrap_content"
-        android:hint="Your username"
-        android:inputType="textPersonName"
-        android:layout_width="fill_parent"/>
-    <EditText
-    android:id="@+id/EditTextPass"
-    android:layout_height="wrap_content"
-    android:hint="Your password"
-    android:inputType="textPassword"
-    android:layout_width="fill_parent"/>
-    <EditText
-        android:id="@+id/EditTextEmail"
-        android:layout_height="wrap_content"
-        android:hint="Your email"
-        android:inputType="textEmailAddress"
-        android:layout_width="fill_parent"/>
-    <Spinner
-        android:id="@+id/SpinnerFeedbackType"
-        android:layout_height="wrap_content"
-        android:prompt="@string/lookingFor"
-        android:layout_width="fill_parent"
-        android:entries="@array/meetlist">
-    </Spinner>
-    <EditText
-        android:id="@+id/aboutYou"
-        android:layout_height="wrap_content"
-        android:hint="Tell About You"
-        android:inputType="textMultiLine"
-        android:lines="5"
-        android:layout_width="fill_parent">
-    </EditText>
-    <CheckBox
-        android:id="@+id/haveApair"
-        android:layout_height="wrap_content"
-        android:text="Do you have couple?"
-        android:layout_width="fill_parent">
-    </CheckBox>
+
     <Button
         android:id="@+id/ButtonRegister"
         android:layout_height="wrap_content"
-        android:text="Join"
-        android:onClick="register"
+        android:text="Show Users"
+        android:onClick="showUsers"
         android:layout_width="fill_parent">
     </Button>
 </LinearLayout>

@@ -6,7 +6,7 @@ package build.agcy.test1.Models;
 public class User {
     public String id;
     public String username;
-    public float latittude;
-    public float longtitude;
+    public String latitude;
+    public String longtitude;
     public String photo;
 }

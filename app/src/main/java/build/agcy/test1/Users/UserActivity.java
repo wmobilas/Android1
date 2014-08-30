@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import build.agcy.test1.Api.Users.UserTask;
 import build.agcy.test1.Models.User;
 import build.agcy.test1.R;
 
@@ -19,15 +19,13 @@ public class UserActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);// айдишники у нас везде стринг
-
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new PlaceholderUserFragment())
                     .commit();
         }
-
     }
 
 
@@ -53,48 +51,60 @@ public class UserActivity extends Activity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
 
-        private String userid;
+    public static class PlaceholderUserFragment extends Fragment {
+
+        private String username;
         public User user;
-        public PlaceholderFragment() {
-        }
 
+        public PlaceholderUserFragment() {
+        }
+        public static View user_activity_View;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            final View rootView = inflater.inflate(R.layout.fragment_user, container, false);
+                                 Bundle savedInstanceState) {
+            if (user_activity_View != null) {
+                ViewGroup parent = (ViewGroup) user_activity_View.getParent();
+                if (parent != null)
+                    parent.removeView(user_activity_View);
+            }
+            try{
+                user_activity_View=inflater.inflate(R.layout.fragment_user, container, false);
+            } catch (InflateException e) {
+            }
             Activity activity = getActivity();
-            if(activity!=null) {
+            if (activity != null) {
                 Intent intent = activity.getIntent();
                 Bundle bundle = intent.getExtras();
-                String id = bundle.getString("userid");
-                this.userid = id;
-            }else{
-                userid = null;
+                username = bundle.getString("user_username");
+                ((TextView) user_activity_View.findViewById(R.id.description)).setText(username);
+                ((TextView) user_activity_View.findViewById(R.id.status)).setVisibility(View.GONE);
+//                UserTask task = new UserTask(user_id) {
+//                    @Override
+//                    public void onSuccess(User user1) {
+//                        user = user1;
+//                        ((TextView) user_activity_View.findViewById(R.id.description)).setText(user.username);
+//                        ((TextView) user_activity_View.findViewById(R.id.status)).setVisibility(View.GONE);
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception exp) {
+//                        Toast.makeText(getActivity().getApplicationContext(),
+//                                "usertask error" + exp.toString(), Toast.LENGTH_LONG).show();
+//                        }
+//                };
+//                task.start();
+            } else {
+                user = new User() {{
+                    id = "123";
+                    username = "Ivan";
+                }};
+                ((TextView) user_activity_View.findViewById(R.id.description)).setText(user.username);
+                ((TextView) user_activity_View.findViewById(R.id.status)).setVisibility(View.GONE);
             }
-            UserTask task = new UserTask(userid) {
-
-
-                @Override
-                public void onSuccess(User user) {
-                }
-
-                @Override
-                public void onError(Exception exp) {
-                    ((TextView) rootView.findViewById(R.id.status)).setText("Error");
-                    // обработка ошибки тоже нужна подробная, надеюсь, это не нужно объяснять?
-                    // во всяком случае пока можно оставить так, мы ведь не продакшн делаем, где каждый левый еррор будет сказываться на
-                    // количестве пользователей xD
-                }
-            };
-            //task.start();
-            user = new User(){{ id = "123"; username = "Ivan";}};
-            PlaceholderFragment.this.user = user;
-            ((TextView) rootView.findViewById(R.id.description)).setText(user.username);
-            ((TextView) rootView.findViewById(R.id.status)).setVisibility(View.GONE);
-            // теперь жди пока я прикручу апи) сделай пока каких-то фиктивных юзеров, чтобы раставить все по местами
-            return rootView;
+            return user_activity_View;
         }
     }
 }
+
+

@@ -39,13 +39,5 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Show Users"
-            android:id="@+id/bttn"
-            android:onClick="showUsers"
-            android:background="@drawable/field"/>
-
     </LinearLayout>
 </RelativeLayout>

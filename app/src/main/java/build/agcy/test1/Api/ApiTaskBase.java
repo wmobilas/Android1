@@ -19,7 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
-import java.net.CookieStore;
 import java.util.List;
 
 import build.agcy.test1.Api.Errors.ApiError;
@@ -31,7 +30,7 @@ import build.agcy.test1.EatWithMeApp;
  */
 public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> implements TaskCallback<T> {
     protected static final String LOG_TAG = "API TASK";
-    protected static final String apiUrl = "http://eatwithme.azurewebsites.net/api/";
+    protected static final String apiUrl = "http://eatwithme.azurewebsites.net/";
     protected final String methodName;
     protected final boolean post;
     protected final Boolean loginRequred;
@@ -70,7 +69,6 @@ public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> imp
             String responseStr = EntityUtils.toString(httpEntity);
             Log.i(LOG_TAG, "Server response " + responseStr);
             return responseStr;
-
         } catch (Exception exp) {
             Log.e(LOG_TAG, "Loader error " + exp.toString());
             return exp;

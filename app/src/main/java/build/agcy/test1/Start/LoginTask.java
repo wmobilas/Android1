@@ -30,12 +30,11 @@ public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
     private String token;
 
     public LoginTask(String methodName, ArrayList<NameValuePair> args){
-        super(methodName, args, true, false);
-
+        super(methodName, args, false, false);
     }
 
     public LoginTask(final String login, final String password) {
-        super("account/login", new ArrayList<NameValuePair>(){{
+        super("api/account/login", new ArrayList<NameValuePair>(){{
             add(new BasicNameValuePair("login",login));
             add(new BasicNameValuePair("password",password));
         }}, false, false);
@@ -44,11 +43,6 @@ public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
     @Override
     protected CurrentUser parse(String json) throws JSONException {
         return new Gson().fromJson(json, CurrentUser.class);
-    }
-    public class MyException extends Exception {
-        public MyException(String message) {
-            super(message);
-        }
     }
     @Override
     protected Object doInBackground(Object... params) {

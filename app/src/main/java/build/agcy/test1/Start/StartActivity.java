@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentActivity;
@@ -28,17 +27,22 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import org.apache.http.NameValuePair;
+
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import build.agcy.test1.Api.Errors.ApiError;
+import build.agcy.test1.Api.Users.UsersListTask;
 import build.agcy.test1.Core.GCM.GCMRegistrationTask;
 import build.agcy.test1.EatWithMeApp;
 import build.agcy.test1.Main.MainActivity;
 import build.agcy.test1.Models.CurrentUser;
+import build.agcy.test1.Models.User;
 import build.agcy.test1.R;
 
 
@@ -57,9 +61,7 @@ public class StartActivity extends FragmentActivity {
      * The {@link ViewPager} that will host the section contents.
      */
 
-    public static final int GET_FROM_GALLERY = 3;
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    public static final String EXTRA_MESSAGE = "11";
     public static final String PROPERTY_REG_ID = "11";
     private static final String PROPERTY_APP_VERSION = "application_version_code";
 
@@ -104,6 +106,21 @@ public class StartActivity extends FragmentActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        UsersListTask usersListTask = new UsersListTask(new ArrayList<NameValuePair>()) {
+            @Override
+            public void onSuccess(final User[] response) {
+                SharedPreferences prefs = getApplicationContext().getSharedPreferences("auth_prefs", Context.MODE_PRIVATE);
+                for (User user : response){
+                    prefs.edit()
+                            .putString(user.id, user.username).commit();
+                }
+            }
+            @Override
+            public void onError(Exception exp) {
+                Toast.makeText(getApplicationContext(),"UserListTaskError "+exp.toString(),Toast.LENGTH_LONG).show();
+            }
+        };
+        usersListTask.start();
     }
 
 
@@ -212,30 +229,23 @@ public class StartActivity extends FragmentActivity {
             fragment.setArguments(args);
             return fragment;
         }
-
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
-
             final Button testButtonMap = (Button) rootView.findViewById(R.id.join_button);
             testButtonMap.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-//                    final View rootView = getLayoutInflater().inflate(R.layout.fragment_welcome, null);
-
                             ((Button) rootView.findViewById(R.id.login_button)).setVisibility(View.GONE);
                             ((Button) rootView.findViewById(R.id.join_button)).setVisibility(View.GONE);
                             ((Button) rootView.findViewById(R.id.register_button)).setVisibility(View.VISIBLE);
                             Log.d("build.agcy","textbuttonclick");
-//                    mSectionsPagerAdapter.notifyDataSetChanged();
-
                         }
                     });
             Bundle args = getArguments();
-            // todo: bind args
+//            todo: bind args
             return rootView;
         }
     }
@@ -243,46 +253,93 @@ public class StartActivity extends FragmentActivity {
     public static class SecondPageFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_login, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.fragment_login, container, false);
         }
     }
 
     public static class ThirdPageFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_login, container, false);
-            return rootView;
+
+            return inflater.inflate(R.layout.fragment_login, container, false);
         }
     }
 
     public void registerProfile(View v) {
 //        final View rootView = getLayoutInflater().inflate(R.layout.fragment_register, null);
-        Toast.makeText(getApplicationContext(), "Registration...", Toast.LENGTH_SHORT).show();
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        // Toast.makeText(getApplicationContext(), "Registration...", Toast.LENGTH_SHORT).show();
+        // final Handler handler = new Handler();
+        // handler.postDelayed(new Runnable() {
+        //     @Override
+        //     public void run() {
+        // Do something after 5s = 5000ms
+        //       Toast.makeText(getApplicationContext(), "Registration failed. Please try later", Toast.LENGTH_SHORT).show();
+        //   }
+        //}, 5000);
+        username_login = (TextView) findViewById(R.id.username_login);
+        username = username_login.getText().toString();
+        password_login = (TextView) findViewById(R.id.password_login);
+        password = password_login.getText().toString();
+//        final Button login_button =(Button) findViewById(R.id.login_button);
+//        login_button.setVisibility(View.GONE);
+//        final Button join_button =(Button) findViewById(R.id.join_button);
+//        login_button.setVisibility(View.GONE);
+//        final Button register_button =(Button) findViewById(R.id.register_button);
+//        login_button.setVisibility(View.VISIBLE);
+
+        if (username.equals("") || password.equals("")) {
+            Toast.makeText(getApplicationContext(), "Please fill form", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setTitle("Registering...");
+        dialog.setMessage("Please wait");
+        dialog.show();
+
+        RegisterTask task = new RegisterTask(username, password) {
             @Override
-            public void run() {
-                // Do something after 5s = 5000ms
-                Toast.makeText(getApplicationContext(), "Registration failed. Please try later", Toast.LENGTH_SHORT).show();
-
+            public void onSuccess(CurrentUser currentUser) {
+                dialog.dismiss();
+                EatWithMeApp.saveCurrentUser(currentUser);
+                startActivity(new Intent(getBaseContext(), MainActivity.class));
+                finish();
             }
-        }, 5000);
-//        final ProgressBar mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.login_progress);
 
+            @Override
+            public void onError(Exception exp) {
+                dialog.dismiss();
+                ((Button) findViewById(R.id.login_button)).setVisibility(View.VISIBLE);
+                ((Button) findViewById(R.id.join_button)).setVisibility(View.VISIBLE);
+                ((Button) findViewById(R.id.register_button)).setVisibility(View.GONE);
+                if (exp instanceof ApiError) {
+                    //todo:коды
+//                        int code = ((ApiError) exp).getCode();
+//                        if (code == ApiError.BADCREDITS) {
+                    Toast.makeText(getApplicationContext(), "Can`t register now. Please try later" + exp.toString(), Toast.LENGTH_SHORT).show();
+//                        }
+
+                } else {
+                    if (exp instanceof SocketException) {
+                        Toast.makeText(getApplicationContext(), "Check your internet connection" + exp.toString(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Unexpected error" + exp.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onTokenRecieved(String token) {
+                EatWithMeApp.saveToken(token);
+            }
+        };
+
+        task.start();
     }
 
-    public void getImage(View v) {
-        startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
-    }
 
     public void login(View v) {
-
-//        if (mViewPager.getCurrentItem() < 2) {
-//            mViewPager.setCurrentItem(2, true);
-//        } else {
-        //wmobilas,123qweASD
-        final View rootView = getLayoutInflater().inflate(R.layout.fragment_welcome, null);
         username_login= (TextView) findViewById(R.id.username_login);
         username= username_login.getText().toString();
         password_login= (TextView) findViewById(R.id.password_login);
@@ -312,6 +369,7 @@ public class StartActivity extends FragmentActivity {
                 public void onError(Exception exp) {
                     dialog.dismiss();
                     if (exp instanceof ApiError) {
+                        //todo:коды
 //                        int code = ((ApiError) exp).getCode();
 //                        if (code == ApiError.BADCREDITS) {
                             Toast.makeText(getApplicationContext(), "Check your login and password", Toast.LENGTH_SHORT).show();
@@ -321,8 +379,7 @@ public class StartActivity extends FragmentActivity {
                         if (exp instanceof SocketException) {
                             Toast.makeText(getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
                         } else {
-//                            Toast.makeText(getApplicationContext(), "Check your login and password", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(), "Unexpected error", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(getApplicationContext(), "Unexpected error", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -332,12 +389,7 @@ public class StartActivity extends FragmentActivity {
                     EatWithMeApp.saveToken(token);
                 }
             };
-
-
-//            final ProgressBar mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.login_progress);
-//            mActivityIndicator.setVisibility(View.VISIBLE);
             task.start();
-//        }
     }
 
     private boolean checkPlayServices() {
@@ -390,12 +442,9 @@ public class StartActivity extends FragmentActivity {
         };
         task.execute();
     }
-
     private void sendRegistrationIdToBackend(String regid) {
         Log.i(TAG, "sendRegistrationIdToBackend");
-
     }
-
     private void storeRegistrationId(String regId) {
         final SharedPreferences prefs = getGCMPreferences();
         int appVersion = getAppVersion(context);
@@ -405,6 +454,4 @@ public class StartActivity extends FragmentActivity {
         editor.putInt(PROPERTY_APP_VERSION, appVersion);
         editor.commit();
     }
-
-
 }

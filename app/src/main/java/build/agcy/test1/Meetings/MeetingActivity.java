@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import build.agcy.test1.Api.Meetings.MeetingGetTask;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
 
@@ -23,7 +23,7 @@ public class MeetingActivity extends Activity {
         setContentView(R.layout.activity_meeting);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container1, new PlaceholderMeetingFragment())
                     .commit();
         }
     }
@@ -51,47 +51,38 @@ public class MeetingActivity extends Activity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
 
-        private String meeting_id;
-        public Meeting meeting;
-        public PlaceholderFragment() {
+    public static class PlaceholderMeetingFragment extends Fragment {
+
+        public PlaceholderMeetingFragment() {
         }
-
+        public static View meeting_activity_View;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            final View rootView = inflater.inflate(R.layout.fragment_meeting, container, false);
+                                 Bundle savedInstanceState) {
+            if (meeting_activity_View != null) {
+                ViewGroup parent = (ViewGroup) meeting_activity_View.getParent();
+                if (parent != null)
+                    parent.removeView(meeting_activity_View);
+            }
+            try{
+                meeting_activity_View = inflater.inflate(R.layout.fragment_meeting, container, false);
+            } catch (InflateException e) {
+            }
             Activity activity = getActivity();
             if(activity!=null) {
                 Intent intent = activity.getIntent();
                 Bundle bundle = intent.getExtras();
-                String id = bundle.getString("meeting_id");
-                this.meeting_id = id;
+                ((TextView) meeting_activity_View.findViewById(R.id.meeting_creator)).setText("by " + bundle.getString("meeting_creator"));
+                ((TextView) meeting_activity_View.findViewById(R.id.meeting_description1)).setText(bundle.getString("meeting_description"));
+                (meeting_activity_View.findViewById(R.id.meeting_status)).setVisibility(View.GONE);
             }else{
-                meeting_id = null;
+                Meeting meeting=new Meeting("1", "description", "creator","33.333333","33.333333",2222);
+                ((TextView) meeting_activity_View.findViewById(R.id.meeting_description1)).setText(meeting.description);
+                ((TextView) meeting_activity_View.findViewById(R.id.meeting_creator)).setText("by "+meeting.creator);
+                (meeting_activity_View.findViewById(R.id.meeting_status)).setVisibility(View.GONE);
             }
-            MeetingGetTask task = new MeetingGetTask(meeting_id) {
-
-
-                @Override
-                public void onSuccess(Meeting meeting) {
-                }
-
-                @Override
-                public void onError(Exception exp) {
-                    ((TextView) rootView.findViewById(R.id.meeting_status)).setText("Error");
-                   }
-            };
-            //task.start();
-
-            //meeting = new Meeting(){{ meeting_id = "1"; description = "Bulochki`s";creator = "Ivan";}};
-            meeting=new Meeting("1", "description", "creator","33.333333","33.333333",2222);
-            PlaceholderFragment.this.meeting = meeting;
-            ((TextView) rootView.findViewById(R.id.meeting_description)).setText(meeting.description);
-            ((TextView) rootView.findViewById(R.id.meeting_status)).setVisibility(View.GONE);
-            return rootView;
+            return meeting_activity_View;
         }
     }
-
 }

@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:background="@color/bg_color"
+    android:layout_gravity="bottom"
     >
     <ImageView
         android:id="@+id/meeting_photo"

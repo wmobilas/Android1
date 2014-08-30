@@ -19,7 +19,7 @@ tools:context="build.agcy.test1.Meetings.MeetingActivity$PlaceholderFragment"
     android:layout_height="236dp"
     android:layout_gravity="top" />
 <TextView
-    android:id="@+id/meeting_description"
+    android:id="@+id/meeting_description1"
     android:textAppearance="?android:attr/textAppearanceLarge"
     android:text="Description"
     android:layout_width="wrap_content"

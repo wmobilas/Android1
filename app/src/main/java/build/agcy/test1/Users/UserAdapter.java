@@ -46,7 +46,6 @@ public class UserAdapter extends BaseAdapter {
         TextView nameView = (TextView) rootView.findViewById(R.id.user_name);
         ImageView imageView = (ImageView) rootView.findViewById(R.id.user_photo);
         User user = getItem(position);
-
         nameView.setText(user.username);
         // imageView и биндим как-то картинку, не важно
 

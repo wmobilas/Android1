@@ -19,42 +19,35 @@ public class Meeting implements Parcelable {
         this.description = description;
         this.creator = creator;
         this.longitude = longtitude;
+        //todo:исправить на серверн на longitude
         this.latitude = latitude;
         this.time = time;
     }
     public void setMeetingId(String meeting_id) {
-        this.meeting_id = meeting_id;
-    }
+        this.meeting_id = meeting_id;}
     public String getMeetingId() {
-        return meeting_id;
-    }
+        return meeting_id;}
     public void setDescription(String description) {
-        this.description = description;
-    }
+        this.description = description;}
     public String getDescription() {
-        return description;
-    }
+        return description;}
     public void setCreator(String creator) {
-        this.creator = creator;
-    }
+        this.creator = creator;}
     public String getCreator() {
-        return meeting_id;
-    } public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
+        return meeting_id;}
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;}
     public String getLatitude() {
-        return latitude;
-    }public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
+        return latitude;}
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;}
     public String getLongitude() {
-        return longitude;
-    }public void setTime(int time) {
-        this.time = time;
-    }
+        return longitude;}
+    public void setTime(int time) {
+        this.time = time;}
     public int getTime() {
-        return time;
-    }
+        return time;}
+
 
     @Override
     public int describeContents() {
