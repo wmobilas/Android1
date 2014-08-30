@@ -33,14 +33,26 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: build.agcy.test1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88f9a1c8-6eb3-46f4-9365-6d400a93a17e" name="Default" comment="Fragmentes">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MapActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MapActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MapFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MapFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/Meeting.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/Meeting.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/User.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_meeting.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_meeting.xml" />
+    <list default="true" id="88f9a1c8-6eb3-46f4-9365-6d400a93a17e" name="Default" comment="Соглашение на встречу &#10;должна убираться кнопка открыта что ты создал">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ap.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/apt.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/eat.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pttr.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/CollectionDemoActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragmentes/MeetingListFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Models/MeetingsAccept.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/values-v19/Styles.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_collection_demo.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/buttonshape.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/drawer_list_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/field.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_collection_object.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_community.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_meeting.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_section_dummy.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_section_launchpad.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/nowbutton.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="test1.iws" />
@@ -1000,10 +1012,6 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -1325,7 +1333,11 @@
       <created>1409424328385</created>
       <updated>1409424328385</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Соглашение на встречу &#10;должна убираться кнопка открыта что ты создал">
+      <created>1409439488949</created>
+      <updated>1409439488949</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1438,7 +1450,8 @@
     <MESSAGE value="Улучшено окно встречи&#10;теперь как фрагмент" />
     <MESSAGE value="Сделаны таски&#10;много улучшений" />
     <MESSAGE value="Fragmentes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fragmentes" />
+    <MESSAGE value="Соглашение на встречу &#10;должна убираться кнопка открыта что ты создал" />
+    <option name="LAST_COMMIT_MESSAGE" value="Соглашение на встречу &#10;должна убираться кнопка открыта что ты создал" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1626,25 +1639,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java</url>
-          <line>102</line>
+          <line>96</line>
           <properties />
           <option name="timeStamp" value="494" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java</url>
-          <line>100</line>
+          <line>94</line>
           <properties />
           <option name="timeStamp" value="495" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java</url>
-          <line>106</line>
+          <line>100</line>
           <properties />
           <option name="timeStamp" value="496" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java</url>
-          <line>109</line>
+          <line>103</line>
           <properties />
           <option name="timeStamp" value="497" />
         </line-breakpoint>
@@ -2102,15 +2115,15 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="4804" max-vertical-offset="6596">
           <caret line="312" column="124" selection-start-line="312" selection-start-column="124" selection-end-line="312" selection-end-column="124" />
           <folding>
-            <element signature="e#7885#7886#0" expanded="true" />
-            <element signature="e#7943#7944#0" expanded="true" />
-            <element signature="e#12756#13505#0" expanded="true" />
-            <element signature="e#13490#13491#0" expanded="true" />
-            <element signature="e#13565#14589#0" expanded="true" />
-            <element signature="e#14574#14575#0" expanded="true" />
-            <element signature="e#14644#19514#0" expanded="true" />
-            <element signature="e#19512#19513#0" expanded="true" />
-            <marker date="1409439219281" expanded="false" signature="-1:-1" placeholder="..." />
+            <element signature="e#7792#7793#0" expanded="true" />
+            <element signature="e#7850#7851#0" expanded="true" />
+            <element signature="e#12663#13412#0" expanded="true" />
+            <element signature="e#13397#13398#0" expanded="true" />
+            <element signature="e#13472#14496#0" expanded="true" />
+            <element signature="e#14481#14482#0" expanded="true" />
+            <element signature="e#14551#19421#0" expanded="true" />
+            <element signature="e#19419#19420#0" expanded="true" />
+            <marker date="1409439488202" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -2138,8 +2151,8 @@
         <state vertical-scroll-proportion="0.16928446" vertical-offset="1212" max-vertical-offset="2057">
           <caret line="102" column="31" selection-start-line="102" selection-start-column="31" selection-end-line="102" selection-end-column="31" />
           <folding>
-            <element signature="e#5174#6717#0" expanded="true" />
-            <element signature="e#6690#6691#0" expanded="true" />
+            <element signature="e#4998#6541#0" expanded="true" />
+            <element signature="e#6514#6515#0" expanded="true" />
           </folding>
         </state>
       </provider>

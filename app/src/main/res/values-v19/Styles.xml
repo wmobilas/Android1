@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NoActionBarTheme" parent="@android:style/Theme.Holo.Light">
+    <item name="android:actionBarStyle">@style/TranslucentActionBar</item>
+    <item name="android:windowTranslucentNavigation">false</item>
+    <item name="android:windowTranslucentStatus">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="TranslucentActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+    <style name="NoAction_BarTheme" parent="android:Theme.Holo.Light.NoActionBar.TranslucentDecor">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>
