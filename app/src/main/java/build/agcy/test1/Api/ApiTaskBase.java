@@ -30,7 +30,7 @@ import build.agcy.test1.EatWithMeApp;
  */
 public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> implements TaskCallback<T> {
     protected static final String LOG_TAG = "API TASK";
-    protected static final String apiUrl = "http://eatwithme.azurewebsites.net/";
+    protected static final String apiUrl = "http://eatwithme.azurewebsites.net/api/";
     protected final String methodName;
     protected final boolean post;
     protected final Boolean loginRequred;
@@ -51,12 +51,12 @@ public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> imp
 
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpRequestBase request;
+
+            String args = URLEncodedUtils.format(nameValuePairs, "utf-8");
+            url += "?" + args;
             if (post) {
                 request = new HttpPost(url);
-                ((HttpPost) request).setEntity(new UrlEncodedFormEntity(nameValuePairs));
             } else {
-                String args = URLEncodedUtils.format(nameValuePairs, "utf-8");
-                url += "?" + args;
                 request = new HttpGet(url);
             }
             if(loginRequred){

@@ -19,7 +19,7 @@ public abstract class UsersListTask extends ApiTaskBase<User[]> {
     // отправляем int offset, int count, float latitude, float longitude
     // или отправляем массив ids
     public UsersListTask(List<NameValuePair> nameValuePairs) {
-        super("api/user/list", nameValuePairs, false, false);
+        super("user/list", nameValuePairs, false, false);
     }
 //    @Override
 //    protected Object doInBackground(Object... params) {

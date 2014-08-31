@@ -6,10 +6,10 @@
 
     <string name="text_here">Text here</string>
     <string name="send">Send</string>
-    <string name="app_name">Google Places and Maps</string>
+    <string name="app_name">EatWithMe</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">Your Nearest Places</string>
+    <string name="title_activity_main">Main</string>
     <string name="title_activity_meeting">MeetingActivity</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_user_list">UserListActivity</string>
@@ -27,10 +27,10 @@
     <string name="meeting_type2">Lunch</string>
     <string name="meeting_type3">Dinner</string>
     <string name="meeting_type4">Other</string>
-    <string name="title_section1">Create</string>
-    <string name="title_section2">Explore</string>
-    <string name="title_section3">Recent</string>
-    <string name="title_section4">Settings</string>
+    <string name="navbar_title_nearby">Nearby</string>
+    <string name="navbar_title_create">Create</string>
+    <string name="navbar_title_profile">Profile</string>
+    <string name="navbar_title_settings">Settings</string>
     <string name="action_example">Refresh</string>
     <string name="dinner">Dinner</string>
     <string name="lunch">Lunch</string>

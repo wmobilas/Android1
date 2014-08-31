@@ -26,7 +26,7 @@ import build.agcy.test1.Models.Meeting;
  */
 public abstract class MeetingGetTask extends ApiTaskBase<Meeting> {
     public MeetingGetTask(final String id) {
-        super("api/meeting/get", new ArrayList<NameValuePair>(){{
+        super("meeting/get", new ArrayList<NameValuePair>(){{
             add(new BasicNameValuePair("id",id));
         }}, false, false);
     }

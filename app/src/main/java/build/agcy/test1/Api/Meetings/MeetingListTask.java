@@ -19,7 +19,7 @@ public abstract class MeetingListTask extends ApiTaskBase<Meeting[]> {
     // отправляем int offset, int count, float latitude, float longitude
     // или отправляем массив ids
     public MeetingListTask(List<NameValuePair> nameValuePairs) {
-        super("api/meeting/list", nameValuePairs, false, false);
+        super("meeting/list", nameValuePairs, false, false);
     }
 //    @Override
 //    protected Object doInBackground(Object... params) {

@@ -27,22 +27,18 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import org.apache.http.NameValuePair;
-
 import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import build.agcy.test1.Api.Errors.ApiError;
-import build.agcy.test1.Api.Users.UsersListTask;
 import build.agcy.test1.Core.GCM.GCMRegistrationTask;
 import build.agcy.test1.EatWithMeApp;
+import build.agcy.test1.Main.Main1Activity;
 import build.agcy.test1.Main.MainActivity;
 import build.agcy.test1.Models.CurrentUser;
-import build.agcy.test1.Models.User;
 import build.agcy.test1.R;
 
 
@@ -98,29 +94,16 @@ public class StartActivity extends FragmentActivity {
             Log.e(TAG, "No valid Google Play Services APK found.");
         }
         if (EatWithMeApp.token != null) {
-            //todo
             finish();
             startActivity(new Intent(this, MainActivity.class));
+            return;
         }
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        UsersListTask usersListTask = new UsersListTask(new ArrayList<NameValuePair>()) {
-            @Override
-            public void onSuccess(final User[] response) {
-                SharedPreferences prefs = getApplicationContext().getSharedPreferences("auth_prefs", Context.MODE_PRIVATE);
-                for (User user : response){
-                    prefs.edit()
-                            .putString(user.id, user.username).commit();
-                }
-            }
-            @Override
-            public void onError(Exception exp) {
-                Toast.makeText(getApplicationContext(),"UserListTaskError "+exp.toString(),Toast.LENGTH_LONG).show();
-            }
-        };
-        usersListTask.start();
+
+        login(null);
     }
 
 
@@ -340,12 +323,15 @@ public class StartActivity extends FragmentActivity {
 
 
     public void login(View v) {
+        /*
         username_login= (TextView) findViewById(R.id.username_login);
         username= username_login.getText().toString();
         password_login= (TextView) findViewById(R.id.password_login);
         password= password_login.getText().toString();
+        */
+        username="wmobilas";
+        password="123qweASD";
         if (username.equals("") || password.equals("")){
-//          username="wmobilas"; password="123qweASD";
             Toast.makeText(getApplicationContext(), "Please fill form", Toast.LENGTH_SHORT).show();
             return;
         }

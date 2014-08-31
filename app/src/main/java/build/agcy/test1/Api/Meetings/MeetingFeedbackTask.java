@@ -26,7 +26,7 @@ import build.agcy.test1.Api.ApiTaskBase;
 
 public abstract class MeetingFeedbackTask extends ApiTaskBase<String> {
     public MeetingFeedbackTask(final String id, final String text, final Boolean like) {
-        super("api/meeting/feedback", new ArrayList<NameValuePair>(){{
+        super("meeting/feedback", new ArrayList<NameValuePair>(){{
             add(new BasicNameValuePair("id",id));
             add(new BasicNameValuePair("text",text));
             add(new BasicNameValuePair("like",like.toString()));

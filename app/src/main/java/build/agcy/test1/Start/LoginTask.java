@@ -27,14 +27,14 @@ import build.agcy.test1.Models.CurrentUser;
 
 
 public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
-    private String token;
+    private String token = "";
 
     public LoginTask(String methodName, ArrayList<NameValuePair> args){
         super(methodName, args, false, false);
     }
 
     public LoginTask(final String login, final String password) {
-        super("api/account/login", new ArrayList<NameValuePair>(){{
+        super("account/login", new ArrayList<NameValuePair>(){{
             add(new BasicNameValuePair("login",login));
             add(new BasicNameValuePair("password",password));
         }}, false, false);
@@ -62,11 +62,6 @@ public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
             HttpResponse httpResponse = httpClient.execute(request);
             HttpEntity httpEntity = httpResponse.getEntity();
             String responseStr = EntityUtils.toString(httpEntity);
-            if (responseStr.equals("http://eatwithme.azurewebsites.net/api/account/login?login=+&password=+")){
-                ApiError exp = new ApiError("no_such_account");
-                return exp;
-//                onError(null);
-            }
             String token = "";
             List<Cookie> cookies = httpClient.getCookieStore().getCookies();
             for(Cookie cookie: cookies){
@@ -88,7 +83,8 @@ public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
     @Override
     protected void onPostExecute(Object response) {
         super.onPostExecute(response);
-        onTokenRecieved(token);
+        if(token.equals(""))
+            onTokenRecieved(token);
     }
 
     public abstract void onTokenRecieved(String token);

@@ -1,4 +1,4 @@
-package build.agcy.test1.Fragmentes;
+package build.agcy.test1.Fragments;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;

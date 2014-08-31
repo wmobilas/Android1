@@ -15,7 +15,6 @@ public abstract class RegisterTask extends LoginTask {
         super("account/register", new ArrayList<NameValuePair>() {{
             add(new BasicNameValuePair("login", login));
             add(new BasicNameValuePair("password", password));
-            add(new BasicNameValuePair("confirmPassword", password));
         }});
     }
 }
