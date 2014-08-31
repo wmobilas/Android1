@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-   >
-<!-- xmlns:tools="http://schemas.android.com/tools"
-    tools:context="build.agcy.test1.Meetings.MeetingListFragment$PlaceholderMeetingFragment"-->
+    >
+    <!-- xmlns:tools="http://schemas.android.com/tools"
+        tools:context="build.agcy.test1.Meetings.MeetingListFragment$PlaceholderMeetingFragment"-->
     <!-- Show on Map button -->
 
-      <!--List view -->
+    <!--List view -->
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mapMeeting"
         android:layout_width="match_parent"
@@ -21,16 +21,16 @@
         android:layout_height="match_parent"
         android:weightSum="1">
         <ListView
-        android:id="@+id/meeting_fragment_list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.00" />
+            android:id="@+id/meeting_fragment_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.00" />
     </LinearLayout>
     <TextView
-    android:id="@+id/meetings_list_status"
-    android:text="loading..."
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal|top"
+        android:id="@+id/meetings_list_status"
+        android:text="loading..."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="-280dp" />
 </LinearLayout>

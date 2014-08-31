@@ -18,9 +18,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import build.agcy.test1.EatWithMeApp;
-import build.agcy.test1.Fragments.MeetingListFragment;
+import build.agcy.test1.Meetings.MeetingListFragment;
 import build.agcy.test1.Fragments.TimePickerFragment;
-import build.agcy.test1.Meetings.CreateMeetingFragment;
 import build.agcy.test1.Meetings.MeetingActivity;
 import build.agcy.test1.R;
 import build.agcy.test1.Users.UserListActivity;
@@ -123,7 +122,7 @@ public class Main1Activity extends FragmentActivity implements ActionBar.TabList
                     // The first section of the app is the most interesting -- it offers
                     // a launchpad into the other demonstrations in this example application.
 
-                    return new MeetingListFragment();
+                    //return new MeetingListFragment();
                 //todo починить ошибку при перелистывании и удалении карты если она не вторая а первая в табвью
                 case 2:
                     // The first section of the app is the most interesting -- it offers

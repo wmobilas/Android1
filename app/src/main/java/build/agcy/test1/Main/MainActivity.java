@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import com.google.android.gms.maps.MapFragment;
 
 import build.agcy.test1.Meetings.CreateMeetingFragment;
+import build.agcy.test1.Meetings.MeetingListFragment;
 import build.agcy.test1.R;
 
 public class MainActivity extends Activity
@@ -55,7 +56,7 @@ public class MainActivity extends Activity
                 fragment = new CreateMeetingFragment();
                 break;
             case 2:
-                fragment = new MapFragment();
+                fragment = new MeetingListFragment();
                 break;
             case 3:
                 break;

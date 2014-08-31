@@ -33,6 +33,7 @@ public class EatWithMeApp extends Application {
         app = this;
     }
     public static void saveToken(String token) {
+        EatWithMeApp.token = token;
         SharedPreferences prefs = app.getSharedPreferences(AUTH_PREFS, Activity.MODE_MULTI_PROCESS);
         prefs.edit().putString(TOKEN_PREFERENCES_KEY, token).commit();
     }

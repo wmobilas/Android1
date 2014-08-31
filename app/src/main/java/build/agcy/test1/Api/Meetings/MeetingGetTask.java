@@ -31,37 +31,13 @@ public abstract class MeetingGetTask extends ApiTaskBase<Meeting> {
         }}, false, false);
     }
     @Override
-    protected Object doInBackground(Object... params) {
-        try {
-            String url = apiUrl + methodName;
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpRequestBase request;
-            String args = URLEncodedUtils.format(nameValuePairs, "utf-8");
-            url += "?" + args;
-            request = new HttpGet(url);
-            HttpResponse httpResponse = httpClient.execute(request);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            String responseStr;
-            responseStr = EntityUtils.toString(httpEntity);
-            Log.i(LOG_TAG, "Server response " + responseStr);
-            return (responseStr);
-        } catch (Exception exp) {
-                Log.e(LOG_TAG, "Loader error " + exp.toString());
-            return exp;
-        }
-    }
-    @Override
     protected Meeting parse(String json) throws JSONException, FileNotFoundException {
         return new Gson().fromJson(json, Meeting.class);
     }
-    @Override
-    public void onSuccess(Meeting meeting) {
-    }
+
     @Override
     protected void onPostExecute(Object response) {
         super.onPostExecute(response);
     }
-    @Override
-    public void onError(Exception exp) {
-    }
+
 }

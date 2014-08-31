@@ -30,7 +30,8 @@ import build.agcy.test1.EatWithMeApp;
  */
 public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> implements TaskCallback<T> {
     protected static final String LOG_TAG = "API TASK";
-    protected static final String apiUrl = "http://eatwithme.azurewebsites.net/api/";
+    private static final String DOMAIN = "eatwithme.azurewebsites.net";
+    protected static final String apiUrl = "http://"+DOMAIN+"/api/";
     protected final String methodName;
     protected final boolean post;
     protected final Boolean loginRequred;
@@ -60,9 +61,14 @@ public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> imp
                 request = new HttpGet(url);
             }
             if(loginRequred){
+
                 BasicCookieStore cookies = new BasicCookieStore();
-                cookies.addCookie(new BasicClientCookie(".AspNet.ApplicationCookie", EatWithMeApp.token));
+                cookies.addCookie(new BasicClientCookie(".AspNet.ApplicationCookie", EatWithMeApp.token){{
+                    setDomain(DOMAIN);
+                    setPath("/");
+                }});
                 httpClient.setCookieStore(cookies);
+
             }
             HttpResponse httpResponse = httpClient.execute(request);
             HttpEntity httpEntity = httpResponse.getEntity();

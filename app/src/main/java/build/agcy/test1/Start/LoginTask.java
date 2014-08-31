@@ -83,7 +83,7 @@ public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
     @Override
     protected void onPostExecute(Object response) {
         super.onPostExecute(response);
-        if(token.equals(""))
+        if(!token.equals(""))
             onTokenRecieved(token);
     }
 

@@ -1,6 +1,8 @@
-package build.agcy.test1.Fragments;
+package build.agcy.test1.Meetings;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,9 +13,6 @@ import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -26,6 +25,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -54,7 +54,7 @@ import build.agcy.test1.R;
  * Created by Freeman on 14.08.2014.
  */
 public class MeetingListFragment extends Fragment implements GoogleMap.OnInfoWindowClickListener {
-    private SupportMapFragment mapFragment;
+    private MapFragment mapFragment;
     private GoogleMap map;
     final String TAG = "agcy.test";
     double latitude;
@@ -63,7 +63,7 @@ public class MeetingListFragment extends Fragment implements GoogleMap.OnInfoWin
     Marker myMarker;
     LocationManager locationManager;
     String provider;
-    private FragmentActivity myContext;
+    private Activity myContext;
     public MeetingListFragment(){}
     ArrayList<Meeting> meetings = new ArrayList<Meeting>();
     @Override
@@ -71,7 +71,7 @@ public class MeetingListFragment extends Fragment implements GoogleMap.OnInfoWin
 
         super.onAttach(activity);
         Log.d(TAG, "mapfragment onAttach");
-        myContext=(FragmentActivity) activity;
+        myContext= activity;
     }
     public static View myView;
     @Override
@@ -196,9 +196,9 @@ public class MeetingListFragment extends Fragment implements GoogleMap.OnInfoWin
 
         Log.d(TAG, "mapfragment onCreate");
         FragmentManager fm = getChildFragmentManager();
-        mapFragment = (SupportMapFragment) fm.findFragmentById(R.id.mapMeeting);
+        mapFragment = (MapFragment) fm.findFragmentById(R.id.mapMeeting);
         if (mapFragment == null) {
-            mapFragment = SupportMapFragment.newInstance();
+            mapFragment = MapFragment.newInstance();
             fm.beginTransaction().replace(R.id.mapMeeting, mapFragment).commit();}
         setUpMapIfNeeded();
     }
