@@ -1,16 +1,16 @@
 package build.agcy.test1.Main;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.widget.DrawerLayout;
+import android.widget.Toast;
 
 import build.agcy.test1.Core.Helpers.FindMe;
 import build.agcy.test1.Meetings.CreateMeetingFragment;
@@ -119,6 +119,7 @@ public class MainActivity extends Activity
                 @Override
                 public void foundLocation(String provider, Location location) {
                     Log.i("Findme", "lat = " + location.getLatitude() + " long = " + location.getLongitude());
+                    Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
                 }
 
                 @Override

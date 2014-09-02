@@ -2,52 +2,36 @@
 <pre-dex-items>
 
     <item
-        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-84a148403b7f2f796a3b4172392b40fcce07510f.jar"
-        jar="D:\EathWithMe\Client\Android1\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
+        dex="M:\Eatwithme\Android1\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-66f7572922bf26575f88a22d22ca954ef1948576.jar"
+        jar="M:\Eatwithme\Android1\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
+        jumboMode="false" revision="19.1.0" sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d" />
     <item
-        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-eccb1e1e58cfdbb045a3a0c932a2f28635ffaa9d.jar"
-        jar="D:\EathWithMe\Client\Android1\app\build\intermediates\exploded-aar\com.android.support\support-v13\20.0.0\libs\internal_impl-20.0.0.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="27bbd3982cdfe4468a9bf99c8c773734a9049e33"/>
+        dex="M:\Eatwithme\Android1\app\build\intermediates\pre-dexed\debug\classes-66039a317ee73d6e8087a61032a2a23baf36dc4d.jar"
+        jar="M:\Eatwithme\Android1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\3.1.59\classes.jar"
+        jumboMode="false" revision="19.1.0" sha1="2dd7b1a9ea65bb03d9cd16df777eeaf537a1fc81" />
     <item
-        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\classes-1dad81c8075ed2d8eb057c9b241af7ff23145fed.jar"
-        jar="D:\EathWithMe\Client\Android1\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+        dex="M:\Eatwithme\Android1\app\build\intermediates\pre-dexed\debug\gson-2.2.4-48115aa1af1ba9465a9b7fda11f56f564292a2c1.jar"
+        jar="M:\Eatwithme\Android1\app\libs\gson-2.2.4.jar" jumboMode="false" revision="19.1.0"
+        sha1="973e832af433b44c3ed11c426f2f390b29f3f3f8" />
     <item
-        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\classes-7d3641267ee3c08b95aa781fbe10370b43c21a8b.jar"
-        jar="D:\EathWithMe\Client\Android1\app\build\intermediates\exploded-aar\com.android.support\support-v13\20.0.0\classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="e128103d5281ddd26195a7f980b36d0d005a4e56"/>
+        dex="M:\Eatwithme\Android1\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-af15aefafbfa4ac5efa0966426c158f84fff4555.jar"
+        jar="M:\Eatwithme\Android1\app\build\intermediates\exploded-aar\com.android.support\support-v13\20.0.0\libs\internal_impl-20.0.0.jar"
+        jumboMode="false" revision="19.1.0" sha1="27bbd3982cdfe4468a9bf99c8c773734a9049e33" />
     <item
-        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\classes-45048cf04c17eb681fc00a4661165fbaf3ed6a81.jar"
-        jar="D:\EathWithMe\Client\Android1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\3.1.59\classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="2dd7b1a9ea65bb03d9cd16df777eeaf537a1fc81"/>
+        dex="M:\Eatwithme\Android1\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.2-a3627c3889fe8e245d231341b6ed632b26891ed3.jar"
+        jar="M:\Eatwithme\Android1\app\libs\universal-image-loader-1.9.2.jar" jumboMode="false"
+        revision="19.1.0" sha1="9e025bc5b84968e7d6ac765e660a70b3e5a87432" />
     <item
-        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-e2484044f014e85930db6d168a98909a8a97bda9.jar"
-        jar="C:\Users\kiolt_000\AppData\Local\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
+        dex="M:\Eatwithme\Android1\app\build\intermediates\pre-dexed\debug\classes-b687164c0bed635febfe1059c10bda69deac6b1d.jar"
+        jar="M:\Eatwithme\Android1\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
+        jumboMode="false" revision="19.1.0" sha1="8694693636ab36910c8100ce527c258ff3ebece0" />
     <item
-        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\gson-2.2.4-cefef37643be7985147a80871a20fd2c582ee918.jar"
-        jar="D:\EathWithMe\Client\Android1\app\libs\gson-2.2.4.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="973e832af433b44c3ed11c426f2f390b29f3f3f8"/>
+        dex="M:\Eatwithme\Android1\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-692047bbd26e6a9dab4fefc752c46446f3a5f659.jar"
+        jar="C:\android\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jumboMode="false" revision="19.1.0" sha1="9d9013e9ff35fc3756411e62873c363c70c638fa" />
     <item
-        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.2-b9991d869677a89b496aec1e102d085b45006ecd.jar"
-        jar="D:\EathWithMe\Client\Android1\app\libs\universal-image-loader-1.9.2.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="9e025bc5b84968e7d6ac765e660a70b3e5a87432"/>
+        dex="M:\Eatwithme\Android1\app\build\intermediates\pre-dexed\debug\classes-0adeb371d712b62fcb1e298219584065b0cd3b67.jar"
+        jar="M:\Eatwithme\Android1\app\build\intermediates\exploded-aar\com.android.support\support-v13\20.0.0\classes.jar"
+        jumboMode="false" revision="19.1.0" sha1="e128103d5281ddd26195a7f980b36d0d005a4e56" />
 
 </pre-dex-items>

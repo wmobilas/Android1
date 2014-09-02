@@ -1,16 +1,14 @@
 package build.agcy.test1.Core.Helpers;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.content.Context;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.android.gms.location.LocationClient;
+import java.util.Timer;
 
 public class FindMe {
 
@@ -40,41 +38,32 @@ public class FindMe {
     }
 
     public void please() {
-        if (timer == null) {
-            if (getLastKnownLocation) {
-                Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
+        String provider;
+        Criteria criteria = new Criteria();
+        provider = locationManager.getBestProvider(criteria, true);
+        if (locationManager.getLastKnownLocation(provider) != null) {
+            provider = locationManager.getBestProvider(criteria, true);
+        } else {
+            provider = locationManager.getBestProvider(criteria, false);
+        }
+        Location loc = locationManager.getLastKnownLocation(provider);
                 if (loc != null) {
                     listener.foundLocation(LocationManager.GPS_PROVIDER, loc);
                     return;
                 }
 
-                //loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                //if (loc != null) {
-                  //  listener.foundLocation(LocationManager.NETWORK_PROVIDER, loc);
-                   // return;
-                //}
-            }
-
-            timer = new Timer();
-            try {
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        if (timer != null) {
-                            timer.cancel();
-                            timer = null;
-                        }
-                        listener.couldntFindLocation();
-                    }
-                }, timeoutMS);
-            } catch (Exception e) {e.printStackTrace();};
-
-
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGPSProvider);
-
+        loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if (loc != null) {
+            listener.foundLocation(LocationManager.NETWORK_PROVIDER, loc);
+            return;
         }
+        listener.couldntFindLocation();
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGPSProvider);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListenerNetworkProvider);
+
     }
+
 
     final LocationListener locationListenerNetworkProvider = new LocationListener() {
 
@@ -125,14 +114,8 @@ public class FindMe {
     };
 
     private void onLocationChanged(LocationListener locationListener, String provider, Location location) {
-        if (location != null) {
-            if(timer!=null) {
-                timer.cancel();
-                timer = null;
-            }
             locationManager.removeUpdates(locationListener);
             listener.foundLocation(provider, location);
-        }
     }
 
     private void onProviderDisabled(String provider) {
