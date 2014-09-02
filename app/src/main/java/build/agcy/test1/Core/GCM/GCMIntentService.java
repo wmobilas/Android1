@@ -66,6 +66,7 @@ public class GCMIntentService extends IntentService {
                         }
                     }
                 }
+                sendNotification(pushMessage);
                 Log.i(TAG, "Received: " + extras.toString());
             }
         }

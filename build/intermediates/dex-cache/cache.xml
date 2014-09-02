@@ -43,5 +43,11 @@
         jumboMode="false"
         revision="19.1.0"
         sha1="973e832af433b44c3ed11c426f2f390b29f3f3f8"/>
+    <item
+        dex="D:\EathWithMe\Client\Android1\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.2-b9991d869677a89b496aec1e102d085b45006ecd.jar"
+        jar="D:\EathWithMe\Client\Android1\app\libs\universal-image-loader-1.9.2.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="9e025bc5b84968e7d6ac765e660a70b3e5a87432"/>
 
 </pre-dex-items>

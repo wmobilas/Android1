@@ -106,7 +106,7 @@ public class NavigationDrawerFragment extends Fragment {
                 new String[]{
                         getString(R.string.navbar_title_profile),
                         getString(R.string.navbar_title_create),
-                        getString(R.string.navbar_title_nearby),
+                        getString(R.string.navbar_title_meetings),
                         getString(R.string.navbar_title_settings)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);

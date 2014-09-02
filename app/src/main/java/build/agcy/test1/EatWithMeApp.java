@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import build.agcy.test1.Models.CurrentUser;
 
 /**
@@ -28,31 +31,31 @@ public class EatWithMeApp extends Application {
             token = prefs.getString(TOKEN_PREFERENCES_KEY, null);
             currentUser = new CurrentUser();
             currentUser.username = prefs.getString(USERNAME_PREFERENCES_KEY, "AnonymousDoge");
+            currentUser.id = prefs.getString(USERID_PREFERENCES_KEY, "");
             currentUser.photo = prefs.getString(PHOTO_PREFERENCES_KEY, "http://cs616230.vk.me/v616230567/151af/cP4wx9MZT-w.jpg");
         }
         app = this;
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+        .build();
+        ImageLoader.getInstance().init(config);
     }
     public static void saveToken(String token) {
         EatWithMeApp.token = token;
         SharedPreferences prefs = app.getSharedPreferences(AUTH_PREFS, Activity.MODE_MULTI_PROCESS);
-        prefs.edit().putString(TOKEN_PREFERENCES_KEY, token).commit();
+        prefs.edit().putString(TOKEN_PREFERENCES_KEY, token).apply();
     }
-    public static void profileUpdate() {
-        SharedPreferences prefs = app.getSharedPreferences(AUTH_PREFS, Activity.MODE_MULTI_PROCESS);
-        prefs.edit().putString(UPDATED_PROFILE_COUNT, "1").commit();
-    }
-    public static boolean isProfileUpdated() {
-        SharedPreferences prefs = app.getSharedPreferences(AUTH_PREFS, Activity.MODE_MULTI_PROCESS);
-        if (!prefs.contains(UPDATED_PROFILE_COUNT)) {return false;}return true;
-    }
-
     public static void saveCurrentUser(CurrentUser currentUser) {
         SharedPreferences prefs = app.getSharedPreferences(AUTH_PREFS, Activity.MODE_MULTI_PROCESS);
         prefs.edit()
                 .putString(USERNAME_PREFERENCES_KEY, currentUser.username)
                 .putString(USERID_PREFERENCES_KEY, currentUser.id)
                 .putString(PHOTO_PREFERENCES_KEY, currentUser.photo)
-                .commit();
+                .apply();
+        EatWithMeApp.currentUser = currentUser;
     }
 
+    public static boolean isOwner(String creator) {
+        return currentUser.id.equals(creator);
+    }
 }

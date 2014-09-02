@@ -7,7 +7,6 @@ public class User {
     public String id;
     public String username;
     public String latitude;
-    public String longtitude;
-    //todo longitude
+    public String longitude;
     public String photo;
 }

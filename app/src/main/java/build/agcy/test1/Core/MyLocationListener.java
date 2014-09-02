@@ -202,4 +202,23 @@ public class MyLocationListener extends Service implements LocationListener {
     public IBinder onBind(Intent arg0) {
         return null;
     }
+
+    public void updateLocation() {
+
+        if (isGPSEnabled) {
+            Log.d("GPS", "GPS Enabled");
+            if (locationManager != null) {
+            locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    0,
+                    0, this);
+                location = locationManager
+                        .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if (location != null) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                }
+            }
+        }
+    }
 }

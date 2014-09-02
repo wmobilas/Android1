@@ -289,7 +289,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
         ArrayList<Meeting> meetingsList = null;
         if(activity!=null) {
             Intent intent = activity.getIntent();
-            meetingsList=intent.getParcelableArrayListExtra("meetings");
+            //meetingsList=intent.getParcelableArrayListExtra("meetings");
            // Object object= bundle.get("meetings");
             //todo показать все маркеры на карте в поле зрения, центрировать по переданному маркеру, отобразить данные по встерече из маркера
 
@@ -310,7 +310,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
             meeting_name=meetingsList.get(i).description;
             meeting_creator=meetingsList.get(i).creator;
             parseLat=Double.parseDouble(meetingsList.get(i).latitude);
-            parseLng=Double.parseDouble(meetingsList.get(i).longtitude);
+            parseLng=Double.parseDouble(meetingsList.get(i).longitude);
 
             cordinats = new LatLng(parseLat, parseLng);
             Marker marker = map.addMarker(new MarkerOptions()

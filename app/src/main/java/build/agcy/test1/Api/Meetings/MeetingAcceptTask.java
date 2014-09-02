@@ -25,28 +25,17 @@ import build.agcy.test1.EatWithMeApp;
 /**
  * Created by kiolt_000 on 17/08/2014.
  */
-public class MeetingAcceptTask extends ApiTaskBase<String> {
+public abstract class MeetingAcceptTask extends ApiTaskBase<String> {
     // todo: 2) предлагаем встретиться
     // отправляем string id втречи
     public MeetingAcceptTask(final String id, final String message) {
         super("meeting/accept", new ArrayList<NameValuePair>(){{
             add(new BasicNameValuePair("id",id));
-            add(new BasicNameValuePair("text",message));
+            add(new BasicNameValuePair("message",message));
         }}, true, true);
     }
     @Override
     protected String parse(String json) throws JSONException {
-
         return new Gson().fromJson(json,String.class);
-    }
-    @Override
-    public void onSuccess(String response) {
-    }
-    @Override
-    protected void onPostExecute(Object response) {
-        super.onPostExecute(response);
-    }
-    @Override
-    public void onError(Exception exp) {
     }
 }

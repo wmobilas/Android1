@@ -5,35 +5,46 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:background="@color/bg_color"
-    android:layout_gravity="bottom"
     >
-    <ImageView
-        android:id="@+id/meeting_photo"
-        android:src="@drawable/pin"
-        android:padding="10dp"
-        android:layout_width="75dp"
-        android:layout_height="75dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/meeting_photo"
+            android:src="@drawable/pin"
+            android:padding="10dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp" />
+        <TextView
+            android:id="@+id/meeting_coords"
+            android:text="Coords"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
     <!--<TextView-->
-        <!--android:id="@+id/user_name"-->
-        <!--android:text="Name"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
+    <!--android:id="@+id/user_name"-->
+    <!--android:text="Name"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical">
-    <TextView
-    android:id="@+id/meeting_description"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="@color/color1"
-    android:text="Description" />
-    <TextView
-        android:id="@+id/meeting_creator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color1"
-        android:text="Creator" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color1"
+            android:text="Description" />
+        <TextView
+            android:id="@+id/creator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color1"
+            android:text="Creator" />
+    </LinearLayout>
 </LinearLayout>

@@ -19,33 +19,20 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import build.agcy.test1.Api.ApiTaskBase;
-import build.agcy.test1.Models.MeetingsAccept;
+import build.agcy.test1.Models.Meeting;
 
 /**
  * Created by kiolt_000 on 17/08/2014.
  */
-public abstract class MeetingAcceptsListTask extends ApiTaskBase<MeetingsAccept[]> {
-    // todo: 3) получаем список предложений встретиться на созданную встречу
-    // отправляем string id
-    // получаем массив MeetingsAccept{ string id; string accepterId; }
+public abstract class MeetingAcceptsListTask extends ApiTaskBase<Meeting.Accept[]> {
     public MeetingAcceptsListTask(final String id) {
         super("meeting/acceptslist", new ArrayList<NameValuePair>(){{
             add(new BasicNameValuePair("id",id));
-        }}, false, false);
+        }}, false, true);
     }
 
     @Override
-    public void onSuccess(MeetingsAccept[] meetings) {
-    }
-    @Override
-    protected void onPostExecute(Object response) {
-        super.onPostExecute(response);
-    }
-    @Override
-    public void onError(Exception exp) {
-    }
-    @Override
-    protected MeetingsAccept[] parse(String json) throws JSONException, FileNotFoundException {
-        return new Gson().fromJson((json), MeetingsAccept[].class);
+    protected Meeting.Accept[] parse(String json) throws JSONException, FileNotFoundException {
+        return new Gson().fromJson((json), Meeting.Accept[].class);
     }
 }

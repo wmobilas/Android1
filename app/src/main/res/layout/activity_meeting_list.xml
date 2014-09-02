@@ -10,12 +10,19 @@
     <!-- Show on Map button -->
 
     <!--List view -->
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/mapMeeting"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        class="com.google.android.gms.maps.SupportMapFragment"
-        />
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <fragment
+
+            android:id="@+id/mapMeeting"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            class="com.google.android.gms.maps.MapFragment"
+            />
+        </RelativeLayout>
+
     <LinearLayout android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -27,7 +27,7 @@
     <string name="meeting_type2">Lunch</string>
     <string name="meeting_type3">Dinner</string>
     <string name="meeting_type4">Other</string>
-    <string name="navbar_title_nearby">Nearby</string>
+    <string name="navbar_title_meetings">Nearby</string>
     <string name="navbar_title_create">Create</string>
     <string name="navbar_title_profile">Profile</string>
     <string name="navbar_title_settings">Settings</string>

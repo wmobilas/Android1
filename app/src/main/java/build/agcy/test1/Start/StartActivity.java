@@ -34,9 +34,9 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import build.agcy.test1.Api.Errors.ApiError;
+import build.agcy.test1.Api.PushRegisterTask;
 import build.agcy.test1.Core.GCM.GCMRegistrationTask;
 import build.agcy.test1.EatWithMeApp;
-import build.agcy.test1.Main.Main1Activity;
 import build.agcy.test1.Main.MainActivity;
 import build.agcy.test1.Models.CurrentUser;
 import build.agcy.test1.R;
@@ -83,6 +83,21 @@ public class StartActivity extends FragmentActivity {
         //if (BuildConfig.DEBUG) {
         //     GCMRegistrarCompat.checkManifest(this);}
         context = getApplicationContext();
+        if (EatWithMeApp.token != null) {
+            startActivity(new Intent(this, MainActivity.class));
+            registerGCM();
+            finish();
+            return;
+        }
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        login(null);
+    }
+
+    private void registerGCM() {
         if (checkPlayServices()) {
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
@@ -93,17 +108,6 @@ public class StartActivity extends FragmentActivity {
         } else {
             Log.e(TAG, "No valid Google Play Services APK found.");
         }
-        if (EatWithMeApp.token != null) {
-            finish();
-            startActivity(new Intent(this, MainActivity.class));
-            return;
-        }
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
-
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        login(null);
     }
 
 
@@ -287,6 +291,7 @@ public class StartActivity extends FragmentActivity {
                 dialog.dismiss();
                 EatWithMeApp.saveCurrentUser(currentUser);
                 startActivity(new Intent(getBaseContext(), MainActivity.class));
+                registerGCM();
                 finish();
             }
 
@@ -329,7 +334,7 @@ public class StartActivity extends FragmentActivity {
         password_login= (TextView) findViewById(R.id.password_login);
         password= password_login.getText().toString();
         */
-        username="wmobilas";
+        username="kioltk";
         password="123qweASD";
         if (username.equals("") || password.equals("")){
             Toast.makeText(getApplicationContext(), "Please fill form", Toast.LENGTH_SHORT).show();
@@ -348,6 +353,7 @@ public class StartActivity extends FragmentActivity {
                     dialog.dismiss();
                     EatWithMeApp.saveCurrentUser(currentUser);
                     startActivity(new Intent(getBaseContext(), MainActivity.class));
+                    registerGCM();
                     finish();
                 }
 
@@ -429,6 +435,18 @@ public class StartActivity extends FragmentActivity {
         task.execute();
     }
     private void sendRegistrationIdToBackend(String regid) {
+        PushRegisterTask pushRegisterTask = new PushRegisterTask(regid) {
+            @Override
+            public void onSuccess(Boolean response) {
+
+            }
+
+            @Override
+            public void onError(Exception exp) {
+
+            }
+        };
+        pushRegisterTask.start();
         Log.i(TAG, "sendRegistrationIdToBackend");
     }
     private void storeRegistrationId(String regId) {

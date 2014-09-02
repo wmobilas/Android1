@@ -2,6 +2,8 @@ package build.agcy.test1.Api.Meetings;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -25,31 +27,24 @@ import build.agcy.test1.EatWithMeApp;
 /**
  * Created by kiolt_000 on 17/08/2014.
  */
-public class MeetingCreateTask extends ApiTaskBase<String> {
+public abstract class MeetingCreateTask extends ApiTaskBase<String> {
 //    public MeetingCreateTask(String methodName, ArrayList<NameValuePair> args){
 //        super(methodName, args, true, false);
 //    }
     public MeetingCreateTask(final String latitude, final String longitude, final String time, final String selectedType) {
         super("meeting/create", new ArrayList<NameValuePair>(){{
             add(new BasicNameValuePair("latitude",latitude));
-            add(new BasicNameValuePair("longtitude",longitude));
+            add(new BasicNameValuePair("longitude",longitude));
             add(new BasicNameValuePair("time",time));
             add(new BasicNameValuePair("description",selectedType));
         }}, true, true);
     }
     @Override
     protected String parse(String json) throws JSONException {
-
         //todo: parse
-        return "";
+        return String.valueOf(new Gson().fromJson(json,MeetingCreateResponse.class).id);
     }
-    @Override
-    public void onSuccess(String response) {}
-    @Override
-    protected void onPostExecute(Object response) {
-        super.onPostExecute(response);}
-    @Override
-    public void onError(Exception exp) {}
-    // отправляем float latitute, float longitude, int time, string text
-    // получае string id встречи
+    private class MeetingCreateResponse{
+        public int id;
+    }
 }

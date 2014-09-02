@@ -23,7 +23,7 @@ public class UserActivity extends Activity {
         setContentView(R.layout.activity_user);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderUserFragment())
+                    .add(R.id.content_container, new PlaceholderUserFragment())
                     .commit();
         }
     }

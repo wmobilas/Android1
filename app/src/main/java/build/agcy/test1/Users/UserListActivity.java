@@ -31,7 +31,7 @@ public class UserListActivity extends Activity {
         setContentView(R.layout.activity_user_list);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.content_container, new PlaceholderFragment())
                     .commit();
         }
     }
@@ -91,7 +91,7 @@ public class UserListActivity extends Activity {
                             bundle.putString("user_photo", response[position].photo);
                             bundle.putString("user_username", response[position].username);
                             bundle.putString("user_latitude", response[position].latitude);
-                            bundle.putString("user_latitude", response[position].longtitude);
+                            bundle.putString("user_latitude", response[position].longitude);
                             //todo потом поменять на longitude
                             Intent intent = new Intent(getActivity(), UserActivity.class);
                             intent.putExtras(bundle);

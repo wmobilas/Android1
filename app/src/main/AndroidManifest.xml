@@ -27,8 +27,8 @@
     <application
         android:name=".EatWithMeApp"
         android:allowBackup="true"
-        android:icon="@drawable/doge"
-        android:label="App"
+        android:icon="@drawable/ic_pig"
+        android:label="EatWithMe"
         android:theme="@style/AppTheme" >
         <activity
             android:theme="@style/NoActionBarTheme"
@@ -60,17 +60,13 @@
             android:name=".Users.UserActivity"
             android:label="@string/title_activity_user"
             android:theme="@style/AnimationActivity" />
-        <activity
-            android:name=".Main.CollectionDemoActivity"
-            android:label="@string/title_activity_demo"
-            android:theme="@style/AnimationActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAXFmyiU0BWRu7gDlYBf82IBMchmIXKT50" />
+            android:value="AIzaSyBV6Kul7Ybt_7yeEd6Im7gSjN_0fNu_Psw" />
 
 
 

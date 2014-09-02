@@ -1,110 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:padding="12dp"
+    android:id="@+id/fragment_explore"
+    android:textSize="15sp">
+
+
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fragment_explore"
-        android:textSize="15sp">
-
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <ImageView
             android:id="@+id/imgEat"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_marginTop="0dip"
-            android:src="@drawable/eat"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop" />
-        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
-            android:orientation="vertical">
-
-            <Spinner
-                android:id="@+id/MeetingType"
-                android:layout_height="60dp"
-                android:prompt="@string/lookingFor"
-                android:layout_width="fill_parent"
-                android:entries="@array/meeting_type"
-                android:layout_marginTop="16dp">
-            </Spinner>
-            <CheckBox
-                android:id="@+id/pairMeeting"
-                android:layout_height="wrap_content"
-                android:text=" Pair Meeting"
-                android:layout_width="wrap_content"
-                android:checked="false">
-            </CheckBox>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Waiting for response..."
-                android:id="@+id/waiting"
-                android:layout_gravity="center_horizontal"
-                android:visibility="gone" />
-
-                <Button
-                    android:id="@+id/time_picker"
-                    android:text="Pick Time"
-                    android:onClick="timePick"
-                    android:textColor="@color/bg_color"
-                    android:textSize="30sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="73dp"
-                    android:paddingRight="16dp"
-                    android:paddingLeft="16dp"
-                    android:gravity="center"
-                    android:background="@drawable/buttonshape" />
-
-                <!--android:layout_marginLeft="6dp"-->
-                <!--android:layout_marginStart="6dp"-->
-                <Button
-                    android:id="@+id/created_meeting_button"
-                    android:text="Watch who accepted"
-                    android:textColor="@color/bg_color"
-                    android:textSize="30sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="73dp"
-                    android:paddingRight="6dp"
-                    android:paddingLeft="6dp"
-                    android:background="@drawable/nowbutton"
-                    android:visibility="gone"
-                    />
-                <Button
-                    android:id="@+id/cancel_meeting"
-                    android:text="Cancel"
-                    android:textColor="@color/bg_color"
-                    android:textSize="30sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="73dp"
-                    android:paddingRight="6dp"
-                    android:paddingLeft="6dp"
-                    android:background="@drawable/buttonshape"
-                    android:visibility="gone"
-                    />
-
-                <Button
-                    android:id="@+id/create_meeting"
-                    android:text="NOW!"
-                    android:textColor="@color/bg_color"
-                    android:textSize="30sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="73dp"
-                    android:paddingRight="6dp"
-                    android:paddingLeft="6dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/nowbutton"
-                    />
-        </LinearLayout>
-
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/eat" />
+        <TextView
+            android:text="Describe your meeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/text"
+            android:hint="Simple lunch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="See date and map selector in future versions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
-</ScrollView>
+    <Button
+        android:layout_alignParentBottom="true"
+        android:id="@+id/create_meeting"
+        android:text="create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+</RelativeLayout>

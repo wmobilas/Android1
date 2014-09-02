@@ -5,13 +5,14 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 
-import com.google.android.gms.maps.MapFragment;
-
+import build.agcy.test1.Core.Helpers.FindMe;
 import build.agcy.test1.Meetings.CreateMeetingFragment;
 import build.agcy.test1.Meetings.MeetingListFragment;
 import build.agcy.test1.R;
@@ -63,7 +64,7 @@ public class MainActivity extends Activity
         }
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
+                .replace(R.id.content_container, fragment)
                 .commit();
     }
 
@@ -73,7 +74,7 @@ public class MainActivity extends Activity
                 mTitle = getString(R.string.navbar_title_create);
                 break;
             case 2:
-                mTitle = getString(R.string.navbar_title_nearby);
+                mTitle = getString(R.string.navbar_title_meetings);
                 break;
             case 3:
                 mTitle = getString(R.string.navbar_title_settings);
@@ -110,6 +111,21 @@ public class MainActivity extends Activity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if(id== R.id.action_example){
+            // todo: почему эта херь не определяет местоположение блять?
+            FindMe.please(this, 60000, true, new FindMe.FindMeListener() {
+                @Override
+                public void foundLocation(String provider, Location location) {
+                    Log.i("Findme", "lat = " + location.getLatitude() + " long = " + location.getLongitude());
+                }
+
+                @Override
+                public void couldntFindLocation() {
+
+                }
+            });
             return true;
         }
         return super.onOptionsItemSelected(item);

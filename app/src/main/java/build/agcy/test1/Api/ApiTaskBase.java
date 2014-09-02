@@ -70,6 +70,7 @@ public abstract class ApiTaskBase<T> extends AsyncTask<Object, Void, Object> imp
                 httpClient.setCookieStore(cookies);
 
             }
+            Log.i(LOG_TAG, "Api request " + url);
             HttpResponse httpResponse = httpClient.execute(request);
             HttpEntity httpEntity = httpResponse.getEntity();
             String responseStr = EntityUtils.toString(httpEntity);
