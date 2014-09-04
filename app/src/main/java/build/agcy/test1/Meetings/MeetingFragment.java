@@ -40,14 +40,15 @@ public class MeetingFragment extends Fragment {
 
 
     public static View meetingView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        try{
+        try {
             meetingView = inflater.inflate(R.layout.fragment_meeting, container, false);
         } catch (InflateException e) {
-            Log.e("MeetingFragment","Cant inflate",e);
+            Log.e("MeetingFragment", "Cant inflate", e);
         }
 
         bindData();
@@ -81,12 +82,12 @@ public class MeetingFragment extends Fragment {
 
                 if (!meeting.isConfirmed())
                     if (EatWithMeApp.isOwner(meeting.creator)) {
-                        getFragmentManager().beginTransaction().add(R.id.action_container, new AcceptListFragment()).commit();
+                        getFragmentManager().beginTransaction().replace(R.id.action_container, new AcceptListFragment()).commit();
                     } else {
-                        getFragmentManager().beginTransaction().add(R.id.action_container, new AcceptFragment()).commit();
+                        getFragmentManager().beginTransaction().replace(R.id.action_container, new AcceptFragment()).commit();
                     }
                 else {
-                    getFragmentManager().beginTransaction().add(R.id.action_container, new ConfirmedFragment()).commit();
+                    getFragmentManager().beginTransaction().replace(R.id.action_container, new ConfirmedFragment()).commit();
                 }
 
             } else {
@@ -111,17 +112,17 @@ public class MeetingFragment extends Fragment {
 
             @Override
             public void onError(Exception exp) {
-                Toast.makeText(getActivity(),"Error " + exp.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Error " + exp.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         };
         meetingTask.start();
     }
 
-    public class AcceptFragment extends Fragment{
+    public class AcceptFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_accept,null);
+            View rootView = inflater.inflate(R.layout.fragment_accept, null);
             final Button acceptButton = (Button) rootView.findViewById(R.id.accept);
             final TextView messageBox = (TextView) rootView.findViewById(R.id.message);
             final TextView statusView = (TextView) rootView.findViewById(R.id.status);
@@ -157,12 +158,13 @@ public class MeetingFragment extends Fragment {
             return rootView;
         }
     }
-    public class ConfirmedFragment extends Fragment{
+
+    public class ConfirmedFragment extends Fragment {
         private View rootView;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            rootView = inflater.inflate(R.layout.fragment_confirmed,null);
+            rootView = inflater.inflate(R.layout.fragment_confirmed, null);
             return rootView;
         }
     }
@@ -179,7 +181,7 @@ public class MeetingFragment extends Fragment {
                 @Override
                 public void onSuccess(final Meeting.Accept[] response) {
                     loadingView.setVisibility(View.GONE);
-                    if(response.length>0) {
+                    if (response.length > 0) {
                         listView.setVisibility(View.VISIBLE);
                         loadingView.setVisibility(View.GONE);
                         listView.setAdapter(new BaseAdapter() {
@@ -251,7 +253,7 @@ public class MeetingFragment extends Fragment {
 
                             }
                         });
-                    }else{
+                    } else {
                         TextView statusView = (TextView) rootView.findViewById(R.id.status);
                         statusView.setVisibility(View.VISIBLE);
                         statusView.setText("None still respond to your meeting");

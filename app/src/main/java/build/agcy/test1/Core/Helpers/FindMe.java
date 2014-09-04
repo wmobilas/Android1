@@ -8,12 +8,11 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.util.Timer;
-
 public class FindMe {
 
     public static interface FindMeListener {
         public void foundLocation(String provider, Location location);
+
         public void couldntFindLocation();
     }
 
@@ -27,8 +26,6 @@ public class FindMe {
     private FindMeListener listener;
     private int timeoutMS;
     private boolean getLastKnownLocation;
-
-    private Timer timer;
 
     public FindMe(Context context, int timeoutMS, boolean getLastKnownLocation, FindMeListener listener) {
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -47,10 +44,10 @@ public class FindMe {
             provider = locationManager.getBestProvider(criteria, false);
         }
         Location loc = locationManager.getLastKnownLocation(provider);
-                if (loc != null) {
-                    listener.foundLocation(LocationManager.GPS_PROVIDER, loc);
-                    return;
-                }
+        if (loc != null) {
+            listener.foundLocation(LocationManager.GPS_PROVIDER, loc);
+            return;
+        }
 
         loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         if (loc != null) {
@@ -114,8 +111,8 @@ public class FindMe {
     };
 
     private void onLocationChanged(LocationListener locationListener, String provider, Location location) {
-            locationManager.removeUpdates(locationListener);
-            listener.foundLocation(provider, location);
+        locationManager.removeUpdates(locationListener);
+        listener.foundLocation(provider, location);
     }
 
     private void onProviderDisabled(String provider) {

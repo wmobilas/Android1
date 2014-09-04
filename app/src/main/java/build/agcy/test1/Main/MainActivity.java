@@ -119,12 +119,14 @@ public class MainActivity extends Activity
                 @Override
                 public void foundLocation(String provider, Location location) {
                     Log.i("Findme", "lat = " + location.getLatitude() + " long = " + location.getLongitude());
+                    Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).cancel();
                     Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void couldntFindLocation() {
-
+                    Toast.makeText(getApplicationContext(), "Please turn GPS on ", Toast.LENGTH_SHORT).cancel();
+                    Toast.makeText(getApplicationContext(), "Please turn GPS on ", Toast.LENGTH_SHORT).show();
                 }
             });
             return true;

@@ -21,10 +21,12 @@ import build.agcy.test1.R;
 public class MeetingListAdapter extends BaseAdapter {
     private final ArrayList<Meeting> meetings;
     private final Context context;
-    public MeetingListAdapter(Context context, ArrayList<Meeting> meetings){
+
+    public MeetingListAdapter(Context context, ArrayList<Meeting> meetings) {
         this.context = context;
         this.meetings = meetings;
     }
+
     @Override
     public int getCount() {
         return meetings.size();
@@ -41,27 +43,39 @@ public class MeetingListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rootView = inflater.inflate(R.layout.item_meeting, null);
-        TextView descView = (TextView) rootView.findViewById(R.id.description);
-        TextView coordsView = (TextView) rootView.findViewById(R.id.meeting_coords);
-        final TextView creatorNameTextView = (TextView) rootView.findViewById(R.id.creator);
-        ImageView imageView = (ImageView) rootView.findViewById(R.id.meeting_photo);
+        View adapterView = inflater.inflate(R.layout.item_meeting, null);
+        TextView descView = (TextView) adapterView.findViewById(R.id.description);
+        TextView coordsView = (TextView) adapterView.findViewById(R.id.meeting_coords);
+        final TextView creatorNameTextView = (TextView) adapterView.findViewById(R.id.creator);
+        ImageView imageView = (ImageView) adapterView.findViewById(R.id.meeting_photo);
 
         final Meeting meeting = getItem(position);
-
-        descView.setText(meeting.description);
+//                    UserTask task = new UserTask(String.valueOf(meeting.creator)) {
+//                    @Override
+//                    public void onSuccess(User user1) {
+//                        creatorNameTextView.setText(user1.username);
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception exp) {
+//                        Toast.makeText(context,
+//                                "usertask error" + exp.toString(), Toast.LENGTH_LONG).show();
         creatorNameTextView.setText(meeting.creator);
-        coordsView.setText(meeting.latitude+"\n"+meeting.longitude);
+//                        }
+//                };
+//                task.start();
+        descView.setText(meeting.description);
+        coordsView.setText(meeting.latitude + "\n" + meeting.longitude);
 
-        String imageUrl = ""+
-        "http://maps.googleapis.com/maps/api/staticmap?zoom=12&size=100x100&maptype=roadmap" +
-        "&markers=color:red%7Clabel:Here%7C"+
-        meeting.longitude +","+
-        meeting.latitude+"";
+        String imageUrl = "" +
+                "http://maps.googleapis.com/maps/api/staticmap?zoom=12&size=100x100&maptype=roadmap" +
+                "&markers=color:red%7Clabel:Here%7C" +
+                meeting.longitude + "," +
+                meeting.latitude + "";
         ImageLoader.getInstance().displayImage(imageUrl, imageView);
 
-        return rootView;
+        return adapterView;
     }
 }

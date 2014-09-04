@@ -26,11 +26,12 @@ import build.agcy.test1.Models.User;
  */
 public abstract class UserTask extends ApiTaskBase<User> {
 
-     public UserTask(final String userid) {
-        super("api/user/get", new ArrayList<NameValuePair>(){{
-            add(new BasicNameValuePair("id",userid));
+    public UserTask(final String userid) {
+        super("user/get", new ArrayList<NameValuePair>() {{
+            add(new BasicNameValuePair("id", userid));
         }}, false, false);
     }
+
     @Override
     protected Object doInBackground(Object... params) {
         try {
@@ -51,17 +52,21 @@ public abstract class UserTask extends ApiTaskBase<User> {
             return exp;
         }
     }
+
     @Override
     protected User parse(String json) throws JSONException, FileNotFoundException {
         return new Gson().fromJson(json, User.class);
     }
+
     @Override
     public void onSuccess(User user) {
     }
+
     @Override
     protected void onPostExecute(Object response) {
         super.onPostExecute(response);
     }
+
     @Override
     public void onError(Exception exp) {
     }

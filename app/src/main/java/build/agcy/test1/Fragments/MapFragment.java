@@ -1,6 +1,8 @@
 package build.agcy.test1.Fragments;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +11,10 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.app.Fragment;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -33,11 +35,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 
 import build.agcy.test1.Core.MyLocationListener;
 import build.agcy.test1.Meetings.MapHelpers.MeetingPopupAdapter;
-import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
 
 /**
@@ -159,6 +159,7 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -179,7 +180,7 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
         mapFragment = (com.google.android.gms.maps.MapFragment) fm.findFragmentById(R.id.map);
         if (mapFragment == null) {
             mapFragment = com.google.android.gms.maps.MapFragment.newInstance();
-            fm.beginTransaction().replace(R.id.map, mapFragment).commit();
+            fm.beginTransaction().add(R.id.map, mapFragment).commit();
         }
         setUpMapIfNeeded();
     }
