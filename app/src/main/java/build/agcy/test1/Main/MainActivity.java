@@ -49,7 +49,7 @@ public class MainActivity extends Activity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         Fragment fragment = null;
-        switch (position){
+        switch (position) {
             case 0:
                 fragment = new Fragment();
                 break;
@@ -113,8 +113,7 @@ public class MainActivity extends Activity
         if (id == R.id.action_settings) {
             return true;
         }
-        if(id== R.id.action_example){
-            // todo: почему эта херь не определяет местоположение блять?
+        if (id == R.id.action_example) {
             FindMe.please(this, 60000, true, new FindMe.FindMeListener() {
                 @Override
                 public void foundLocation(String provider, Location location) {
@@ -133,7 +132,6 @@ public class MainActivity extends Activity
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

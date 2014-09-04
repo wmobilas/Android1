@@ -63,7 +63,6 @@ public class CreateMeetingFragment extends android.app.Fragment {
                 final String latitude = "" + locationListener.getLatitude();
                 final String longitude = "" + locationListener.getLongitude();
 
-                // todo: implement time picker
                 String time = createTimeButton.getText().toString();
 
 //                SharedPreferences prefs = getActivity().getSharedPreferences("auth_prefs", Context.MODE_PRIVATE);

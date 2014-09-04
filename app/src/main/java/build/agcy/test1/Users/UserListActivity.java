@@ -65,15 +65,16 @@ public class UserListActivity extends Activity {
         }
 
         public static View user_list_activity_View;
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             if (user_list_activity_View != null) {
                 ViewGroup parent = (ViewGroup) user_list_activity_View.getParent();
                 if (parent != null)
                     parent.removeView(user_list_activity_View);
             }
-            try{
+            try {
                 user_list_activity_View = inflater.inflate(R.layout.fragment_user_list, container, false);
             } catch (InflateException e) {
             }
@@ -92,7 +93,6 @@ public class UserListActivity extends Activity {
                             bundle.putString("user_username", response[position].username);
                             bundle.putString("user_latitude", response[position].latitude);
                             bundle.putString("user_latitude", response[position].longitude);
-                            //todo потом поменять на longitude
                             Intent intent = new Intent(getActivity(), UserActivity.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
@@ -103,7 +103,7 @@ public class UserListActivity extends Activity {
 
                 @Override
                 public void onError(Exception exp) {
-                    Toast.makeText(getActivity().getApplicationContext(),"UserListTaskError "+exp.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "UserListTaskError " + exp.toString(), Toast.LENGTH_LONG).show();
                 }
             };
             task.start();
