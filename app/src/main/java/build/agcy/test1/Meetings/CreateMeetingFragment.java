@@ -16,6 +16,7 @@ import build.agcy.test1.Api.Errors.ApiError;
 import build.agcy.test1.Api.Meetings.MeetingCreateTask;
 import build.agcy.test1.Core.Helpers.TimeConverter;
 import build.agcy.test1.Core.MyLocationListener;
+import build.agcy.test1.Fragments.TimePickerFragment;
 import build.agcy.test1.R;
 
 /**
@@ -31,9 +32,16 @@ public class CreateMeetingFragment extends android.app.Fragment {
                              final Bundle savedInstanceState) {
         final View meetingCreateView = inflater.inflate(R.layout.fragment_create_meeting, container, false);
         final Button createMeetingButton = (Button) meetingCreateView.findViewById(R.id.create_meeting);
+        final Button createTimeButton = (Button) meetingCreateView.findViewById(R.id.time_pick);
 
         final MyLocationListener locationListener = new MyLocationListener(getActivity());
         locationListener.updateLocation();
+        createTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new TimePickerFragment(createTimeButton).show(getFragmentManager(), "TAG");
+            }
+        });
         createMeetingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +64,19 @@ public class CreateMeetingFragment extends android.app.Fragment {
                 final String longitude = "" + locationListener.getLongitude();
 
                 // todo: implement time picker
-                String time = String.valueOf(TimeConverter.getUnixNow());
+                String time = createTimeButton.getText().toString();
+
+//                SharedPreferences prefs = getActivity().getSharedPreferences("auth_prefs", Context.MODE_PRIVATE);
+//                if (!prefs.contains("user_meeting_time")){
+                if (time.equals("time")) {
+//                    Calendar c = Calendar.getInstance();
+//                    time=String.valueOf((c.get(Calendar.HOUR_OF_DAY)))+""+String.valueOf(c.get(Calendar.MINUTE));
+                    time = String.valueOf(TimeConverter.getUnixNow());
+                } else {
+                    time = time.substring(0, 2) + "" + time.substring(3);
+                }
+//                if (time.equals("00")){time="0000";}
+//                if (time.length()<4){time="0"+time;}
                 final String finalText = text;
 
                 MeetingCreateTask task = new MeetingCreateTask(latitude, longitude, time, finalText) {

@@ -29,6 +29,14 @@
             android:hint="Simple lunch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_alignParentBottom="true"
+            android:id="@+id/time_pick"
+            android:text="Pick Time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <TextView
             android:text="See date and map selector in future versions"
             android:layout_width="wrap_content"

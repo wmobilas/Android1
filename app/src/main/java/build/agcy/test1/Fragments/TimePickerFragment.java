@@ -1,14 +1,12 @@
 package build.agcy.test1.Fragments;
 
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
+import android.widget.Button;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -17,14 +15,19 @@ import java.util.Calendar;
  */
 public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
-int count=0;
+    Button btn;
+    int count=0;
+
+    public TimePickerFragment(Button createTimeButton) {
+        this.btn = createTimeButton;
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
-
         // Create a new instance of TimePickerDialog and return it
         return new TimePickerDialog(getActivity(), this, hour, minute,
                 DateFormat.is24HourFormat(getActivity()));
@@ -51,10 +54,12 @@ int count=0;
                     }
                 }
             }
-            Toast.makeText(getActivity(), time, Toast.LENGTH_SHORT).show();
-            SharedPreferences prefs = getActivity().getSharedPreferences("auth_prefs", Context.MODE_PRIVATE);
-            prefs.edit()
-                    .putString("user_meeting_time", time.substring(0, 2) + time.substring(3)).commit();
+//            Toast.makeText(getActivity(), time, Toast.LENGTH_SHORT).show();
+
+            btn.setText(time.substring(0, 2) + ":" + time.substring(3));
+//            SharedPreferences prefs = getActivity().getSharedPreferences("auth_prefs", Context.MODE_PRIVATE);
+//            prefs.edit()
+//                    .putString("user_meeting_time", time.substring(0, 2) + time.substring(3)).commit();
         }
 
        count++;
