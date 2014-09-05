@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import build.agcy.test1.Core.Helpers.FindMe;
+import build.agcy.test1.Fragments.MapFragment;
 import build.agcy.test1.Meetings.CreateMeetingFragment;
 import build.agcy.test1.Meetings.MeetingListFragment;
 import build.agcy.test1.R;
@@ -29,7 +30,7 @@ public class MainActivity extends Activity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-
+    int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,7 @@ public class MainActivity extends Activity
                 fragment = new MeetingListFragment();
                 break;
             case 3:
+                fragment = new MapFragment();
                 break;
         }
         FragmentManager fragmentManager = getFragmentManager();
@@ -117,9 +119,14 @@ public class MainActivity extends Activity
             FindMe.please(this, 60000, true, new FindMe.FindMeListener() {
                 @Override
                 public void foundLocation(String provider, Location location) {
+
+                    if (count == 0) {
                     Log.i("Findme", "lat = " + location.getLatitude() + " long = " + location.getLongitude());
                     Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).cancel();
                     Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
+
+                    }
+                    count++;
                 }
 
                 @Override

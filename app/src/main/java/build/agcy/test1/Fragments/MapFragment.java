@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -14,7 +12,6 @@ import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -34,10 +31,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.lang.reflect.Field;
+import org.apache.http.NameValuePair;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
+import build.agcy.test1.Api.Meetings.MeetingListTask;
+import build.agcy.test1.Api.UpdateLocationTask;
 import build.agcy.test1.Core.MyLocationListener;
 import build.agcy.test1.Meetings.MapHelpers.MeetingPopupAdapter;
+import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
 
 /**
@@ -49,6 +53,7 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
     final String TAG = "agcy.test";
     double latitude;
     double longitude;
+    int count = 0;
     LatLng currentPosition;
     Marker myMarker;
     LocationManager locationManager;
@@ -173,7 +178,6 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
 //            fragmentTransaction.replace(R.id.map, mapFragment);
 //            fragmentTransaction.apply();
 //        }
-
         super.onCreate(savedInstanceState);
         Log.d(TAG, "mapfragment onCreate");
         FragmentManager fm = getChildFragmentManager();
@@ -188,7 +192,9 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the
         // map.
-        if (map == null) {
+        if (map != null) {
+            init();
+        } else {
             // Try to obtain the map from the SupportMapFragment.
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -214,13 +220,11 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
             // Check if we were successful in obtaining the map.
         }
 
-        if (map != null) {
-            init();
-        }
     }
 
     private void init() {
 
+        if (count == 0) {
         final MyLocationListener myLocationService = new MyLocationListener(myContext) {
 
         };
@@ -232,27 +236,58 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
         map.setInfoWindowAdapter(new MeetingPopupAdapter(myContext.getBaseContext()));
         map.setOnInfoWindowClickListener(this);
         //map.setBuildingsEnabled(true);
-        map.setOnInfoWindowClickListener(this);
 
         locationManager = (LocationManager) myContext.getSystemService(Context.LOCATION_SERVICE);
         // Define the criteria how to select the locatioin provider -> use
         // default
-        Criteria criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, true);
-        Location location = null;
-        if (locationManager.getLastKnownLocation(provider) != null) {
-            location = locationManager.getLastKnownLocation(provider);
 
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-        } else {
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
+            Criteria criteria = new Criteria();
             latitude = myLocationService.getLatitude();
             longitude = myLocationService.getLongitude();
-            Toast.makeText(myContext.getApplicationContext(), "Please Turn GPS On", Toast.LENGTH_LONG).show();
-        }
-//        addMeetings(map, myContext);
+            List<String> providers = locationManager.getProviders(criteria, true);
+            if (providers != null) {
+                Location newestLocation = null;
+                for (String provider : providers) {
+                    Location location = locationManager.getLastKnownLocation(provider);
+                    if (location != null) {
+                        if (newestLocation == null) {
+                            newestLocation = location;
+                        } else {
+                            if (location.getTime() > newestLocation.getTime()) {
+                                newestLocation = location;
+                            }
+                        }
+                        locationManager.requestLocationUpdates(provider, 0, 0, myLocationService);
+                    }
+                }
+                if (newestLocation != null) {
+                    longitude = newestLocation.getLongitude();
+                    latitude = newestLocation.getLatitude();
+                }
+            } else {
+                LocationDialogFragment dialog = new LocationDialogFragment();
+                dialog.show(getFragmentManager(),
+                        LocationDialogFragment.class.getName());
+            }
+//        Criteria criteria = new Criteria();
+//            criteria.setAccuracy(Criteria.ACCURACY_FINE);
+//            provider = locationManager.getBestProvider(criteria, true);
+//            if (locationManager.getLastKnownLocation(provider) == null) {
+//                if (locationManager.getLastKnownLocation(provider) == null) {
+//                    Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+//                }
+//            }
+//            Location location = locationManager.getLastKnownLocation(provider);
+//            if (location != null) {
+//                latitude = location.getLatitude();
+//                longitude = location.getLongitude();
+//                return;
+//            } else {
+//            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//            startActivity(intent);
+//            Toast.makeText(myContext.getApplicationContext(), "Please Turn GPS On", Toast.LENGTH_LONG).show();
+
+            addMeetings(map);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude))
                 .zoom(16)
@@ -261,26 +296,18 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
                 .build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         map.animateCamera(cameraUpdate);
+            UpdateLocationTask taskLocation = new UpdateLocationTask(
+                    String.valueOf(latitude),
+                    String.valueOf(longitude)) {
+                @Override
+                public void onSuccess(String response) {
+                }
 
-//        EatWithMeApp app =  new EatWithMeApp();
-//        SharedPreferences prefs = app.getSharedPreferences("auth_prefs", Activity.MODE_MULTI_PROCESS);
-        SharedPreferences prefs = myContext.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE);
-        prefs.edit()
-                .putString("user_lat", Double.toString(latitude))
-                .putString("user_lng", Double.toString(longitude));
-
-        //   activity_map.setClustering(new ClusteringSettings().enabled(false).addMarkersDynamically(true));
-//        activity_map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-//
-//            @Override
-//            public void onMapClick(LatLng latLng) {
-//                if((myMarker!=null)
-//                          && (Math.abs(myMarker.getPosition().latitude - latLng.latitude) < 0.05
-//                          && Math.abs(myMarker.getPosition().longitude - latLng.longitude) < 0.05)) {
-//                    myMarker.setVisible(false);
-//                }
-//            }
-//        });
+                @Override
+                public void onError(Exception exp) {
+                }
+            };
+            taskLocation.start();
         map.setInfoWindowAdapter(
                 new MeetingPopupAdapter(myContext.getBaseContext()));
         // Adding and showing marker while touching the GoogleMap
@@ -289,22 +316,22 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
             @Override
             public void onMapClick(LatLng position) {
                 // Clears any existing markers from the GoogleMap
-                map.clear();
+//                map.clear();
 
                 // Creating an instance of MarkerOptions to set position
-                MarkerOptions markerOptions = new MarkerOptions();
-
-                // Setting position on the MarkerOptions
-                markerOptions.position(position);
-
-                // Animating to the currently touched position
-                map.animateCamera(CameraUpdateFactory.newLatLng(position));
-
-                // Adding marker on the GoogleMap
-                Marker marker = map.addMarker(markerOptions);
-
-                // Showing InfoWindow on the GoogleMap
-                marker.showInfoWindow();
+//                MarkerOptions markerOptions = new MarkerOptions();
+//
+//                // Setting position on the MarkerOptions
+//                markerOptions.position(position);
+//
+//                // Animating to the currently touched position
+//                map.animateCamera(CameraUpdateFactory.newLatLng(position));
+//
+//                // Adding marker on the GoogleMap
+//                Marker marker = map.addMarker(markerOptions);
+//
+//                // Showing InfoWindow on the GoogleMap
+//                marker.showInfoWindow();
 
 
             }
@@ -360,6 +387,10 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
                 Log.d(TAG, "onCameraChange: " + camera.target.latitude + "," + camera.target.longitude);
             }
         });
+
+
+        }
+        count++;
     }
 
     public void onClickTest(View view) {
@@ -439,45 +470,31 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
 //                        .fromResource(R.drawable.pin)));
 //        markers.add(marker);}
 //    }
-    private void addMeetings(GoogleMap map, Activity activity) {
-        /*
-        ArrayList<Meeting> meetingsList = null;
-        if (activity != null) {
-            Intent intent = activity.getIntent();
-            meetingsList = intent.getParcelableArrayListExtra("meetings");
-            // Object object= bundle.get("meetings");
+    private void addMeetings(final GoogleMap map) {
+        final MeetingListTask task = new MeetingListTask(new ArrayList<NameValuePair>()) {
+            @Override
+            public void onSuccess(final Meeting[] response) {
+                for (Meeting m : response) {
+                    map.addMarker(new MarkerOptions()
+                                    .position(new LatLng(Double.parseDouble(m.latitude), Double.parseDouble(m.longitude)))
+                                    .title(m.description)
+                                    .snippet(m.time + " " + m.Id)
+//                            .icon(BitmapDescriptorFactory
+//                                    .fromResource(R.drawable.pin))
+                    );
+                }
+            }
 
+            @Override
+            public void onError(Exception exp) {
+                Toast.makeText(getActivity().getApplicationContext(), "MeetingListTaskError " + exp.toString(), Toast.LENGTH_LONG).show();
+                Log.d(TAG, "MeetingListTaskError " + exp.toString());
+            }
+        };
+        task.start();
 
-        } else {
-            Log.d("e", "error no activity");
-            return;
-        }
-        ArrayList<Marker> markers = new ArrayList<Marker>();
-        int meeting_length = meetingsList.size();
-        int meeting_time = 0;
-        String meeting_name = "";
-        String meeting_creator = "";
-        double parseLat = 0;
-        double parseLng = 0;
-        LatLng cordinats = new LatLng(0, 0);
-        for (int i = 0; i < meeting_length; i++) {
-            meeting_time = meetingsList.get(i).time;
-            meeting_name = meetingsList.get(i).description;
-            meeting_creator = meetingsList.get(i).creator;
-            parseLat = Double.parseDouble(meetingsList.get(i).latitude);
-            parseLng = Double.parseDouble(meetingsList.get(i).longitude);
-
-            cordinats = new LatLng(parseLat, parseLng);
-            Marker marker = map.addMarker(new MarkerOptions()
-                    .position(cordinats)
-                    .title(meeting_name)
-                    .snippet(meeting_time + " " + meeting_creator)
-                    .icon(BitmapDescriptorFactory
-                            .fromResource(R.drawable.pin)));
-            markers.add(marker);
-        }
-        */
     }
+
 
     private void addGroundOverlay(GoogleMap map, double lat, double lng, Image image) {
         GroundOverlay mGroundOverlay;

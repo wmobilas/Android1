@@ -3,7 +3,7 @@ package build.agcy.test1.Models;
 /**
  * Created by kiolt_000 on 17/08/2014.
  */
-public class Meeting  {
+public class Meeting {
     public String Id;
     public String description;
     public String creator;
@@ -11,19 +11,21 @@ public class Meeting  {
     public String latitude;
     public int time;
     public String confirmer;
-    public boolean isConfirmed(){
-        return confirmer!=null && !confirmer.equals("");
+
+    public boolean isConfirmed() {
+        return confirmer != null && !confirmer.equals("");
     }
-    public Meeting(String Id, String description,String creator,String longitude,String latitude,int time) {
+
+    public Meeting(String Id, String description, String creator, String longitude, String latitude, int time) {
         this.Id = Id;
         this.description = description;
         this.creator = creator;
         this.longitude = longitude;
-        //todo:исправить на серверн на longitude
         //id не получаю
         this.latitude = latitude;
         this.time = time;
     }
+
     /*
     public void setMeetingId(String Id) {
         this.Id = Id;}
@@ -83,13 +85,14 @@ public class Meeting  {
         }
     };
     */
-    public static class Accept{
+    public static class Accept {
         public String id;
         public String meetingId;
         public String acceptorId;
         public String message;
         public int time;
-        public Accept(String id,String acceptorId, String message){
+
+        public Accept(String id, String acceptorId, String message) {
             this.id = id;
             this.acceptorId = acceptorId;
             this.message = message;

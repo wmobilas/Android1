@@ -8,8 +8,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
-public class FindMe {
+import java.util.List;
 
+public class FindMe {
     public static interface FindMeListener {
         public void foundLocation(String provider, Location location);
 
@@ -35,33 +36,32 @@ public class FindMe {
     }
 
     public void please() {
-        String provider;
         Criteria criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, true);
-        if (locationManager.getLastKnownLocation(provider) != null) {
-            provider = locationManager.getBestProvider(criteria, true);
-        } else {
-            provider = locationManager.getBestProvider(criteria, false);
-        }
-        Location loc = locationManager.getLastKnownLocation(provider);
-        if (loc != null) {
-            listener.foundLocation(LocationManager.GPS_PROVIDER, loc);
-            return;
-        }
+        List<String> providers = locationManager.getProviders(criteria, true);
+        if (providers != null) {
+            Location newestLocation = null;
+            for (String provider : providers) {
+                Location location = locationManager.getLastKnownLocation(provider);
+                if (location != null) {
+                    if (newestLocation == null) {
+                        newestLocation = location;
+                    } else {
+                        if (location.getTime() > newestLocation.getTime()) {
+                            newestLocation = location;
+                        }
+                    }
+                }
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGPSProvider);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListenerNetworkProvider);
+            }
+            if (newestLocation != null) {
+                listener.foundLocation(LocationManager.NETWORK_PROVIDER, newestLocation);
+                return;
 
-        loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if (loc != null) {
-            listener.foundLocation(LocationManager.NETWORK_PROVIDER, loc);
-            return;
+            }
+            listener.couldntFindLocation();
         }
-        listener.couldntFindLocation();
-
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGPSProvider);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListenerNetworkProvider);
-
     }
-
-
     final LocationListener locationListenerNetworkProvider = new LocationListener() {
 
         @Override

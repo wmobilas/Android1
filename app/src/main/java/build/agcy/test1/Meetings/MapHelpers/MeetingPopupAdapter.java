@@ -1,6 +1,5 @@
 package build.agcy.test1.Meetings.MapHelpers;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Location;
 import android.view.LayoutInflater;
@@ -8,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -82,10 +82,10 @@ public class MeetingPopupAdapter implements InfoWindowAdapter {
                 String adres = "";
                 if ((!adresses[0].equals(" null")) && (!adresses[0].equals("")))
                     adres += "Street:" + adresses[0];
-                if ((!adresses[1].equals(" null")) && (!adresses[1].equals("")))
-                    adres += " City:" + adresses[1];
-                if ((!adresses[2].equals(" null")) && (!adresses[2].equals("")))
-                    adres += " Country:" + adresses[2];
+//                if ((!adresses[1].equals(" null")) && (!adresses[1].equals("")))
+//                    adres += " City:" + adresses[1];
+//                if ((!adresses[2].equals(" null")) && (!adresses[2].equals("")))
+//                    adres += " Country:" + adresses[2]);
                 tv_lat.setText(adres);
                 tv_lng.setText("Longitude:" + lastCoords.longitude + " Lattitude:" + lastCoords.latitude);
             }
