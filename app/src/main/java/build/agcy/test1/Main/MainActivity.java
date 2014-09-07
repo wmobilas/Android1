@@ -52,7 +52,7 @@ public class MainActivity extends Activity
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new Fragment();
+                fragment = new ProfileFragment();
                 break;
             case 1:
                 fragment = new CreateMeetingFragment();

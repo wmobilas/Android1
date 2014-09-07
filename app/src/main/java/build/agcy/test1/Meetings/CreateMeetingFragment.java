@@ -67,7 +67,7 @@ public class CreateMeetingFragment extends android.app.Fragment {
 
 //                SharedPreferences prefs = getActivity().getSharedPreferences("auth_prefs", Context.MODE_PRIVATE);
 //                if (!prefs.contains("user_meeting_time")){
-                if (time.equals("time")) {
+                if (time.equals(getResources().getString(R.string.pick_time))) {
 //                    Calendar c = Calendar.getInstance();
 //                    time=String.valueOf((c.get(Calendar.HOUR_OF_DAY)))+""+String.valueOf(c.get(Calendar.MINUTE));
                     time = String.valueOf(TimeConverter.getUnixNow());

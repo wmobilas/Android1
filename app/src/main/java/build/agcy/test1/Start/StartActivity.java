@@ -24,9 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import java.io.IOException;
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Locale;
@@ -102,9 +104,8 @@ public class StartActivity extends FragmentActivity {
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
 
-            if (regid.isEmpty()) {
-                registerInBackground();
-            }
+                registerInBackground(!regid.isEmpty());
+
         } else {
             Log.e(TAG, "No valid Google Play Services APK found.");
         }
@@ -333,9 +334,9 @@ public class StartActivity extends FragmentActivity {
         username= username_login.getText().toString();
         password_login= (TextView) findViewById(R.id.password_login);
         password= password_login.getText().toString();
-        */
+
         username="kioltk";
-        password="123qweASD";
+        password="123qweASD";*/
         if (username.equals("") || password.equals("")){
             Toast.makeText(getApplicationContext(), "Please fill form", Toast.LENGTH_SHORT).show();
             return;
@@ -385,8 +386,12 @@ public class StartActivity extends FragmentActivity {
     }
 
     private boolean checkPlayServices() {
+
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        Log.i(TAG, "Result code: "+resultCode +". With error message: " + GooglePlayServicesUtil.getErrorString(resultCode));
+
         if (resultCode != ConnectionResult.SUCCESS) {
+
 
             if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
                 GooglePlayServicesUtil.getErrorDialog(resultCode, this,
@@ -419,8 +424,8 @@ public class StartActivity extends FragmentActivity {
         return registrationId;
     }
 
-    private void registerInBackground() {
-        GCMRegistrationTask task = new GCMRegistrationTask(this) {
+    private void registerInBackground(boolean unregister) {
+        GCMRegistrationTask task = new GCMRegistrationTask(this,unregister) {
             @Override
             public void onSuccess(String regid) {
                 storeRegistrationId(regid);

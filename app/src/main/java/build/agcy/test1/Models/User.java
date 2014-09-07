@@ -9,4 +9,7 @@ public class User {
     public String latitude;
     public String longitude;
     public String photo;
+
+
+
 }

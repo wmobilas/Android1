@@ -130,9 +130,9 @@ public class MeetingListFragment extends Fragment {
             childFragmentManager.set(this, null);
 
         } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
+//            throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+//            throw new RuntimeException(e);
         }
     }
 

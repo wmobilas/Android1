@@ -25,6 +25,7 @@ import build.agcy.test1.Api.Meetings.MeetingAcceptTask;
 import build.agcy.test1.Api.Meetings.MeetingAcceptsListTask;
 import build.agcy.test1.Api.Meetings.MeetingConfirmTask;
 import build.agcy.test1.Api.Meetings.MeetingGetTask;
+import build.agcy.test1.Core.Helpers.Converters;
 import build.agcy.test1.EatWithMeApp;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
@@ -73,21 +74,22 @@ public class MeetingFragment extends Fragment {
                 descriptionView.setText(meeting.description);
                 creatorView.setText("by " + meeting.creator);
 
-                String imageUrl = "" +
-                        "http://maps.googleapis.com/maps/api/staticmap?zoom=10&size=640x360&maptype=roadmap" +
-                        "&markers=color:red%7Clabel:Here%7C" +
-                        meeting.longitude + "," +
-                        meeting.latitude + "";
+                String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude,meeting.latitude, 640, 360,10,"red","here");
                 ImageLoader.getInstance().displayImage(imageUrl, imageView);
-
+                Fragment fragment = null;
                 if (!meeting.isConfirmed())
                     if (EatWithMeApp.isOwner(meeting.creator)) {
-                        getFragmentManager().beginTransaction().replace(R.id.action_container, new AcceptListFragment()).commit();
+                        fragment = new AcceptListFragment();
                     } else {
-                        getFragmentManager().beginTransaction().replace(R.id.action_container, new AcceptFragment()).commit();
+                        fragment = new AcceptFragment();
                     }
                 else {
-                    getFragmentManager().beginTransaction().replace(R.id.action_container, new ConfirmedFragment()).commit();
+                    fragment =new ConfirmedFragment();
+
+                }
+                if(fragment!=null){
+                    fragment.setArguments(getArguments());
+                    getFragmentManager().beginTransaction().replace(R.id.action_container, fragment).commit();
                 }
 
             } else {
@@ -119,7 +121,16 @@ public class MeetingFragment extends Fragment {
         meetingTask.start();
     }
 
-    public class AcceptFragment extends Fragment {
+    public static class AcceptFragment extends Fragment {
+
+        private String meetingId;
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            meetingId = getArguments().getString("id","0");
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_accept, null);
@@ -135,7 +146,7 @@ public class MeetingFragment extends Fragment {
                     accepting.setTitle("Wait pls");
                     accepting.setCancelable(false);
                     accepting.show();
-                    MeetingAcceptTask acceptTask = new MeetingAcceptTask(meeting.Id, messageBox.getText().toString()) {
+                    MeetingAcceptTask acceptTask = new MeetingAcceptTask(meetingId, messageBox.getText().toString()) {
                         @Override
                         public void onSuccess(String response) {
                             accepting.dismiss();
@@ -159,9 +170,16 @@ public class MeetingFragment extends Fragment {
         }
     }
 
-    public class ConfirmedFragment extends Fragment {
+    public static class ConfirmedFragment extends Fragment {
         private View rootView;
 
+        private String meetingId;
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            meetingId = getArguments().getString("id","0");
+        }
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             rootView = inflater.inflate(R.layout.fragment_confirmed, null);
@@ -169,15 +187,22 @@ public class MeetingFragment extends Fragment {
         }
     }
 
-    private class AcceptListFragment extends Fragment {
+    public static class AcceptListFragment extends Fragment {
         private View rootView;
+        private String meetingId;
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            meetingId = getArguments().getString("id","0");
+        }
 
         @Override
         public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             rootView = inflater.inflate(R.layout.fragment_accepts_list, null);
             final ListView listView = (ListView) rootView.findViewById(R.id.list);
             final View loadingView = rootView.findViewById(R.id.loading);
-            MeetingAcceptsListTask task = new MeetingAcceptsListTask(meeting.Id) {
+            MeetingAcceptsListTask task = new MeetingAcceptsListTask(meetingId) {
                 @Override
                 public void onSuccess(final Meeting.Accept[] response) {
                     loadingView.setVisibility(View.GONE);

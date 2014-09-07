@@ -164,7 +164,6 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -180,7 +179,7 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
 //        }
         super.onCreate(savedInstanceState);
         Log.d(TAG, "mapfragment onCreate");
-        FragmentManager fm = getChildFragmentManager();
+        FragmentManager fm = getFragmentManager();
         mapFragment = (com.google.android.gms.maps.MapFragment) fm.findFragmentById(R.id.map);
         if (mapFragment == null) {
             mapFragment = com.google.android.gms.maps.MapFragment.newInstance();

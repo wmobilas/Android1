@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
+import build.agcy.test1.Core.Helpers.Converters;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
 
@@ -69,11 +70,7 @@ public class MeetingListAdapter extends BaseAdapter {
         descView.setText(meeting.description);
         coordsView.setText(meeting.latitude + "\n" + meeting.longitude);
 
-        String imageUrl = "" +
-                "http://maps.googleapis.com/maps/api/staticmap?zoom=12&size=100x100&maptype=roadmap" +
-                "&markers=color:red%7Clabel:Here%7C" +
-                meeting.longitude + "," +
-                meeting.latitude + "";
+        String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 600, 400, 7 , "red","Here");
         ImageLoader.getInstance().displayImage(imageUrl, imageView);
 
         return adapterView;

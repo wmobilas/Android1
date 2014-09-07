@@ -1,113 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="build.agcy.test1.Main.ProfileFragment">
 
-
-        <ImageView
-            android:id="@+id/choose_img_button"
-            android:layout_width="346dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:src="@drawable/ic_launcher"
-            android:onClick="getImage"
-            android:hapticFeedbackEnabled="true"
-            android:layout_weight="0.07" />
-        <TextView
-            android:id="@+id/user_pic_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Please touch to upload avatar"
-            android:textSize="18sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp" />
-        <TextView
-            android:id="@+id/TextViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Introduce yourself"
-            android:textSize="35sp"
-            android:layout_marginBottom="6dp" />
-        <!--<EditText-->
-
-        <!--android:id="@+id/EditTextName"-->
-        <!--android:layout_marginTop="6dp"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:inputType="textAutoComplete"-->
-        <!--android:hint="Username"-->
-        <!--android:paddingRight="6dp"-->
-        <!--android:paddingLeft="6dp"-->
-        <!--android:background="@drawable/field"/>-->
-        <!--<EditText-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="48dp"-->
-        <!--android:ems="10"-->
-        <!--android:hint="Password"-->
-        <!--android:layout_marginTop="6dp"-->
-        <!--android:paddingRight="6dp"-->
-        <!--android:paddingLeft="6dp"-->
-        <!--android:background="@drawable/field"-->
-        <!--android:id="@+id/EditTextPass"-->
-        <!--android:inputType="textPassword"/>-->
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/about_profile"
-            android:text=""
-            android:layout_weight="0.18"
-            android:inputType="textMultiLine"
-            android:textSize="18sp"
-            android:hint="  Just couple lines. We use this to find best people for you"
-            android:padding="6dp"
-            android:layout_marginBottom="6dp" />
-
-
-        <Spinner
-            android:id="@+id/meetlist1"
-            android:layout_height="50dp"
-            android:prompt="@string/lookingFor"
-            android:layout_width="fill_parent"
-            android:entries="@array/meetlist"
-            android:layout_marginBottom="6dp">
-        </Spinner>
-
-        <CheckBox
-            android:id="@+id/haveApair"
-            android:layout_height="wrap_content"
-            android:text="Do you have couple?"
-            android:layout_width="fill_parent"
-            android:layout_marginBottom="6dp">
-        </CheckBox>
-        <!--<Button-->
-        <!--android:id="@+id/ButtonRegister"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Join"-->
-        <!--android:onClick="register"-->
-        <!--android:layout_width="fill_parent">-->
-        <!--</Button>-->
-        <Button
-            android:id="@+id/update_button"
-            android:text="Update"
-            android:textColor="@color/color1"
-            android:textSize="20sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/buttonshape"
-            android:hapticFeedbackEnabled="true"
-            android:layout_marginBottom="6dp" />
-        <ImageView
-            android:id="@+id/facebook_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/fbcon"
-            android:scaleType="center"/>
-
+    <TextView
+        android:text="hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/id" />
+    <TextView
+        android:text="hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_name" />
+    <TextView
+        android:text="hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/latitude" />
+    <TextView
+        android:text="hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/longitude" />
 </LinearLayout>

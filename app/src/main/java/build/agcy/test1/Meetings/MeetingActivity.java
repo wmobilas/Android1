@@ -23,6 +23,8 @@ public class MeetingActivity extends Activity {
                     .commit();
         }
         getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
 
@@ -41,6 +43,9 @@ public class MeetingActivity extends Activity {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        }
+        if(id == android.R.id.home){
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }

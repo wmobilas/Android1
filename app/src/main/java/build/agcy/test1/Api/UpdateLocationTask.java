@@ -12,8 +12,7 @@ public abstract class UpdateLocationTask extends ApiTaskBase<String> {
     public UpdateLocationTask(final String latitude, final String longitude) {
         super("device/checklocation", new ArrayList<NameValuePair>() {{
             add(new BasicNameValuePair("latitude", latitude));
-            add(new BasicNameValuePair("longtitude", longitude));
-            //todo longitude!)
+            add(new BasicNameValuePair("longitude", longitude));
         }}, true, true);
     }
 

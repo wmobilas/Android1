@@ -36,7 +36,9 @@ public class GCMIntentService extends IntentService {
         String messageType = gcm.getMessageType(intent);
 
         if (!extras.isEmpty()) {
-        // has effect of unparcelling Bundle
+
+            Log.i(TAG, "Received: " + extras.toString());
+            // has effect of unparcelling Bundle
             /*
              * Filter messages based on message type. Since it is likely that GCM
              * will be extended in the future with new message types, just ignore
@@ -53,21 +55,24 @@ public class GCMIntentService extends IntentService {
                 // If it's a regular GCM message, do some work.
             } else if (GoogleCloudMessaging.
                     MESSAGE_TYPE_MESSAGE.equals(messageType)) {
-                String pushMessage = extras.getString("payload");
+                String pushKey = extras.getString("collapse_key");
+                String pushJson = extras.getString("json");
                 // todo: Парсим пуш
-                if(pushMessage.equals("meeting")){
+                if(pushKey==null){
+                    return;
+                }
+                if(pushKey.equals("meeting")){
                     // новая встреча рядом
                 }else{
-                    if(pushMessage.equals("accept")){
+                    if(pushKey.equals("accept")){
                         // предложили встретиться
                     }else{
-                        if(pushMessage.equals("confirm")){
+                        if(pushKey.equals("confirm")){
                             // кто-то подтвердил, что согласен с тобой встретиться. ы
                         }
                     }
                 }
-                sendNotification(pushMessage);
-                Log.i(TAG, "Received: " + extras.toString());
+                sendNotification(pushJson);
             }
         }
         // Release the wake lock provided by the WakefulBroadcastReceiver.

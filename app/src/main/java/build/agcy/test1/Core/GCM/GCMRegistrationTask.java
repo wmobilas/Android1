@@ -17,19 +17,28 @@ public abstract class GCMRegistrationTask extends AsyncTask<Void, Void, Object> 
 
     private static final String LOG_TAG = "GCMRegistrtionTask";
     private final Context context;
+    private final boolean unregister;
 
     String SENDER_ID = "331939190116";
 
-    public GCMRegistrationTask(Context context) {
+    public GCMRegistrationTask(Context context, boolean unregister) {
         this.context = context;
+        this.unregister = unregister;
     }
 
     @Override
     protected Object doInBackground(Void... params) {
         String regid = "";
-        try {
-            GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(context);
+        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(context);
+        if(unregister){
+            try {
+                gcm.unregister();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
+        try {
             regid = gcm.register(SENDER_ID);
             Log.i(LOG_TAG, "Device registered, registration ID=" + regid);
             // You should send the registration ID to your server over HTTP, so it

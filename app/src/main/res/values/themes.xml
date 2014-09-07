@@ -3,7 +3,7 @@
     <style
         name="AnimationActivity"
         parent="@android:style/Theme.DeviceDefault.Light">
-        <item name="android:windowAnimationStyle">@style/DownUpActivity</item>
+        <!--item name="android:windowAnimationStyle">@style/DownUpActivity</item-->
     </style>
 
 </resources>
