@@ -16,10 +16,10 @@ public class MeetingActivity extends Activity {
         if (savedInstanceState == null) {
             MeetingFragment fragment = new MeetingFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("id",getIntent().getExtras().getString("id"));
+            bundle.putString("id", getIntent().getExtras().getString("id"));
             fragment.setArguments(bundle);
             getFragmentManager().beginTransaction()
-                    .add(R.id.content_container, fragment)
+                    .replace(R.id.content_container, fragment)
                     .commit();
         }
         getActionBar().setHomeButtonEnabled(true);
@@ -44,7 +44,7 @@ public class MeetingActivity extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
-        if(id == android.R.id.home){
+        if (id == android.R.id.home) {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);

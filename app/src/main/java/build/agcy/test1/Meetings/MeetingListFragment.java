@@ -39,16 +39,17 @@ public class MeetingListFragment extends Fragment {
         myContext = activity;
     }
 
+    public static View myView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container,
                 savedInstanceState);
         Log.d(TAG, "mapfragment onCreateView");
-
-        final View myView = inflater.inflate(R.layout.activity_meeting_list, container, false);
+        myView = inflater.inflate(R.layout.activity_meeting_list, container, false);
+        if (savedInstanceState != null) {
+            // Restore last state
+        } else {
         final ListView meetingListView = (ListView) myView.findViewById(R.id.meeting_fragment_list);
-
-
         MeetingListTask task = new MeetingListTask(new ArrayList<NameValuePair>()) {
             @Override
             public void onSuccess(final Meeting[] response) {
@@ -67,7 +68,6 @@ public class MeetingListFragment extends Fragment {
                     }
                 });
             }
-
             @Override
             public void onError(Exception exp) {
                 Toast.makeText(getActivity().getApplicationContext(), "MeetingListTaskError " + exp.toString(), Toast.LENGTH_LONG).show();
@@ -75,6 +75,7 @@ public class MeetingListFragment extends Fragment {
             }
         };
         task.start();
+        }
         return myView;
     }
 
