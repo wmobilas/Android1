@@ -124,9 +124,7 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
         }
     }
 
-    public static View mapView;
-
-    //    private ViewGroup mapContainer;
+    private static View mapView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         container.removeAllViews();

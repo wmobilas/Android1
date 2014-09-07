@@ -13,17 +13,12 @@ import build.agcy.test1.R;
 public class ProfileFragment extends Fragment {
 
 
-    public static View profileView;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        if (profileView != null) {
-            return profileView;
-        }
-        profileView = inflater.inflate(R.layout.fragment_profile, container, false);
+        View profileView = inflater.inflate(R.layout.fragment_profile, container, false);
         if (savedInstanceState != null) {
             // Restore last state
         } else {

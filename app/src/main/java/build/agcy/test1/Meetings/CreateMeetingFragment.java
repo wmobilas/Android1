@@ -27,7 +27,7 @@ public class CreateMeetingFragment extends android.app.Fragment {
     public CreateMeetingFragment() {
     }
 
-    public static View meetingCreateView;
+    private static View meetingCreateView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
