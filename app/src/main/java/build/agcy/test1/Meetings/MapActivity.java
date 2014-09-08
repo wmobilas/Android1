@@ -48,10 +48,11 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
     Marker myMarker;
     LocationManager locationManager;
     String provider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-       // MyLocationListener.SetUpLocationListener(this);
+        // MyLocationListener.SetUpLocationListener(this);
 //        final Context mainContext = this;
 //        new Thread(new Runnable() {
 //            @Override
@@ -59,13 +60,13 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
 //                MyLocationListener.SetUpLocationListener(mainContext);
 //            }
 //        }).start();
-      //  LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-      //  Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        //  LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        //  Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.map_Fragment);
         map = mapFragment.getMap();
 
         if (map == null) {
@@ -74,9 +75,10 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
         }
         init();
     }
+
     private void init() {
 
-        final MyLocationListener myLocationService = new MyLocationListener(this){
+        final MyLocationListener myLocationService = new MyLocationListener(this) {
 
         };
 //        marker = activity_map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("I am here!"));
@@ -88,25 +90,24 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
         //map.setBuildingsEnabled(true);
         map.setOnInfoWindowClickListener(this);
 
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            // Define the criteria how to select the locatioin provider -> use
-            // default
-            Criteria criteria = new Criteria();
-            provider = locationManager.getBestProvider(criteria, true);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // Define the criteria how to select the locatioin provider -> use
+        // default
+        Criteria criteria = new Criteria();
+        provider = locationManager.getBestProvider(criteria, true);
         Location location = null;
-        if (locationManager.getLastKnownLocation(provider)!=null){
-                    location = locationManager.getLastKnownLocation(provider);
+        if (locationManager.getLastKnownLocation(provider) != null) {
+            location = locationManager.getLastKnownLocation(provider);
 
-            latitude=location.getLatitude();
-            longitude=location.getLongitude();
-                }
-                else {
-                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(intent);
-            latitude=myLocationService.getLatitude();
-            longitude=myLocationService.getLongitude();
-            Toast.makeText(getApplicationContext(), "Please Turn GPS On",Toast.LENGTH_LONG).show();
-                    }
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+        } else {
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+            latitude = myLocationService.getLatitude();
+            longitude = myLocationService.getLongitude();
+            Toast.makeText(getApplicationContext(), "Please Turn GPS On", Toast.LENGTH_LONG).show();
+        }
 //        addMeetings(map, this);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude))
@@ -158,7 +159,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
         });
         map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
 
-//            public void addMyMarker(LatLng latlng){
+            //            public void addMyMarker(LatLng latlng){
 //                myMarker = activity_map.addMarker(new MarkerOptions()
 //                        .position(currentPosition)
 //                        .title("Hello world")
@@ -252,20 +253,21 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
 //        startActivity(i);
 
     }
+
     private void addMyMarker(GoogleMap map, double lat, double lon,
-                           int title, int snippet) {
-        Marker marker=map.addMarker(new MarkerOptions().position(new LatLng(lat, lon))
-                        .title(getString(title))
-                        .snippet(getString(snippet)));
+                             int title, int snippet) {
+        Marker marker = map.addMarker(new MarkerOptions().position(new LatLng(lat, lon))
+                .title(getString(title))
+                .snippet(getString(snippet)));
 
 //        if (image != null) {
 //            images.put(marker.getId(),
 //                    Uri.parse("http://misc.commonsware.com/mapsv2/"
 //                            + image));
-        }
+    }
 
 
-//    private void addMeetings(MeetingAdapter meetings, GoogleMap map){
+    //    private void addMeetings(MeetingAdapter meetings, GoogleMap map){
 //        MeetingAdapter meetingsList = meetings;
 //        ArrayList<Marker> markers = new ArrayList<Marker>();
 //        int meeting_length = meetings.getCount();
@@ -285,43 +287,45 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
 //                        .fromResource(R.drawable.pin)));
 //        markers.add(marker);}
 //    }
-    private void addMeetings(GoogleMap map, Activity activity){
+    private void addMeetings(GoogleMap map, Activity activity) {
         ArrayList<Meeting> meetingsList = null;
-        if(activity!=null) {
+        if (activity != null) {
             Intent intent = activity.getIntent();
             //meetingsList=intent.getParcelableArrayListExtra("meetings");
-           // Object object= bundle.get("meetings");
+            // Object object= bundle.get("meetings");
             //todo показать все маркеры на карте в поле зрения, центрировать по переданному маркеру, отобразить данные по встерече из маркера
 
-        }else{
-            Log.d("e","error no activity");
+        } else {
+            Log.d("e", "error no activity");
             return;
         }
         ArrayList<Marker> markers = new ArrayList<Marker>();
         int meeting_length = meetingsList.size();
-        int meeting_time=0;
-        String meeting_name="";
-        String meeting_creator="";
-        double parseLat=0;
-        double parseLng=0;
-        LatLng cordinats=new LatLng(0, 0);
-        for (int i=0;i<meeting_length;i++){
+        int meeting_time = 0;
+        String meeting_name = "";
+        String meeting_creator = "";
+        double parseLat = 0;
+        double parseLng = 0;
+        LatLng cordinats = new LatLng(0, 0);
+        for (int i = 0; i < meeting_length; i++) {
             meeting_time = meetingsList.get(i).time;
-            meeting_name=meetingsList.get(i).description;
-            meeting_creator=meetingsList.get(i).creator;
-            parseLat=Double.parseDouble(meetingsList.get(i).latitude);
-            parseLng=Double.parseDouble(meetingsList.get(i).longitude);
+            meeting_name = meetingsList.get(i).description;
+            meeting_creator = meetingsList.get(i).creator;
+            parseLat = Double.parseDouble(meetingsList.get(i).latitude);
+            parseLng = Double.parseDouble(meetingsList.get(i).longitude);
 
             cordinats = new LatLng(parseLat, parseLng);
             Marker marker = map.addMarker(new MarkerOptions()
-                .position(cordinats)
-                .title(meeting_name)
-                .snippet(meeting_time +" " + meeting_creator)
-                .icon(BitmapDescriptorFactory
-                        .fromResource(R.drawable.pin)));
-        markers.add(marker);}
+                    .position(cordinats)
+                    .title(meeting_name)
+                    .snippet(meeting_time + " " + meeting_creator)
+                    .icon(BitmapDescriptorFactory
+                            .fromResource(R.drawable.pin)));
+            markers.add(marker);
+        }
     }
-    private void addGroundOverlay(GoogleMap map, double lat,double lng, Image image){
+
+    private void addGroundOverlay(GoogleMap map, double lat, double lng, Image image) {
         GroundOverlay mGroundOverlay;
         LatLng cordination = new LatLng(lat, lng);
         mGroundOverlay = map.addGroundOverlay(new GroundOverlayOptions()

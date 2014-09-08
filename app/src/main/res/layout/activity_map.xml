@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mapLayout"
+    android:id="@+id/map_Layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Meetings.MapActivity" >
+    android:layout_height="match_parent">
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/map"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="281dp"
-        class="com.google.android.gms.maps.MapFragment"
-        android:name="build.agcy.test1.Fragments.MapFragment" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map_Fragment"
+            android:layout_width="match_parent"
+            android:layout_height="281dp"
+            class="com.google.android.gms.maps.MapFragment"
+            android:name="build.agcy.test1.Fragments.MapFragment" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btnTest"
@@ -20,7 +26,6 @@
         android:layout_height="wrap_content"
         android:onClick="onClickTest"
         android:text="Test"
-        android:layout_gravity="center_horizontal">
-    </Button>
+        android:layout_gravity="center_horizontal"></Button>
 
 </LinearLayout>

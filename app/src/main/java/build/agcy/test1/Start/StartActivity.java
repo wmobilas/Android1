@@ -24,11 +24,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import java.io.IOException;
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Locale;
@@ -71,8 +69,8 @@ public class StartActivity extends FragmentActivity {
     SharedPreferences prefs;
     Context context;
     String regid = "";
-    String username="";
-    String password="";
+    String username = "";
+    String password = "";
     TextView username_login;
     TextView password_login;
 
@@ -92,11 +90,9 @@ public class StartActivity extends FragmentActivity {
             return;
         }
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
-
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        login(null);
+//        login(null);
     }
 
     private void registerGCM() {
@@ -104,7 +100,7 @@ public class StartActivity extends FragmentActivity {
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
 
-                registerInBackground(!regid.isEmpty());
+            registerInBackground(!regid.isEmpty());
 
         } else {
             Log.e(TAG, "No valid Google Play Services APK found.");
@@ -217,6 +213,7 @@ public class StartActivity extends FragmentActivity {
             fragment.setArguments(args);
             return fragment;
         }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -229,7 +226,7 @@ public class StartActivity extends FragmentActivity {
                             ((Button) rootView.findViewById(R.id.login_button)).setVisibility(View.GONE);
                             ((Button) rootView.findViewById(R.id.join_button)).setVisibility(View.GONE);
                             ((Button) rootView.findViewById(R.id.register_button)).setVisibility(View.VISIBLE);
-                            Log.d("build.agcy","textbuttonclick");
+                            Log.d("build.agcy", "textbuttonclick");
                         }
                     });
             Bundle args = getArguments();
@@ -329,66 +326,66 @@ public class StartActivity extends FragmentActivity {
 
 
     public void login(View v) {
-        /*
-        username_login= (TextView) findViewById(R.id.username_login);
-        username= username_login.getText().toString();
-        password_login= (TextView) findViewById(R.id.password_login);
-        password= password_login.getText().toString();
 
+        username_login = (TextView) findViewById(R.id.username_login);
+        username = username_login.getText().toString();
+        password_login = (TextView) findViewById(R.id.password_login);
+        password = password_login.getText().toString();
+/*
         username="kioltk";
         password="123qweASD";*/
-        if (username.equals("") || password.equals("")){
+        if (username.equals("") || password.equals("")) {
             Toast.makeText(getApplicationContext(), "Please fill form", Toast.LENGTH_SHORT).show();
             return;
         }
-            final ProgressDialog dialog = new ProgressDialog(this);
-            dialog.setCancelable(false);
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.setTitle("Logging in");
-            dialog.setMessage("Please wait");
-            dialog.show();
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setTitle("Logging in");
+        dialog.setMessage("Please wait");
+        dialog.show();
 
-            LoginTask task = new LoginTask(username, password) {
-                @Override
-                public void onSuccess(CurrentUser currentUser) {
-                    dialog.dismiss();
-                    EatWithMeApp.saveCurrentUser(currentUser);
-                    startActivity(new Intent(getBaseContext(), MainActivity.class));
-                    registerGCM();
-                    finish();
-                }
+        LoginTask task = new LoginTask(username, password) {
+            @Override
+            public void onSuccess(CurrentUser currentUser) {
+                dialog.dismiss();
+                EatWithMeApp.saveCurrentUser(currentUser);
+                startActivity(new Intent(getBaseContext(), MainActivity.class));
+                registerGCM();
+                finish();
+            }
 
-                @Override
-                public void onError(Exception exp) {
-                    dialog.dismiss();
-                    if (exp instanceof ApiError) {
-                        //todo:коды
+            @Override
+            public void onError(Exception exp) {
+                dialog.dismiss();
+                if (exp instanceof ApiError) {
+                    //todo:коды
 //                        int code = ((ApiError) exp).getCode();
 //                        if (code == ApiError.BADCREDITS) {
-                            Toast.makeText(getApplicationContext(), "Check your login and password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Check your login and password", Toast.LENGTH_SHORT).show();
 //                        }
 
+                } else {
+                    if (exp instanceof SocketException) {
+                        Toast.makeText(getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (exp instanceof SocketException) {
-                            Toast.makeText(getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
-                        } else {
-                           Toast.makeText(getApplicationContext(), "Unexpected error", Toast.LENGTH_SHORT).show();
-                        }
+                        Toast.makeText(getApplicationContext(), "Unexpected error", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
 
-                @Override
-                public void onTokenRecieved(String token) {
-                    EatWithMeApp.saveToken(token);
-                }
-            };
-            task.start();
+            @Override
+            public void onTokenRecieved(String token) {
+                EatWithMeApp.saveToken(token);
+            }
+        };
+        task.start();
     }
 
     private boolean checkPlayServices() {
 
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        Log.i(TAG, "Result code: "+resultCode +". With error message: " + GooglePlayServicesUtil.getErrorString(resultCode));
+        Log.i(TAG, "Result code: " + resultCode + ". With error message: " + GooglePlayServicesUtil.getErrorString(resultCode));
 
         if (resultCode != ConnectionResult.SUCCESS) {
 
@@ -425,7 +422,7 @@ public class StartActivity extends FragmentActivity {
     }
 
     private void registerInBackground(boolean unregister) {
-        GCMRegistrationTask task = new GCMRegistrationTask(this,unregister) {
+        GCMRegistrationTask task = new GCMRegistrationTask(this, unregister) {
             @Override
             public void onSuccess(String regid) {
                 storeRegistrationId(regid);
@@ -434,11 +431,12 @@ public class StartActivity extends FragmentActivity {
 
             @Override
             public void onError(Exception exp) {
-                Toast.makeText(getBaseContext(),"Cant get register id: " + exp.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Cant get register id: " + exp.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         };
         task.execute();
     }
+
     private void sendRegistrationIdToBackend(String regid) {
         PushRegisterTask pushRegisterTask = new PushRegisterTask(regid) {
             @Override
@@ -454,6 +452,7 @@ public class StartActivity extends FragmentActivity {
         pushRegisterTask.start();
         Log.i(TAG, "sendRegistrationIdToBackend");
     }
+
     private void storeRegistrationId(String regId) {
         final SharedPreferences prefs = getGCMPreferences();
         int appVersion = getAppVersion(context);

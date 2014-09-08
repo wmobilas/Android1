@@ -31,6 +31,7 @@ public class MainActivity extends Activity
      */
     private CharSequence mTitle;
     int count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class MainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
     }
 
     @Override
@@ -121,9 +123,9 @@ public class MainActivity extends Activity
                 public void foundLocation(String provider, Location location) {
 
                     if (count == 0) {
-                    Log.i("Findme", "lat = " + location.getLatitude() + " long = " + location.getLongitude());
-                    Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).cancel();
-                    Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
+                        Log.i("Findme", "lat = " + location.getLatitude() + " long = " + location.getLongitude());
+                        Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).cancel();
+                        Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
 
                     }
                     count++;
