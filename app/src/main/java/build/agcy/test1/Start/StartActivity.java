@@ -101,11 +101,10 @@ public class StartActivity extends FragmentActivity {
         if (checkPlayServices()) {
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
-
             registerInBackground(!regid.isEmpty());
-
         } else {
             Log.e(TAG, "No valid Google Play Services APK found.");
+            Toast.makeText(context, "NO PLAY SERVICES", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -220,7 +219,17 @@ public class StartActivity extends FragmentActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
-            final Button testButtonMap = (Button) rootView.findViewById(R.id.join_button);
+            final Button JoinButton = (Button) rootView.findViewById(R.id.join_button);
+            JoinButton.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ((Button) rootView.findViewById(R.id.login_button)).setVisibility(View.GONE);
+                            ((Button) rootView.findViewById(R.id.join_button)).setVisibility(View.GONE);
+                            ((Button) rootView.findViewById(R.id.register_button)).setVisibility(View.VISIBLE);
+                            Log.d("build.agcy", "registration");
+                        }
+                    });
             Bundle args = getArguments();
 //            todo: bind args
             return rootView;
@@ -243,16 +252,6 @@ public class StartActivity extends FragmentActivity {
     }
 
     public void registerProfile(View v) {
-//        final View rootView = getLayoutInflater().inflate(R.layout.fragment_register, null);
-        // Toast.makeText(getApplicationContext(), "Registration...", Toast.LENGTH_SHORT).show();
-        // final Handler handler = new Handler();
-        // handler.postDelayed(new Runnable() {
-        //     @Override
-        //     public void run() {
-        // Do something after 5s = 5000ms
-        //       Toast.makeText(getApplicationContext(), "Registration failed. Please try later", Toast.LENGTH_SHORT).show();
-        //   }
-        //}, 5000);
         username_login = (TextView) findViewById(R.id.username_login);
         username = username_login.getText().toString();
         password_login = (TextView) findViewById(R.id.password_login);

@@ -44,10 +44,17 @@ public class MeetingListAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.item_meeting, null);
-        TextView descView = (TextView) itemView.findViewById(R.id.description);
-        final TextView userNameTextView = (TextView) itemView.findViewById(R.id.user_name);
-        ImageView imageView = (ImageView) itemView.findViewById(R.id.meeting_photo);
+        ViewGroup view = null;
+
+        if (convertView == null) {
+            view = (ViewGroup) inflater.inflate(R.layout.item_meeting, parent, false);
+        } else {
+            view = (ViewGroup) convertView;
+        }
+//        View itemView = inflater.inflate(R.layout.item_meeting, null);
+        TextView descView = (TextView) view.findViewById(R.id.description);
+        final TextView userNameTextView = (TextView) view.findViewById(R.id.user_name);
+        ImageView imageView = (ImageView) view.findViewById(R.id.meeting_photo);
 
         final Meeting meeting = getItem(position);
         userNameTextView.setText(meeting.owner.username);
@@ -57,6 +64,6 @@ public class MeetingListAdapter extends BaseAdapter {
         String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 600, 400, 7, "red", "Here");
         // ImageLoader.getInstance().displayImage(imageUrl, imageView);
 
-        return itemView;
+        return view;
     }
 }

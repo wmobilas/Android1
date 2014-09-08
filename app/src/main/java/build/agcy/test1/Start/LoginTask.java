@@ -22,21 +22,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import build.agcy.test1.Api.ApiTaskBase;
-import build.agcy.test1.Api.Errors.ApiError;
 import build.agcy.test1.Models.CurrentUser;
 
 
 public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
     private String token = "";
 
-    public LoginTask(String methodName, ArrayList<NameValuePair> args){
-        super(methodName, args, false, false);
+    public LoginTask(String methodName, ArrayList<NameValuePair> args) {
+        super(methodName, args, true, false);
     }
 
     public LoginTask(final String login, final String password) {
-        super("account/login", new ArrayList<NameValuePair>(){{
-            add(new BasicNameValuePair("login",login));
-            add(new BasicNameValuePair("password",password));
+        super("account/login", new ArrayList<NameValuePair>() {{
+            add(new BasicNameValuePair("login", login));
+            add(new BasicNameValuePair("password", password));
         }}, false, false);
     }
 
@@ -44,6 +43,7 @@ public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
     protected CurrentUser parse(String json) throws JSONException {
         return new Gson().fromJson(json, CurrentUser.class);
     }
+
     @Override
     protected Object doInBackground(Object... params) {
         try {
@@ -64,8 +64,8 @@ public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
             String responseStr = EntityUtils.toString(httpEntity);
             String token = "";
             List<Cookie> cookies = httpClient.getCookieStore().getCookies();
-            for(Cookie cookie: cookies){
-                if(cookie.getName().equals(".AspNet.ApplicationCookie")){
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(".AspNet.ApplicationCookie")) {
                     token = cookie.getValue();
                     break;
                 }
@@ -83,7 +83,7 @@ public abstract class LoginTask extends ApiTaskBase<CurrentUser> {
     @Override
     protected void onPostExecute(Object response) {
         super.onPostExecute(response);
-        if(!token.equals(""))
+        if (!token.equals(""))
             onTokenRecieved(token);
     }
 

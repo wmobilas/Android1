@@ -2,16 +2,20 @@ package build.agcy.test1.Core.GCM;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.gson.Gson;
 
+import build.agcy.test1.Core.GCM.Push.PushAccept;
+import build.agcy.test1.Core.GCM.Push.PushConfirm;
+import build.agcy.test1.Core.GCM.Push.PushMeeting;
 import build.agcy.test1.R;
 
 /**
@@ -57,22 +61,30 @@ public class GCMIntentService extends IntentService {
                     MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                 String pushKey = extras.getString("collapse_key");
                 String pushJson = extras.getString("json");
-                // todo: Парсим пуш
-                if(pushKey==null){
+                if (pushKey == null) {
                     return;
                 }
-                if(pushKey.equals("meeting")){
-                    // новая встреча рядом
-                }else{
-                    if(pushKey.equals("accept")){
-                        // предложили встретиться
-                    }else{
-                        if(pushKey.equals("confirm")){
-                            // кто-то подтвердил, что согласен с тобой встретиться. ы
+                if (pushKey.equals("meeting")) {
+                    PushMeeting _m = new Gson().fromJson(pushJson, PushMeeting.class);
+                    _m.getNotification(getApplicationContext());
+                    // новая встреча рядом  сюда я буду давать description и id
+                } else {
+                    if (pushKey.equals("accept")) {
+                        PushAccept _a = new Gson().fromJson(pushJson, PushAccept.class);
+                        _a.getNotification(getApplicationContext());
+
+                        // предложили встретиться сюда буду давать meetingId message и id
+                        // в уведомлении здесь можно всунуть сразу две кнопки - подтвердить и отказ, но не обязательно
+                    } else {
+                        if (pushKey.equals("confirm")) {
+                            PushConfirm _c = new Gson().fromJson(pushJson, PushConfirm.class);
+                            _c.getNotification(getApplicationContext());
+                            // кто-то подтвердил, что согласен с тобой встретиться. и сюда отдаю только meetingId
+                        } else {
+                            sendNotification(pushJson);
                         }
                     }
                 }
-                sendNotification(pushJson);
             }
         }
         // Release the wake lock provided by the WakefulBroadcastReceiver.
@@ -86,15 +98,18 @@ public class GCMIntentService extends IntentService {
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        //PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-          //      new Intent(this, DemoActivity.class), 0);
+        Context ctx = getApplicationContext();
+//        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+//                new Intent(this, DemoActivity.class), 0);
 
+        Resources res = ctx.getResources();
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.doge)
-                        .setContentTitle("GCM Notification")
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(msg))
+                        .setSmallIcon(R.drawable.pin)
+                        .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.doge))
+                        .setWhen(System.currentTimeMillis())
+                        .setAutoCancel(true)
+                        .setContentTitle("Test")
                         .setContentText(msg);
 
         // mBuilder.setContentIntent(contentIntent);

@@ -6,8 +6,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,23 +37,16 @@ import build.agcy.test1.Users.UserActivity;
 public class MeetingFragment extends Fragment {
 
     private Meeting meeting;
-    private MeetingGetTask meetingTask;
-
-
-    public static View meetingView;
+    private static View meetingView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        try {
+        if (savedInstanceState != null) {
+        } else {
             meetingView = inflater.inflate(R.layout.fragment_meeting, container, false);
-        } catch (InflateException e) {
-            Log.e("MeetingFragment", "Cant inflate", e);
+            bindData();
         }
-
-        bindData();
-
         return meetingView;
     }
 
@@ -63,16 +54,11 @@ public class MeetingFragment extends Fragment {
         if (meeting != null && meetingView != null) {
             ProgressBar loadingView = (ProgressBar) meetingView.findViewById(R.id.loading);
             View containerView = meetingView.findViewById(R.id.content_container);
-
             View ownerContainer = meetingView.findViewById(R.id.user_container);
-
-
             TextView descriptionView = (TextView) meetingView.findViewById(R.id.description);
             ImageView imageView = (ImageView) meetingView.findViewById(R.id.image);
-
             TextView ownerNameView = (TextView) ownerContainer.findViewById(R.id.user_name);
             ImageView ownerPhotoView = (ImageView) ownerContainer.findViewById(R.id.user_photo);
-
             ownerContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -88,11 +74,13 @@ public class MeetingFragment extends Fragment {
                 loadingView.setVisibility(View.GONE);
                 containerView.setVisibility(View.VISIBLE);
                 descriptionView.setText(meeting.description);
-
                 ownerNameView.setText(meeting.owner.username);
-                ImageLoader.getInstance().displayImage(meeting.owner.photo, ownerPhotoView);
-
-                String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude,meeting.latitude, 640, 360,10,"red","here");
+                if (meeting.owner.photo != null) {
+                    ImageLoader.getInstance().displayImage(meeting.owner.photo, ownerPhotoView);
+                } else {
+                    ImageLoader.getInstance().displayImage(EatWithMeApp.currentUser.photo, ownerPhotoView);
+                }
+                String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 640, 360, 10, "red", "here");
                 ImageLoader.getInstance().displayImage(imageUrl, imageView);
                 Fragment fragment = null;
                 Bundle arguments = getArguments();
@@ -134,14 +122,8 @@ public class MeetingFragment extends Fragment {
                         }
                     }
                 }
-
-                if(fragment!=null){
-                    fragment.setArguments(arguments);
-                    getFragmentManager().beginTransaction().replace(R.id.action_container, fragment).commit();
-                }
-
-            } else {
-                // =(
+                fragment.setArguments(arguments);
+                getFragmentManager().beginTransaction().replace(R.id.action_container, fragment).commit();
             }
         }
     }
@@ -152,7 +134,7 @@ public class MeetingFragment extends Fragment {
         Bundle meetingArgs = getArguments();
         String id = meetingArgs.getString("id");
 
-        meetingTask = new MeetingGetTask(id) {
+        MeetingGetTask meetingTask = new MeetingGetTask(id) {
             @Override
             public void onSuccess(Meeting response) {
                 meeting = response;
@@ -184,49 +166,46 @@ public class MeetingFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             if (savedInstanceState != null) {
-                return rootView;
-            }
-            if (meetingId == null) {
-                rootView = inflater.inflate(R.layout.fragment_accepted, null);
-                TextView messageView = (TextView) rootView.findViewById(R.id.message);
-                messageView.setText(getArguments().getString("message", "Empty message :O"));
             } else {
-                rootView = inflater.inflate(R.layout.fragment_accept, null);
+                if (meetingId == null) {
+                    rootView = inflater.inflate(R.layout.fragment_accepted, null);
+                    TextView messageView = (TextView) rootView.findViewById(R.id.message);
+                    messageView.setText(getArguments().getString("message", "Empty message :O"));
+                } else {
+                    rootView = inflater.inflate(R.layout.fragment_accept, null);
 
-                final Button acceptButton = (Button) rootView.findViewById(R.id.accept);
-                final TextView messageBox = (TextView) rootView.findViewById(R.id.message);
-                final TextView statusView = (TextView) rootView.findViewById(R.id.status);
+                    final Button acceptButton = (Button) rootView.findViewById(R.id.accept);
+                    final TextView messageBox = (TextView) rootView.findViewById(R.id.message);
+                    final TextView statusView = (TextView) rootView.findViewById(R.id.status);
 
-                acceptButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        final ProgressDialog accepting = new ProgressDialog(getActivity());
-                        accepting.setMessage("Accepting");
-                        accepting.setTitle("Wait pls");
-                        accepting.setCancelable(false);
-                        accepting.show();
-                        MeetingAcceptTask acceptTask = new MeetingAcceptTask(meetingId, messageBox.getText().toString()) {
-                            @Override
-                            public void onSuccess(String response) {
-                                accepting.dismiss();
-                                messageBox.setVisibility(View.GONE);
-                                acceptButton.setVisibility(View.GONE);
+                    acceptButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            final ProgressDialog accepting = new ProgressDialog(getActivity());
+                            accepting.setMessage("Accepting");
+                            accepting.setTitle("Wait pls");
+                            accepting.setCancelable(false);
+                            accepting.show();
+                            MeetingAcceptTask acceptTask = new MeetingAcceptTask(meetingId, messageBox.getText().toString()) {
+                                @Override
+                                public void onSuccess(String response) {
+                                    accepting.dismiss();
+                                    messageBox.setVisibility(View.GONE);
+                                    acceptButton.setVisibility(View.GONE);
+                                    statusView.setText("Accept sended");
+                                }
 
-                                statusView.setText("Accept sended");
-                            }
+                                @Override
+                                public void onError(Exception exp) {
+                                    accepting.dismiss();
+                                    Toast.makeText(getActivity(), "Error:" + exp.getMessage(), Toast.LENGTH_SHORT).show();
 
-                            @Override
-                            public void onError(Exception exp) {
-                                accepting.dismiss();
-                                Toast.makeText(getActivity(), "Error:" + exp.getMessage(), Toast.LENGTH_SHORT).show();
-
-                            }
-                        };
-                        acceptTask.start();
-
-                    }
-                });
-
+                                }
+                            };
+                            acceptTask.start();
+                        }
+                    });
+                }
             }
             return rootView;
         }
@@ -236,12 +215,14 @@ public class MeetingFragment extends Fragment {
         private View rootView;
 
         private String meetingId;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            meetingId = getArguments().getString("id","0");
+            meetingId = getArguments().getString("id", "0");
 
         }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             rootView = inflater.inflate(R.layout.fragment_confirmed, null);
@@ -268,7 +249,7 @@ public class MeetingFragment extends Fragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            meetingId = getArguments().getString("id","0");
+            meetingId = getArguments().getString("id", "0");
         }
 
         @Override

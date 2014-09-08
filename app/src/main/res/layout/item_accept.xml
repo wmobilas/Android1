@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <lib.roundedimage.RoundedImageView
+    <!--<lib.roundedimage.RoundedImageView-->
+    <!--app:corner_radius="30dp"-->
+    <ImageView
         android:layout_margin="6dp"
-        app:corner_radius="30dp"
         android:id="@+id/photo"
         android:src="@drawable/doge"
         android:layout_width="40dp"

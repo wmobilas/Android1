@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,8 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
-            <lib.roundedimage.RoundedImageView
-                app:corner_radius="5dp"
+            <!--<lib.roundedimage.RoundedImageView-->
+            <!--app:corner_radius="5dp"-->
+            <ImageView
                 android:id="@+id/meeting_photo"
                 android:src="@drawable/map"
                 android:scaleType="centerCrop"
@@ -42,8 +42,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp" />
 
-                <lib.roundedimage.RoundedImageView
-                    app:corner_radius="30dp"
+                <!--<lib.roundedimage.RoundedImageView-->
+                <!--app:corner_radius="30dp"-->
+                <ImageView
                     android:id="@+id/user_photo"
                     android:src="@drawable/doge"
                     android:layout_width="45dp"

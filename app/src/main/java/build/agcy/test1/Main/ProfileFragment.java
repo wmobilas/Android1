@@ -37,7 +37,6 @@ public class ProfileFragment extends Fragment {
 
         } else {
             rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-
             TextView userNameView = (TextView) rootView.findViewById(R.id.user_name);
             userNameView.setText(EatWithMeApp.currentUser.username);
             ImageView backgroundView = (ImageView) rootView.findViewById(R.id.background);

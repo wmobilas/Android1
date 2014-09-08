@@ -35,16 +35,17 @@ public class EatWithMeApp extends Application {
             currentUser.photo = prefs.getString(PHOTO_PREFERENCES_KEY, "http://cs616230.vk.me/v616230567/151af/cP4wx9MZT-w.jpg");
         }
         app = this;
-
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-        .build();
+                .build();
         ImageLoader.getInstance().init(config);
     }
+
     public static void saveToken(String token) {
         EatWithMeApp.token = token;
         SharedPreferences prefs = app.getSharedPreferences(AUTH_PREFS, Activity.MODE_MULTI_PROCESS);
         prefs.edit().putString(TOKEN_PREFERENCES_KEY, token).apply();
     }
+
     public static void saveCurrentUser(CurrentUser currentUser) {
         SharedPreferences prefs = app.getSharedPreferences(AUTH_PREFS, Activity.MODE_MULTI_PROCESS);
         prefs.edit()

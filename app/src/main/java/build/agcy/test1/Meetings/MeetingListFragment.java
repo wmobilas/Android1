@@ -41,43 +41,46 @@ public class MeetingListFragment extends Fragment {
     }
 
     public static View myView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container,
                 savedInstanceState);
         Log.d(TAG, "mapfragment onCreateView");
-        myView = inflater.inflate(R.layout.fragment_meeting_list, container, false);
         if (savedInstanceState != null) {
             // Restore last state
+            return myView;
         } else {
+            myView = inflater.inflate(R.layout.fragment_meeting_list, container, false);
             final ListView meetingListView = (ListView) myView.findViewById(R.id.list);
             MeetingListTask task = new MeetingListTask(new ArrayList<NameValuePair>() {{
                 add(new BasicNameValuePair("confirmed", "false"));
             }}) {
-            @Override
-            public void onSuccess(final Meeting[] response) {
-                myView.findViewById(R.id.history_status).setVisibility(View.GONE);
-                final MeetingListAdapter adapter = new MeetingListAdapter(getActivity(), new ArrayList<Meeting>(Arrays.asList(response)));
-                meetingListView.setAdapter(adapter);
-                meetingListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onSuccess(final Meeting[] response) {
+                    myView.findViewById(R.id.history_status).setVisibility(View.GONE);
+                    final MeetingListAdapter adapter = new MeetingListAdapter(getActivity(), new ArrayList<Meeting>(Arrays.asList(response)));
+                    meetingListView.setAdapter(adapter);
+                    meetingListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("id", String.valueOf(response[position].id));
-                        Intent intent = new Intent(getActivity(), MeetingActivity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                    }
-                });
-            }
-            @Override
-            public void onError(Exception exp) {
-                Toast.makeText(getActivity().getApplicationContext(), "MeetingListTaskError " + exp.toString(), Toast.LENGTH_LONG).show();
-                Log.d(TAG, "MeetingListTaskError " + exp.toString());
-            }
-        };
-        task.start();
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("id", String.valueOf(response[position].id));
+                            Intent intent = new Intent(getActivity(), MeetingActivity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    });
+                }
+
+                @Override
+                public void onError(Exception exp) {
+                    Toast.makeText(getActivity().getApplicationContext(), "MeetingListTaskError " + exp.toString(), Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "MeetingListTaskError " + exp.toString());
+                }
+            };
+            task.start();
         }
         return myView;
     }

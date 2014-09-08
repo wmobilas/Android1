@@ -1,9 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
     tools:context="build.agcy.test1.Main.ProfileFragment">
 
     <ListView
@@ -21,10 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="200dp" />
 
-    <lib.roundedimage.RoundedImageView
+    <!--<lib.roundedimage.RoundedImageView
+        app:corner_radius="100dp"-->
+    <ImageView
         android:id="@+id/photo"
         android:layout_marginTop="100dp"
-        app:corner_radius="100dp"
         android:src="@drawable/doge"
         android:layout_centerHorizontal="true"
         android:layout_width="120dp"
@@ -39,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/user_name" />
+
     <TextView
         android:id="@+id/history_status"
         android:layout_below="@+id/background"
