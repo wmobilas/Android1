@@ -8,8 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import java.util.ArrayList;
 
 import build.agcy.test1.Core.Helpers.Converters;
@@ -21,7 +19,7 @@ import build.agcy.test1.R;
  */
 public class MeetingListAdapter extends BaseAdapter {
     private final ArrayList<Meeting> meetings;
-    private final Context context;
+    protected final Context context;
 
     public MeetingListAdapter(Context context, ArrayList<Meeting> meetings) {
         this.context = context;
@@ -46,33 +44,19 @@ public class MeetingListAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View adapterView = inflater.inflate(R.layout.item_meeting, null);
-        TextView descView = (TextView) adapterView.findViewById(R.id.description);
-        TextView coordsView = (TextView) adapterView.findViewById(R.id.meeting_coords);
-        final TextView creatorNameTextView = (TextView) adapterView.findViewById(R.id.creator);
-        ImageView imageView = (ImageView) adapterView.findViewById(R.id.meeting_photo);
+        View itemView = inflater.inflate(R.layout.item_meeting, null);
+        TextView descView = (TextView) itemView.findViewById(R.id.description);
+        final TextView userNameTextView = (TextView) itemView.findViewById(R.id.user_name);
+        ImageView imageView = (ImageView) itemView.findViewById(R.id.meeting_photo);
 
         final Meeting meeting = getItem(position);
-//                    UserTask task = new UserTask(String.valueOf(meeting.creator)) {
-//                    @Override
-//                    public void onSuccess(User user1) {
-//                        creatorNameTextView.setText(user1.username);
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception exp) {
-//                        Toast.makeText(context,
-//                                "usertask error" + exp.toString(), Toast.LENGTH_LONG).show();
-        creatorNameTextView.setText(meeting.creator);
-//                        }
-//                };
-//                task.start();
+        userNameTextView.setText(meeting.owner.username);
+
         descView.setText(meeting.description);
-        coordsView.setText(meeting.latitude + "\n" + meeting.longitude);
 
-        String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 600, 400, 7 , "red","Here");
-        ImageLoader.getInstance().displayImage(imageUrl, imageView);
+        String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 600, 400, 7, "red", "Here");
+        // ImageLoader.getInstance().displayImage(imageUrl, imageView);
 
-        return adapterView;
+        return itemView;
     }
 }

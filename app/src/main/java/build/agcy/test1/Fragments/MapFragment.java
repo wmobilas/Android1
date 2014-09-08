@@ -125,6 +125,7 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
     }
 
     private static View mapView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         container.removeAllViews();
@@ -456,7 +457,7 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
                     map.addMarker(new MarkerOptions()
                                     .position(new LatLng(Double.parseDouble(m.latitude), Double.parseDouble(m.longitude)))
                                     .title(m.description)
-                                    .snippet(m.time + " " + m.Id)
+                                    .snippet(m.time + " " + m.id)
 //                            .icon(BitmapDescriptorFactory
 //                                    .fromResource(R.drawable.pin))
                     );

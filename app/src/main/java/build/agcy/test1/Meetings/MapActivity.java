@@ -310,7 +310,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
         for (int i = 0; i < meeting_length; i++) {
             meeting_time = meetingsList.get(i).time;
             meeting_name = meetingsList.get(i).description;
-            meeting_creator = meetingsList.get(i).creator;
+            meeting_creator = meetingsList.get(i).owner.username;
             parseLat = Double.parseDouble(meetingsList.get(i).latitude);
             parseLng = Double.parseDouble(meetingsList.get(i).longitude);
 

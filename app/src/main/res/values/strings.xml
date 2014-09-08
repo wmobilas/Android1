@@ -2,7 +2,6 @@
 <resources>
 
     <color name="color1">#222</color>
-    <color name="bg_color">#ffffff</color>
 
     <string name="text_here">Text here</string>
     <string name="send">Send</string>

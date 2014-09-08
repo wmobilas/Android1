@@ -13,7 +13,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.agcy.vkproject.spy.R;
+import build.agcy.test1.R;
+
 
 @SuppressWarnings("UnusedDeclaration")
 public class RoundedImageView extends ImageView {
@@ -169,14 +170,17 @@ public class RoundedImageView extends ImageView {
         }
     }
 
-    @Override public void setImageURI(Uri uri) {
+    @Override
+    public void setImageURI(Uri uri) {
         super.setImageURI(uri);
         setImageDrawable(getDrawable());
     }
 
     private Drawable resolveResource() {
         Resources rsrc = getResources();
-        if (rsrc == null) { return null; }
+        if (rsrc == null) {
+            return null;
+        }
 
         Drawable d = null;
 
@@ -211,7 +215,9 @@ public class RoundedImageView extends ImageView {
     }
 
     private void updateAttrs(Drawable drawable) {
-        if (drawable == null) { return; }
+        if (drawable == null) {
+            return;
+        }
 
         if (drawable instanceof RoundedDrawable) {
             ((RoundedDrawable) drawable)
@@ -246,7 +252,9 @@ public class RoundedImageView extends ImageView {
     }
 
     public void setCornerRadius(float radius) {
-        if (cornerRadius == radius) { return; }
+        if (cornerRadius == radius) {
+            return;
+        }
 
         cornerRadius = radius;
         updateDrawableAttrs();
@@ -262,7 +270,9 @@ public class RoundedImageView extends ImageView {
     }
 
     public void setBorderWidth(float width) {
-        if (borderWidth == width) { return; }
+        if (borderWidth == width) {
+            return;
+        }
 
         borderWidth = width;
         updateDrawableAttrs();
@@ -283,7 +293,9 @@ public class RoundedImageView extends ImageView {
     }
 
     public void setBorderColor(ColorStateList colors) {
-        if (borderColor.equals(colors)) { return; }
+        if (borderColor.equals(colors)) {
+            return;
+        }
 
         borderColor =
                 (colors != null) ? colors : ColorStateList.valueOf(RoundedDrawable.DEFAULT_BORDER_COLOR);
@@ -310,7 +322,9 @@ public class RoundedImageView extends ImageView {
     }
 
     public void setMutateBackground(boolean mutate) {
-        if (mutateBackground == mutate) { return; }
+        if (mutateBackground == mutate) {
+            return;
+        }
 
         mutateBackground = mutate;
         updateBackgroundDrawableAttrs(true);

@@ -90,9 +90,11 @@ public class StartActivity extends FragmentActivity {
             return;
         }
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-//        login(null);
+
+
     }
 
     private void registerGCM() {
@@ -219,16 +221,6 @@ public class StartActivity extends FragmentActivity {
                                  Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
             final Button testButtonMap = (Button) rootView.findViewById(R.id.join_button);
-            testButtonMap.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            ((Button) rootView.findViewById(R.id.login_button)).setVisibility(View.GONE);
-                            ((Button) rootView.findViewById(R.id.join_button)).setVisibility(View.GONE);
-                            ((Button) rootView.findViewById(R.id.register_button)).setVisibility(View.VISIBLE);
-                            Log.d("build.agcy", "textbuttonclick");
-                        }
-                    });
             Bundle args = getArguments();
 //            todo: bind args
             return rootView;
@@ -331,7 +323,7 @@ public class StartActivity extends FragmentActivity {
         username = username_login.getText().toString();
         password_login = (TextView) findViewById(R.id.password_login);
         password = password_login.getText().toString();
-/*
+        /*
         username="kioltk";
         password="123qweASD";*/
         if (username.equals("") || password.equals("")) {

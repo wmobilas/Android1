@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -45,15 +46,17 @@ public class MeetingListFragment extends Fragment {
         super.onCreateView(inflater, container,
                 savedInstanceState);
         Log.d(TAG, "mapfragment onCreateView");
-        myView = inflater.inflate(R.layout.activity_meeting_list, container, false);
+        myView = inflater.inflate(R.layout.fragment_meeting_list, container, false);
         if (savedInstanceState != null) {
             // Restore last state
         } else {
-        final ListView meetingListView = (ListView) myView.findViewById(R.id.meeting_fragment_list);
-        MeetingListTask task = new MeetingListTask(new ArrayList<NameValuePair>()) {
+            final ListView meetingListView = (ListView) myView.findViewById(R.id.list);
+            MeetingListTask task = new MeetingListTask(new ArrayList<NameValuePair>() {{
+                add(new BasicNameValuePair("confirmed", "false"));
+            }}) {
             @Override
             public void onSuccess(final Meeting[] response) {
-                myView.findViewById(R.id.meetings_list_status).setVisibility(View.GONE);
+                myView.findViewById(R.id.history_status).setVisibility(View.GONE);
                 final MeetingListAdapter adapter = new MeetingListAdapter(getActivity(), new ArrayList<Meeting>(Arrays.asList(response)));
                 meetingListView.setAdapter(adapter);
                 meetingListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -61,7 +64,7 @@ public class MeetingListFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("id", String.valueOf(response[position].Id));
+                        bundle.putString("id", String.valueOf(response[position].id));
                         Intent intent = new Intent(getActivity(), MeetingActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);

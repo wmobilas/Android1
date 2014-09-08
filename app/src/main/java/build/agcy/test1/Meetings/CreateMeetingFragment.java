@@ -42,6 +42,7 @@ public class CreateMeetingFragment extends android.app.Fragment {
 
             final MyLocationListener locationListener = new MyLocationListener(getActivity());
             locationListener.updateLocation();
+
             createTimeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -66,6 +67,7 @@ public class CreateMeetingFragment extends android.app.Fragment {
                     // todo: implement location selector
                     final String latitude = "" + locationListener.getLatitude();
                     final String longitude = "" + locationListener.getLongitude();
+                    locationListener.stopUsingGPS();
                     String time = createTimeButton.getText().toString();
                     if (time.equals(getResources().getString(R.string.pick_time))) {
                         time = String.valueOf(TimeConverter.getUnixNow());

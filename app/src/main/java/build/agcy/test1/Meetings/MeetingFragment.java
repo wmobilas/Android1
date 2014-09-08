@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.InflateException;
@@ -29,6 +30,7 @@ import build.agcy.test1.Core.Helpers.Converters;
 import build.agcy.test1.EatWithMeApp;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
+import build.agcy.test1.Users.UserActivity;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -62,33 +64,79 @@ public class MeetingFragment extends Fragment {
             ProgressBar loadingView = (ProgressBar) meetingView.findViewById(R.id.loading);
             View containerView = meetingView.findViewById(R.id.content_container);
 
+            View ownerContainer = meetingView.findViewById(R.id.user_container);
+
+
             TextView descriptionView = (TextView) meetingView.findViewById(R.id.description);
             ImageView imageView = (ImageView) meetingView.findViewById(R.id.image);
-            TextView creatorView = (TextView) meetingView.findViewById(R.id.creator);
 
+            TextView ownerNameView = (TextView) ownerContainer.findViewById(R.id.user_name);
+            ImageView ownerPhotoView = (ImageView) ownerContainer.findViewById(R.id.user_photo);
+
+            ownerContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), UserActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", meeting.owner.id);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
 
             if (meeting != null) {
                 loadingView.setVisibility(View.GONE);
                 containerView.setVisibility(View.VISIBLE);
-
                 descriptionView.setText(meeting.description);
-                creatorView.setText("by " + meeting.creator);
+
+                ownerNameView.setText(meeting.owner.username);
+                ImageLoader.getInstance().displayImage(meeting.owner.photo, ownerPhotoView);
 
                 String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude,meeting.latitude, 640, 360,10,"red","here");
                 ImageLoader.getInstance().displayImage(imageUrl, imageView);
                 Fragment fragment = null;
-                if (!meeting.isConfirmed())
-                    if (EatWithMeApp.isOwner(meeting.creator)) {
-                        fragment = new AcceptListFragment();
-                    } else {
-                        fragment = new AcceptFragment();
-                    }
-                else {
-                    fragment =new ConfirmedFragment();
+                Bundle arguments = getArguments();
 
+                if (EatWithMeApp.isOwner(meeting.owner.id)) {
+                    if (!meeting.isConfirmed())
+                        // показываем хозяину запросы
+                        fragment = new AcceptListFragment();
+                    else {
+                        // показываем кого он выбрал
+                        arguments.putString("status", "owner");
+                        arguments.putString("confirmer_name", meeting.confirmer.username);
+                        arguments.putString("confirmer_id", meeting.confirmer.id);
+                        arguments.putString("confirmer_photo", meeting.confirmer.photo);
+                        fragment = new ConfirmedFragment();
+                    }
+                } else {
+
+                    if (meeting.accept == null) {
+                        if (!meeting.isConfirmed()) {
+                            // показываем окошко запроса
+                            arguments.putString("meetingId", meeting.id);
+                            fragment = new AcceptFragment();
+                        } else
+                            // показываем, что уже поздно
+                            fragment = new ConfirmedFragment();
+                    } else {
+                        if (!meeting.isConfirmed()) {
+                            // запрос отправлен
+                            arguments.putString("id", meeting.accept.id);
+                            arguments.putString("message", meeting.accept.message);
+                            arguments.putInt("time", meeting.accept.time);
+                            fragment = new AcceptFragment();
+                        } else {
+                            // с вами встретятся =)
+                            arguments.putString("status", "acceptor");
+                            arguments.putString("confirmer_id", meeting.confirmer.id);
+                            fragment = new ConfirmedFragment();
+                        }
+                    }
                 }
+
                 if(fragment!=null){
-                    fragment.setArguments(getArguments());
+                    fragment.setArguments(arguments);
                     getFragmentManager().beginTransaction().replace(R.id.action_container, fragment).commit();
                 }
 
@@ -124,48 +172,62 @@ public class MeetingFragment extends Fragment {
     public static class AcceptFragment extends Fragment {
 
         private String meetingId;
+        View rootView = null;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            meetingId = getArguments().getString("id","0");
+            meetingId = getArguments().getString("meetingId", null);
+
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_accept, null);
-            final Button acceptButton = (Button) rootView.findViewById(R.id.accept);
-            final TextView messageBox = (TextView) rootView.findViewById(R.id.message);
-            final TextView statusView = (TextView) rootView.findViewById(R.id.status);
+            if (savedInstanceState != null) {
+                return rootView;
+            }
+            if (meetingId == null) {
+                rootView = inflater.inflate(R.layout.fragment_accepted, null);
+                TextView messageView = (TextView) rootView.findViewById(R.id.message);
+                messageView.setText(getArguments().getString("message", "Empty message :O"));
+            } else {
+                rootView = inflater.inflate(R.layout.fragment_accept, null);
 
-            acceptButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    final ProgressDialog accepting = new ProgressDialog(getActivity());
-                    accepting.setMessage("Accepting");
-                    accepting.setTitle("Wait pls");
-                    accepting.setCancelable(false);
-                    accepting.show();
-                    MeetingAcceptTask acceptTask = new MeetingAcceptTask(meetingId, messageBox.getText().toString()) {
-                        @Override
-                        public void onSuccess(String response) {
-                            accepting.dismiss();
-                            messageBox.setVisibility(View.GONE);
-                            acceptButton.setVisibility(View.GONE);
+                final Button acceptButton = (Button) rootView.findViewById(R.id.accept);
+                final TextView messageBox = (TextView) rootView.findViewById(R.id.message);
+                final TextView statusView = (TextView) rootView.findViewById(R.id.status);
 
-                            statusView.setText("Accept sended");
-                        }
+                acceptButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final ProgressDialog accepting = new ProgressDialog(getActivity());
+                        accepting.setMessage("Accepting");
+                        accepting.setTitle("Wait pls");
+                        accepting.setCancelable(false);
+                        accepting.show();
+                        MeetingAcceptTask acceptTask = new MeetingAcceptTask(meetingId, messageBox.getText().toString()) {
+                            @Override
+                            public void onSuccess(String response) {
+                                accepting.dismiss();
+                                messageBox.setVisibility(View.GONE);
+                                acceptButton.setVisibility(View.GONE);
 
-                        @Override
-                        public void onError(Exception exp) {
+                                statusView.setText("Accept sended");
+                            }
 
-                        }
-                    };
-                    acceptTask.start();
+                            @Override
+                            public void onError(Exception exp) {
+                                accepting.dismiss();
+                                Toast.makeText(getActivity(), "Error:" + exp.getMessage(), Toast.LENGTH_SHORT).show();
 
-                }
-            });
+                            }
+                        };
+                        acceptTask.start();
 
+                    }
+                });
+
+            }
             return rootView;
         }
     }
@@ -174,15 +236,27 @@ public class MeetingFragment extends Fragment {
         private View rootView;
 
         private String meetingId;
-
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             meetingId = getArguments().getString("id","0");
+
         }
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             rootView = inflater.inflate(R.layout.fragment_confirmed, null);
+            TextView messageView = (TextView) rootView.findViewById(R.id.message);
+
+            String status = getArguments().getString("status");
+            if (status == null) {
+                messageView.setText("This meeting is finished");
+            } else {
+                if (status.equals("owner")) {
+                    messageView.setText("You confirmed " + getArguments().getString("confirmer_name") + " to your meeting");
+                } else {
+                    messageView.setText("You've been confirmed to this meeting. WOWOW");
+                }
+            }
             return rootView;
         }
     }
@@ -232,8 +306,8 @@ public class MeetingFragment extends Fragment {
                                 TextView messageView = (TextView) itemView.findViewById(R.id.message);
 
                                 Meeting.Accept accept = getItem(i);
-
-                                acceptorIdView.setText(accept.acceptorId);
+                                // todo: insert photo
+                                acceptorIdView.setText(accept.acceptor.username);
                                 messageView.setText(accept.message);
                                 return itemView;
                             }

@@ -4,33 +4,26 @@ package build.agcy.test1.Models;
  * Created by kiolt_000 on 17/08/2014.
  */
 public class Meeting {
-    public String Id;
+    public String id;
     public String description;
-    public String creator;
     public String longitude;
     public String latitude;
     public int time;
-    public String confirmer;
+    public Accept accept;
+    public int acceptsCount;
+    public User owner;
+    public User confirmer;
 
     public boolean isConfirmed() {
-        return confirmer != null && !confirmer.equals("");
+        return confirmer != null;
     }
 
-    public Meeting(String Id, String description, String creator, String longitude, String latitude, int time) {
-        this.Id = Id;
-        this.description = description;
-        this.creator = creator;
-        this.longitude = longitude;
-        //id не получаю
-        this.latitude = latitude;
-        this.time = time;
-    }
 
     /*
-    public void setMeetingId(String Id) {
-        this.Id = Id;}
+    public void setMeetingId(String id) {
+        this.id = id;}
     public String getMeetingId() {
-        return Id;}
+        return id;}
     public void setDescription(String description) {
         this.description = description;}
     public String getDescription() {
@@ -58,7 +51,7 @@ public class Meeting {
     }
 
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(Id);
+        dest.writeString(id);
         dest.writeString(description);
         dest.writeString(creator);
         dest.writeString(longitude);
@@ -70,13 +63,13 @@ public class Meeting {
 
         @Override
         public Meeting createFromParcel(Parcel source) {
-            String Id = source.readString();
+            String id = source.readString();
             String description = source.readString();
             String creator = source.readString();
             String latitude = source.readString();
             String longitude = source.readString();
             int time = source.readInt();
-            return new Meeting(Id, description,creator, latitude, longitude, time );
+            return new Meeting(id, description,creator, latitude, longitude, time );
         }
 
         @Override
@@ -88,14 +81,8 @@ public class Meeting {
     public static class Accept {
         public String id;
         public String meetingId;
-        public String acceptorId;
+        public User acceptor;
         public String message;
         public int time;
-
-        public Accept(String id, String acceptorId, String message) {
-            this.id = id;
-            this.acceptorId = acceptorId;
-            this.message = message;
-        }
     }
 }
