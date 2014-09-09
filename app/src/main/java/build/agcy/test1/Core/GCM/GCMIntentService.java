@@ -70,16 +70,12 @@ public class GCMIntentService extends IntentService {
                 if (pushKey.equals("meeting")) {
 
                     push = new Gson().fromJson(pushJson, PushMeeting.class);
-                    // новая встреча рядом  сюда я буду давать description и id
                 } else {
                     if (pushKey.equals("accept")) {
                         push = new Gson().fromJson(pushJson, PushAccept.class);
-                        // предложили встретиться сюда буду давать meetingId message и id
-                        // в уведомлении здесь можно всунуть сразу две кнопки - подтвердить и отказ, но не обязательно
                     } else {
                         if (pushKey.equals("confirm")) {
                             push = new Gson().fromJson(pushJson, PushConfirm.class);
-                            // кто-то подтвердил, что согласен с тобой встретиться. и сюда отдаю только meetingId
                         }
                     }
                 }
@@ -92,7 +88,6 @@ public class GCMIntentService extends IntentService {
                 push.showNotification();
             }
         }
-        // Release the wake lock provided by the WakefulBroadcastReceiver.
         GCMBroadcastReceiver.completeWakefulIntent(intent);
     }
 
