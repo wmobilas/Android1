@@ -13,9 +13,11 @@ import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.gson.Gson;
 
+import build.agcy.test1.Core.GCM.Push.Push;
 import build.agcy.test1.Core.GCM.Push.PushAccept;
 import build.agcy.test1.Core.GCM.Push.PushConfirm;
 import build.agcy.test1.Core.GCM.Push.PushMeeting;
+import build.agcy.test1.Core.GCM.Push.PushTest;
 import build.agcy.test1.R;
 
 /**
@@ -64,27 +66,30 @@ public class GCMIntentService extends IntentService {
                 if (pushKey == null) {
                     return;
                 }
+                Push push = null;
                 if (pushKey.equals("meeting")) {
-                    PushMeeting _m = new Gson().fromJson(pushJson, PushMeeting.class);
-                    _m.getNotification(getApplicationContext());
+
+                    push = new Gson().fromJson(pushJson, PushMeeting.class);
                     // новая встреча рядом  сюда я буду давать description и id
                 } else {
                     if (pushKey.equals("accept")) {
-                        PushAccept _a = new Gson().fromJson(pushJson, PushAccept.class);
-                        _a.getNotification(getApplicationContext());
-
+                        push = new Gson().fromJson(pushJson, PushAccept.class);
                         // предложили встретиться сюда буду давать meetingId message и id
                         // в уведомлении здесь можно всунуть сразу две кнопки - подтвердить и отказ, но не обязательно
                     } else {
                         if (pushKey.equals("confirm")) {
-                            PushConfirm _c = new Gson().fromJson(pushJson, PushConfirm.class);
-                            _c.getNotification(getApplicationContext());
+                            push = new Gson().fromJson(pushJson, PushConfirm.class);
                             // кто-то подтвердил, что согласен с тобой встретиться. и сюда отдаю только meetingId
-                        } else {
-                            sendNotification(pushJson);
                         }
                     }
                 }
+
+                if (push == null) {
+                    push = new PushTest(pushKey, pushJson);
+                }
+
+                push.setContext(getBaseContext());
+                push.showNotification();
             }
         }
         // Release the wake lock provided by the WakefulBroadcastReceiver.
