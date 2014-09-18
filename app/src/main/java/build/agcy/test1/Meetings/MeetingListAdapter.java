@@ -61,7 +61,7 @@ public class MeetingListAdapter extends BaseAdapter {
 
         descView.setText(meeting.description);
 
-        String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 600, 400, 7, "red", "Here");
+        String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 600, 400, 7, "black", "Here");
         // ImageLoader.getInstance().displayImage(imageUrl, imageView);
 
         return view;

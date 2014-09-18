@@ -27,6 +27,8 @@ public class CreateMeetingFragment extends android.app.Fragment {
     public CreateMeetingFragment() {
     }
 
+    //todo выбор из предустановленного списка если другое введи сам
+    //todo выбирать язык встречи чтобы люди могли найти общий язык
     private static View meetingCreateView;
 
     @Override
@@ -58,7 +60,7 @@ public class CreateMeetingFragment extends android.app.Fragment {
                     dialog.setTitle("Creating meeting...");
                     dialog.setMessage("Please wait");
                     dialog.show();
-                    EditText textBox = (EditText) meetingCreateView.findViewById(R.id.text);
+                    EditText textBox = (EditText) meetingCreateView.findViewById(R.id.text1);
 
                     String text = "Simple lunch";
                     if (!textBox.getText().toString().equals("")) {

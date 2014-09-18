@@ -25,7 +25,6 @@ public abstract class Push {
 
     public abstract String getMessage();
 
-
     public void setContext(Context context) {
         this.context = context;
     }
@@ -42,18 +41,19 @@ public abstract class Push {
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         PendingIntent contentIntent = getPendingIntent();
-
         Resources res = context.getResources();
         Bitmap img = BitmapFactory.decodeResource
-                (res, R.drawable.doge);
+                (res, R.drawable.notif);
         // todo: maybe show map on the notification image?
         builder
-                .setSmallIcon(R.drawable.pin)
+                .setSmallIcon(R.drawable.pinw)
                 .setLargeIcon(img)
                 .setAutoCancel(true)
                 .setContentTitle(getTitle())
-                .setContentText(getMessage());
-        // todo: implement buttons
+                .setContentText(getMessage())
+                .addAction(R.drawable.cncl, "Dismiss", null)
+                .addAction(R.drawable.acpt, "Accept", contentIntent).build();
+
         if (contentIntent != null)
             builder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, builder.build());

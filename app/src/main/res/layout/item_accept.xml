@@ -1,36 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--<lib.roundedimage.RoundedImageView-->
-    <!--app:corner_radius="30dp"-->
-    <ImageView
-        android:layout_margin="6dp"
-        android:id="@+id/photo"
-        android:src="@drawable/doge"
-        android:layout_width="40dp"
-        android:layout_height="40dp" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:id="@+id/top"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/photo"
+            android:src="@drawable/doge"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:corner_radius="40dp"
+            app:border_width="1dip"
+            app:border_color="#40555555"
+            app:mutate_background="true"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:oval="true" />
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingRight="0dp"
+            android:paddingEnd="0dp"
+            android:paddingStart="12dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="acceptor id"
+                android:id="@+id/acceptorId"
+
+                android:layout_width="wrap_content"
+                android:textColor="@color/violet_dark"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Hello! Join me!"
+                android:textStyle="bold"
+                android:id="@+id/message"
+                android:textColor="@color/violet_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <LinearLayout
-        android:padding="6dp"
         android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:text="acceptor id"
-            android:id="@+id/acceptorId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="Hello!"
-            android:textStyle="bold"
-            android:id="@+id/message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-</LinearLayout>
+        android:id="@+id/bottomline"
+        android:background="@drawable/violetline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/top"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

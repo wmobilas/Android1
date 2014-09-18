@@ -4,74 +4,147 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingBottom="18dp"
     android:gravity="center_vertical"
-    android:padding="8dp">
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    android:visibility="visible"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:background="@drawable/bg_color"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-
-            <!--<lib.roundedimage.RoundedImageView-->
-            <!--app:corner_radius="30dp"-->
-            <ImageView
-                android:id="@+id/owner_photo"
-                android:src="@drawable/doge"
-                android:layout_width="45dp"
-                android:layout_height="45dp" />
-
-            <TextView
-                android:text="username"
-                android:id="@+id/owner_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
-                android:layout_marginEnd="4dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_gravity="end"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-
-            <TextView
-                android:text="username"
-                android:id="@+id/confirmer_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
-                android:layout_marginEnd="4dp" />
-
-            <!--<lib.roundedimage.RoundedImageView-->
-            <!--app:corner_radius="30dp"-->
-            <ImageView
-                android:id="@+id/confirmer_photo"
-                android:src="@drawable/doge"
-                android:layout_width="45dp"
-                android:layout_height="45dp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/color1"
-            android:text="Description"
-            android:paddingLeft="8dp"
-            android:paddingStart="8dp"
+            android:orientation="vertical"
+            android:background="@color/violet_dark">
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Description"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/bottomline"
+            android:background="@drawable/bottomline"
+            android:layout_width="match_parent"
+            android:layout_above="@+id/parent"
+            android:layout_height="1dp" />
+
+        <RelativeLayout
+            android:id="@+id/parent"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/white"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:paddingTop="12dp"
-            android:paddingRight="18dp"
-            android:paddingEnd="18dp"
-            android:paddingBottom="12dp" />
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/owner_photo"
+                    android:src="@drawable/doge"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    app:corner_radius="30dp"
+                    android:layout_marginRight="6dp"
+                    app:border_width="1dip"
+                    app:border_color="#40555555"
+                    app:mutate_background="true"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    app:oval="true" />
+
+                <TextView
+                    android:text="username"
+                    android:id="@+id/owner_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:textColor="@color/black_light"
+                    android:layout_marginEnd="4dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lLayout">
+
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:text="username"
+                        android:id="@+id/confirmer_name"
+                        android:textColor="@color/black_light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginEnd="4dp" />
+                </LinearLayout>
+
+                <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/confirmer_photo"
+                    android:src="@drawable/doge"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    app:corner_radius="30dp"
+                    app:border_width="1dip"
+                    app:border_color="#40555555"
+                    app:mutate_background="true"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    app:oval="true" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/lock"
+                android:src="@drawable/open"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:text="OPEN"
+                android:id="@+id/open_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_light"
+                android:layout_marginTop="4dp"
+                android:layout_below="@+id/lock"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

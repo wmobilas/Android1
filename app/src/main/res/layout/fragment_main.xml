@@ -9,6 +9,8 @@
     tools:context="build.agcy.test1.Main.MainActivity$PlaceholderFragment">
 
     <TextView
+        android:clipToPadding="false"
+        android:fitsSystemWindows="true"
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

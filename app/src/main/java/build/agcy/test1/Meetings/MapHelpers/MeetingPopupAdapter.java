@@ -27,28 +27,22 @@ public class MeetingPopupAdapter implements InfoWindowAdapter {
     }
 
 
-    @Override
+    //    @Override
     public View getInfoContents(Marker marker) {
         return null;
     }
 
-    @Override
+    //    @Override
     public View getInfoWindow(final Marker marker) {
 
 
         final View rootView = inflater.inflate(R.layout.marker_meeting_new, null);
 
         // Getting the position from the marker
-        LatLng newCoords = marker.getPosition();//стой)мб вот это
-        // Getting reference to the TextView to set latitude
-        final TextView tv_lng = (TextView) rootView.findViewById(R.id.tv_lat);
+        LatLng newCoords = marker.getPosition();
+        final TextView coordinatesField = (TextView) rootView.findViewById(R.id.popup_snippet);
 
-        // Getting reference to the TextView to set longitude
-        final TextView tv_lat = (TextView) rootView.findViewById(R.id.tv_lng);
-        //TextView mAddress = (TextView) findViewById(R.id.tv_lng);
-
-
-        // todo: все комментарии не в тему и закрытый код, который мусор тоже нужно убрать.
+        final TextView adressField = (TextView) rootView.findViewById(R.id.popup_title);
         if (address == null || !newCoords.equals(lastCoords)) {
             Location current = new Location("reverseGeocoded");
             current.setLatitude(marker.getPosition().latitude);
@@ -60,8 +54,8 @@ public class MeetingPopupAdapter implements InfoWindowAdapter {
             mActivityIndicator.setVisibility(View.VISIBLE);
             final ImageView img = (ImageView) rootView.findViewById(R.id.info_window_icon);
             img.setVisibility(View.GONE);
-            tv_lat.setVisibility(View.GONE);
-            tv_lng.setVisibility(View.GONE);
+            adressField.setVisibility(View.GONE);
+            coordinatesField.setVisibility(View.GONE);
             new GetAddressTask(context) {
 
                 @Override
@@ -75,8 +69,8 @@ public class MeetingPopupAdapter implements InfoWindowAdapter {
             mActivityIndicator.setVisibility(View.GONE);
             final ImageView img = (ImageView) rootView.findViewById(R.id.info_window_icon);
             img.setVisibility(View.VISIBLE);
-            tv_lat.setVisibility(View.VISIBLE);
-            tv_lng.setVisibility(View.VISIBLE);
+            adressField.setVisibility(View.VISIBLE);
+            coordinatesField.setVisibility(View.VISIBLE);
             if (!address.equals("No address found")) {
                 String[] adresses = address.split(",");
                 String adres = "";
@@ -86,8 +80,8 @@ public class MeetingPopupAdapter implements InfoWindowAdapter {
 //                    adres += " City:" + adresses[1];
 //                if ((!adresses[2].equals(" null")) && (!adresses[2].equals("")))
 //                    adres += " Country:" + adresses[2]);
-                tv_lat.setText(adres);
-                tv_lng.setText("Longitude:" + lastCoords.longitude + " Lattitude:" + lastCoords.latitude);
+                adressField.setText(adres);
+                coordinatesField.setText("Longitude:" + lastCoords.longitude + " Lattitude:" + lastCoords.latitude);
             }
         }
 

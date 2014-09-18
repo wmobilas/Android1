@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="NoActionBarTheme" parent="@android:style/Theme.Holo.Light">
-    <item name="android:actionBarStyle">@style/TranslucentActionBar</item>
-    <item name="android:windowTranslucentNavigation">false</item>
-    <item name="android:windowTranslucentStatus">true</item>
-    <item name="android:windowContentOverlay">@null</item>
+        <item name="android:actionBarStyle">@style/TranslucentActionBar</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
@@ -12,8 +13,41 @@
     <style name="TranslucentActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
     <style name="NoAction_BarTheme" parent="android:Theme.Holo.Light.NoActionBar.TranslucentDecor">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault.Light">
+        <!-- Customize your theme here. -->
+
+        <item name="android:fragmentCloseEnterAnimation">@animator/comming_in</item>
+        <item name="android:fragmentOpenEnterAnimation">@animator/comming_in</item>
+        <item name="android:fragmentFadeEnterAnimation">@animator/comming_in</item>
+        <item name="android:fragmentFadeExitAnimation">@animator/comming_out</item>
+        <item name="android:fragmentCloseExitAnimation">@animator/comming_out</item>
+        <item name="android:fragmentOpenExitAnimation">@animator/comming_out</item>
+        <item name="android:activityCloseEnterAnimation">@animator/comming_in</item>
+        <item name="android:activityOpenEnterAnimation">@animator/pushdown_in</item>
+        <item name="android:activityOpenExitAnimation">@animator/pushdown_out</item>
+        <item name="android:activityCloseExitAnimation">@animator/comming_out</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="android:actionBarTabTextStyle">@color/white</item>
+    </style>
+
+    <style name="NavDrawerItemSelected" parent="AppTheme">
+        <item name="android:activatedBackgroundIndicator">@color/violet</item>
     </style>
 </resources>

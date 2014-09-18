@@ -1,14 +1,10 @@
 package build.agcy.test1.Core.Helpers;
 
 import android.content.Context;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
-import android.util.Log;
 
-import java.util.List;
+import build.agcy.test1.Core.MyLocationListener;
 
 public class FindMe {
     public static interface FindMeListener {
@@ -19,7 +15,7 @@ public class FindMe {
 
     public static FindMe please(Context context, int timeout, boolean getLastKnownLocation, FindMeListener listener) {
         FindMe findMe = new FindMe(context, timeout, getLastKnownLocation, listener);
-        findMe.please();
+        findMe.please(context);
         return findMe;
     }
 
@@ -35,92 +31,50 @@ public class FindMe {
         this.getLastKnownLocation = getLastKnownLocation;
     }
 
-    public void please() {
-        Criteria criteria = new Criteria();
-        List<String> providers = locationManager.getProviders(criteria, true);
-        if (providers != null) {
-            Location newestLocation = null;
-            for (String provider : providers) {
-                Location location = locationManager.getLastKnownLocation(provider);
-                if (location != null) {
-                    if (newestLocation == null) {
-                        newestLocation = location;
-                    } else {
-                        if (location.getTime() > newestLocation.getTime()) {
-                            newestLocation = location;
-                        }
-                    }
+    public void please(Context mContext) {
+        boolean isGPSEnabled, isNetworkEnabled;
+        final MyLocationListener myLocationService = new MyLocationListener(mContext) {
+        };
+        if (locationManager == null) {
+            locationManager = (LocationManager) mContext
+                    .getSystemService(Context.LOCATION_SERVICE);
+        }
+
+        isGPSEnabled = locationManager
+                .isProviderEnabled(LocationManager.GPS_PROVIDER);
+        isNetworkEnabled = locationManager
+                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER, 0, 100, myLocationService);
+        locationManager.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER, 0, 100,
+                myLocationService);
+        locationManager.requestLocationUpdates(
+                LocationManager.PASSIVE_PROVIDER, 0, 100,
+                myLocationService);
+        Location location;
+        if ((locationManager
+                .getLastKnownLocation(LocationManager.GPS_PROVIDER) != null) || (isGPSEnabled)) {
+            location = locationManager
+                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            listener.foundLocation(LocationManager.GPS_PROVIDER, location);
+        } else {
+            if ((isNetworkEnabled) || (locationManager
+                    .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER) != null) || (locationManager
+                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER) != null)) {
+                if (locationManager
+                        .getLastKnownLocation(LocationManager.NETWORK_PROVIDER) == null) {
+                    location = locationManager
+                            .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                    listener.foundLocation(LocationManager.PASSIVE_PROVIDER, location);
+                } else {
+                    location = locationManager
+                            .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    listener.foundLocation(LocationManager.NETWORK_PROVIDER, location);
                 }
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGPSProvider);
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListenerNetworkProvider);
             }
-            if (newestLocation != null) {
-                listener.foundLocation(LocationManager.NETWORK_PROVIDER, newestLocation);
-                return;
-
-            }
-            listener.couldntFindLocation();
         }
-    }
-    final LocationListener locationListenerNetworkProvider = new LocationListener() {
-
-        @Override
-        public void onLocationChanged(Location location) {
-            FindMe.this.onLocationChanged(this, LocationManager.NETWORK_PROVIDER, location);
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-            FindMe.this.onProviderDisabled(provider);
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-            FindMe.this.onProviderEnabled(provider);
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-    };
-
-    final LocationListener locationListenerGPSProvider = new LocationListener() {
-
-        @Override
-        public void onLocationChanged(Location location) {
-            FindMe.this.onLocationChanged(this, LocationManager.GPS_PROVIDER, location);
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-            FindMe.this.onProviderDisabled(provider);
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-            FindMe.this.onProviderEnabled(provider);
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-    };
-
-    private void onLocationChanged(LocationListener locationListener, String provider, Location location) {
-        locationManager.removeUpdates(locationListener);
-        listener.foundLocation(provider, location);
-    }
-
-    private void onProviderDisabled(String provider) {
-        Log.d("FindMe", "Provider disabled - " + provider);
-    }
-
-    private void onProviderEnabled(String provider) {
-        Log.d("FindMe", "Provider enabled - " + provider);
+        listener.couldntFindLocation();
     }
 
 }

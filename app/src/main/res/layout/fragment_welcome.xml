@@ -2,50 +2,67 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true">
-    <ImageView
-        android:src="@drawable/pttr"
-        android:scaleType = "centerCrop"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:alpha="0.8"/>
+    android:animateLayoutChanges="true"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false">
 
     <ImageView
-        android:src="@drawable/apt"
-        android:scaleType = "centerInside"
+        android:src="@drawable/anim"
+        android:scaleType="centerCrop"
         android:layout_width="wrap_content"
-        android:layout_height="380dp"
-        android:layout_marginBottom="-290dp"
-        android:layout_gravity="center_horizontal|bottom"/>
-    <LinearLayout android:orientation="vertical"
+        android:layout_height="fill_parent" />
+
+    <ImageView
+        android:src="@drawable/ic_pig_full"
+        android:layout_width="wrap_content"
+        android:layout_height="143dp"
+        android:layout_marginBottom="-90dp"
+        android:layout_gravity="center_horizontal|bottom" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="6dp"
-        android:animateLayoutChanges="true">
+        android:padding="25dp"
+        android:animateLayoutChanges="true"
+        android:weightSum="1"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
+
         <ImageView
-            android:src="@drawable/doge"
+            android:src="@drawable/ic2"
             android:layout_width="wrap_content"
-            android:layout_height="143dp"
-            android:layout_gravity="center_horizontal|bottom"/>
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal|bottom" />
+        <!--<ImageView-->
+        <!--android:src="@drawable/meet"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_gravity="center_horizontal|bottom"/>-->
+
         <TextView
-            android:id="@+id/much_like"
-            android:text="Wow\nSuch app\nMuch like"
-            android:layout_width="wrap_content"
+            android:layout_width="287dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/color1"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="6dp"/>
+            android:layout_marginTop="18dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="EatWithMe"
+            android:textSize="40sp"
+            android:textColor="@color/common_signin_btn_dark_text_focused"
+            android:gravity="center_horizontal"
+            android:id="@+id/textWelcome" />
 
         <EditText
             android:layout_width="match_parent"
+            android:layout_marginTop="6dp"
             android:layout_height="48dp"
             android:id="@+id/username_login"
-            android:inputType="textAutoComplete"
+            android:inputType="textNoSuggestions"
             android:hint="Username"
             android:paddingRight="6dp"
             android:paddingLeft="6dp"
-            android:background="@drawable/field"/>
+            android:background="@drawable/field" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -53,11 +70,9 @@
             android:ems="10"
             android:id="@+id/password_login"
             android:hint="Password"
-            android:layout_marginTop="6dp"
             android:paddingRight="6dp"
             android:paddingLeft="6dp"
-            android:background="@drawable/field"/>
-
+            android:background="@drawable/field" />
 
         <Button
             android:text="Login"
@@ -67,10 +82,10 @@
             android:onClick="login"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/nowbutton"
-            android:layout_marginTop="6dp"
             android:textSize="20sp"
+            android:textColor="@color/common_signin_btn_dark_text_focused"
             android:hapticFeedbackEnabled="true"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
         <Button
             android:text="Register"
@@ -79,46 +94,34 @@
             android:id="@+id/register_button"
             android:onClick="registerProfile"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/nowbutton"
-            android:layout_marginTop="6dp"
             android:textSize="20sp"
+            android:textColor="@color/common_signin_btn_dark_text_focused"
             android:hapticFeedbackEnabled="true"
-            android:visibility="gone"/>
+            android:background="@drawable/nowbutton"
+            android:visibility="gone" />
+
         <Button
             android:text="Join now! It`s free"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/join_button"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/buttonshape"
-            android:layout_marginTop="6dp"
+            android:background="@drawable/bttn"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:hapticFeedbackEnabled="true"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-            <!--android:text="Dont`t have an account yet?"-->
-            <!--android:id="@+id/RegisterText"-->
-            <!--android:textColor="@color/bg_color"-->
-            <!--android:layout_marginTop="6dp"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:onClick="registerProfile"/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-            <!--android:text=" Join us! It`s free"-->
-            <!--android:textColor="@android:color/holo_orange_dark"-->
-            <!--android:id="@+id/textView"-->
-            <!--android:onClick="registerProfile"-->
-            <!--android:textSize="20sp"-->
-            <!--android:layout_gravity="center_horizontal"/>-->
-
-
+        <Button
+            android:text="Already registered?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/already_button"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bttn"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:hapticFeedbackEnabled="true"
+            android:visibility="gone" />
     </LinearLayout>
 </FrameLayout>

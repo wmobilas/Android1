@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="build.agcy.test1" >
+    package="build.agcy.test1">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- location permissions -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <!-- gcm permissions -->
@@ -15,6 +16,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="build.agcy.test1.permission.C2D_MESSAGE" />
+
     <permission
         android:name="build.agcy.test1.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -22,43 +24,42 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
-
     <application
+        android:largeHeap="true"
         android:name=".EatWithMeApp"
         android:allowBackup="true"
-        android:icon="@drawable/ic_pig"
+        android:icon="@drawable/ic_launcher"
         android:label="EatWithMe"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:theme="@style/NoActionBarTheme"
             android:name=".Start.StartActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Chat.AndyChatActivity"
             android:label="Chat"
-            android:theme="@style/AnimationActivity" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Meetings.MapActivity"
             android:label="Meetings"
-            android:theme="@style/AnimationActivity" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Meetings.MeetingActivity"
             android:label="@string/title_activity_meeting"
-            android:theme="@style/AnimationActivity" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Users.UserListActivity"
             android:label="@string/title_activity_user_list"
-            android:theme="@style/AnimationActivity" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Users.UserActivity"
             android:label="@string/title_activity_user"
-            android:theme="@style/AnimationActivity" />
+            android:theme="@style/AppTheme" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -68,8 +69,7 @@
             android:value="AIzaSyBV6Kul7Ybt_7yeEd6Im7gSjN_0fNu_Psw" />
 
 
-
-        <receiver android:name=".Core.GCM.GCMBroadcastReceiver" >
+        <receiver android:name=".Core.GCM.GCMBroadcastReceiver">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
@@ -82,8 +82,8 @@
 
         <activity
             android:name=".Main.MainActivity"
-            android:label="@string/title_activity_main" >
-        </activity>
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

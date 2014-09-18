@@ -46,16 +46,17 @@ public class ProfileFragment extends Fragment {
                     640, 640,
                     7);
             ImageLoader.getInstance().displayImage(backgroundUrl, backgroundView);
-
             ImageView photoView = (ImageView) rootView.findViewById(R.id.photo);
-            ImageLoader.getInstance().displayImage(EatWithMeApp.currentUser.photo, photoView);
-
+            if (EatWithMeApp.currentUser.photo != null) {
+                ImageLoader.getInstance().displayImage(EatWithMeApp.currentUser.photo, photoView);
+            }
             final ListView meetingListView = (ListView) rootView.findViewById(R.id.history_list);
             MeetingHistoryTask task = new MeetingHistoryTask() {
                 @Override
                 public void onSuccess(final Meeting[] response) {
                     if (response.length == 0) {
-                        ((TextView) rootView.findViewById(R.id.history_status)).setText("You have no meetings yet");
+                        ((TextView) rootView.findViewById(R.id.history_text)).setText("You have no meetings yet");
+                        (rootView.findViewById(R.id.history_status)).setVisibility(View.VISIBLE);
                     } else
                         rootView.findViewById(R.id.history_status).setVisibility(View.GONE);
                     final MeetingHistoryAdapter adapter = new MeetingHistoryAdapter(getActivity(), new ArrayList<Meeting>(Arrays.asList(response)));
@@ -79,7 +80,6 @@ public class ProfileFragment extends Fragment {
                 }
             };
             task.start();
-
         }
         return rootView;
     }

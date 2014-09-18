@@ -1,44 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="48dp" 
-    android:background="@drawable/buttonshape">
+    android:layout_height="48dp"
+    android:padding="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:background="@color/transparent">
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="25dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:contentDescription="@string/desc_list_item_icon"
         android:src="@drawable/ic_launcher"
         android:layout_centerVertical="true" />
 
+    <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/owner_photo"
+        android:src="@drawable/doge"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        app:corner_radius="30dp"
+        app:border_width="1dip"
+        app:border_color="#20555555"
+        app:mutate_background="true"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:oval="true" />
+
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_toRightOf="@id/icon"
+        android:layout_toEndOf="@id/icon"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="@color/color1"
+        android:textColor="@color/violet_dark"
         android:gravity="center_vertical"
         android:paddingRight="40dp"
         android:paddingLeft="0dp"
         android:paddingStart="0dp"
-        android:paddingEnd="40dp"
-        />
-    
-    <TextView android:id="@+id/counter"
+        android:paddingEnd="40dp" />
+
+    <TextView
+        android:id="@+id/counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttonshape"
+        android:background="@drawable/nowbutton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
         android:layout_marginEnd="8dp"
-        android:textColor="@color/common_signin_btn_default_background"/>
-
+        android:textColor="@color/common_signin_btn_default_background"
+        android:visibility="invisible" />
 </RelativeLayout>

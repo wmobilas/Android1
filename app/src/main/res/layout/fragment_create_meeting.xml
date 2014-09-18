@@ -1,52 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:padding="12dp"
     android:id="@+id/fragment_explore"
+    android:layout_marginTop="-1dp"
     android:textSize="15sp">
 
-
-
-    <LinearLayout
+    <ImageView
+        android:src="@drawable/eat2"
+        android:layout_marginTop="-48dp"
+        android:layout_marginBottom="100dp"
+        android:paddingTop="-100dp"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:id="@+id/imgEat"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/eat" />
-        <TextView
-            android:text="Describe your meeting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/text"
-            android:hint="Simple lunch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:id="@+id/imageView" />
 
-        <Button
-            android:layout_alignParentBottom="true"
-            android:id="@+id/time_pick"
-            android:text="@string/pick_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="See date and map selector in future versions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <Button
-        android:layout_alignParentBottom="true"
-        android:id="@+id/create_meeting"
-        android:text="create"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-</RelativeLayout>
+        android:layout_gravity="bottom"
+        android:gravity="bottom">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="182dp"
+            android:background="@color/violet_dark"
+            android:gravity="center_horizontal|bottom"
+            android:layout_gravity="center_horizontal|bottom">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/bottomline"
+                android:background="@drawable/bottomline"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/top"
+                android:layout_height="60dp"
+                android:background="@color/white">
+
+                <EditText
+                    android:id="@+id/text1"
+                    android:gravity="center"
+                    android:hint="Name your meeting"
+                    android:background="@color/white"
+                    android:textColor="@color/violet_dark"
+                    android:textColorHighlight="@color/violet_dark"
+                    android:textColorHint="@color/violet_dark"
+                    android:textColorLink="@color/violet_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textNoSuggestions" />
+            </LinearLayout>
+            <!--<TextView-->
+            <!--android:text="See date and map selector in future versions"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/textView"-->
+            <!--android:layout_below="@+id/text"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:visibility="gone"/>-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/bottom_line_divider"
+                android:background="@drawable/bottomline"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <Button
+                android:id="@+id/time_pick"
+                android:text="@string/pick_time"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/white"
+                android:textColor="@color/violet_dark" />
+
+            <Button
+                android:id="@+id/create_meeting"
+                android:text="Create"
+                android:background="@color/violet_dark"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

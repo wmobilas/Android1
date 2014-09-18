@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import java.util.ArrayList;
 
 import build.agcy.test1.Models.Meeting;
@@ -16,40 +18,55 @@ import build.agcy.test1.R;
  * Created by kiolt_000 on 08/09/2014.
  */
 public class MeetingHistoryAdapter extends MeetingListAdapter {
-    private View view;
 
     public MeetingHistoryAdapter(Context context, ArrayList<Meeting> meetings) {
         super(context, meetings);
     }
 
+    //todo не показывать не мои встречи и отображать количество предложений от accepterов
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ViewGroup view = null;
-
+        ViewGroup view;
         if (convertView == null) {
             view = (ViewGroup) inflater.inflate(R.layout.item_meeting_history, parent, false);
         } else {
             view = (ViewGroup) convertView;
         }
-//      View view = inflater.inflate(R.layout.item_meeting_history, null);
         TextView descView = (TextView) view.findViewById(R.id.description);
         TextView ownerNameView = (TextView) view.findViewById(R.id.owner_name);
+        TextView openUsernameView = (TextView) view.findViewById(R.id.open_username);
         ImageView ownerPhotoView = (ImageView) view.findViewById(R.id.owner_photo);
-        TextView statusView = (TextView) view.findViewById(R.id.status);
         final TextView confirmerNameTextView = (TextView) view.findViewById(R.id.confirmer_name);
         ImageView confirmerPhotoView = (ImageView) view.findViewById(R.id.confirmer_photo);
+        ImageView open = (ImageView) view.findViewById(R.id.lock);
         final Meeting meeting = getItem(position);
         ownerNameView.setText(meeting.owner.username);
         String ownerPhotoUrl = meeting.owner.photo;
-        // ImageLoader.getInstance().displayImage(ownerPhotoUrl, ownerPhotoView);
+        confirmerPhotoView.setVisibility(View.VISIBLE);
+        ownerNameView.setVisibility(View.VISIBLE);
+        openUsernameView.setVisibility(View.GONE);
+//        open.setVisibility(View.GONE);
+        confirmerNameTextView.setVisibility(View.VISIBLE);
+        ownerPhotoView.setVisibility(View.VISIBLE);
+
         if (meeting.confirmer != null) {
+            open.setImageResource(R.drawable.lock);
+            if (ownerPhotoUrl != null) {
+                ImageLoader.getInstance().displayImage(ownerPhotoUrl, ownerPhotoView);
+            }
             confirmerNameTextView.setText(meeting.confirmer.username);
-            String confirmerPhotoUrl = meeting.confirmer.photo;
-            // ImageLoader.getInstance().displayImage(ownerPhotoUrl, confirmerPhotoView);
+            if (meeting.confirmer.photo != null) {
+                ImageLoader.getInstance().displayImage(meeting.confirmer.photo, confirmerPhotoView);
+            }
+
         } else {
-            confirmerNameTextView.setText("Pending");
+            open.setImageResource(R.drawable.open);
+            openUsernameView.setVisibility(View.VISIBLE);
             confirmerPhotoView.setVisibility(View.GONE);
+            confirmerNameTextView.setVisibility(View.GONE);
+            ownerPhotoView.setVisibility(View.GONE);
+            ownerNameView.setVisibility(View.GONE);
         }
         //Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 600, 400, 7, "red", "Here");
         descView.setText(meeting.description);

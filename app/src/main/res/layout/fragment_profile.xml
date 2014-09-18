@@ -4,50 +4,98 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
-    tools:context="build.agcy.test1.Main.ProfileFragment">
-
-    <ListView
-        android:paddingTop="50dp"
-        android:clipToPadding="false"
-        android:id="@+id/history_list"
-        android:layout_below="@+id/background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    tools:context="build.agcy.test1.Main.ProfileFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/background"
-        android:src="@drawable/map"
+        android:src="@drawable/ap_l"
+        android:alpha="0.3"
         android:scaleType="centerCrop"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent" />
 
-    <!--<lib.roundedimage.RoundedImageView
-        app:corner_radius="100dp"-->
-    <ImageView
-        android:id="@+id/photo"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/doge"
-        android:layout_centerHorizontal="true"
-        android:layout_width="120dp"
-        android:layout_height="120dp" />
-
-    <TextView
-        android:paddingTop="10dp"
-        android:textSize="20sp"
-        android:layout_below="@+id/photo"
-        android:layout_centerHorizontal="true"
-        android:text="UserName"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/user_name" />
+        android:id="@+id/top">
 
-    <TextView
-        android:id="@+id/history_status"
-        android:layout_below="@+id/background"
-        android:gravity="center"
-        android:layout_centerHorizontal="true"
-        android:text="Loading history"
-        android:layout_alignParentBottom="true"
+        <ImageView
+            android:id="@+id/background"
+            android:src="@drawable/map"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:contentDescription="map"
+            android:background="@drawable/bottomline" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/bottomline"
+            android:background="@drawable/bottomline"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/background"
+            android:layout_height="2dp" />
+
+        <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/photo"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/doge"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            app:corner_radius="100dip"
+            app:border_width="2dip"
+            app:border_color="#40555555"
+            app:mutate_background="true"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:oval="true" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/photo"
+            android:layout_centerHorizontal="true"
+            android:text="UserName"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/history_text"
+            android:text="loading"
+            android:visibility="gone"
+            android:layout_below="@+id/user_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="94dp" />
+    </RelativeLayout>
+
+    <ListView
+        android:clipToPadding="false"
+        android:background="@color/black_light"
+        android:overScrollMode="never"
+        android:id="@+id/history_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/upline"
+        android:background="@drawable/bottomline"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/history_list"
+        android:layout_height="1dp" />
+
+    <ProgressBar
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/history_status"
+        android:layout_below="@+id/top"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="94dp" />
 </RelativeLayout>

@@ -1,23 +1,17 @@
 package build.agcy.test1.Users;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Fragment;
-import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.Window;
+import android.view.WindowManager;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-import build.agcy.test1.Api.Users.UserTask;
-import build.agcy.test1.EatWithMeApp;
-import build.agcy.test1.Models.User;
+import build.agcy.test1.Fragments.UserFragment;
 import build.agcy.test1.R;
 
 public class UserActivity extends Activity {
@@ -28,9 +22,32 @@ public class UserActivity extends Activity {
         setContentView(R.layout.activity_user);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.content_container, new PlaceholderUserFragment())
+                    .add(R.id.content_container, new UserFragment())
                     .commit();
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(true);
+        }
+
+        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setStatusBarTintResource(R.color.violet_dark);
+
+
+    }
+
+
+    @TargetApi(19)
+    private void setTranslucentStatus(boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
     }
 
 
@@ -57,67 +74,7 @@ public class UserActivity extends Activity {
      * A placeholder fragment containing a simple view.
      */
 
-    public static class PlaceholderUserFragment extends Fragment {
 
-        private String username;
-        public User user;
-
-        public PlaceholderUserFragment() {
-        }
-
-        private static View user_activity_View;
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-//            if (user_activity_View != null) {
-//                ViewGroup parent = (ViewGroup) user_activity_View.getParent();
-//                if (parent != null)
-//                    parent.removeView(user_activity_View);
-//            }
-            if (savedInstanceState != null) {
-            } else {
-                user_activity_View = inflater.inflate(R.layout.fragment_user, container, false);
-                Activity activity = getActivity();
-                if (activity != null) {
-                    Intent intent = activity.getIntent();
-                    Bundle bundle = intent.getExtras();
-                    String user_id = bundle.getString("id");
-                    UserTask task = new UserTask(user_id) {
-                        @Override
-                        public void onSuccess(User user1) {
-                            user = user1;
-                            ((TextView) user_activity_View.findViewById(R.id.description)).setText(user.username);
-                            (user_activity_View.findViewById(R.id.status)).setVisibility(View.GONE);
-                            ImageLoader.getInstance().displayImage(EatWithMeApp.currentUser.photo, (ImageView) user_activity_View.findViewById(R.id.photo));
-
-                            if (user.photo != null) {
-                                ImageLoader.getInstance().displayImage(user.photo, (ImageView) user_activity_View.findViewById(R.id.photo));
-                            } else {
-                                ImageLoader.getInstance().displayImage(EatWithMeApp.currentUser.photo, (ImageView) user_activity_View.findViewById(R.id.photo));
-                            }
-                        }
-
-                        @Override
-                        public void onError(Exception exp) {
-                            Toast.makeText(getActivity().getApplicationContext(),
-                                    "usertask error" + exp.toString(), Toast.LENGTH_LONG).show();
-                        }
-                    };
-                    task.start();
-                } else {
-                    user = new User() {{
-                        id = "123";
-                        username = "Ivan";
-                    }};
-                    ((TextView) user_activity_View.findViewById(R.id.description)).setText(user.username);
-                    (user_activity_View.findViewById(R.id.status)).setVisibility(View.GONE);
-                }
-
-            }
-            return user_activity_View;
-        }
-    }
 }
 
 

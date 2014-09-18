@@ -1,13 +1,17 @@
 package build.agcy.test1.Start;
 
+import android.app.ActivityManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v13.app.FragmentPagerAdapter;
@@ -20,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +34,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.net.SocketException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -60,7 +66,6 @@ public class StartActivity extends FragmentActivity {
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     public static final String PROPERTY_REG_ID = "11";
     private static final String PROPERTY_APP_VERSION = "application_version_code";
-
     ViewPager mViewPager;
     Map<String, Object> map = new HashMap<String, Object>();
     String TAG = "agcy.test";
@@ -73,15 +78,52 @@ public class StartActivity extends FragmentActivity {
     String password = "";
     TextView username_login;
     TextView password_login;
+    static Typeface type;
+    MediaPlayer mp;
+
+    @Override
+    protected void onPause() {
+        if (this.isFinishing()) {
+            mp.stop();
+        }
+        context = getApplicationContext();
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfos = activityManager.getRunningTasks(1);
+        if (!taskInfos.isEmpty()) {
+            ComponentName topActivity = taskInfos.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                mp.stop();
+            }
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (this.isFinishing()) {
+            if (mp != null) {
+                mp.stop();
+            }
+        }
+        context = getApplicationContext();
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfos = activityManager.getRunningTasks(1);
+        if (!taskInfos.isEmpty()) {
+            ComponentName topActivity = taskInfos.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                if (mp != null) {
+                    mp.stop();
+                }
+            }
+        }
+        super.onDestroy();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        //  GCMRegistrarCompat.checkDevice(this);
-        //if (BuildConfig.DEBUG) {
-        //     GCMRegistrarCompat.checkManifest(this);}
+        type = Typeface.createFromAsset(getAssets(), "fonts/fox.ttf");
         context = getApplicationContext();
         if (EatWithMeApp.token != null) {
             startActivity(new Intent(this, MainActivity.class));
@@ -90,11 +132,13 @@ public class StartActivity extends FragmentActivity {
             return;
         }
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
-
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-
+        mp = MediaPlayer.create(StartActivity.this, R.raw.coffee);
+        mp.setLooping(true);
+        mp.setVolume(0.0f, 0.5f);
+        mp.start();
     }
 
     private void registerGCM() {
@@ -219,14 +263,40 @@ public class StartActivity extends FragmentActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
-            final Button JoinButton = (Button) rootView.findViewById(R.id.join_button);
-            JoinButton.setOnClickListener(
+            final Button joinButton = (Button) rootView.findViewById(R.id.join_button);
+            final Button alreadyButton = (Button) rootView.findViewById(R.id.already_button);
+
+
+            //  GCMRegistrarCompat.checkDevice(this);
+            //if (BuildConfig.DEBUG) {
+            //     GCMRegistrarCompat.checkManifest(this);}
+
+            ((TextView) rootView.findViewById(R.id.textWelcome)).setTypeface(type);
+            ((EditText) rootView.findViewById(R.id.username_login)).setTypeface(type);
+            ((EditText) rootView.findViewById(R.id.password_login)).setTypeface(type);
+            ((Button) rootView.findViewById(R.id.login_button)).setTypeface(type);
+            joinButton.setTypeface(type);
+            alreadyButton.setTypeface(type);
+            ((Button) rootView.findViewById(R.id.register_button)).setTypeface(type);
+            joinButton.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             ((Button) rootView.findViewById(R.id.login_button)).setVisibility(View.GONE);
-                            ((Button) rootView.findViewById(R.id.join_button)).setVisibility(View.GONE);
+                            joinButton.setVisibility(View.GONE);
+                            alreadyButton.setVisibility(View.VISIBLE);
                             ((Button) rootView.findViewById(R.id.register_button)).setVisibility(View.VISIBLE);
+                            Log.d("build.agcy", "registration");
+                        }
+                    });
+            alreadyButton.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ((Button) rootView.findViewById(R.id.login_button)).setVisibility(View.VISIBLE);
+                            joinButton.setVisibility(View.VISIBLE);
+                            alreadyButton.setVisibility(View.GONE);
+                            ((Button) rootView.findViewById(R.id.register_button)).setVisibility(View.GONE);
                             Log.d("build.agcy", "registration");
                         }
                     });
@@ -290,6 +360,7 @@ public class StartActivity extends FragmentActivity {
                 ((Button) findViewById(R.id.login_button)).setVisibility(View.VISIBLE);
                 ((Button) findViewById(R.id.join_button)).setVisibility(View.VISIBLE);
                 ((Button) findViewById(R.id.register_button)).setVisibility(View.GONE);
+                ((Button) findViewById(R.id.already_button)).setVisibility(View.GONE);
                 if (exp instanceof ApiError) {
                     //todo:коды
 //                        int code = ((ApiError) exp).getCode();

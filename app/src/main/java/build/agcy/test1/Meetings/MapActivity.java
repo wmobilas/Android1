@@ -293,7 +293,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
             Intent intent = activity.getIntent();
             //meetingsList=intent.getParcelableArrayListExtra("meetings");
             // Object object= bundle.get("meetings");
-            //todo показать все маркеры на карте в поле зрения, центрировать по переданному маркеру, отобразить данные по встерече из маркера
+            //todo центрировать по переданному маркеру, отобразить данные по встерече из маркера
 
         } else {
             Log.d("e", "error no activity");
@@ -320,7 +320,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
                     .title(meeting_name)
                     .snippet(meeting_time + " " + meeting_creator)
                     .icon(BitmapDescriptorFactory
-                            .fromResource(R.drawable.pin)));
+                            .fromResource(R.drawable.pinb)));
             markers.add(marker);
         }
     }
@@ -329,7 +329,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
         GroundOverlay mGroundOverlay;
         LatLng cordination = new LatLng(lat, lng);
         mGroundOverlay = map.addGroundOverlay(new GroundOverlayOptions()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.pin))
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.pinb))
                 .anchor(0, 1)
                 .position(cordination, 50f, 50f));
 

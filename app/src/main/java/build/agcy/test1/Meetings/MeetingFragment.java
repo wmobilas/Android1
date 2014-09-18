@@ -71,20 +71,17 @@ public class MeetingFragment extends Fragment {
             });
 
             if (meeting != null) {
-                loadingView.setVisibility(View.GONE);
-                containerView.setVisibility(View.VISIBLE);
                 descriptionView.setText(meeting.description);
-                ownerNameView.setText(meeting.owner.username);
+                ownerNameView.setText("by " + meeting.owner.username);
                 if (meeting.owner.photo != null) {
                     ImageLoader.getInstance().displayImage(meeting.owner.photo, ownerPhotoView);
                 } else {
-                    ImageLoader.getInstance().displayImage(EatWithMeApp.currentUser.photo, ownerPhotoView);
                 }
-                String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 640, 360, 10, "red", "here");
+                String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 640, 360, 10, "black", "here");
                 ImageLoader.getInstance().displayImage(imageUrl, imageView);
-                Fragment fragment = null;
+                imageView.setVisibility(View.VISIBLE);
+                Fragment fragment;
                 Bundle arguments = getArguments();
-
                 if (EatWithMeApp.isOwner(meeting.owner.id)) {
                     if (!meeting.isConfirmed())
                         // показываем хозяину запросы
@@ -124,6 +121,8 @@ public class MeetingFragment extends Fragment {
                 }
                 fragment.setArguments(arguments);
                 getFragmentManager().beginTransaction().replace(R.id.action_container, fragment).commit();
+                loadingView.setVisibility(View.GONE);
+                containerView.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -213,14 +212,12 @@ public class MeetingFragment extends Fragment {
 
     public static class ConfirmedFragment extends Fragment {
         private View rootView;
-
         private String meetingId;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             meetingId = getArguments().getString("id", "0");
-
         }
 
         @Override
@@ -287,9 +284,14 @@ public class MeetingFragment extends Fragment {
                                 TextView messageView = (TextView) itemView.findViewById(R.id.message);
 
                                 Meeting.Accept accept = getItem(i);
-                                // todo: insert photo
+                                ImageView photoView = (ImageView) rootView.findViewById(R.id.photo);
+                                if (accept.acceptor.photo != null) {
+                                    ImageLoader.getInstance().displayImage(accept.acceptor.photo, photoView);
+                                }
                                 acceptorIdView.setText(accept.acceptor.username);
-                                messageView.setText(accept.message);
+                                if (accept.message != null) {
+                                    messageView.setText(accept.message);
+                                }
                                 return itemView;
                             }
                         });

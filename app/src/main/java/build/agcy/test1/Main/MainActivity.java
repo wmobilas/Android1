@@ -1,18 +1,25 @@
 package build.agcy.test1.Main;
 
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+
 import build.agcy.test1.Core.Helpers.FindMe;
+import build.agcy.test1.Fragments.LocationDialogFragment;
 import build.agcy.test1.Fragments.MapFragment;
 import build.agcy.test1.Meetings.CreateMeetingFragment;
 import build.agcy.test1.Meetings.MeetingListFragment;
@@ -46,6 +53,27 @@ public class MainActivity extends Activity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(true);
+        }
+
+        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setStatusBarTintResource(R.color.violet_dark);
+
+    }
+
+    @TargetApi(19)
+    private void setTranslucentStatus(boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
     }
 
     @Override
@@ -81,7 +109,7 @@ public class MainActivity extends Activity
                 mTitle = getString(R.string.navbar_title_meetings);
                 break;
             case 3:
-                mTitle = getString(R.string.navbar_title_settings);
+                mTitle = getString(R.string.navbar_title_map);
                 break;
         }
         mTitle = getString(R.string.navbar_title_profile);
@@ -124,7 +152,6 @@ public class MainActivity extends Activity
 
                     if (count == 0) {
                         Log.i("Findme", "lat = " + location.getLatitude() + " long = " + location.getLongitude());
-                        Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).cancel();
                         Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
 
                     }
@@ -133,14 +160,17 @@ public class MainActivity extends Activity
 
                 @Override
                 public void couldntFindLocation() {
-                    Toast.makeText(getApplicationContext(), "Please turn GPS on ", Toast.LENGTH_SHORT).cancel();
-                    Toast.makeText(getApplicationContext(), "Please turn GPS on ", Toast.LENGTH_SHORT).show();
+                    if (count == 0) {
+                        Toast.makeText(MainActivity.this, "Please turn GPS on", Toast.LENGTH_LONG).show();
+                        LocationDialogFragment dialog = new LocationDialogFragment();
+                        dialog.show(getFragmentManager(),
+                                LocationDialogFragment.class.getName());
+                    }
+                    count--;
                 }
             });
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

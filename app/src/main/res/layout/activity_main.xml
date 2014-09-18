@@ -4,7 +4,6 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="build.agcy.test1.Main.MainActivity">
 
     <!-- As the main content view, the view below consumes the entire
@@ -13,6 +12,8 @@
         android:background="#fff"
         android:id="@+id/content_container"
         android:layout_width="match_parent"
+        android:clipToPadding="false"
+        android:fitsSystemWindows="true"
         android:layout_height="match_parent" />
 
     <!-- android:layout_gravity="start" tells DrawerLayout to treat
@@ -26,6 +27,8 @@
         android:id="@+id/navigation_drawer"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fitsSystemWindows="true"
         android:layout_gravity="start"
         android:name="build.agcy.test1.Main.NavigationDrawerFragment"
         tools:layout="@layout/fragment_navigation_drawer" />

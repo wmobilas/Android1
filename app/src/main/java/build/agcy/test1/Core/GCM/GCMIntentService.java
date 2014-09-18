@@ -68,7 +68,6 @@ public class GCMIntentService extends IntentService {
                 }
                 Push push = null;
                 if (pushKey.equals("meeting")) {
-
                     push = new Gson().fromJson(pushJson, PushMeeting.class);
                 } else {
                     if (pushKey.equals("accept")) {
@@ -105,7 +104,7 @@ public class GCMIntentService extends IntentService {
         Resources res = ctx.getResources();
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.pin)
+                        .setSmallIcon(R.drawable.pinw)
                         .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.doge))
                         .setWhen(System.currentTimeMillis())
                         .setAutoCancel(true)
