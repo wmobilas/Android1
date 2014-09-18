@@ -173,7 +173,9 @@ public class UserFragment extends Fragment {
                         if (user.photo != null) {
                             ImageLoader.getInstance().displayImage(user.photo, (ImageView) user_activity_View.findViewById(R.id.photo));
                         } else {
-                            ImageLoader.getInstance().displayImage(EatWithMeApp.currentUser.photo, (ImageView) user_activity_View.findViewById(R.id.photo));
+                            if (EatWithMeApp.currentUser.photo != null) {
+                                ImageLoader.getInstance().displayImage(EatWithMeApp.currentUser.photo, (ImageView) user_activity_View.findViewById(R.id.photo));
+                            }
                         }
                     }
 

@@ -20,7 +20,7 @@
 
             <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/meeting_photo"
-                android:src="@drawable/map"
+                android:src="@drawable/map1"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 app:corner_radius="10dp"

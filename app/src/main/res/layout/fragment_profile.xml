@@ -21,7 +21,7 @@
 
         <ImageView
             android:id="@+id/background"
-            android:src="@drawable/map"
+            android:src="@drawable/map1"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="200dp"
