@@ -79,7 +79,7 @@ public class MeetingListFragment extends Fragment {
 
                 @Override
                 public void onError(Exception exp) {
-                    Toast.makeText(getActivity().getApplicationContext(), "MeetingListTaskError " + exp.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "MeetingListTaskError " + exp.toString(), Toast.LENGTH_LONG).show();
                     Log.d(TAG, "MeetingListTaskError " + exp.toString());
                 }
             };

@@ -86,7 +86,7 @@ public class StartActivity extends FragmentActivity {
         if (this.isFinishing()) {
             mp.stop();
         }
-        context = getApplicationContext();
+        context = this;
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> taskInfos = activityManager.getRunningTasks(1);
         if (!taskInfos.isEmpty()) {
@@ -105,7 +105,7 @@ public class StartActivity extends FragmentActivity {
                 mp.stop();
             }
         }
-        context = getApplicationContext();
+        context = this;
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> taskInfos = activityManager.getRunningTasks(1);
         if (!taskInfos.isEmpty()) {
@@ -124,7 +124,7 @@ public class StartActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         type = Typeface.createFromAsset(getAssets(), "fonts/fox.ttf");
-        context = getApplicationContext();
+        context = this;
         if (EatWithMeApp.token != null) {
             startActivity(new Intent(this, MainActivity.class));
             registerGCM();
@@ -334,7 +334,7 @@ public class StartActivity extends FragmentActivity {
 //        login_button.setVisibility(View.VISIBLE);
 
         if (username.equals("") || password.equals("")) {
-            Toast.makeText(getApplicationContext(), "Please fill form", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill form", Toast.LENGTH_SHORT).show();
             return;
         }
         final ProgressDialog dialog = new ProgressDialog(this);
@@ -365,14 +365,14 @@ public class StartActivity extends FragmentActivity {
                     //todo:коды
 //                        int code = ((ApiError) exp).getCode();
 //                        if (code == ApiError.BADCREDITS) {
-                    Toast.makeText(getApplicationContext(), "Can`t register now. Please try later" + exp.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StartActivity.this, "Can`t register now. Please try later" + exp.toString(), Toast.LENGTH_SHORT).show();
 //                        }
 
                 } else {
                     if (exp instanceof SocketException) {
-                        Toast.makeText(getApplicationContext(), "Check your internet connection" + exp.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StartActivity.this, "Check your internet connection" + exp.toString(), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Unexpected error" + exp.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StartActivity.this, "Unexpected error" + exp.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -397,7 +397,7 @@ public class StartActivity extends FragmentActivity {
         username="kioltk";
         password="123qweASD";*/
         if (username.equals("") || password.equals("")) {
-            Toast.makeText(getApplicationContext(), "Please fill form", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill form", Toast.LENGTH_SHORT).show();
             return;
         }
         final ProgressDialog dialog = new ProgressDialog(this);
@@ -424,14 +424,14 @@ public class StartActivity extends FragmentActivity {
                     //todo:коды
 //                        int code = ((ApiError) exp).getCode();
 //                        if (code == ApiError.BADCREDITS) {
-                    Toast.makeText(getApplicationContext(), "Check your login and password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StartActivity.this, "Check your login and password", Toast.LENGTH_SHORT).show();
 //                        }
 
                 } else {
                     if (exp instanceof SocketException) {
-                        Toast.makeText(getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StartActivity.this, "Check your internet connection", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Unexpected error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StartActivity.this, "Unexpected error", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

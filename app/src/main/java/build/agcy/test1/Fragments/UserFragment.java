@@ -181,7 +181,7 @@ public class UserFragment extends Fragment {
 
                     @Override
                     public void onError(Exception exp) {
-                        Toast.makeText(getActivity().getApplicationContext(),
+                        Toast.makeText(getActivity(),
                                 "usertask error" + exp.toString(), Toast.LENGTH_LONG).show();
                     }
                 };

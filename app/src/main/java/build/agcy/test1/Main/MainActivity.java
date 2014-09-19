@@ -152,7 +152,7 @@ public class MainActivity extends Activity
 
                     if (count == 0) {
                         Log.i("Findme", "lat = " + location.getLatitude() + " long = " + location.getLongitude());
-                        Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
 
                     }
                     count++;
