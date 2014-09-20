@@ -1,11 +1,14 @@
 package build.agcy.test1.Core.GCM.Push;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import build.agcy.test1.R;
@@ -35,12 +38,20 @@ public abstract class Push {
 
         final int NOTIFICATION_ID = getNotificationId();
         NotificationManager mNotificationManager;
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(context);
         mNotificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
+        (buildr().build()).defaults |= Notification.DEFAULT_VIBRATE;
+        (buildr().build()).sound = Uri.parse("android.resource://" + "build.agcy.test1/" + R.raw.eat);
 
+        mNotificationManager.notify(NOTIFICATION_ID, buildr().build());
+    }
+
+    protected NotificationCompat.Builder buildr() {
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(context);
         PendingIntent contentIntent = getPendingIntent();
+        Intent deleteIntent = new Intent(context, DeleteNotificationReciever.class);
+        deleteIntent.putExtra("id", String.valueOf(getNotificationId()));
         Resources res = context.getResources();
         Bitmap img = BitmapFactory.decodeResource
                 (res, R.drawable.notif);
@@ -51,12 +62,12 @@ public abstract class Push {
                 .setAutoCancel(true)
                 .setContentTitle(getTitle())
                 .setContentText(getMessage())
-                .addAction(R.drawable.cncl, "Dismiss", null)
+                .setWhen(System.currentTimeMillis())
+                .addAction(R.drawable.cncl, "Dismiss", PendingIntent.getBroadcast(context, 12345, deleteIntent, PendingIntent.FLAG_CANCEL_CURRENT))
                 .addAction(R.drawable.acpt, "Accept", contentIntent).build();
-
-        if (contentIntent != null)
-            builder.setContentIntent(contentIntent);
-        mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+//        if (contentIntent != null)
+//            builder.setContentIntent(contentIntent);
+        return builder;
     }
 
     protected abstract PendingIntent getPendingIntent();

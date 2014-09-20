@@ -33,9 +33,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-
-        } else {
+        if (savedInstanceState == null) {
             rootView = inflater.inflate(R.layout.fragment_profile, container, false);
             TextView userNameView = (TextView) rootView.findViewById(R.id.user_name);
             userNameView.setText(EatWithMeApp.currentUser.username);
@@ -55,8 +53,8 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onSuccess(final Meeting[] response) {
                     if (response.length == 0) {
-                        ((TextView) rootView.findViewById(R.id.history_text)).setText("You have no meetings yet");
-                        (rootView.findViewById(R.id.history_status)).setVisibility(View.VISIBLE);
+                        rootView.findViewById(R.id.history_text).setVisibility(View.VISIBLE);
+                        rootView.findViewById(R.id.history_status).setVisibility(View.GONE);
                     } else
                         rootView.findViewById(R.id.history_status).setVisibility(View.GONE);
                     final MeetingHistoryAdapter adapter = new MeetingHistoryAdapter(getActivity(), new ArrayList<Meeting>(Arrays.asList(response)));

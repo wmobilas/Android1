@@ -3,7 +3,6 @@ package build.agcy.test1.Meetings;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -50,10 +47,7 @@ public class MeetingListFragment extends Fragment {
         super.onCreateView(inflater, container,
                 savedInstanceState);
         Log.d(TAG, "mapfragment onCreateView");
-        if (savedInstanceState != null) {
-            // Restore last state
-            return myView;
-        } else {
+        if (savedInstanceState == null) {
             myView = inflater.inflate(R.layout.fragment_meeting_list, container, false);
             final ListView meetingListView = (ListView) myView.findViewById(R.id.list);
             MeetingListTask task = new MeetingListTask(new ArrayList<NameValuePair>() {{
@@ -150,15 +144,5 @@ public class MeetingListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "mapfragment onCreate");
-
-        SystemBarTintManager tintManager = new SystemBarTintManager(getActivity());
-        // enable status bar tint
-        tintManager.setStatusBarTintEnabled(true);
-        // enable navigation bar tint
-        tintManager.setNavigationBarTintEnabled(true);
-        // set a custom tint color for all system bars
-        tintManager.setTintColor(Color.parseColor("#800edc"));
-        // set       a custom navigation bar resource
-        tintManager.setNavigationBarTintResource(R.color.violet_dark);
     }
 }

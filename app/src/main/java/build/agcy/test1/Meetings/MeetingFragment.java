@@ -14,7 +14,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,8 +41,7 @@ public class MeetingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-        } else {
+        if (savedInstanceState == null) {
             meetingView = inflater.inflate(R.layout.fragment_meeting, container, false);
             bindData();
         }
@@ -52,8 +50,6 @@ public class MeetingFragment extends Fragment {
 
     private void bindData() {
         if (meeting != null && meetingView != null) {
-            ProgressBar loadingView = (ProgressBar) meetingView.findViewById(R.id.loading);
-            View containerView = meetingView.findViewById(R.id.content_container);
             View ownerContainer = meetingView.findViewById(R.id.user_container);
             TextView descriptionView = (TextView) meetingView.findViewById(R.id.description);
             ImageView imageView = (ImageView) meetingView.findViewById(R.id.image);
@@ -70,60 +66,56 @@ public class MeetingFragment extends Fragment {
                 }
             });
 
-            if (meeting != null) {
-                descriptionView.setText(meeting.description);
-                ownerNameView.setText("by " + meeting.owner.username);
-                if (meeting.owner.photo != null) {
-                    ImageLoader.getInstance().displayImage(meeting.owner.photo, ownerPhotoView);
-                } else {
+            descriptionView.setText(meeting.description);
+            ownerNameView.setText("by " + meeting.owner.username);
+            if (meeting.owner.photo != null) {
+                ImageLoader.getInstance().displayImage(meeting.owner.photo, ownerPhotoView);
+            }
+            String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 640, 360, 10, "black", "here");
+            ImageLoader.getInstance().displayImage(imageUrl, imageView);
+            Fragment fragment;
+            Bundle arguments = getArguments();
+            if (EatWithMeApp.isOwner(meeting.owner.id)) {
+                if (!meeting.isConfirmed())
+                    // показываем хозяину запросы
+                    fragment = new AcceptListFragment();
+                else {
+                    // показываем кого он выбрал
+                    arguments.putString("status", "owner");
+                    arguments.putString("confirmer_name", meeting.confirmer.username);
+                    arguments.putString("confirmer_id", meeting.confirmer.id);
+                    arguments.putString("confirmer_photo", meeting.confirmer.photo);
+                    fragment = new ConfirmedFragment();
                 }
-                String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 640, 360, 10, "black", "here");
-                ImageLoader.getInstance().displayImage(imageUrl, imageView);
-                imageView.setVisibility(View.VISIBLE);
-                Fragment fragment;
-                Bundle arguments = getArguments();
-                if (EatWithMeApp.isOwner(meeting.owner.id)) {
-                    if (!meeting.isConfirmed())
-                        // показываем хозяину запросы
-                        fragment = new AcceptListFragment();
-                    else {
-                        // показываем кого он выбрал
-                        arguments.putString("status", "owner");
-                        arguments.putString("confirmer_name", meeting.confirmer.username);
+            } else {
+
+                if (meeting.accept == null) {
+                    if (!meeting.isConfirmed()) {
+                        // показываем окошко запроса
+                        arguments.putString("meetingId", meeting.id);
+                        fragment = new AcceptFragment();
+                    } else
+                        // показываем, что уже поздно
+                        fragment = new ConfirmedFragment();
+                } else {
+                    if (!meeting.isConfirmed()) {
+                        // запрос отправлен
+                        arguments.putString("id", meeting.accept.id);
+                        arguments.putString("message", meeting.accept.message);
+                        arguments.putInt("time", meeting.accept.time);
+                        fragment = new AcceptFragment();
+                    } else {
+                        // с вами встретятся =)
+                        arguments.putString("status", "acceptor");
                         arguments.putString("confirmer_id", meeting.confirmer.id);
-                        arguments.putString("confirmer_photo", meeting.confirmer.photo);
                         fragment = new ConfirmedFragment();
                     }
-                } else {
-
-                    if (meeting.accept == null) {
-                        if (!meeting.isConfirmed()) {
-                            // показываем окошко запроса
-                            arguments.putString("meetingId", meeting.id);
-                            fragment = new AcceptFragment();
-                        } else
-                            // показываем, что уже поздно
-                            fragment = new ConfirmedFragment();
-                    } else {
-                        if (!meeting.isConfirmed()) {
-                            // запрос отправлен
-                            arguments.putString("id", meeting.accept.id);
-                            arguments.putString("message", meeting.accept.message);
-                            arguments.putInt("time", meeting.accept.time);
-                            fragment = new AcceptFragment();
-                        } else {
-                            // с вами встретятся =)
-                            arguments.putString("status", "acceptor");
-                            arguments.putString("confirmer_id", meeting.confirmer.id);
-                            fragment = new ConfirmedFragment();
-                        }
-                    }
                 }
-                fragment.setArguments(arguments);
-                getFragmentManager().beginTransaction().replace(R.id.action_container, fragment).commit();
-                loadingView.setVisibility(View.GONE);
-                containerView.setVisibility(View.VISIBLE);
             }
+            fragment.setArguments(arguments);
+            getFragmentManager().beginTransaction().replace(R.id.action_container, fragment).commit();
+            View loadingView = meetingView.findViewById(R.id.loading);
+            loadingView.setVisibility(View.GONE);
         }
     }
 
@@ -232,6 +224,7 @@ public class MeetingFragment extends Fragment {
                 if (status.equals("owner")) {
                     messageView.setText("You confirmed " + getArguments().getString("confirmer_name") + " to your meeting");
                 } else {
+                    //todo проверка что не я владелец
                     messageView.setText("You've been confirmed to this meeting. WOWOW");
                 }
             }

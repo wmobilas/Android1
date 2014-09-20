@@ -57,7 +57,7 @@ public class MeetingListAdapter extends BaseAdapter {
         ImageView imageView = (ImageView) view.findViewById(R.id.meeting_photo);
 
         final Meeting meeting = getItem(position);
-        userNameTextView.setText(meeting.owner.username);
+        userNameTextView.setText("by " + meeting.owner.username);
 
         descView.setText(meeting.description);
 

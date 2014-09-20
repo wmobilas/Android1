@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="meetlist">
-        <item>@string/type1</item>
-        <item>@string/type2</item>
-        <item>@string/type3</item>
-        <item>@string/type4</item>
-    </string-array>
     <string-array name="meeting_type">
         <item>@string/meeting_type1</item>
         <item>@string/meeting_type2</item>

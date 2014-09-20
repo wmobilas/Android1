@@ -30,7 +30,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="EatWithMe"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.Violet">
         <activity
             android:theme="@style/NoActionBarTheme"
             android:name=".Start.StartActivity"
@@ -42,24 +42,19 @@
         </activity>
         <activity
             android:name=".Chat.AndyChatActivity"
-            android:label="Chat"
-            android:theme="@style/AppTheme" />
+            android:label="Chat" />
         <activity
             android:name=".Meetings.MapActivity"
-            android:label="Meetings"
-            android:theme="@style/AppTheme" />
+            android:label="Meetings" />
         <activity
             android:name=".Meetings.MeetingActivity"
-            android:label="@string/title_activity_meeting"
-            android:theme="@style/AppTheme" />
+            android:label="@string/title_activity_meeting" />
         <activity
             android:name=".Users.UserListActivity"
-            android:label="@string/title_activity_user_list"
-            android:theme="@style/AppTheme" />
+            android:label="@string/title_activity_user_list" />
         <activity
             android:name=".Users.UserActivity"
-            android:label="@string/title_activity_user"
-            android:theme="@style/AppTheme" />
+            android:label="@string/title_activity_user" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -68,8 +63,9 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBV6Kul7Ybt_7yeEd6Im7gSjN_0fNu_Psw" />
 
-
-        <receiver android:name=".Core.GCM.GCMBroadcastReceiver">
+        <receiver
+            android:name="build.agcy.test1.Core.GCM.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
@@ -77,13 +73,20 @@
                 <category android:name="build.agcy.test1" />
             </intent-filter>
         </receiver>
+        <!--<receiver android:name=".Core.GCM.GCMBroadcastReceiver">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.google.android.c2dm.intent.RECEIVE" />-->
+        <!--<action android:name="com.google.android.c2dm.intent.REGISTRATION" />-->
 
-        <service android:name=".Core.GCM.GCMIntentService" />
+        <!--<category android:name="build.agcy.test1" />-->
+        <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <service android:name="build.agcy.test1.Core.GCM.GCMIntentService" />
 
         <activity
             android:name=".Main.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme"></activity>
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

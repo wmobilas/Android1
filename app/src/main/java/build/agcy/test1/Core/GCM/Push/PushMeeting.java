@@ -12,7 +12,6 @@ public class PushMeeting extends Push {
     public String id;
     public String description;
 
-
     @Override
     protected PendingIntent getPendingIntent() {
         Intent i = new Intent(context, MeetingActivity.class);

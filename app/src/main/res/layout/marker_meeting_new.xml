@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="2dip"
-        android:src="@drawable/ic_pig"
+        android:src="@drawable/ic_launcher"
         android:contentDescription="icon"
         android:layout_gravity="center"
         android:visibility="visible" />

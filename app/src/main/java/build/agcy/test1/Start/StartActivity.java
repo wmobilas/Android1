@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
+import android.location.Location;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -24,7 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,15 +32,13 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.net.SocketException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import build.agcy.test1.Api.Errors.ApiError;
 import build.agcy.test1.Api.PushRegisterTask;
 import build.agcy.test1.Core.GCM.GCMRegistrationTask;
+import build.agcy.test1.Core.Helpers.FindMe;
 import build.agcy.test1.EatWithMeApp;
 import build.agcy.test1.Main.MainActivity;
 import build.agcy.test1.Models.CurrentUser;
@@ -67,18 +64,14 @@ public class StartActivity extends FragmentActivity {
     public static final String PROPERTY_REG_ID = "11";
     private static final String PROPERTY_APP_VERSION = "application_version_code";
     ViewPager mViewPager;
-    Map<String, Object> map = new HashMap<String, Object>();
     String TAG = "agcy.test";
     GoogleCloudMessaging gcm;
-    AtomicInteger msgId = new AtomicInteger();
-    SharedPreferences prefs;
     Context context;
     String regid = "";
     String username = "";
     String password = "";
     TextView username_login;
     TextView password_login;
-    static Typeface type;
     MediaPlayer mp;
 
     @Override
@@ -123,8 +116,18 @@ public class StartActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        type = Typeface.createFromAsset(getAssets(), "fonts/fox.ttf");
         context = getApplicationContext();
+        FindMe.please(context, new FindMe.FindMeListener() {
+            @Override
+            public void foundLocation(String provider, Location location) {
+                Log.d(TAG, " " + location.getLatitude() + " " + location.getLongitude());
+            }
+
+            @Override
+            public void couldntFindLocation() {
+            }
+        });
+
         if (EatWithMeApp.token != null) {
             startActivity(new Intent(this, MainActivity.class));
             registerGCM();
@@ -135,7 +138,7 @@ public class StartActivity extends FragmentActivity {
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        mp = MediaPlayer.create(StartActivity.this, R.raw.coffee);
+        mp = MediaPlayer.create(StartActivity.this, R.raw.coffe);
         mp.setLooping(true);
         mp.setVolume(0.0f, 0.5f);
         mp.start();
@@ -217,7 +220,7 @@ public class StartActivity extends FragmentActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 1;
         }
 
         @Override
@@ -225,11 +228,11 @@ public class StartActivity extends FragmentActivity {
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return getString(R.string.doge).toUpperCase(l);
+                    return getString(R.string.app_name).toUpperCase(l);
                 case 1:
-                    return getString(R.string.explore_new_world).toUpperCase(l);
+                    return getString(R.string.app_name).toUpperCase(l);
                 case 2:
-                    return getString(R.string.login).toUpperCase(l);
+                    return getString(R.string.app_name).toUpperCase(l);
             }
             return null;
         }
@@ -262,7 +265,7 @@ public class StartActivity extends FragmentActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            final View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
+            final View rootView = inflater.inflate(R.layout.activity_welcome, container, false);
             final Button joinButton = (Button) rootView.findViewById(R.id.join_button);
             final Button alreadyButton = (Button) rootView.findViewById(R.id.already_button);
 
@@ -271,21 +274,14 @@ public class StartActivity extends FragmentActivity {
             //if (BuildConfig.DEBUG) {
             //     GCMRegistrarCompat.checkManifest(this);}
 
-            ((TextView) rootView.findViewById(R.id.textWelcome)).setTypeface(type);
-            ((EditText) rootView.findViewById(R.id.username_login)).setTypeface(type);
-            ((EditText) rootView.findViewById(R.id.password_login)).setTypeface(type);
-            ((Button) rootView.findViewById(R.id.login_button)).setTypeface(type);
-            joinButton.setTypeface(type);
-            alreadyButton.setTypeface(type);
-            ((Button) rootView.findViewById(R.id.register_button)).setTypeface(type);
             joinButton.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            ((Button) rootView.findViewById(R.id.login_button)).setVisibility(View.GONE);
+                            (rootView.findViewById(R.id.login_button)).setVisibility(View.GONE);
                             joinButton.setVisibility(View.GONE);
                             alreadyButton.setVisibility(View.VISIBLE);
-                            ((Button) rootView.findViewById(R.id.register_button)).setVisibility(View.VISIBLE);
+                            (rootView.findViewById(R.id.register_button)).setVisibility(View.VISIBLE);
                             Log.d("build.agcy", "registration");
                         }
                     });
@@ -293,15 +289,16 @@ public class StartActivity extends FragmentActivity {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            ((Button) rootView.findViewById(R.id.login_button)).setVisibility(View.VISIBLE);
+                            (rootView.findViewById(R.id.login_button)).setVisibility(View.VISIBLE);
                             joinButton.setVisibility(View.VISIBLE);
                             alreadyButton.setVisibility(View.GONE);
-                            ((Button) rootView.findViewById(R.id.register_button)).setVisibility(View.GONE);
+                            (rootView.findViewById(R.id.register_button)).setVisibility(View.GONE);
                             Log.d("build.agcy", "registration");
                         }
                     });
             Bundle args = getArguments();
 //            todo: bind args
+            MainActivity.applyTypeface(MainActivity.getParentView(rootView), MainActivity.getTypeface(getActivity().getApplicationContext()));
             return rootView;
         }
     }
@@ -326,12 +323,6 @@ public class StartActivity extends FragmentActivity {
         username = username_login.getText().toString();
         password_login = (TextView) findViewById(R.id.password_login);
         password = password_login.getText().toString();
-//        final Button login_button =(Button) findViewById(R.id.login_button);
-//        login_button.setVisibility(View.GONE);
-//        final Button join_button =(Button) findViewById(R.id.join_button);
-//        login_button.setVisibility(View.GONE);
-//        final Button register_button =(Button) findViewById(R.id.register_button);
-//        login_button.setVisibility(View.VISIBLE);
 
         if (username.equals("") || password.equals("")) {
             Toast.makeText(getApplicationContext(), "Please fill form", Toast.LENGTH_SHORT).show();
@@ -357,10 +348,10 @@ public class StartActivity extends FragmentActivity {
             @Override
             public void onError(Exception exp) {
                 dialog.dismiss();
-                ((Button) findViewById(R.id.login_button)).setVisibility(View.VISIBLE);
-                ((Button) findViewById(R.id.join_button)).setVisibility(View.VISIBLE);
-                ((Button) findViewById(R.id.register_button)).setVisibility(View.GONE);
-                ((Button) findViewById(R.id.already_button)).setVisibility(View.GONE);
+                (findViewById(R.id.login_button)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.join_button)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.register_button)).setVisibility(View.GONE);
+                (findViewById(R.id.already_button)).setVisibility(View.GONE);
                 if (exp instanceof ApiError) {
                     //todo:коды
 //                        int code = ((ApiError) exp).getCode();
@@ -393,9 +384,6 @@ public class StartActivity extends FragmentActivity {
         username = username_login.getText().toString();
         password_login = (TextView) findViewById(R.id.password_login);
         password = password_login.getText().toString();
-        /*
-        username="kioltk";
-        password="123qweASD";*/
         if (username.equals("") || password.equals("")) {
             Toast.makeText(getApplicationContext(), "Please fill form", Toast.LENGTH_SHORT).show();
             return;

@@ -3,7 +3,6 @@ package build.agcy.test1.Fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.Image;
@@ -30,10 +29,11 @@ import org.apache.http.NameValuePair;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Date;
 
 import build.agcy.test1.Api.Meetings.MeetingListTask;
 import build.agcy.test1.Api.UpdateLocationTask;
-import build.agcy.test1.Core.MyLocationListener;
+import build.agcy.test1.Core.Helpers.FindMe;
 import build.agcy.test1.Meetings.MapHelpers.MeetingPopupAdapter;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
@@ -51,7 +51,6 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
     LocationManager locationManager;
     private Activity myContext;
     private Location location;
-    private boolean hasGpsProvider, hasNetworkProvider;
 
     public MapFragment() {
     }
@@ -129,14 +128,34 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         container.removeAllViews();
         container.removeAllViewsInLayout();
-        if (mapView != null) {
-            return mapView;
-        }
-        mapView = inflater.inflate(R.layout.activity_map, container, false);
-        if (savedInstanceState != null) {
-            // Restore last state
-        }
-//        else {
+        FindMe.please(getActivity(), new FindMe.FindMeListener() {
+            int pressedCount = 0;
+
+            @Override
+            public void foundLocation(String provider, Location location) {
+
+                if (pressedCount == 0) {
+                    MapFragment.this.location = location;
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                    Log.d(TAG, "before lat= " + latitude + " lng= " + longitude);
+                }
+                pressedCount++;
+            }
+
+            @Override
+            public void couldntFindLocation() {
+                if (pressedCount == 0) {
+                    LocationDialogFragment dialog = new LocationDialogFragment();
+                    dialog.show(getFragmentManager(),
+                            LocationDialogFragment.class.getName());
+                    pressedCount--;
+                }
+            }
+        });
+        if (mapView == null) {
+            mapView = inflater.inflate(R.layout.activity_map, container, false);
+//            if (savedInstanceState == null) {
 //            Button testButtonMap = (Button) mapView.findViewById(R.id.btnTest);
 //            testButtonMap.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -153,7 +172,8 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
 //
 //                }
 //            });
-//        }
+//            }
+        }
         return mapView;
     }
 
@@ -205,80 +225,32 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
 
     }
 
-    public Location getLocation(Context mContext) {
-
-        final MyLocationListener myLocationService = new MyLocationListener(myContext) {
-        };
-        if (locationManager == null) {
-            locationManager = (LocationManager) mContext
-                    .getSystemService(Context.LOCATION_SERVICE);
-        }
-
-        hasGpsProvider = locationManager
-                .isProviderEnabled(LocationManager.GPS_PROVIDER);
-        hasNetworkProvider = locationManager
-                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER, 0, 100, myLocationService);
-        locationManager.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER, 0, 100,
-                myLocationService);
-        locationManager.requestLocationUpdates(
-                LocationManager.PASSIVE_PROVIDER, 0, 100,
-                myLocationService);
-        Location location;
-        if ((locationManager
-                .getLastKnownLocation(LocationManager.GPS_PROVIDER) != null) || (hasGpsProvider)) {
-            location = locationManager
-                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            return location;
-        } else {
-            if ((hasNetworkProvider) || (locationManager
-                    .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER) != null)) {
-                if (locationManager
-                        .getLastKnownLocation(LocationManager.NETWORK_PROVIDER) == null) {
-                    return locationManager
-                            .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-                }
-            }
-        }
-        return locationManager
-                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-    }
-
     private void init() {
-
+        map.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+            @Override
+            public void onMyLocationChange(Location location) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+                Log.d(TAG, "after lat= " + latitude + " lng= " + longitude);
+                MapFragment.this.location = location;
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(latitude, longitude))
+                        .zoom(16)
+                        .bearing(45)
+                        .tilt(30)
+                        .build();
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+                map.animateCamera(cameraUpdate);
+            }
+        });
         if (count == 0) {
-//            final Location[] newestLocation = {null};
-
-//        marker = activity_map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("I am here!"));
+            addMeetings(map);
             map.setMyLocationEnabled(true);
-            Log.d(TAG, "map!=null!!!!");
             map.getUiSettings().setAllGesturesEnabled(true);
             map.getUiSettings().setMyLocationButtonEnabled(false);
-            map.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-                @Override
-                public void onMyLocationChange(Location location) {
-                    latitude = location.getLatitude();
-                    longitude = location.getLongitude();
-                    MapFragment.this.location = location;
-                    CameraPosition cameraPosition = new CameraPosition.Builder()
-                            .target(new LatLng(latitude, longitude))
-                            .zoom(16)
-                            .bearing(45)
-                            .tilt(30)
-                            .build();
-                    CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
-                    map.animateCamera(cameraUpdate);
-                }
-            });
-            if (location == null) {
-                location = getLocation(myContext);
-            }
             map.getUiSettings().setCompassEnabled(false);
             map.setInfoWindowAdapter(new MeetingPopupAdapter(myContext.getBaseContext()));
             map.setOnInfoWindowClickListener(this);
-            //map.setBuildingsEnabled(true);
 
             if (location == null) {
                 LocationDialogFragment dialog = new LocationDialogFragment();
@@ -288,32 +260,33 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
                 longitude = location.getLongitude();
                 latitude = location.getLatitude();
             }
-            addMeetings(map);
+
+            UpdateLocationTask taskLocation = new UpdateLocationTask(
+                    String.valueOf(latitude),
+                    String.valueOf(longitude)) {
+                @Override
+                public void onSuccess(String response) {
+                }
+
+                @Override
+                public void onError(Exception exp) {
+                }
+            };
+            taskLocation.start();
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(new LatLng(latitude, longitude))
+                    .zoom(16)
+                    .bearing(45)
+                    .tilt(30)
+                    .build();
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+            map.animateCamera(cameraUpdate);
         }
         count++;
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(latitude, longitude))
-                .zoom(16)
-                .bearing(45)
-                .tilt(30)
-                .build();
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
-        map.animateCamera(cameraUpdate);
-        UpdateLocationTask taskLocation = new UpdateLocationTask(
-                String.valueOf(latitude),
-                String.valueOf(longitude)) {
-            @Override
-            public void onSuccess(String response) {
-            }
-
-            @Override
-            public void onError(Exception exp) {
-            }
-        };
-        taskLocation.start();
 //                    new MeetingPopupAdapter(myContext.getBaseContext()));
         map.setInfoWindowAdapter(
                 new GoogleMap.InfoWindowAdapter() {
+                    //todo open meeting, время отображать нормально
                     @Override
                     public View getInfoWindow(Marker marker) {
                         return null;
@@ -467,13 +440,19 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
             @Override
             public void onSuccess(final Meeting[] response) {
                 for (Meeting m : response) {
-                    map.addMarker(new MarkerOptions()
-                                    .position(new LatLng(Double.parseDouble(m.latitude), Double.parseDouble(m.longitude)))
-                                    .title(m.description)
-                                    .snippet(m.time + " " + m.id)
+                    if (!m.isConfirmed()) {
+                        long time = m.time * (long) 1000;
+                        Date date = new Date(time);
+//                        SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy a");
+//                        format.setTimeZone(TimeZone.getTimeZone("GMT"));
+                        map.addMarker(new MarkerOptions()
+                                        .position(new LatLng(Double.parseDouble(m.latitude), Double.parseDouble(m.longitude)))
+                                        .title(m.description)
+                                        .snippet("by " + m.owner.username + " at " + String.valueOf(date).substring(11, 16))
 //                                    .icon(BitmapDescriptorFactory
 //                                    .fromResource(R.drawable.pinb))
-                    );
+                        );
+                    }
                 }
             }
 

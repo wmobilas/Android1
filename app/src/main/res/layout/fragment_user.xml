@@ -7,142 +7,158 @@
     tools:context="build.agcy.test1.Users.UserActivity$PlaceholderFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:src="@color/white"
-        android:scaleType="centerCrop"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imageView"
-
-        />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:id="@+id/violetline"
-        android:background="@drawable/violetline"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/llout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ListView
-        android:id="@+id/message_list"
-        android:layout_height="match_parent"
-        android:textColor="@color/violet_dark"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/top"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="248dp"
-        android:id="@+id/top">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/user_fragment"
+        android:visibility="visible">
 
         <ImageView
-            android:src="@drawable/ap_l"
-            android:scaleType="center"
-            android:alpha="0.3"
+            android:src="@color/white"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/back"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_height="match_parent"
+            android:id="@+id/imageView" />
 
         <LinearLayout
             android:orientation="horizontal"
-            android:id="@+id/bottomline"
-            android:background="@drawable/bottomline"
+            android:id="@+id/violetline"
+            android:background="@drawable/violetline"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
+            android:layout_above="@+id/llout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/top"
+            android:layout_above="@+id/violetline"
+            android:layout_alignParentTop="true">
+
+            <ImageView
+                android:src="@drawable/ap_l"
+                android:scaleType="center"
+                android:alpha="0.3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/back"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_above="@+id/bottomline" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/bottomline"
+                android:background="@drawable/bottomline"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_above="@+id/message_list"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_marginTop="30dp"
+                android:id="@+id/photo"
+                android:src="@drawable/doge"
+                android:scaleType="centerCrop"
+                app:corner_radius="100dip"
+                app:border_width="2dip"
+                app:border_color="#40555555"
+                app:mutate_background="true"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:oval="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/description"
+                android:text=""
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:textColor="@color/violet_dark"
+                android:textSize="28sp"
+                android:layout_below="@+id/photo"
+                android:layout_centerHorizontal="true" />
+
+            <ListView
+                android:id="@+id/message_list"
+                android:layout_height="match_parent"
+                android:textColor="@color/violet_dark"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/description" />
+
+            <!--<LinearLayout-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:id="@+id/linearLayout"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_centerHorizontal="true">-->
+
+            <!--</LinearLayout>-->
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/llout"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:gravity="bottom"
+            android:layout_gravity="center_horizontal|bottom"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true">
 
-        <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_marginTop="48dp"
-            android:id="@+id/photo"
-            android:src="@drawable/doge"
-            android:layout_centerHorizontal="true"
-            android:scaleType="centerCrop"
-            app:corner_radius="100dip"
-            app:border_width="2dip"
-            app:border_color="#40555555"
-            app:mutate_background="true"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            app:oval="true" />
 
-        <TextView
-            android:id="@+id/description"
-            android:text=""
-            android:layout_width="match_parent"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            android:textColor="@color/violet_dark"
-            android:textSize="28sp"
-            android:layout_above="@+id/bottomline"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            <EditText
+                android:id="@+id/txt_inputText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="12dp"
+                android:background="@color/white"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textColor="@color/violet_dark"
+                android:text="Text here"
+                android:layout_weight="1"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/btn_Send"
+                android:layout_weight="2"
+                android:background="@color/violet_dark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:text="Send" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/status"
+        android:background="@color/grey_default">
 
         <ProgressBar
-            android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_alignBottom="@+id/photo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="33dp" />
-
-        <!--<LinearLayout-->
-        <!--android:gravity="center"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:id="@+id/linearLayout"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_centerHorizontal="true">-->
-
-        <!--</LinearLayout>-->
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/llout"
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:gravity="bottom"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-
-        <EditText
-            android:id="@+id/txt_inputText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="12dp"
-            android:background="@color/white"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:textColor="@color/black_light"
-            android:text="Text here"
-            android:layout_weight="1"
-            android:inputType="text" />
-
-        <Button
-            android:id="@+id/btn_Send"
-            android:layout_weight="2"
-            android:background="@color/violet_dark"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:text="Send" />
-    </LinearLayout>
 
 </RelativeLayout>

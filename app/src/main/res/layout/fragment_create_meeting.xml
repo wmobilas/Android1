@@ -40,13 +40,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp" />
 
-            <LinearLayout
+            <RelativeLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:id="@+id/top"
                 android:layout_height="60dp"
                 android:background="@color/white">
 
+                <Spinner
+                    android:id="@+id/meeting_type"
+                    android:prompt="@string/type"
+                    android:hint="@string/type"
+                    android:entries="@array/meeting_type"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:textColor="@color/violet_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible" />
+
                 <EditText
+                    android:visibility="gone"
                     android:id="@+id/text1"
                     android:gravity="center"
                     android:hint="Name your meeting"
@@ -57,8 +72,9 @@
                     android:textColorLink="@color/violet_dark"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textStyle="normal"
                     android:inputType="textNoSuggestions" />
-            </LinearLayout>
+            </RelativeLayout>
             <!--<TextView-->
             <!--android:text="See date and map selector in future versions"-->
             <!--android:layout_width="wrap_content"-->

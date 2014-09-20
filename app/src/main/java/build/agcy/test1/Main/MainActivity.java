@@ -5,15 +5,23 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -37,13 +45,45 @@ public class MainActivity extends Activity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-    int count = 0;
+
+    public static void applyTypeface(ViewGroup v, Typeface f) {
+        if (v != null) {
+            int vgCount = v.getChildCount();
+            for (int i = 0; i < vgCount; i++) {
+                if (v.getChildAt(i) == null) continue;
+                if (v.getChildAt(i) instanceof ViewGroup) {
+                    applyTypeface((ViewGroup) v.getChildAt(i), f);
+                } else {
+                    View view = v.getChildAt(i);
+                    if (view instanceof TextView) {
+                        ((TextView) (view)).setTypeface(f);
+                    } else if (view instanceof EditText) {
+                        ((EditText) (view)).setTypeface(f);
+                    } else if (view instanceof Button) {
+                        ((Button) (view)).setTypeface(f);
+                    }
+                }
+            }
+        }
+    }
+
+    public static ViewGroup getParentView(View v) {
+        ViewGroup vg = null;
+        if (v != null) {
+            vg = (ViewGroup) v.getRootView();
+        }
+        return vg;
+    }
+
+    public static Typeface getTypeface(Context c) {
+        Typeface typeface = Typeface.createFromAsset(c.getAssets(), "fonts/fox.ttf");
+        return typeface;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -60,6 +100,7 @@ public class MainActivity extends Activity
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
         tintManager.setStatusBarTintEnabled(true);
         tintManager.setStatusBarTintResource(R.color.violet_dark);
+
 
     }
 
@@ -129,7 +170,12 @@ public class MainActivity extends Activity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
+
+            // Inflate the menu items for use in the action bar
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.main, menu);
+
+
             restoreActionBar();
             return true;
         }
@@ -146,27 +192,27 @@ public class MainActivity extends Activity
             return true;
         }
         if (id == R.id.action_example) {
-            FindMe.please(this, 60000, true, new FindMe.FindMeListener() {
+            FindMe.please(this, new FindMe.FindMeListener() {
+                int pressedCount = 0;
+
                 @Override
                 public void foundLocation(String provider, Location location) {
 
-                    if (count == 0) {
+                    if (pressedCount == 0) {
                         Log.i("Findme", "lat = " + location.getLatitude() + " long = " + location.getLongitude());
                         Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
-
                     }
-                    count++;
+                    pressedCount++;
                 }
 
                 @Override
                 public void couldntFindLocation() {
-                    if (count == 0) {
-                        Toast.makeText(MainActivity.this, "Please turn GPS on", Toast.LENGTH_LONG).show();
+                    if (pressedCount == 0) {
                         LocationDialogFragment dialog = new LocationDialogFragment();
                         dialog.show(getFragmentManager(),
                                 LocationDialogFragment.class.getName());
+                        pressedCount--;
                     }
-                    count--;
                 }
             });
             return true;

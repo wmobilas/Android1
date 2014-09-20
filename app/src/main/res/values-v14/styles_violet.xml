@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="AppTheme.Violet" parent="@android:style/Theme.DeviceDefault.Light.DarkActionBar">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_violet</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Violet</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Violet</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Violet</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Violet</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Violet</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_violet</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_violet</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Violet</item>
+
+        <item name="android:itemTextAppearance">@style/TextAppearance</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:animation">@style/AnimationActivity</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:itemBackground">@color/white</item>
+        <item name="android:colorBackground">@color/white</item>
+
+        <item name="android:actionOverflowButtonStyle">@style/MyActionButtonOverflow</item>
+
+
+        <!-- Light.DarkActionBar specific -->
+        <item name="android:actionBarWidgetTheme">@style/Theme.Violet.Widget</item>
+
+    </style>
+
+    <style name="ActionBar.Solid.Violet" parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/ab_solid_violet</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_violet</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_violet</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Violet</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Violet" parent="@android:style/Widget.DeviceDefault.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_violet</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Violet</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Violet.Widget" parent="@android:style/Theme.DeviceDefault">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Violet</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Violet</item>
+    </style>
+
+</resources>

@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:paddingTop="4dp"
+        android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:paddingRight="8dp"
         android:paddingLeft="8dp"
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:id="@+id/top"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/black_light">
 
         <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/photo"
@@ -24,7 +24,7 @@
             android:scaleType="centerCrop"
             app:corner_radius="40dp"
             app:border_width="1dip"
-            app:border_color="#40555555"
+            app:border_color="@color/white"
             app:mutate_background="true"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -44,16 +44,15 @@
             <TextView
                 android:text="acceptor id"
                 android:id="@+id/acceptorId"
-
                 android:layout_width="wrap_content"
-                android:textColor="@color/violet_dark"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:text="Hello! Join me!"
                 android:textStyle="bold"
                 android:id="@+id/message"
-                android:textColor="@color/violet_dark"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

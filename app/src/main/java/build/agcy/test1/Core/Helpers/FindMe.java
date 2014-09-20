@@ -13,22 +13,19 @@ public class FindMe {
         public void couldntFindLocation();
     }
 
-    public static FindMe please(Context context, int timeout, boolean getLastKnownLocation, FindMeListener listener) {
-        FindMe findMe = new FindMe(context, timeout, getLastKnownLocation, listener);
+    public static FindMe please(Context context, FindMeListener listener) {
+        FindMe findMe = new FindMe(context, listener);
         findMe.please(context);
         return findMe;
     }
 
     private LocationManager locationManager;
     private FindMeListener listener;
-    private int timeoutMS;
-    private boolean getLastKnownLocation;
+    Location location;
 
-    public FindMe(Context context, int timeoutMS, boolean getLastKnownLocation, FindMeListener listener) {
+    public FindMe(Context context, FindMeListener listener) {
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         this.listener = listener;
-        this.timeoutMS = timeoutMS;
-        this.getLastKnownLocation = getLastKnownLocation;
     }
 
     public void please(Context mContext) {
@@ -52,26 +49,47 @@ public class FindMe {
         locationManager.requestLocationUpdates(
                 LocationManager.PASSIVE_PROVIDER, 0, 100,
                 myLocationService);
-        Location location;
-        if ((locationManager
-                .getLastKnownLocation(LocationManager.GPS_PROVIDER) != null) || (isGPSEnabled)) {
-            location = locationManager
-                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            listener.foundLocation(LocationManager.GPS_PROVIDER, location);
+        Boolean passiveNotEmpty = locationManager
+                .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER) != null;
+        Boolean networkNotEmpty = locationManager
+                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER) != null;
+        Boolean gpsNotEmpty = locationManager
+                .getLastKnownLocation(LocationManager.GPS_PROVIDER) != null;
+
+        if ((!isGPSEnabled) && ((isNetworkEnabled) || (passiveNotEmpty) || (networkNotEmpty))) {
+            if (networkNotEmpty) {
+                location = locationManager
+                        .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                listener.foundLocation(LocationManager.NETWORK_PROVIDER, location);
+            }
+            if (passiveNotEmpty) {
+                location = locationManager
+                        .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                listener.foundLocation(LocationManager.PASSIVE_PROVIDER, location);
+            }
+            if (gpsNotEmpty) {
+                location = locationManager
+                        .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                myLocationService.stopUsingGPS();
+                listener.foundLocation(LocationManager.GPS_PROVIDER, location);
+            }
+            listener.couldntFindLocation();
         } else {
-            if ((isNetworkEnabled) || (locationManager
-                    .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER) != null) || (locationManager
-                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER) != null)) {
-                if (locationManager
-                        .getLastKnownLocation(LocationManager.NETWORK_PROVIDER) == null) {
-                    location = locationManager
-                            .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-                    listener.foundLocation(LocationManager.PASSIVE_PROVIDER, location);
-                } else {
-                    location = locationManager
-                            .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                    listener.foundLocation(LocationManager.NETWORK_PROVIDER, location);
-                }
+            if (gpsNotEmpty) {
+                location = locationManager
+                        .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                myLocationService.stopUsingGPS();
+                listener.foundLocation(LocationManager.GPS_PROVIDER, location);
+            }
+            if (passiveNotEmpty) {
+                location = locationManager
+                        .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                listener.foundLocation(LocationManager.PASSIVE_PROVIDER, location);
+            }
+            if (networkNotEmpty) {
+                location = locationManager
+                        .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                listener.foundLocation(LocationManager.NETWORK_PROVIDER, location);
             }
         }
         listener.couldntFindLocation();

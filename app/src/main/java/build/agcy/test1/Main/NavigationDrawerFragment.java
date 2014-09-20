@@ -70,7 +70,7 @@ public class NavigationDrawerFragment extends Fragment {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
         SystemBarTintManager tintManager = new SystemBarTintManager(context);
         SystemBarTintManager.SystemBarConfig config = tintManager.getConfig();
-        view.setPadding(0, (config.getPixelInsetTop(true) * 2) - 20, config.getPixelInsetRight(), config.getPixelInsetBottom());
+        view.setPadding(0, (config.getPixelInsetTop(true) * 2) - 25, config.getPixelInsetRight(), config.getPixelInsetBottom());
     }
 
     @Override
@@ -82,6 +82,7 @@ public class NavigationDrawerFragment extends Fragment {
 // This could also be set in your layout, allows the list items to scroll through the bottom padded area (navigation bar)
 //        list.setClipToPadding(false);
 // Sets the padding to the insets (include action bar and navigation bar padding for the current device and orientation)
+
         setInsets(getActivity(), getView());
     }
 
@@ -101,16 +102,6 @@ public class NavigationDrawerFragment extends Fragment {
 
         // Select either the default item (0) or the last selected item.
         selectItem(mCurrentSelectedPosition);
-
-//        SystemBarTintManager tintManager = new SystemBarTintManager(getActivity());
-//        // enable status bar tint
-//        tintManager.setStatusBarTintEnabled(true);
-//        // enable navigation bar tint
-//        tintManager.setNavigationBarTintEnabled(true);
-//        // set a custom tint color for all system bars
-//        tintManager.setTintColor(Color.parseColor("#800edc"));
-//        // set       a custom navigation bar resource
-//        tintManager.setNavigationBarTintResource(R.color.violet_dark);
     }
 
     @Override
@@ -131,7 +122,6 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-//        mDrawerListView.setBackgroundColor(Color.parseColor("#40ffffff"));
         mDrawerListView.setClipToPadding(false);
         mDrawerListView.setFitsSystemWindows(true);
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
@@ -139,13 +129,13 @@ public class NavigationDrawerFragment extends Fragment {
 //                android.R.layout.simple_list_item_activated_1,
 //                android.R.id.text1,
                 //todo меняит картинко
-                R.layout.drawer_list_item,
+                R.layout.nav_drawer_item,
                 R.id.text1,
                 new String[]{
                         getString(R.string.navbar_title_profile),
                         getString(R.string.navbar_title_create),
                         getString(R.string.navbar_title_meetings),
-                        getString(R.string.navbar_title_settings)
+                        getString(R.string.navbar_title_map)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -169,18 +159,21 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
 
-//        mFragmentContainerView.setBackgroundColor(Color.parseColor("#8d26e0"));
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setTitle(R.string.app_name);
+//        actionBar.setIcon(R.drawable.ic3white);
+//        actionBar.setLogo(R.drawable.ic3white);
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */
-                R.drawable.ic_drawer_white,             /* nav drawer image to replace 'Up' caret */
+                R.drawable.ic_navigation_drawer,             /* nav drawer image to replace 'Up' caret */
                 R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
         ) {
@@ -304,9 +297,6 @@ public class NavigationDrawerFragment extends Fragment {
      */
     private void showGlobalContextActionBar() {
         ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setTitle(R.string.app_name);
     }
 
     private ActionBar getActionBar() {

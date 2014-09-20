@@ -40,9 +40,10 @@ public class MyLocationListener extends Service implements LocationListener {
 
     public MyLocationListener(Context context) {
         this.mContext = context;
-        if (location == null) {
-            location = getLocation();
-        }
+//        if (location == null) {
+        location = getLocation();
+//        updateLocation();
+//        }
     }
 
     public Location getLocation() {
@@ -52,28 +53,52 @@ public class MyLocationListener extends Service implements LocationListener {
             locationManager = (LocationManager) mContext
                     .getSystemService(Context.LOCATION_SERVICE);
         }
-
+        Boolean passiveNotEmpty = locationManager
+                .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER) != null;
+        Boolean networkNotEmpty = locationManager
+                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER) != null;
+        Boolean gpsNotEmpty = locationManager
+                .getLastKnownLocation(LocationManager.GPS_PROVIDER) != null;
         isGPSEnabled = locationManager
                 .isProviderEnabled(LocationManager.GPS_PROVIDER);
         isNetworkEnabled = locationManager
                 .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        if ((locationManager
-                .getLastKnownLocation(LocationManager.GPS_PROVIDER) != null) || (isGPSEnabled)) {
-            location = locationManager
-                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if ((!isGPSEnabled) && ((isNetworkEnabled) || (passiveNotEmpty) || (networkNotEmpty))) {
+            if (networkNotEmpty) {
+                location = locationManager
+                        .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                return location;
+            }
+            if (passiveNotEmpty) {
+                location = locationManager
+                        .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                return location;
+            }
+            if (gpsNotEmpty) {
+                location = locationManager
+                        .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                return location;
+            }
             return location;
         } else {
-            if ((isNetworkEnabled) || (locationManager
-                    .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER) != null)) {
-                if (locationManager
-                        .getLastKnownLocation(LocationManager.NETWORK_PROVIDER) == null) {
-                    return locationManager
-                            .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-                }
+            if (gpsNotEmpty) {
+                location = locationManager
+                        .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                return location;
             }
         }
-        return locationManager
-                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if (networkNotEmpty) {
+            location = locationManager
+                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            return location;
+        }
+        if (passiveNotEmpty) {
+            location = locationManager
+                    .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+            return location;
+        }
+
+        return location;
     }
 
     /**
@@ -183,9 +208,9 @@ public class MyLocationListener extends Service implements LocationListener {
         if (location == null) {
             location = getLocation();
         }
-        if (location != null) {
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-        }
+//        if (location != null) {
+//            latitude = location.getLatitude();
+//            longitude = location.getLongitude();
+//        }
     }
 }

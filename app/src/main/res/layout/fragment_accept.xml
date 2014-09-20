@@ -16,11 +16,13 @@
 
     <Button
         android:text="Accept"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/accept"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="6dp"
+        android:background="@drawable/nowbutton"
         android:textSize="20sp"
         android:layout_alignParentBottom="true" />
 

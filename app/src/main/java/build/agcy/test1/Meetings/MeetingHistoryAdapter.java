@@ -14,9 +14,7 @@ import java.util.ArrayList;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
 
-/**
- * Created by kiolt_000 on 08/09/2014.
- */
+
 public class MeetingHistoryAdapter extends MeetingListAdapter {
 
     public MeetingHistoryAdapter(Context context, ArrayList<Meeting> meetings) {
@@ -49,9 +47,8 @@ public class MeetingHistoryAdapter extends MeetingListAdapter {
 //        open.setVisibility(View.GONE);
         confirmerNameTextView.setVisibility(View.VISIBLE);
         ownerPhotoView.setVisibility(View.VISIBLE);
-
         if (meeting.confirmer != null) {
-            open.setImageResource(R.drawable.lock);
+            open.setImageResource(R.drawable.closed);
             if (ownerPhotoUrl != null) {
                 ImageLoader.getInstance().displayImage(ownerPhotoUrl, ownerPhotoView);
             }
@@ -59,7 +56,6 @@ public class MeetingHistoryAdapter extends MeetingListAdapter {
             if (meeting.confirmer.photo != null) {
                 ImageLoader.getInstance().displayImage(meeting.confirmer.photo, confirmerPhotoView);
             }
-
         } else {
             open.setImageResource(R.drawable.open);
             openUsernameView.setVisibility(View.VISIBLE);
