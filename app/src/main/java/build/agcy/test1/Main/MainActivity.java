@@ -200,6 +200,8 @@ public class MainActivity extends Activity
 
                     if (pressedCount == 0) {
                         Log.i("Findme", "lat = " + location.getLatitude() + " long = " + location.getLongitude());
+                        Toast.makeText(MainActivity.this, "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
+
                         Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
                     }
                     pressedCount++;

@@ -106,7 +106,7 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
             startActivity(intent);
             latitude = myLocationService.getLatitude();
             longitude = myLocationService.getLongitude();
-            Toast.makeText(getApplicationContext(), "Please Turn GPS On", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please Turn GPS On", Toast.LENGTH_LONG).show();
         }
 //        addMeetings(map, this);
         CameraPosition cameraPosition = new CameraPosition.Builder()

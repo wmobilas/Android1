@@ -97,7 +97,7 @@ public class GCMIntentService extends IntentService {
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Context ctx = getApplicationContext();
+        Context ctx = this;
 //        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
 //                new Intent(this, DemoActivity.class), 0);
 

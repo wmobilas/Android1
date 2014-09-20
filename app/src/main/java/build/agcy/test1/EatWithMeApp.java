@@ -35,7 +35,7 @@ public class EatWithMeApp extends Application {
             currentUser.photo = prefs.getString(PHOTO_PREFERENCES_KEY, "http://cs616230.vk.me/v616230567/151af/cP4wx9MZT-w.jpg");
         }
         app = this;
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .build();
         ImageLoader.getInstance().init(config);
     }

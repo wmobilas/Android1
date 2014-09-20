@@ -103,7 +103,7 @@ public class UserListActivity extends Activity {
 
                 @Override
                 public void onError(Exception exp) {
-                    Toast.makeText(getActivity().getApplicationContext(), "UserListTaskError " + exp.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "UserListTaskError " + exp.toString(), Toast.LENGTH_LONG).show();
                 }
             };
             task.start();
