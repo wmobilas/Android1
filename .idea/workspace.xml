@@ -68,240 +68,13 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: build.agcy.test1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88f9a1c8-6eb3-46f4-9365-6d400a93a17e" name="Default" comment="Красивости, улучшения, фиксы">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ab_bottom_solid_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ab_bottom_solid_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ab_bottom_solid_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ab_bottom_solid_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ab_solid_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ab_solid_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ab_solid_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ab_solid_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ab_stacked_solid_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ab_stacked_solid_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ab_stacked_solid_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ab_stacked_solid_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ab_texture_tile_violet.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ab_texture_tile_violet.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ab_texture_tile_violet.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ab_texture_tile_violet.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ab_transparent_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ab_transparent_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ab_transparent_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ab_transparent_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/agree.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/agreew.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/btn_cab_done_default_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/btn_cab_done_default_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/btn_cab_done_default_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/btn_cab_done_default_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/btn_cab_done_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/btn_cab_done_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/btn_cab_done_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/btn_cab_done_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/btn_cab_done_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/btn_cab_done_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/btn_cab_done_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/btn_cab_done_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/cab_background_bottom_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/cab_background_bottom_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/cab_background_bottom_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/cab_background_bottom_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/cab_background_top_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/cab_background_top_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/cab_background_top_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/cab_background_top_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/closed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/raw/coffe.ogg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/divider_black.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/raw/eat.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/getmeeting.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/getuser.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_action_overflow_round.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-ldpi/ic_action_overflow_round.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_action_overflow_round.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_action_overflow_round.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_action_overflow_round.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_navigation_drawer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-ldpi/ic_navigation_drawer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_navigation_drawer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_navigation_drawer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_navigation_drawer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/list_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/list_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/list_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/list_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/list_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/list_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/list_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/list_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/marker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/marker_w.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/markerb.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/markerv.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/menu_dropdown_panel_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/menu_dropdown_panel_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/menu_dropdown_panel_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/menu_dropdown_panel_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/progress_bg_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/progress_bg_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/progress_bg_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/progress_bg_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/progress_primary_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/progress_primary_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/progress_primary_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/progress_primary_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/progress_secondary_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/progress_secondary_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/progress_secondary_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/progress_secondary_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/refresh.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/spinner_ab_default_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/spinner_ab_default_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/spinner_ab_default_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/spinner_ab_default_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/spinner_ab_disabled_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/spinner_ab_disabled_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/spinner_ab_disabled_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/spinner_ab_disabled_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/spinner_ab_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/spinner_ab_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/spinner_ab_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/spinner_ab_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/spinner_ab_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/spinner_ab_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/spinner_ab_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/spinner_ab_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/tab_selected_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/tab_selected_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tab_selected_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/tab_selected_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/tab_selected_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/tab_selected_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tab_selected_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/tab_selected_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/tab_selected_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/tab_selected_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tab_selected_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/tab_selected_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/tab_unselected_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/tab_unselected_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tab_unselected_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/tab_unselected_focused_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/tab_unselected_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/tab_unselected_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tab_unselected_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/tab_unselected_pressed_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/tab_unselected_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/tab_unselected_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tab_unselected_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/tab_unselected_violet.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/unlock.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/Helpers/CustomSpinner.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/Push/DeleteNotificationReciever.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/Helpers/ListeningArrayAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/Helpers/SpinnerListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ab_background_textured_violet.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/border.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/btn_cab_done_violet.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/menu.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/nav_drawer_item.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/progress_horizontal_violet.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/selectable_background_violet.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/spinner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/spinner_background_ab_violet.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/values-v14/styles_violet.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/tab_indicator_ab_violet.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/textbox.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/whiteline.xml" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-hdpi\border.xml" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-hdpi\ic_action_search.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-hdpi\ic_drawer_black.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-hdpi\ic_pig.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-ldpi\mark_blue.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-ldpi\mark_red.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-mdpi\ic_action_search.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-mdpi\ic_drawer.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-mdpi\ic_pig.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-mdpi\mark_blue.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-mdpi\mark_red.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-xhdpi\ic_action_search.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-xhdpi\ic_drawer.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-xhdpi\ic_pig.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-xxhdpi\ic_drawer.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable-xxhdpi\ic_pig.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable\and.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable\ic2.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable\ic3.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable\ic3b.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable\ic3white.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable\ic_drawer_white.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable\ic_launcher.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable\logo.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable\logo_v.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable\map.PNG" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\drawable\meet.png" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\layout\fragment_community.xml" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\layout\fragment_explore.xml" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\layout\fragment_profile_update.xml" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\layout\fragment_section_dummy.xml" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\layout\fragment_section_launchpad.xml" afterPath="" />
-      <change type="DELETED" beforePath="M:\Eatwithme\Android1\app\src\main\res\raw\coffee.mp3" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/eat2.jpg" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/eat2.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/lock.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/lock.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/notif.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/notif.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/open.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/open.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/CreateMeetingFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/CreateMeetingFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/Helpers/FindMe.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/Helpers/FindMe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/GCMBroadcastReceiver.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/GCMBroadcastReceiver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragments/MapFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Fragments/MapFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingHistoryAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingHistoryAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Meetings/MeetingListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Start/Music.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Start/Music.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/MyLocationListener.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/MyLocationListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/NavigationDrawerFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/NavigationDrawerFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/ProfileFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/ProfileFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/Push/Push.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/Push/Push.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/Push/PushAccept.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/Push/PushAccept.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/Push/PushConfirm.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/Push/PushConfirm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/Push/PushMeeting.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/GCM/Push/PushMeeting.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Start/StartActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Start/StartActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-v19/Styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-v19/Styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Users/UserActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Users/UserActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bttn.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bttn.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_accept.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_accept.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_accepted.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_accepted.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_accepts_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_accepts_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_confirmed.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_confirmed.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_meeting.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_meeting.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_meeting.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_meeting.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_meeting_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_meeting_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_navigation_drawer.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_navigation_drawer.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_accept.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_accept.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_meeting.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_meeting.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_meeting_history.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_meeting_history.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/marker_meeting_new.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/marker_meeting_new.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/nowbutton.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/nowbutton.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/round_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/round_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/toast_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/toast_layout.xml" />
+    <list default="true" id="88f9a1c8-6eb3-46f4-9365-6d400a93a17e" name="Default" comment="Больше красивостей и лучше локация">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hs_err_pid11244.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hs_err_pid11620.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hs_err_pid11740.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hs_err_pid12012.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hs_err_pid8428.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="M:\Eatwithme\Android1\app\src\main\java\build\agcy\test1\Fragments\UserFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Users/UserFragment.java" />
-      <change type="MOVED" beforePath="M:\Eatwithme\Android1\app\src\main\res\layout\drawer_list_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_view_item.xml" />
-      <change type="MOVED" beforePath="M:\Eatwithme\Android1\app\src\main\res\layout\fragment_welcome.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_welcome.xml" />
     </list>
     <list id="5c37c7ce-bf60-4f95-be10-624a8d84d91a" name="Failed commit: Default" comment="Красивости, улучшения, фиксы" />
     <ignored path="test1.iws" />
@@ -329,7 +102,20 @@
     <favorites_list name="test1" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.28795812" vertical-offset="3337" max-vertical-offset="3910">
+              <caret line="206" column="35" selection-start-line="206" selection-start-column="35" selection-end-line="206" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -1572,6 +1358,132 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -1929,7 +1841,11 @@
       <created>1411033702907</created>
       <updated>1411033702907</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Больше красивостей и лучше локация">
+      <created>1411239396961</created>
+      <updated>1411239396961</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2045,7 +1961,8 @@
     <MESSAGE value="подправлен интерфейс&#10;" />
     <MESSAGE value="todo почистил чуть" />
     <MESSAGE value="Красивости, улучшения, фиксы" />
-    <option name="LAST_COMMIT_MESSAGE" value="Красивости, улучшения, фиксы" />
+    <MESSAGE value="Больше красивостей и лучше локация" />
+    <option name="LAST_COMMIT_MESSAGE" value="Больше красивостей и лучше локация" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -2156,7 +2073,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Start/StartActivity.java</url>
-          <line>405</line>
+          <line>418</line>
           <properties />
           <option name="timeStamp" value="154" />
         </line-breakpoint>
@@ -2197,7 +2114,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Core/MyLocationListener.java</url>
-          <line>207</line>
+          <line>208</line>
           <properties />
           <option name="timeStamp" value="365" />
         </line-breakpoint>
@@ -2318,10 +2235,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.29321662" vertical-offset="4405" max-vertical-offset="4862">
           <caret line="301" column="29" selection-start-line="301" selection-start-column="29" selection-end-line="301" selection-end-column="29" />
-          <folding>
-            <element signature="e#11720#11721#0" expanded="false" />
-            <element signature="e#11771#11772#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2345,10 +2259,10 @@
           <caret line="123" column="13" selection-start-line="123" selection-start-column="13" selection-end-line="123" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7670#7690#0" expanded="true" />
-            <element signature="e#8024#8052#0" expanded="true" />
-            <element signature="e#8120#8148#0" expanded="true" />
-            <element signature="e#8216#8244#0" expanded="true" />
+            <element signature="e#7639#7659#0" expanded="true" />
+            <element signature="e#7993#8021#0" expanded="true" />
+            <element signature="e#8089#8117#0" expanded="true" />
+            <element signature="e#8185#8213#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2358,16 +2272,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="4782" max-vertical-offset="5236">
           <caret line="331" column="84" selection-start-line="331" selection-start-column="84" selection-end-line="331" selection-end-column="84" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6876091" vertical-offset="3108" max-vertical-offset="3825">
-          <caret line="206" column="44" selection-start-line="206" selection-start-column="44" selection-end-line="206" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2691,18 +2595,28 @@
         <state vertical-scroll-proportion="0.2882883" vertical-offset="3000" max-vertical-offset="7565">
           <caret line="226" column="0" selection-start-line="226" selection-start-column="0" selection-end-line="226" selection-end-column="0" />
           <folding>
-            <element signature="e#7558#8376#0" expanded="true" />
-            <element signature="e#8365#8366#0" expanded="true" />
-            <element signature="e#10336#10337#0" expanded="true" />
-            <element signature="e#10395#10396#0" expanded="true" />
-            <element signature="e#10491#10492#0" expanded="true" />
-            <element signature="e#10550#10551#0" expanded="true" />
-            <element signature="e#10672#11533#0" expanded="true" />
-            <element signature="e#11522#11523#0" expanded="true" />
-            <element signature="e#11574#13161#0" expanded="true" />
-            <element signature="e#13150#13151#0" expanded="true" />
-            <element signature="e#13203#13459#0" expanded="true" />
-            <element signature="e#13448#13449#0" expanded="true" />
+            <element signature="e#7564#8382#0" expanded="true" />
+            <element signature="e#8371#8372#0" expanded="true" />
+            <element signature="e#10342#10343#0" expanded="true" />
+            <element signature="e#10401#10402#0" expanded="true" />
+            <element signature="e#10497#10498#0" expanded="true" />
+            <element signature="e#10556#10557#0" expanded="true" />
+            <element signature="e#10678#11539#0" expanded="true" />
+            <element signature="e#11528#11529#0" expanded="true" />
+            <element signature="e#11580#13167#0" expanded="true" />
+            <element signature="e#13156#13157#0" expanded="true" />
+            <element signature="e#13209#13465#0" expanded="true" />
+            <element signature="e#13454#13455#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/build/agcy/test1/Main/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28795812" vertical-offset="3337" max-vertical-offset="3910">
+          <caret line="206" column="35" selection-start-line="206" selection-start-column="35" selection-end-line="206" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
