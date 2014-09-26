@@ -46,30 +46,36 @@
                 android:id="@+id/top"
                 android:layout_height="60dp"
                 android:background="@color/white">
-
-                <Spinner
-                    android:id="@+id/meeting_type"
-                    android:prompt="@string/type"
-                    android:hint="@string/type"
-                    android:entries="@array/meeting_type"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:background="@color/white"
-                    android:textColor="@color/violet_dark"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="visible" />
+                <!--<Spinner-->
+                <!--android:id="@+id/meeting_type"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:prompt="@string/app_name"-->
+                <!--android:layout_height="match_parent"-->
+                <!--style="@style/DropDownListView.Violet"-->
+                <!--/>-->
+                <!--<Spinner-->
+                <!--android:id="@+id/meeting_type"-->
+                <!--android:prompt="@string/type"-->
+                <!--android:hint="@string/type"-->
+                <!--android:entries="@array/meeting_type"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:background="@color/white"-->
+                <!--android:textColor="@color/violet_dark"-->
+                <!--android:spinnerMode="dialog"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:visibility="visible" />-->
 
                 <EditText
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/text1"
                     android:gravity="center"
-                    android:hint="Name your meeting"
+                    android:hint="Input here"
+                    android:textSize="18sp"
                     android:background="@color/white"
                     android:textColor="@color/violet_dark"
-                    android:textColorHighlight="@color/violet_dark"
                     android:textColorHint="@color/violet_dark"
-                    android:textColorLink="@color/violet_dark"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textStyle="normal"
@@ -91,10 +97,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp" />
 
+
+            <Button
+                android:id="@+id/spin"
+                android:textSize="18sp"
+                android:text="@string/type"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/white"
+                android:textColor="@color/violet_dark" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/bottom_linedivider"
+                android:background="@drawable/bottomline"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
             <Button
                 android:id="@+id/time_pick"
                 android:text="@string/pick_time"
                 android:layout_width="match_parent"
+                android:textSize="18sp"
                 android:layout_height="60dp"
                 android:background="@color/white"
                 android:textColor="@color/violet_dark" />
@@ -102,6 +126,7 @@
             <Button
                 android:id="@+id/create_meeting"
                 android:text="Create"
+                android:textSize="18sp"
                 android:background="@color/violet_dark"
                 android:textColor="@color/white"
                 android:layout_width="match_parent"

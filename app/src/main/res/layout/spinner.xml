@@ -7,6 +7,7 @@
     android:prompt="@string/type"
     android:hint="@string/type"
     android:entries="@array/meeting_type"
+    android:spinnerMode="dialog"
     android:background="@color/white"
     android:layout_height="60dp"
     android:gravity="center" />

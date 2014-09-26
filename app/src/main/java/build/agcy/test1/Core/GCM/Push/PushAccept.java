@@ -54,10 +54,10 @@ public class PushAccept extends Push {
                 new NotificationCompat.Builder(context);
         Resources res = context.getResources();
         Bitmap img = BitmapFactory.decodeResource
-                (res, R.drawable.notif);
+                (res, R.drawable.ic_stat_w256h2561377940716185119eatfoodforkknifestreamline2);
         //todo show avatar
         builder
-                .setSmallIcon(R.drawable.pinw)
+                .setSmallIcon(R.drawable.ic_stat_location_place)
                 .setLargeIcon(img)
                 .setAutoCancel(true)
                 .setContentTitle(getTitle())

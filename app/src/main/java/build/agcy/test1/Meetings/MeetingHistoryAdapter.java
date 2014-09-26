@@ -1,6 +1,7 @@
 package build.agcy.test1.Meetings;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
+import build.agcy.test1.EatWithMeApp;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
 
@@ -21,7 +23,8 @@ public class MeetingHistoryAdapter extends MeetingListAdapter {
         super(context, meetings);
     }
 
-    //todo не показывать не мои встречи и отображать количество предложений от accepterов
+    //todo не показывать не мои встречи
+    //todo сделать динамическую загрузку
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -31,41 +34,79 @@ public class MeetingHistoryAdapter extends MeetingListAdapter {
         } else {
             view = (ViewGroup) convertView;
         }
-        TextView descView = (TextView) view.findViewById(R.id.description);
-        TextView ownerNameView = (TextView) view.findViewById(R.id.owner_name);
-        TextView openUsernameView = (TextView) view.findViewById(R.id.open_username);
-        ImageView ownerPhotoView = (ImageView) view.findViewById(R.id.owner_photo);
-        final TextView confirmerNameTextView = (TextView) view.findViewById(R.id.confirmer_name);
-        ImageView confirmerPhotoView = (ImageView) view.findViewById(R.id.confirmer_photo);
-        ImageView open = (ImageView) view.findViewById(R.id.lock);
         final Meeting meeting = getItem(position);
-        ownerNameView.setText(meeting.owner.username);
-        String ownerPhotoUrl = meeting.owner.photo;
-        confirmerPhotoView.setVisibility(View.VISIBLE);
-        ownerNameView.setVisibility(View.VISIBLE);
-        openUsernameView.setVisibility(View.GONE);
-//        open.setVisibility(View.GONE);
-        confirmerNameTextView.setVisibility(View.VISIBLE);
-        ownerPhotoView.setVisibility(View.VISIBLE);
-        if (meeting.confirmer != null) {
-            open.setImageResource(R.drawable.closed);
-            if (ownerPhotoUrl != null) {
-                ImageLoader.getInstance().displayImage(ownerPhotoUrl, ownerPhotoView);
+        ((TextView) view.findViewById(R.id.description)).setText(meeting.description);
+        final ImageView ownerPhotoView = (ImageView) view.findViewById(R.id.owner_photo);
+        final TextView ownerNameView = (TextView) view.findViewById(R.id.owner_name);
+        final TextView openTextView = (TextView) view.findViewById(R.id.open_username);
+        final ImageView openImageView = (ImageView) view.findViewById(R.id.lock);
+        final TextView confirmerNameTextView = (TextView) view.findViewById(R.id.confirmer_name);
+        final ImageView confirmerPhotoView = (ImageView) view.findViewById(R.id.confirmer_photo);
+        ownerNameView.setVisibility(View.GONE);
+        ownerPhotoView.setVisibility(View.GONE);
+        confirmerNameTextView.setVisibility(View.GONE);
+        confirmerPhotoView.setVisibility(View.GONE);
+        openTextView.setVisibility(View.VISIBLE);
+        if (meeting.isConfirmed()) {
+            //когото приняли уже
+            openTextView.setText("Finished");
+            openImageView.setImageResource(R.drawable.closed);
+            ownerNameView.setText(meeting.owner.username);
+            ownerNameView.setVisibility(View.VISIBLE);
+            if (meeting.owner.photo != null) {
+                new Handler().post(new Runnable() {
+                    public void run() {
+                        ImageLoader.getInstance().displayImage(meeting.owner.photo, ownerPhotoView);
+                    }
+                });
+            } else {
+                ownerPhotoView.setImageResource(R.drawable.doge);
             }
+            ownerPhotoView.setVisibility(View.VISIBLE);
+            confirmerNameTextView.setVisibility(View.VISIBLE);
             confirmerNameTextView.setText(meeting.confirmer.username);
             if (meeting.confirmer.photo != null) {
-                ImageLoader.getInstance().displayImage(meeting.confirmer.photo, confirmerPhotoView);
+                new Handler().post(new Runnable() {
+                    public void run() {
+                        ImageLoader.getInstance().displayImage(meeting.confirmer.photo, confirmerPhotoView);
+                    }
+                });
+            } else {
+                confirmerPhotoView.setImageResource(R.drawable.doge);
             }
+            confirmerPhotoView.setVisibility(View.VISIBLE);
         } else {
-            open.setImageResource(R.drawable.open);
-            openUsernameView.setVisibility(View.VISIBLE);
-            confirmerPhotoView.setVisibility(View.GONE);
-            confirmerNameTextView.setVisibility(View.GONE);
-            ownerPhotoView.setVisibility(View.GONE);
-            ownerNameView.setVisibility(View.GONE);
+            //встреча открыта для заявок
+            openImageView.setImageResource(R.drawable.open);
+            openTextView.setText("OPEN");
+            if (meeting.acceptsCount > 0) {
+                //ктото дал заявку
+                if (meeting.owner.id.equals(EatWithMeApp.currentUser.id)) {
+                    //моя встреча
+                    openTextView.setText(meeting.acceptsCount + " accepted your meeting");
+                } else {
+                    //не моя
+                    openTextView.setText(meeting.acceptsCount + " accepted " + meeting.owner.username + " meeting");
+                }
+            }
+            if (!meeting.owner.id.equals(EatWithMeApp.currentUser.id)) {
+                ownerNameView.setText(meeting.owner.username);
+                ownerNameView.setVisibility(View.VISIBLE);
+                if (meeting.owner.photo != null) {
+                    new Handler().post(new Runnable() {
+                        public void run() {
+                            ImageLoader.getInstance().displayImage(meeting.owner.photo, ownerPhotoView);
+                        }
+                    });
+                } else {
+                    ownerPhotoView.setImageResource(R.drawable.doge);
+                }
+                ownerPhotoView.setVisibility(View.VISIBLE);
+            }
         }
+
+
         //Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 600, 400, 7, "red", "Here");
-        descView.setText(meeting.description);
         return view;
     }
 }

@@ -1,7 +1,7 @@
 package build.agcy.test1.Core.Helpers;
 
 /**
- * Created by Freeman on 18.09.2014.
+ * Created by Freeman on 24.09.2014.
  */
 public interface SpinnerListener {
 

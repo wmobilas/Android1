@@ -293,7 +293,6 @@ public class MapActivity extends FragmentActivity implements GoogleMap.OnInfoWin
             Intent intent = activity.getIntent();
             //meetingsList=intent.getParcelableArrayListExtra("meetings");
             // Object object= bundle.get("meetings");
-            //todo центрировать по переданному маркеру, отобразить данные по встерече из маркера
 
         } else {
             Log.d("e", "error no activity");

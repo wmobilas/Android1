@@ -5,11 +5,14 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +30,7 @@ import android.widget.Toast;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import build.agcy.test1.Core.Helpers.FindMe;
+import build.agcy.test1.Core.Helpers.OnBackPressedListener;
 import build.agcy.test1.Fragments.LocationDialogFragment;
 import build.agcy.test1.Fragments.MapFragment;
 import build.agcy.test1.Meetings.CreateMeetingFragment;
@@ -40,16 +44,20 @@ public class MainActivity extends Activity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private static long back_pressed;
+    private static Location location;
+    private CharSequence mTitle;
+    private static boolean gotLocation = false;
+    private static int pressedCount = 0;
+    Fragment fragment = null;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
-    private CharSequence mTitle;
-
     public static void applyTypeface(ViewGroup v, Typeface f) {
         if (v != null) {
             int vgCount = v.getChildCount();
-            for (int i = 0; i < vgCount; i++) {
+            for (int i = 0; vgCount < 1; i++) {
                 if (v.getChildAt(i) == null) continue;
                 if (v.getChildAt(i) instanceof ViewGroup) {
                     applyTypeface((ViewGroup) v.getChildAt(i), f);
@@ -120,7 +128,6 @@ public class MainActivity extends Activity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        Fragment fragment = null;
         switch (position) {
             case 0:
                 fragment = new ProfileFragment();
@@ -135,10 +142,14 @@ public class MainActivity extends Activity
                 fragment = new MapFragment();
                 break;
         }
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_container, fragment)
-                .commit();
+        new Handler().post(new Runnable() {
+            public void run() {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction ft = fragmentManager.beginTransaction();
+                ft.replace(R.id.content_container, fragment);
+                ft.commit();
+            }
+        });
     }
 
     public void onSectionAttached(int number) {
@@ -174,8 +185,6 @@ public class MainActivity extends Activity
             // Inflate the menu items for use in the action bar
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.main, menu);
-
-
             restoreActionBar();
             return true;
         }
@@ -193,32 +202,65 @@ public class MainActivity extends Activity
         }
         if (id == R.id.action_example) {
             FindMe.please(this, new FindMe.FindMeListener() {
-                int pressedCount = 0;
 
                 @Override
                 public void foundLocation(String provider, Location location) {
-
-                    if (pressedCount == 0) {
-                        Log.i("Findme", "lat = " + location.getLatitude() + " long = " + location.getLongitude());
-                        Toast.makeText(MainActivity.this, "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
-
-                        Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
+                    MainActivity.location = location;
+                    gotLocation = true;
+                    if (pressedCount % 2 != 0) {
+                        pressedCount--;
                     }
-                    pressedCount++;
                 }
 
                 @Override
                 public void couldntFindLocation() {
-                    if (pressedCount == 0) {
-                        LocationDialogFragment dialog = new LocationDialogFragment();
-                        dialog.show(getFragmentManager(),
-                                LocationDialogFragment.class.getName());
-                        pressedCount--;
+                    if (pressedCount % 2 != 0) {
+                        pressedCount++;
                     }
                 }
             });
+            if (pressedCount % 2 == 0) {
+                if (gotLocation) {
+                    pressedCount++;
+                    Log.i("Findme", "lat = " + location.getLatitude() + " long = " + location.getLongitude());
+                    Toast.makeText(getApplicationContext(), "lat = " + location.getLatitude() + " long = " + location.getLongitude(), Toast.LENGTH_LONG).show();
+                } else {
+                    pressedCount--;
+                    LocationManager locationMgr = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+                    if (locationMgr.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        Toast.makeText(getApplicationContext(), "Please wait or choose other geo provider...", Toast.LENGTH_LONG).show();
+                    } else {
+                        LocationDialogFragment dialog = new LocationDialogFragment();
+                        dialog.show(getFragmentManager(),
+                                LocationDialogFragment.class.getName());
+                    }
+                }
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (onBackPressedListener != null) {
+            dosomething();
+        } else {
+            if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed();
+            else
+                Toast.makeText(getBaseContext(), "Press once again to exit!", Toast.LENGTH_SHORT).show();
+        }
+        back_pressed = System.currentTimeMillis();
+    }
+
+    public void dosomething() {
+        super.onBackPressed();
+    }
+
+    protected OnBackPressedListener onBackPressedListener;
+
+    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
+        this.onBackPressedListener = onBackPressedListener;
     }
 }

@@ -8,41 +8,82 @@
     android:padding="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <RelativeLayout
         android:background="@drawable/round_corners_color"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:padding="8dp"
+        android:layout_height="60dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="wrap_content">
 
-            <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/meeting_photo"
-                android:src="@drawable/map1"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                app:corner_radius="10dp"
-                app:border_width="1dip"
-                app:border_color="#20555555"
-                app:mutate_background="true"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                app:oval="false" />
+            <!--<com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/meeting_photo"-->
+            <!--android:src="@drawable/map1"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--app:corner_radius="10dp"-->
+            <!--app:border_width="1dip"-->
+            <!--app:border_color="#20555555"-->
+            <!--app:mutate_background="true"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp"-->
+            <!--app:oval="false" />-->
 
-            <LinearLayout
-                android:gravity="center_vertical"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
+            <!--<LinearLayout-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginLeft="0dp"-->
+            <!--android:layout_marginStart="0dp"-->
+            <!--android:layout_marginBottom="6dp">-->
+
+            <!--</LinearLayout>-->
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="6dp">
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+                <TextView
+
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_light"
+                    android:textStyle="bold"
+                    android:text="Description"
+                    android:paddingLeft="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="18dp"
+                    android:paddingEnd="18dp"
+                    android:paddingBottom="12dp" />
+
+                <TextView
+                    android:text="username"
+                    android:id="@+id/user_name"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:paddingLeft="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="12dp" />
 
                 <com.makeramen.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/user_photo"
@@ -51,49 +92,32 @@
                     android:scaleType="centerCrop"
                     app:corner_radius="30dp"
                     app:border_width="2dip"
-                    app:border_color="#40555555"
+                    app:border_color="#20555555"
                     app:mutate_background="true"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    app:oval="true" />
-            </LinearLayout>
+                    app:oval="true"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:id="@+id/count"
+                    android:background="@color/violet"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:text=""
+                    android:visibility="visible"
+                    android:layout_toStartOf="@+id/user_photo"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/user_photo" />
+            </RelativeLayout>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+    </RelativeLayout>
 
-            <TextView
-
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black_light"
-                android:textStyle="bold"
-                android:text="Description"
-                android:paddingLeft="8dp"
-                android:paddingStart="8dp"
-                android:paddingTop="12dp"
-                android:paddingRight="18dp"
-                android:paddingEnd="18dp"
-                android:paddingBottom="12dp" />
-
-            <TextView
-                android:text="username"
-                android:id="@+id/user_name"
-                android:textStyle="bold"
-                android:textColor="@color/black_light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:paddingLeft="8dp"
-                android:paddingStart="8dp"
-                android:paddingTop="12dp"
-                android:paddingRight="18dp"
-                android:paddingEnd="18dp"
-                android:paddingBottom="12dp" />
-        </RelativeLayout>
-    </LinearLayout>
 </RelativeLayout>

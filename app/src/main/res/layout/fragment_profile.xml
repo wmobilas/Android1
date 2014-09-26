@@ -59,13 +59,12 @@
                 android:textSize="20sp"
                 android:layout_below="@+id/photo"
                 android:layout_centerHorizontal="true"
-                android:text="UserName"
+                android:text="Activity"
                 android:textColor="@color/black_light"
                 android:layout_marginBottom="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/user_name" />
-
         </RelativeLayout>
 
         <TextView

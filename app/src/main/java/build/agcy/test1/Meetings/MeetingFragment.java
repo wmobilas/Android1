@@ -2,10 +2,13 @@ package build.agcy.test1.Meetings;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +28,7 @@ import build.agcy.test1.Api.Meetings.MeetingAcceptsListTask;
 import build.agcy.test1.Api.Meetings.MeetingConfirmTask;
 import build.agcy.test1.Api.Meetings.MeetingGetTask;
 import build.agcy.test1.Core.Helpers.Converters;
+import build.agcy.test1.Core.Helpers.CustomImageView;
 import build.agcy.test1.EatWithMeApp;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
@@ -50,11 +55,23 @@ public class MeetingFragment extends Fragment {
 
     private void bindData() {
         if (meeting != null && meetingView != null) {
+
+            final CustomImageView imageView = (CustomImageView) meetingView.findViewById(R.id.image);
+            imageView.setOnImageViewSizeChanged(new CustomImageView.OnImageViewSizeChanged() {
+                @Override
+                public void invoke(ImageView v, final int height, final int width) {
+                    String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, width, height, 15, "purple", "here");
+                    ImageLoader.getInstance().displayImage(imageUrl, imageView);
+                    imageView.setVisibility(View.VISIBLE);
+                }
+            });
+
             View ownerContainer = meetingView.findViewById(R.id.user_container);
             TextView descriptionView = (TextView) meetingView.findViewById(R.id.description);
-            ImageView imageView = (ImageView) meetingView.findViewById(R.id.image);
+//            ImageView imageView = (ImageView) meetingView.findViewById(R.id.image);
             TextView ownerNameView = (TextView) ownerContainer.findViewById(R.id.user_name);
             ImageView ownerPhotoView = (ImageView) ownerContainer.findViewById(R.id.user_photo);
+
             ownerContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -71,10 +88,8 @@ public class MeetingFragment extends Fragment {
             if (meeting.owner.photo != null) {
                 ImageLoader.getInstance().displayImage(meeting.owner.photo, ownerPhotoView);
             }
-            String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 640, 360, 10, "black", "here");
-            ImageLoader.getInstance().displayImage(imageUrl, imageView);
-            Fragment fragment;
-            Bundle arguments = getArguments();
+            final Fragment fragment;
+            final Bundle arguments = getArguments();
             if (EatWithMeApp.isOwner(meeting.owner.id)) {
                 if (!meeting.isConfirmed())
                     // показываем хозяину запросы
@@ -94,9 +109,11 @@ public class MeetingFragment extends Fragment {
                         // показываем окошко запроса
                         arguments.putString("meetingId", meeting.id);
                         fragment = new AcceptFragment();
-                    } else
+                    } else {
                         // показываем, что уже поздно
+                        arguments.putString("status", "confirmed");
                         fragment = new ConfirmedFragment();
+                    }
                 } else {
                     if (!meeting.isConfirmed()) {
                         // запрос отправлен
@@ -106,16 +123,30 @@ public class MeetingFragment extends Fragment {
                         fragment = new AcceptFragment();
                     } else {
                         // с вами встретятся =)
-                        arguments.putString("status", "acceptor");
+                        if (!meeting.confirmer.id.equals(EatWithMeApp.currentUser.id)) {
+                            arguments.putString("status", meeting.owner.username);
+                        } else {
+                            arguments.putString("status", "confirmed");
+                        }
                         arguments.putString("confirmer_id", meeting.confirmer.id);
                         fragment = new ConfirmedFragment();
                     }
+
                 }
+
             }
+
             fragment.setArguments(arguments);
-            getFragmentManager().beginTransaction().replace(R.id.action_container, fragment).commit();
-            View loadingView = meetingView.findViewById(R.id.loading);
-            loadingView.setVisibility(View.GONE);
+            new Handler().post(new Runnable() {
+                public void run() {
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction ft = fragmentManager.beginTransaction();
+                    ft.replace(R.id.action_container, fragment);
+                    ft.commit();
+                    View loadingView = meetingView.findViewById(R.id.loading);
+                    loadingView.setVisibility(View.GONE);
+                }
+            });
         }
     }
 
@@ -151,24 +182,22 @@ public class MeetingFragment extends Fragment {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             meetingId = getArguments().getString("meetingId", null);
-
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            if (savedInstanceState != null) {
-            } else {
+            if (savedInstanceState == null) {
                 if (meetingId == null) {
                     rootView = inflater.inflate(R.layout.fragment_accepted, null);
+                    LinearLayout bottomline = (LinearLayout) rootView.findViewById(R.id.bottomline);
                     TextView messageView = (TextView) rootView.findViewById(R.id.message);
-                    messageView.setText(getArguments().getString("message", "Empty message :O"));
+                    messageView.setText(getArguments().getString("message", "Meeting accepted, Hello!"));
+                    bottomline.setVisibility(View.VISIBLE);
                 } else {
                     rootView = inflater.inflate(R.layout.fragment_accept, null);
-
                     final Button acceptButton = (Button) rootView.findViewById(R.id.accept);
                     final TextView messageBox = (TextView) rootView.findViewById(R.id.message);
                     final TextView statusView = (TextView) rootView.findViewById(R.id.status);
-
                     acceptButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -215,9 +244,10 @@ public class MeetingFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             rootView = inflater.inflate(R.layout.fragment_confirmed, null);
+            LinearLayout bottomline = (LinearLayout) rootView.findViewById(R.id.bottomline);
             TextView messageView = (TextView) rootView.findViewById(R.id.message);
-
             String status = getArguments().getString("status");
+            bottomline.setVisibility(View.VISIBLE);
             if (status == null) {
                 messageView.setText("This meeting is finished");
             } else {
@@ -225,7 +255,11 @@ public class MeetingFragment extends Fragment {
                     messageView.setText("You confirmed " + getArguments().getString("confirmer_name") + " to your meeting");
                 } else {
                     //todo проверка что не я владелец
-                    messageView.setText("You've been confirmed to this meeting. WOWOW");
+                    if (status.equals("confirmed")) {
+                        messageView.setText("You've been confirmed to this meeting. WOWOW");
+                    } else {
+                        messageView.setText(status + " confirmed someone else. Sorry.");
+                    }
                 }
             }
             return rootView;
@@ -245,15 +279,12 @@ public class MeetingFragment extends Fragment {
         @Override
         public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             rootView = inflater.inflate(R.layout.fragment_accepts_list, null);
+            LinearLayout bottomline = (LinearLayout) rootView.findViewById(R.id.bottomline);
             final ListView listView = (ListView) rootView.findViewById(R.id.list);
-            final View loadingView = rootView.findViewById(R.id.loading);
             MeetingAcceptsListTask task = new MeetingAcceptsListTask(meetingId) {
                 @Override
                 public void onSuccess(final Meeting.Accept[] response) {
-                    loadingView.setVisibility(View.GONE);
                     if (response.length > 0) {
-                        listView.setVisibility(View.VISIBLE);
-                        loadingView.setVisibility(View.GONE);
                         listView.setAdapter(new BaseAdapter() {
                             @Override
                             public int getCount() {
@@ -267,7 +298,7 @@ public class MeetingFragment extends Fragment {
 
                             @Override
                             public long getItemId(int i) {
-                                return 0;
+                                return i;
                             }
 
                             @Override
@@ -313,7 +344,6 @@ public class MeetingFragment extends Fragment {
                                                     public void onError(Exception exp) {
                                                         confirmingDialog.dismiss();
                                                         Toast.makeText(getActivity(), "Confirming error", Toast.LENGTH_SHORT).show();
-
                                                     }
                                                 }.start();
                                             }
@@ -321,25 +351,22 @@ public class MeetingFragment extends Fragment {
                                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
-
                                             }
                                         }).show();
-
-
                             }
                         });
+                        listView.setVisibility(View.VISIBLE);
                     } else {
                         TextView statusView = (TextView) rootView.findViewById(R.id.status);
                         statusView.setVisibility(View.VISIBLE);
-                        statusView.setText("None still respond to your meeting");
                     }
                 }
 
                 @Override
                 public void onError(Exception exp) {
-
                 }
             };
+            bottomline.setVisibility(View.VISIBLE);
             task.start();
             return rootView;
         }

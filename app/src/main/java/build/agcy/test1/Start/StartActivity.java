@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -19,8 +20,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -56,13 +55,20 @@ public class StartActivity extends FragmentActivity {
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkPlayServices();
+    }
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
 
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    public static final String PROPERTY_REG_ID = "11";
+    public static final String PROPERTY_REG_ID = "registration_id";
     private static final String PROPERTY_APP_VERSION = "application_version_code";
+    String SENDER_ID = "181401788596";
     ViewPager mViewPager;
     String TAG = "agcy.test";
     GoogleCloudMessaging gcm;
@@ -73,6 +79,7 @@ public class StartActivity extends FragmentActivity {
     TextView username_login;
     TextView password_login;
     MediaPlayer mp;
+    private static long back_pressed;
 
     @Override
     protected void onPause() {
@@ -149,6 +156,7 @@ public class StartActivity extends FragmentActivity {
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
             registerInBackground(!regid.isEmpty());
+//            registerInBackground();
         } else {
             Log.e(TAG, "No valid Google Play Services APK found.");
             Toast.makeText(context, "NO PLAY SERVICES", Toast.LENGTH_LONG).show();
@@ -173,30 +181,6 @@ public class StartActivity extends FragmentActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.tabbd, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     private class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -274,31 +258,35 @@ public class StartActivity extends FragmentActivity {
             //if (BuildConfig.DEBUG) {
             //     GCMRegistrarCompat.checkManifest(this);}
 
+            final Button login = (Button) (rootView.findViewById(R.id.login_button));
+            final Button register = (Button) (rootView.findViewById(R.id.register_button));
             joinButton.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            (rootView.findViewById(R.id.login_button)).setVisibility(View.GONE);
+                            register.setVisibility(View.VISIBLE);
+                            login.setVisibility(View.GONE);
+                            register.setAlpha(Float.parseFloat("0.9"));
                             joinButton.setVisibility(View.GONE);
                             alreadyButton.setVisibility(View.VISIBLE);
-                            (rootView.findViewById(R.id.register_button)).setVisibility(View.VISIBLE);
-                            Log.d("build.agcy", "registration");
                         }
                     });
             alreadyButton.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            (rootView.findViewById(R.id.login_button)).setVisibility(View.VISIBLE);
-                            joinButton.setVisibility(View.VISIBLE);
+                            login.setVisibility(View.VISIBLE);
+                            register.setVisibility(View.GONE);
+                            login.setAlpha(Float.parseFloat("0.9"));
                             alreadyButton.setVisibility(View.GONE);
-                            (rootView.findViewById(R.id.register_button)).setVisibility(View.GONE);
-                            Log.d("build.agcy", "registration");
+                            joinButton.setVisibility(View.VISIBLE);
                         }
                     });
-            Bundle args = getArguments();
-//            todo: bind args
-            MainActivity.applyTypeface(MainActivity.getParentView(rootView), MainActivity.getTypeface(getActivity().getApplicationContext()));
+//            Bundle args = getArguments();
+            //todo: bind args
+            TextView description = (TextView) rootView.findViewById(R.id.textWelcome);
+            description.setTypeface(Typeface.createFromAsset(getActivity().getBaseContext().getAssets(), "fonts/fox.ttf"));
+//            MainActivity.applyTypeface(MainActivity.getParentView(rootView), MainActivity.getTypeface(getActivity().getApplicationContext()));
             return rootView;
         }
     }
@@ -348,10 +336,13 @@ public class StartActivity extends FragmentActivity {
             @Override
             public void onError(Exception exp) {
                 dialog.dismiss();
-                (findViewById(R.id.login_button)).setVisibility(View.VISIBLE);
-                (findViewById(R.id.join_button)).setVisibility(View.VISIBLE);
-                (findViewById(R.id.register_button)).setVisibility(View.GONE);
+                Button login = (Button) (findViewById(R.id.login_button));
+                Button register = (Button) (findViewById(R.id.register_button));
+                login.setVisibility(View.VISIBLE);
+                register.setVisibility(View.GONE);
+                login.setAlpha(Float.parseFloat("0.9"));
                 (findViewById(R.id.already_button)).setVisibility(View.GONE);
+                (findViewById(R.id.join_button)).setVisibility(View.VISIBLE);
                 if (exp instanceof ApiError) {
                     //todo:коды
 //                        int code = ((ApiError) exp).getCode();
@@ -431,6 +422,7 @@ public class StartActivity extends FragmentActivity {
         };
         task.start();
     }
+
 
     private boolean checkPlayServices() {
 
@@ -512,4 +504,14 @@ public class StartActivity extends FragmentActivity {
         editor.putInt(PROPERTY_APP_VERSION, appVersion);
         editor.commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed();
+        else
+            Toast.makeText(getBaseContext(), "Press once again to exit!", Toast.LENGTH_SHORT).show();
+        back_pressed = System.currentTimeMillis();
+    }
+
+
 }

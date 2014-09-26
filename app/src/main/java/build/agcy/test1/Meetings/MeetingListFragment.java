@@ -33,6 +33,15 @@ public class MeetingListFragment extends Fragment {
     public MeetingListFragment() {
     }
 
+    MeetingListTask task;
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        task.cancel(true);
+        Log.d(TAG, "Fragment1 onDestroy");
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -50,7 +59,7 @@ public class MeetingListFragment extends Fragment {
         if (savedInstanceState == null) {
             myView = inflater.inflate(R.layout.fragment_meeting_list, container, false);
             final ListView meetingListView = (ListView) myView.findViewById(R.id.list);
-            MeetingListTask task = new MeetingListTask(new ArrayList<NameValuePair>() {{
+            task = new MeetingListTask(new ArrayList<NameValuePair>() {{
                 add(new BasicNameValuePair("confirmed", "false"));
             }}) {
                 @Override
@@ -63,7 +72,9 @@ public class MeetingListFragment extends Fragment {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                             Bundle bundle = new Bundle();
-                            bundle.putString("id", String.valueOf(response[position].id));
+
+                            bundle.putString("id", String.valueOf(response[(int) adapter.getItemId(position)].id));
+//                            bundle.putString("id", String.valueOf(response[position].id));
                             Intent intent = new Intent(getActivity(), MeetingActivity.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
@@ -116,12 +127,6 @@ public class MeetingListFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         Log.d(TAG, "Fragment1 onDestroyView");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "Fragment1 onDestroy");
     }
 
     @Override

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="NoActionBarTheme" parent="@android:style/Theme.DeviceDefault.Light">
+    <style name="NoActionBarTheme" parent="@style/AppTheme.Violet">
         <item name="android:actionBarStyle">@style/TranslucentActionBar</item>
         <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:windowTranslucentStatus">true</item>
@@ -66,8 +66,8 @@
         <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Violet</item>
         <item name="android:actionDropDownStyle">@style/DropDownNav.Violet</item>
         <item name="android:actionBarStyle">@style/ActionBar.Solid.Violet</item>
-        <item name="android:actionModeBackground">@drawable/cab_background_top_violet</item>
-        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_violet</item>
+        <!--<item name="android:actionModeBackground">@drawable/cab_background_top_violet</item>-->
+        <!--<item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_violet</item>-->
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Violet</item>
 
 

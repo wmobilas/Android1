@@ -62,6 +62,7 @@ public class NavigationDrawerFragment extends Fragment {
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+    String mTitle;
 
     public NavigationDrawerFragment() {
     }
@@ -128,7 +129,7 @@ public class NavigationDrawerFragment extends Fragment {
                 getActivity(),
 //                android.R.layout.simple_list_item_activated_1,
 //                android.R.id.text1,
-                //todo меняит картинко
+                //todo менять иконки меню
                 R.layout.nav_drawer_item,
                 R.id.text1,
                 new String[]{
@@ -159,12 +160,26 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
 
+        switch (fragmentId) {
+            case 0:
+                mTitle = getString(R.string.navbar_title_profile);
+                break;
+            case 1:
+                mTitle = getString(R.string.navbar_title_create);
+                break;
+            case 2:
+                mTitle = getString(R.string.navbar_title_meetings);
+                break;
+            case 3:
+                mTitle = getString(R.string.navbar_title_map);
+                break;
+        }
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setTitle(R.string.app_name);
+        actionBar.setTitle(mTitle);
 //        actionBar.setIcon(R.drawable.ic3white);
 //        actionBar.setLogo(R.drawable.ic3white);
 

@@ -48,6 +48,7 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
     double latitude;
     double longitude;
     int count = 0;
+    int pressedCount = 0;
     LocationManager locationManager;
     private Activity myContext;
     private Location location;
@@ -129,8 +130,6 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
         container.removeAllViews();
         container.removeAllViewsInLayout();
         FindMe.please(getActivity(), new FindMe.FindMeListener() {
-            int pressedCount = 0;
-
             @Override
             public void foundLocation(String provider, Location location) {
 
@@ -139,18 +138,20 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
                     latitude = location.getLatitude();
                     longitude = location.getLongitude();
                     Log.d(TAG, "before lat= " + latitude + " lng= " + longitude);
+                    pressedCount--;
                 }
                 pressedCount++;
             }
 
             @Override
             public void couldntFindLocation() {
-                if (pressedCount == 0) {
+                if (pressedCount == 1) {
                     LocationDialogFragment dialog = new LocationDialogFragment();
                     dialog.show(getFragmentManager(),
                             LocationDialogFragment.class.getName());
-                    pressedCount--;
+                    pressedCount++;
                 }
+                pressedCount--;
             }
         });
         if (mapView == null) {
@@ -284,8 +285,9 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
         }
         count++;
 //                    new MeetingPopupAdapter(myContext.getBaseContext()));
+//        new GoogleMap.InfoWindowAdapter() {
         map.setInfoWindowAdapter(
-                new GoogleMap.InfoWindowAdapter() {
+                new MeetingPopupAdapter(myContext.getBaseContext()) {
                     //todo open meeting, время отображать нормально
                     @Override
                     public View getInfoWindow(Marker marker) {

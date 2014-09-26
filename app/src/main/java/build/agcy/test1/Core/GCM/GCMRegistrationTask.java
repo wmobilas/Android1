@@ -30,7 +30,7 @@ public abstract class GCMRegistrationTask extends AsyncTask<Void, Void, Object> 
     protected Object doInBackground(Void... params) {
         String regid = "";
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(context);
-        if(unregister){
+        if (unregister) {
             try {
                 gcm.unregister();
             } catch (IOException e) {
@@ -39,7 +39,8 @@ public abstract class GCMRegistrationTask extends AsyncTask<Void, Void, Object> 
         }
 
         try {
-            regid = gcm.register(SENDER_ID);
+            regid = gcm.register("331939190116", "879830610296", "181401788596");//todo service not available
+//            regid = gcm.register(SENDER_ID);
             Log.i(LOG_TAG, "Device registered, registration ID=" + regid);
             // You should send the registration ID to your server over HTTP, so it
             // can use GCM/HTTP or CCS to send messages to your app.
@@ -53,9 +54,9 @@ public abstract class GCMRegistrationTask extends AsyncTask<Void, Void, Object> 
 
     @Override
     protected void onPostExecute(Object o) {
-        if(o instanceof Exception){
+        if (o instanceof Exception) {
             onError((Exception) o);
-        }else{
+        } else {
             onSuccess((String) o);
         }
     }

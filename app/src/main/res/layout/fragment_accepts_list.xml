@@ -2,26 +2,37 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:gravity="center"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal|bottom">
 
     <ListView
         android:id="@+id/list"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <ProgressBar
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/bottomline"
+        android:background="@drawable/bottomline"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="1dp"
+        android:layout_above="@+id/status"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:text="None still respond to your meeting"
-        android:layout_gravity="center_horizontal|top"
         android:id="@+id/status"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:textColor="@color/violet_dark"
+        android:alpha="0.9"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

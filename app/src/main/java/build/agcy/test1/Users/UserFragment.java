@@ -51,7 +51,7 @@ public class UserFragment extends Fragment {
     public ArrayAdapter<String> msgList;
 
     public void sendMessageToServer(String str) {
-
+//todo сделать чат
         final String str1 = str;
         new Thread(new Runnable() {
 

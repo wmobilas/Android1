@@ -7,8 +7,8 @@
         <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Violet</item>
         <item name="android:actionDropDownStyle">@style/DropDownNav.Violet</item>
         <item name="android:actionBarStyle">@style/ActionBar.Solid.Violet</item>
-        <item name="android:actionModeBackground">@drawable/cab_background_top_violet</item>
-        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_violet</item>
+        <!--<item name="android:actionModeBackground">@drawable/cab_background_top_violet</item>-->
+        <!--<item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_violet</item>-->
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Violet</item>
         <item name="android:itemTextAppearance">@style/TextAppearance</item>
         <item name="android:typeface">serif</item>
@@ -48,7 +48,7 @@
         <item name="android:src">@drawable/ic_action_overflow_round</item>
     </style>
 
-    <style name="NoActionBarTheme" parent="@android:style/Theme.DeviceDefault.Light">
+    <style name="NoActionBarTheme" parent="@style/AppTheme.Violet">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>

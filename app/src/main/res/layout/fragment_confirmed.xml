@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
+    android:layout_height="60dp"
+    android:alpha="0.9"
+    android:gravity="center_horizontal|bottom"
     android:layout_gravity="center_horizontal">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/bottomline"
+        android:background="@drawable/bottomline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:visibility="gone"
+        android:layout_above="@+id/message"
+        android:layout_centerHorizontal="true" />
+
     <TextView
-        android:id="@+id/message"
         android:text="Confirmed"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:id="@+id/message"
+        android:textColor="@color/violet_dark"
+        android:alpha="0.9"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:visibility="visible" />
+</RelativeLayout>

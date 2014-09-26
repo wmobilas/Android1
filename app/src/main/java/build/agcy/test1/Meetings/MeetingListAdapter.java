@@ -5,12 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import build.agcy.test1.Core.Helpers.Converters;
+import build.agcy.test1.EatWithMeApp;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
 
@@ -33,37 +32,43 @@ public class MeetingListAdapter extends BaseAdapter {
 
     @Override
     public Meeting getItem(int position) {
-        return meetings.get(position);
+        return meetings.get(getCount() - position - 1);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return getCount() - position - 1;
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        //todo сделать динамическую загрузку
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ViewGroup view = null;
-
+        ViewGroup view;
         if (convertView == null) {
             view = (ViewGroup) inflater.inflate(R.layout.item_meeting, parent, false);
         } else {
             view = (ViewGroup) convertView;
         }
-//        View itemView = inflater.inflate(R.layout.item_meeting, null);
-        TextView descView = (TextView) view.findViewById(R.id.description);
-        final TextView userNameTextView = (TextView) view.findViewById(R.id.user_name);
-        ImageView imageView = (ImageView) view.findViewById(R.id.meeting_photo);
-
         final Meeting meeting = getItem(position);
-        userNameTextView.setText("by " + meeting.owner.username);
-
-        descView.setText(meeting.description);
-
-        String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 600, 400, 7, "black", "Here");
-        // ImageLoader.getInstance().displayImage(imageUrl, imageView);
-
+        ((TextView) view.findViewById(R.id.description)).setText(meeting.description);
+        TextView count = (TextView) view.findViewById(R.id.count);
+        if (meeting.acceptsCount == 0) {
+            count.setVisibility(View.INVISIBLE);
+        } else {
+            count.setVisibility(View.VISIBLE);
+            count.setText(meeting.acceptsCount);
+        }
+        String ownerid = meeting.owner.username;
+        String currentUserid = EatWithMeApp.currentUser.username;
+        if (ownerid.equals(currentUserid)) {
+            ((TextView) view.findViewById(R.id.user_name)).setText("by you");
+        } else {
+            ((TextView) view.findViewById(R.id.user_name)).setText("by " + ownerid);
+        }
+//        ImageView imageView = (ImageView) view.findViewById(R.id.meeting_photo);
+//        String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 100, 100, 15, "purple", "Here");
+//        ImageLoader.getInstance().displayImage(imageUrl, (ImageView)view.findViewById(R.id.mapground));
         return view;
     }
 }
