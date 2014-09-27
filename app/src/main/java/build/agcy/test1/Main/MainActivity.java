@@ -34,7 +34,6 @@ import build.agcy.test1.Core.Helpers.OnBackPressedListener;
 import build.agcy.test1.Fragments.LocationDialogFragment;
 import build.agcy.test1.Fragments.MapFragment;
 import build.agcy.test1.Meetings.CreateMeetingFragment;
-import build.agcy.test1.Meetings.MeetingListFragment;
 import build.agcy.test1.R;
 
 public class MainActivity extends Activity
@@ -136,11 +135,11 @@ public class MainActivity extends Activity
                 fragment = new CreateMeetingFragment();
                 break;
             case 2:
-                fragment = new MeetingListFragment();
-                break;
-            case 3:
                 fragment = new MapFragment();
                 break;
+//            case 3:
+//                fragment = null;
+//                break;
         }
         new Handler().post(new Runnable() {
             public void run() {
@@ -160,9 +159,9 @@ public class MainActivity extends Activity
             case 2:
                 mTitle = getString(R.string.navbar_title_meetings);
                 break;
-            case 3:
-                mTitle = getString(R.string.navbar_title_map);
-                break;
+//            case 3:
+//                mTitle = getString(R.string.navbar_title_settings);
+//                break;
         }
         mTitle = getString(R.string.navbar_title_profile);
     }

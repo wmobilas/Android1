@@ -29,6 +29,7 @@ import build.agcy.test1.R;
 public class MeetingListFragment extends Fragment {
     final String TAG = "agcy.test";
     private Activity myContext;
+    int count = 0;
 
     public MeetingListFragment() {
     }
@@ -58,37 +59,43 @@ public class MeetingListFragment extends Fragment {
         Log.d(TAG, "mapfragment onCreateView");
         if (savedInstanceState == null) {
             myView = inflater.inflate(R.layout.fragment_meeting_list, container, false);
-            final ListView meetingListView = (ListView) myView.findViewById(R.id.list);
-            task = new MeetingListTask(new ArrayList<NameValuePair>() {{
-                add(new BasicNameValuePair("confirmed", "false"));
-            }}) {
-                @Override
-                public void onSuccess(final Meeting[] response) {
-                    myView.findViewById(R.id.history_status).setVisibility(View.GONE);
-                    final MeetingListAdapter adapter = new MeetingListAdapter(getActivity(), new ArrayList<Meeting>(Arrays.asList(response)));
-                    meetingListView.setAdapter(adapter);
-                    meetingListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                            Bundle bundle = new Bundle();
+            if (count == 0) {
+                count++;
+                final ListView meetingListView = (ListView) myView.findViewById(R.id.list);
+                task = new MeetingListTask(new ArrayList<NameValuePair>() {{
+                    add(new BasicNameValuePair("confirmed", "false"));
+                }}) {
+                    @Override
+                    public void onSuccess(final Meeting[] response) {
+                        final MeetingListAdapter adapter = new MeetingListAdapter(getActivity(), new ArrayList<Meeting>(Arrays.asList(response)));
+                        meetingListView.setAdapter(adapter);
+                        meetingListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                            bundle.putString("id", String.valueOf(response[(int) adapter.getItemId(position)].id));
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                                Bundle bundle = new Bundle();
+
+                                bundle.putString("id", String.valueOf(response[(int) adapter.getItemId(position)].id));
 //                            bundle.putString("id", String.valueOf(response[position].id));
-                            Intent intent = new Intent(getActivity(), MeetingActivity.class);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                        }
-                    });
-                }
+                                Intent intent = new Intent(getActivity(), MeetingActivity.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+                        });
+                        myView.findViewById(R.id.history_status).setVisibility(View.GONE);
+                    }
 
-                @Override
-                public void onError(Exception exp) {
-                    Toast.makeText(getActivity(), "MeetingListTaskError " + exp.toString(), Toast.LENGTH_LONG).show();
-                    Log.d(TAG, "MeetingListTaskError " + exp.toString());
-                }
-            };
-            task.start();
+                    @Override
+                    public void onError(Exception exp) {
+                        Toast.makeText(getActivity(), "MeetingListTaskError " + exp.toString(), Toast.LENGTH_LONG).show();
+                        Log.d(TAG, "MeetingListTaskError " + exp.toString());
+                        myView.findViewById(R.id.history_status).setVisibility(View.GONE);
+                    }
+                };
+                task.start();
+                myView.findViewById(R.id.history_status).setVisibility(View.VISIBLE);
+            }
         }
         return myView;
     }

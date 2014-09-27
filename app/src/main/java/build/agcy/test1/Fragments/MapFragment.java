@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -34,7 +36,9 @@ import java.util.Date;
 import build.agcy.test1.Api.Meetings.MeetingListTask;
 import build.agcy.test1.Api.UpdateLocationTask;
 import build.agcy.test1.Core.Helpers.FindMe;
+import build.agcy.test1.Core.Helpers.ScrollingLayout;
 import build.agcy.test1.Meetings.MapHelpers.MeetingPopupAdapter;
+import build.agcy.test1.Meetings.MeetingListFragment;
 import build.agcy.test1.Models.Meeting;
 import build.agcy.test1.R;
 
@@ -43,11 +47,13 @@ import build.agcy.test1.R;
  */
 public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClickListener {
     private com.google.android.gms.maps.MapFragment mapFragment;
+    private MeetingListFragment meetingListFragment;
     private GoogleMap map;
     final String TAG = "agcy.test";
     double latitude;
     double longitude;
     int count = 0;
+    int scrollCount = 0;
     int pressedCount = 0;
     LocationManager locationManager;
     private Activity myContext;
@@ -154,8 +160,33 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
                 pressedCount--;
             }
         });
-        if (mapView == null) {
+        if ((mapView == null) && (savedInstanceState == null)) {
             mapView = inflater.inflate(R.layout.activity_map, container, false);
+            final ScrollingLayout mTouchBox = (ScrollingLayout) mapView.findViewById(R.id.bottomline);
+            final RelativeLayout mTouchBox2 = (RelativeLayout) mapView.findViewById(R.id.map_Layout);
+            mTouchBox.setOnTouchListener((new View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    String mode = "DRAG";
+                    switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                        case MotionEvent.ACTION_DOWN:
+                            mode = "DRAG";
+                        case MotionEvent.ACTION_POINTER_DOWN:
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_POINTER_UP:
+                            mode = "NONE";
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            if (mode.equals("DRAG")) {
+                                ViewGroup.LayoutParams p = mTouchBox2.getLayoutParams();
+                                float y = event.getY();
+                                p.height = p.height + (int) y;
+                                mTouchBox2.requestLayout();
+                            }
+                            break;
+                    }
+                    return true;
+                }
+            }));
 //            if (savedInstanceState == null) {
 //            Button testButtonMap = (Button) mapView.findViewById(R.id.btnTest);
 //            testButtonMap.setOnClickListener(new View.OnClickListener() {
@@ -185,9 +216,11 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
         Log.d(TAG, "mapfragment onCreate");
         FragmentManager fm = getFragmentManager();
         mapFragment = (com.google.android.gms.maps.MapFragment) fm.findFragmentById(R.id.map_Fragment);
+        meetingListFragment = new MeetingListFragment();
         if (mapFragment == null) {
             mapFragment = com.google.android.gms.maps.MapFragment.newInstance();
             fm.beginTransaction().replace(R.id.map_Fragment, mapFragment).commit();
+            fm.beginTransaction().replace(R.id.meeting_list_fragment, meetingListFragment).commit();
         }
         setUpMapIfNeeded();
 

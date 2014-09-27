@@ -136,7 +136,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.navbar_title_profile),
                         getString(R.string.navbar_title_create),
                         getString(R.string.navbar_title_meetings),
-                        getString(R.string.navbar_title_map)
+//                        getString(R.string.navbar_title_map)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -170,9 +170,9 @@ public class NavigationDrawerFragment extends Fragment {
             case 2:
                 mTitle = getString(R.string.navbar_title_meetings);
                 break;
-            case 3:
-                mTitle = getString(R.string.navbar_title_map);
-                break;
+//            case 3:
+//                mTitle = getString(R.string.navbar_title_map);
+//                break;
         }
 
         ActionBar actionBar = getActionBar();

@@ -108,6 +108,7 @@ public class MeetingFragment extends Fragment {
                     if (!meeting.isConfirmed()) {
                         // показываем окошко запроса
                         arguments.putString("meetingId", meeting.id);
+                        arguments.putString("meetingAcceptorId", meeting.accept.acceptor.id);
                         fragment = new AcceptFragment();
                     } else {
                         // показываем, что уже поздно
@@ -118,6 +119,7 @@ public class MeetingFragment extends Fragment {
                     if (!meeting.isConfirmed()) {
                         // запрос отправлен
                         arguments.putString("id", meeting.accept.id);
+                        arguments.putString("meetingAcceptorId", meeting.accept.acceptor.id);
                         arguments.putString("message", meeting.accept.message);
                         arguments.putInt("time", meeting.accept.time);
                         fragment = new AcceptFragment();
@@ -176,55 +178,65 @@ public class MeetingFragment extends Fragment {
     public static class AcceptFragment extends Fragment {
 
         private String meetingId;
+        private String meetingAcceptor;
         View rootView = null;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             meetingId = getArguments().getString("meetingId", null);
+            meetingAcceptor = getArguments().getString("meetingAcceptorId", null);
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             if (savedInstanceState == null) {
-                if (meetingId == null) {
+                if ((meetingId == null) && (meetingAcceptor.equals(EatWithMeApp.currentUser.id))) {
                     rootView = inflater.inflate(R.layout.fragment_accepted, null);
                     LinearLayout bottomline = (LinearLayout) rootView.findViewById(R.id.bottomline);
                     TextView messageView = (TextView) rootView.findViewById(R.id.message);
                     messageView.setText(getArguments().getString("message", "Meeting accepted, Hello!"));
                     bottomline.setVisibility(View.VISIBLE);
                 } else {
-                    rootView = inflater.inflate(R.layout.fragment_accept, null);
-                    final Button acceptButton = (Button) rootView.findViewById(R.id.accept);
-                    final TextView messageBox = (TextView) rootView.findViewById(R.id.message);
-                    final TextView statusView = (TextView) rootView.findViewById(R.id.status);
-                    acceptButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            final ProgressDialog accepting = new ProgressDialog(getActivity());
-                            accepting.setMessage("Accepting");
-                            accepting.setTitle("Wait pls");
-                            accepting.setCancelable(false);
-                            accepting.show();
-                            MeetingAcceptTask acceptTask = new MeetingAcceptTask(meetingId, messageBox.getText().toString()) {
-                                @Override
-                                public void onSuccess(String response) {
-                                    accepting.dismiss();
-                                    messageBox.setVisibility(View.GONE);
-                                    acceptButton.setVisibility(View.GONE);
-                                    statusView.setText("Accept sended");
-                                }
+                    if (meetingId == null) {
+                        rootView = inflater.inflate(R.layout.fragment_accepted, null);
+                        LinearLayout bottomline = (LinearLayout) rootView.findViewById(R.id.bottomline);
+                        TextView messageView = (TextView) rootView.findViewById(R.id.message);
+                        messageView.setText("Someone else accepted, Sorry!");
+                        bottomline.setVisibility(View.VISIBLE);
+                    } else {
+                        rootView = inflater.inflate(R.layout.fragment_accept, null);
+                        final Button acceptButton = (Button) rootView.findViewById(R.id.accept);
+                        final TextView messageBox = (TextView) rootView.findViewById(R.id.message);
+                        final TextView statusView = (TextView) rootView.findViewById(R.id.status);
+                        acceptButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                final ProgressDialog accepting = new ProgressDialog(getActivity());
+                                accepting.setMessage("Accepting");
+                                accepting.setTitle("Wait pls");
+                                accepting.setCancelable(false);
+                                accepting.show();
+                                MeetingAcceptTask acceptTask = new MeetingAcceptTask(meetingId, messageBox.getText().toString()) {
+                                    @Override
+                                    public void onSuccess(String response) {
+                                        accepting.dismiss();
+                                        messageBox.setVisibility(View.GONE);
+                                        acceptButton.setVisibility(View.GONE);
+                                        statusView.setText("Accept sended");
+                                    }
 
-                                @Override
-                                public void onError(Exception exp) {
-                                    accepting.dismiss();
-                                    Toast.makeText(getActivity(), "Error:" + exp.getMessage(), Toast.LENGTH_SHORT).show();
+                                    @Override
+                                    public void onError(Exception exp) {
+                                        accepting.dismiss();
+                                        Toast.makeText(getActivity(), "Error:" + exp.getMessage(), Toast.LENGTH_SHORT).show();
 
-                                }
-                            };
-                            acceptTask.start();
-                        }
-                    });
+                                    }
+                                };
+                                acceptTask.start();
+                            }
+                        });
+                    }
                 }
             }
             return rootView;
@@ -372,3 +384,4 @@ public class MeetingFragment extends Fragment {
         }
     }
 }
+

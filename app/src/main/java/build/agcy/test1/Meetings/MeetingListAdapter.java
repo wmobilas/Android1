@@ -57,14 +57,14 @@ public class MeetingListAdapter extends BaseAdapter {
             count.setVisibility(View.INVISIBLE);
         } else {
             count.setVisibility(View.VISIBLE);
-            count.setText(meeting.acceptsCount);
+            count.setText(String.valueOf(meeting.acceptsCount));
         }
         String ownerid = meeting.owner.username;
         String currentUserid = EatWithMeApp.currentUser.username;
         if (ownerid.equals(currentUserid)) {
-            ((TextView) view.findViewById(R.id.user_name)).setText("by you");
+            ((TextView) view.findViewById(R.id.user_name)).setText("By you");
         } else {
-            ((TextView) view.findViewById(R.id.user_name)).setText("by " + ownerid);
+            ((TextView) view.findViewById(R.id.user_name)).setText("By " + ownerid);
         }
 //        ImageView imageView = (ImageView) view.findViewById(R.id.meeting_photo);
 //        String imageUrl = Converters.getStaticMapImageUrl(meeting.longitude, meeting.latitude, 100, 100, 15, "purple", "Here");

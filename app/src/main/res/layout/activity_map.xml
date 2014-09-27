@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/map_Layout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:clipToPadding="false"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/map_Layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:layout_gravity="center_horizontal">
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,7 +19,57 @@
             android:layout_height="match_parent"
             class="com.google.android.gms.maps.MapFragment"
             android:name="build.agcy.test1.Fragments.MapFragment" />
-    </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <build.agcy.test1.Core.Helpers.ScrollingLayout
+        android:orientation="horizontal"
+        android:id="@+id/bottomline"
+        android:background="@drawable/whiteline"
+        android:layout_width="match_parent"
+        android:visibility="visible"
+        android:layout_height="18dp"
+        android:layout_below="@+id/map_Layout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:src="@drawable/divider_black"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:visibility="visible"
+                android:gravity="center"
+                android:layout_width="45dp"
+                android:layout_height="12dp" />
+        </FrameLayout>
+    </build.agcy.test1.Core.Helpers.ScrollingLayout>
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/meeting_list_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="build.agcy.test1.Meetings.MeetingListFragment"
+        android:name="build.agcy.test1.Meetings.MeetingListFragment"
+        android:layout_below="@+id/bottomline" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/bline"
+        android:background="@color/grey_default"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignTop="@+id/meeting_list_fragment"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
     <!--<Button-->
     <!--android:id="@+id/btnTest"-->
     <!--android:layout_width="match_parent"-->
@@ -28,4 +78,4 @@
     <!--android:text="Test"-->
     <!--android:layout_gravity="center_horizontal" />-->
 
-</LinearLayout>
+</RelativeLayout>
