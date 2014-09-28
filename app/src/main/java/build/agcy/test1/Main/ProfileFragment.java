@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.makeramen.RoundedDrawable;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.File;
@@ -102,7 +103,7 @@ public class ProfileFragment extends Fragment {
                     handler2.postDelayed(
                             new Runnable() {
                                 public void run() {
-                                    Bitmap profile = ((BitmapDrawable) photoView.getDrawable()).getBitmap();
+                                    Bitmap profile = RoundedDrawable.drawableToBitmap(photoView.getDrawable());
                                     saveToInternalSorage(profile, "profile");
                                 }
                             }, 2000L);
