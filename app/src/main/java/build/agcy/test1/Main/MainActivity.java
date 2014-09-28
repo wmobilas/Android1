@@ -2,7 +2,6 @@ package build.agcy.test1.Main;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -29,6 +28,8 @@ import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
+import org.netcook.android.tools.CrashCatcherActivity;
+
 import build.agcy.test1.Core.Helpers.FindMe;
 import build.agcy.test1.Core.Helpers.OnBackPressedListener;
 import build.agcy.test1.Fragments.LocationDialogFragment;
@@ -36,8 +37,17 @@ import build.agcy.test1.Fragments.MapFragment;
 import build.agcy.test1.Meetings.CreateMeetingFragment;
 import build.agcy.test1.R;
 
-public class MainActivity extends Activity
+public class MainActivity extends CrashCatcherActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+    @Override
+    protected String getRecipient() {
+        return "wmobilas@gmail.oom";
+    }
+
+    @Override
+    protected Class<?> getStartActivityAfterCrached() {
+        return MainActivity.class;
+    }
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
