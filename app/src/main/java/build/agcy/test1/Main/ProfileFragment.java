@@ -50,7 +50,9 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        task.cancel(true);
+        if (task != null) {
+            task.cancel(true);
+        }
     }
 
     @Override
