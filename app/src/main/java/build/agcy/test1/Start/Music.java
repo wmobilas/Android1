@@ -21,7 +21,7 @@ public class Music extends Service {
     }
 
     public void onCreate() {
-        mp = MediaPlayer.create(this, R.raw.coffe);
+        mp = MediaPlayer.create(this, R.raw.music);
         mp.setLooping(true);
     }
 
