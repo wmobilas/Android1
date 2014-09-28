@@ -1,10 +1,12 @@
 package build.agcy.test1.Core.GCM.Push;
 
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import build.agcy.test1.Meetings.MeetingActivity;
@@ -44,12 +46,15 @@ public class PushConfirm extends Push {
                 new NotificationCompat.Builder(context);
         Resources res = context.getResources();
         Bitmap img = BitmapFactory.decodeResource
-                (res, R.drawable.ic_stat_w256h2561377940716185119eatfoodforkknifestreamline2);
+                (res, R.drawable.ic_stat_location_place);
+        String uri = (ContentResolver.SCHEME_ANDROID_RESOURCE
+                + "://" + context.getPackageName() + "/" + R.raw.eat);
         builder
-                .setSmallIcon(R.drawable.ic_stat_location_place)
+                .setSmallIcon(R.drawable.pin2)
                 .setLargeIcon(img)
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
+                .setSound(Uri.parse(uri))
                 .setContentTitle(getTitle())
                 .setContentText(getMessage()).build();
         PendingIntent contentIntent = getPendingIntent();

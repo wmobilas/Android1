@@ -3,6 +3,7 @@ package build.agcy.test1.Fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.Image;
@@ -47,7 +48,6 @@ import build.agcy.test1.R;
  */
 public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClickListener {
     private com.google.android.gms.maps.MapFragment mapFragment;
-    private MeetingListFragment meetingListFragment;
     private GoogleMap map;
     final String TAG = "agcy.test";
     double latitude;
@@ -55,10 +55,16 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
     int count = 0;
     int scrollCount = 0;
     int pressedCount = 0;
+    boolean locationFinderIsRunning;
     LocationManager locationManager;
     private Activity myContext;
     private Location location;
-
+    Handler timerHandler = new Handler();
+    Runnable runnable = new Runnable() {
+        public void run() {
+            timerTask();
+        }
+    };
     public MapFragment() {
     }
 
@@ -86,18 +92,30 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
     @Override
     public void onResume() {
         super.onResume();
+        if (map != null) {
+            map.setMyLocationEnabled(true);
+            locationFinderIsRunning = true;
+        }
         Log.d(TAG, "Fragment1 onResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        if (map != null) {
+            locationFinderIsRunning = false;
+            map.setMyLocationEnabled(false);
+        }
         Log.d(TAG, "Fragment1 onPause");
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        if (map != null) {
+            locationFinderIsRunning = false;
+            map.setMyLocationEnabled(false);
+        }
         Log.d(TAG, "Fragment1 onStop");
     }
 
@@ -110,6 +128,10 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (map != null) {
+            locationFinderIsRunning = false;
+            map.setMyLocationEnabled(false);
+        }
         Log.d(TAG, "Fragment1 onDestroy");
     }
 
@@ -152,9 +174,13 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
             @Override
             public void couldntFindLocation() {
                 if (pressedCount == 1) {
-                    LocationDialogFragment dialog = new LocationDialogFragment();
-                    dialog.show(getFragmentManager(),
-                            LocationDialogFragment.class.getName());
+                    if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        Toast.makeText(myContext, "Please wait or choose other geo provider...", Toast.LENGTH_LONG).show();
+                    } else {
+                        LocationDialogFragment dialog = new LocationDialogFragment();
+                        dialog.show(getFragmentManager(),
+                                LocationDialogFragment.class.getName());
+                    }
                     pressedCount++;
                 }
                 pressedCount--;
@@ -216,16 +242,48 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
         Log.d(TAG, "mapfragment onCreate");
         FragmentManager fm = getFragmentManager();
         mapFragment = (com.google.android.gms.maps.MapFragment) fm.findFragmentById(R.id.map_Fragment);
-        meetingListFragment = new MeetingListFragment();
+        MeetingListFragment meetingListFragment = new MeetingListFragment();
         if (mapFragment == null) {
             mapFragment = com.google.android.gms.maps.MapFragment.newInstance();
             fm.beginTransaction().replace(R.id.map_Fragment, mapFragment).commit();
             fm.beginTransaction().replace(R.id.meeting_list_fragment, meetingListFragment).commit();
         }
+
         setUpMapIfNeeded();
 
     }
 
+    public void timerTask() {
+        if (locationFinderIsRunning = true)
+            FindMe.please(myContext, new FindMe.FindMeListener() {
+                @Override
+                public void foundLocation(String provider, Location location) {
+
+                    double lat = location.getLatitude();
+                    double lng = location.getLongitude();
+                    if ((latitude != lat) || (longitude != lng)) {
+                        latitude = lat;
+                        longitude = lng;
+                        Log.d(TAG, "after lat= " + latitude + " lng= " + longitude);
+                        MapFragment.this.location = location;
+                        CameraPosition cameraPosition = new CameraPosition.Builder()
+                                .target(new LatLng(latitude, longitude))
+                                .zoom(16)
+                                .bearing(45)
+                                .tilt(30)
+                                .build();
+                        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+                        map.animateCamera(cameraUpdate);
+                        map.setOnMyLocationChangeListener(null);
+                    }
+                }
+
+                @Override
+                public void couldntFindLocation() {
+                }
+            });
+        timerHandler.postDelayed(runnable, 10000);
+    }
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the
         // map.
@@ -249,8 +307,10 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
                                 init();
                             }
                         }, 1000);
+                        if (map == null) {
                         map = mapFragment.getMap();
                         init();
+                        }
                     }
                 }
             }, 100);
@@ -260,23 +320,23 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
     }
 
     private void init() {
-        map.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-            @Override
-            public void onMyLocationChange(Location location) {
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
-                Log.d(TAG, "after lat= " + latitude + " lng= " + longitude);
-                MapFragment.this.location = location;
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(latitude, longitude))
-                        .zoom(16)
-                        .bearing(45)
-                        .tilt(30)
-                        .build();
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
-                map.animateCamera(cameraUpdate);
-            }
-        });
+        locationFinderIsRunning = true;
+//        map.setLocationSource(followMeLocationSource);
+//        map.setOnMyLocationChangeListener();
+//        followMeLocationSource.activate(new MyLocationListener(myContext));
+
+//        map.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+//            @Override
+//            public void onMyLocationChange(Location location) {
+//
+//            }
+//        });
+
+        if (locationManager == null) {
+            locationManager = (LocationManager) myContext
+                    .getSystemService(Context.LOCATION_SERVICE);
+        }
+        runnable.run();
         if (count == 0) {
             addMeetings(map);
             map.setMyLocationEnabled(true);
@@ -287,9 +347,13 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
             map.setOnInfoWindowClickListener(this);
 
             if (location == null) {
+                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    Toast.makeText(myContext, "Please wait or choose other geo provider...", Toast.LENGTH_LONG).show();
+                } else {
                 LocationDialogFragment dialog = new LocationDialogFragment();
                 dialog.show(getFragmentManager(),
                         LocationDialogFragment.class.getName());
+                }
             } else {
                 longitude = location.getLongitude();
                 latitude = location.getLatitude();
@@ -514,4 +578,5 @@ public class MapFragment extends Fragment implements GoogleMap.OnInfoWindowClick
         mGroundOverlay.setTransparency(0.1f);
 
     }
+
 }

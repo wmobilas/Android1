@@ -1,8 +1,8 @@
 package build.agcy.test1.Core.GCM.Push;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -40,8 +40,13 @@ public abstract class Push {
         NotificationManager mNotificationManager;
         mNotificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
-        (buildr().build()).defaults |= Notification.DEFAULT_VIBRATE;
-        (buildr().build()).sound = Uri.parse("android.resource://" + "build.agcy.test1/" + R.raw.eat);
+//        (buildr().build()).defaults |= Notification.DEFAULT_VIBRATE;
+//        (buildr().build()).sound = Uri.parse("android.resource://" + R.raw.eat);
+//        String uri = (ContentResolver.SCHEME_ANDROID_RESOURCE
+//                + "://" + context.getPackageName() + "/" + R.raw.eat);
+//        (buildr().build()).defaults |= Notification.DEFAULT_SOUND;
+//        (buildr().build()).sound = Uri.parse(uri);
+//        buildr().setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 
         mNotificationManager.notify(NOTIFICATION_ID, buildr().build());
     }
@@ -54,17 +59,21 @@ public abstract class Push {
         deleteIntent.putExtra("id", String.valueOf(getNotificationId()));
         Resources res = context.getResources();
         Bitmap img = BitmapFactory.decodeResource
-                (res, R.drawable.ic_stat_w256h2561377940716185119eatfoodforkknifestreamline2);
+                (res, R.drawable.ic_stat_location_place);
         // todo: maybe show map on the notification image?
+        String uri = (ContentResolver.SCHEME_ANDROID_RESOURCE
+                + "://" + context.getPackageName() + "/" + R.raw.eat);
         builder
-                .setSmallIcon(R.drawable.ic_stat_location_place)
+                .setSmallIcon(R.drawable.pin2)
                 .setLargeIcon(img)
                 .setAutoCancel(true)
                 .setContentTitle(getTitle())
                 .setContentText(getMessage())
                 .setWhen(System.currentTimeMillis())
+                .setSound(Uri.parse(uri))
                 .addAction(R.drawable.cncl, "Dismiss", PendingIntent.getBroadcast(context, 12345, deleteIntent, PendingIntent.FLAG_CANCEL_CURRENT))
                 .addAction(R.drawable.acpt, "Accept", contentIntent).build();
+
 //        if (contentIntent != null)
 //            builder.setContentIntent(contentIntent);
         return builder;

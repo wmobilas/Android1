@@ -1,10 +1,12 @@
 package build.agcy.test1.Core.GCM.Push;
 
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import build.agcy.test1.Meetings.MeetingActivity;
@@ -54,13 +56,16 @@ public class PushAccept extends Push {
                 new NotificationCompat.Builder(context);
         Resources res = context.getResources();
         Bitmap img = BitmapFactory.decodeResource
-                (res, R.drawable.ic_stat_w256h2561377940716185119eatfoodforkknifestreamline2);
+                (res, R.drawable.ic_stat_location_place);
         //todo show avatar
+        String uri = (ContentResolver.SCHEME_ANDROID_RESOURCE
+                + "://" + context.getPackageName() + "/" + R.raw.eat);
         builder
-                .setSmallIcon(R.drawable.ic_stat_location_place)
+                .setSmallIcon(R.drawable.pin2)
                 .setLargeIcon(img)
                 .setAutoCancel(true)
                 .setContentTitle(getTitle())
+                .setSound(Uri.parse(uri))
                 .setWhen(System.currentTimeMillis())
                 .setContentText(getMessage())
                 .addAction(R.drawable.getuser, "Who is it?", getUserIntent())
