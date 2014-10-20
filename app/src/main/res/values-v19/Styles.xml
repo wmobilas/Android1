@@ -3,7 +3,7 @@
 
     <style name="NoActionBarTheme" parent="@android:style/Theme.DeviceDefault">
         <item name="android:actionBarStyle">@style/TranslucentActionBar</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowActionBar">false</item>
