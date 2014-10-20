@@ -5,5 +5,5 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:fitsSystemWindows="true"
-    tools:context="build.agcy.test1.Users.UserActivity"
+    tools:context="com.agcy.eatwithme.Users.UserActivity"
     tools:ignore="MergeRootFrame" />

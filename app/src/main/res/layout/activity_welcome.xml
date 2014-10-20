@@ -1,61 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:fitsSystemWindows="true"
-    android:clipToPadding="false">
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--android:animateLayoutChanges="true"-->
+    <!--android:fitsSystemWindows="true"-->
+    <!--android:clipToPadding="false"-->
+    <!--<LinearLayout-->
+    <!--android:id="@+id/lin"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical" />-->
+    <!--&lt;!&ndash;android:src="@drawable/b23"&ndash;&gt;-->
     <ImageView
-        android:src="@drawable/anim"
+        android:layout_height="match_parent"
+        android:id="@+id/lindrawable"
         android:scaleType="centerCrop"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent" />
+        android:src="@drawable/g123"
+        android:layout_width="match_parent" />
 
-    <ImageView
-        android:src="@drawable/ic_pig_full"
-        android:layout_width="wrap_content"
-        android:layout_height="143dp"
-        android:layout_marginBottom="-90dp"
-        android:visibility="gone"
-        android:alpha="0.9"
-        android:layout_gravity="center_horizontal|bottom" />
+    <!--<ImageView-->
+    <!--android:src="@drawable/ic_pig_full"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="143dp"-->
+    <!--android:layout_marginBottom="-90dp"-->
+    <!--android:visibility="gone"-->
+    <!--android:alpha="0.9"-->
+    <!--android:layout_gravity="center_horizontal|bottom" />-->
+
+    <LinearLayout
+        android:alpha="0.3"
+        android:background="@color/green_dark"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:alpha="0.5"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_width="250dp"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         android:weightSum="1"
+        android:visibility="invisible"
         android:orientation="vertical"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal">
 
         <ImageView
-            android:src="@drawable/icn"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:src="@drawable/icn2"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:layout_gravity="center_horizontal|bottom" />
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+    </LinearLayout>
 
-            <TextView
-                android:layout_width="287dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="15dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="eatwithme"
-                android:textSize="40sp"
-                android:textStyle=""
-                android:textColor="@color/white"
-                android:gravity="center_horizontal"
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/textWelcome" />
-        </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom">
+
+        <TextView
+            android:layout_width="287dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37dp"
+            android:layout_marginBottom="15dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="eatwithme"
+            android:textSize="40sp"
+            android:textStyle="normal"
+            android:textColor="@color/white"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/textWelcome" />
 
         <EditText
             android:visibility="visible"
@@ -63,13 +84,11 @@
             android:gravity="center"
             android:hint="Username"
             android:textSize="18sp"
-            android:alpha="0.9"
             android:background="@color/white"
-            android:textColor="@color/violet_dark"
-            android:textColorHint="@color/grey_darker"
+            android:textColor="@color/green"
+            android:textColorHint="@color/green"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:textStyle="normal"
             android:inputType="textNoSuggestions" />
         <!--<EditText-->
         <!--android:layout_width="match_parent"-->
@@ -86,16 +105,14 @@
         <EditText
             android:visibility="visible"
             android:id="@+id/password_login"
-            android:alpha="0.9"
             android:gravity="center"
             android:hint="Password"
             android:textSize="18sp"
             android:background="@color/white"
-            android:textColor="@color/violet_dark"
-            android:textColorHint="@color/grey_darker"
+            android:textColor="@color/green"
+            android:textColorHint="@color/green"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:textStyle="normal"
             android:inputType="textPassword" />
         <!--<EditText-->
         <!--android:layout_width="match_parent"-->

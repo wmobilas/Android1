@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?><!-- File created by the Android Action Bar Style Generator
+
+     Copyright (C) 2011 The Android Open Source Project
+     Copyright (C) 2012 readyState Software Ltd
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+
+    <style name="Theme.Mylight" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_mylight</item>
+        <!--<item name="android:popupMenuStyle">@style/PopupMenu.Mylight</item>-->
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Mylight</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Mylight</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Mylight</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Mylight</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_mylight</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_mylight
+        </item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Mylight</item>
+
+        <item name="android:popupMenuStyle">@style/PopupMenu.Violet</item>
+        <item name="android:itemTextAppearance">@style/TextAppearance</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:animation">@style/AnimationActivity</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:itemBackground">@color/white</item>
+        <item name="android:colorBackground">@color/white</item>
+
+        <!-- Light.DarkActionBar specific -->
+        <item name="android:actionBarWidgetTheme">@style/Theme.Mylight.Widget</item>
+
+        <item name="android:actionOverflowButtonStyle">@style/MyActionButtonOverflow</item>
+    </style>
+
+    <style name="ActionBar.Solid.Mylight" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/gradient</item>
+        <!--<item name="android:background">@drawable/ab_solid_mylight</item>-->
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_mylight</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_mylight</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Mylight</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Mylight" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_mylight</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Mylight</item>
+    </style>
+
+    <style name="PopupMenu.Mylight" parent="@android:style/Widget.Holo.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_mylight</item>
+    </style>
+
+    <style name="DropDownListView.Mylight" parent="@android:style/Widget.Holo.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_mylight</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Mylight" parent="@android:style/Widget.Holo.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_mylight</item>
+    </style>
+
+    <style name="DropDownNav.Mylight" parent="@android:style/Widget.Holo.Spinner">
+        <item name="android:background">@drawable/spinner_background_ab_mylight</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_mylight</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_mylight</item>
+    </style>
+
+    <style name="ProgressBar.Mylight" parent="@android:style/Widget.Holo.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_mylight</item>
+    </style>
+
+    <style name="ActionButton.CloseMode.Mylight" parent="@android:style/Widget.Holo.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_mylight</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Mylight.Widget" parent="@android:style/Theme.Holo">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Mylight</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Mylight</item>
+    </style>
+
+    <style name="myLight" parent="@style/_myLight" />
+
+    <style name="_myLight" parent="@style/Theme.Mylight">
+
+        <item name="android:editTextStyle">@style/EditTextmyLight</item>
+
+        <item name="android:textColorHighlight">#993fb53f</item>
+
+        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewmyLight</item>
+
+        <item name="android:checkboxStyle">@style/CheckBoxmyLight</item>
+
+        <item name="android:buttonStyle">@style/ButtonmyLight</item>
+
+        <item name="android:imageButtonStyle">@style/ImageButtonmyLight</item>
+
+        <item name="android:spinnerStyle">@style/SpinnermyLight</item>
+
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemmyLight</item>
+
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBarmyLight</item>
+
+        <item name="android:seekBarStyle">@style/SeekBarmyLight</item>
+
+        <item name="android:buttonStyleToggle">@style/TogglemyLight</item>
+
+        <item name="android:listViewStyle">@style/ListViewmyLight</item>
+
+        <item name="android:listViewWhiteStyle">@style/ListViewmyLight.White</item>
+
+        <item name="android:spinnerItemStyle">@style/SpinnerItemmyLight</item>
+
+    </style>
+
+    <style name="EditTextmyLight" parent="android:Widget.EditText">
+        <item name="android:background">@drawable/mylight_edit_text_holo_light</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="AutoCompleteTextViewmyLight" parent="android:Widget.AutoCompleteTextView">
+        <item name="android:dropDownSelector">@drawable/mylight_list_selector_holo_light</item>
+        <item name="android:background">@drawable/mylight_edit_text_holo_light</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="CheckBoxmyLight" parent="android:Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/mylight_btn_check_holo_light</item>
+    </style>
+
+    <style name="ButtonmyLight" parent="android:Widget.Button">
+        <item name="android:background">@drawable/mylight_btn_default_holo_light</item>
+        <item name="android:minHeight">48dip</item>
+        <item name="android:minWidth">64dip</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="ImageButtonmyLight" parent="android:Widget.ImageButton">
+        <item name="android:background">@drawable/mylight_btn_default_holo_light</item>
+    </style>
+
+    <style name="SpinnermyLight" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/mylight_spinner_background_holo_light</item>
+        <item name="android:dropDownSelector">@drawable/mylight_list_selector_holo_light</item>
+    </style>
+
+    <style name="SpinnerDropDownItemmyLight" parent="android:Widget.DropDownItem.Spinner">
+        <item name="android:checkMark">@drawable/mylight_btn_radio_holo_light</item>
+    </style>
+
+    <style name="TabmyLight">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+        <item name="android:background">@drawable/mylight_tab_indicator_holo</item>
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minWidth">80dip</item>
+    </style>
+
+    <style name="TabTextmyLight">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <!-- v14 <item name="android:textAllCaps">true</item> -->
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:maxWidth">180dip</item>
+    </style>
+
+    <style name="ProgressBarmyLight" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/mylight_progress_horizontal_holo_light
+        </item>
+        <item name="android:indeterminateDrawable">
+            @drawable/mylight_progress_indeterminate_horizontal_holo_light
+        </item>
+        <item name="android:minHeight">16dip</item>
+        <item name="android:maxHeight">16dip</item>
+    </style>
+
+    <style name="SeekBarmyLight" parent="android:Widget.SeekBar">
+        <item name="android:progressDrawable">
+            @drawable/mylight_scrubber_progress_horizontal_holo_light
+        </item>
+        <item name="android:indeterminateDrawable">
+            @drawable/mylight_scrubber_progress_horizontal_holo_light
+        </item>
+        <item name="android:minHeight">13dip</item>
+        <item name="android:maxHeight">13dip</item>
+        <item name="android:thumb">@drawable/mylight_scrubber_control_selector_holo_light</item>
+        <item name="android:thumbOffset">16dip</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+    </style>
+
+    <style name="TogglemyLight" parent="android:Widget.Button.Toggle">
+        <item name="android:background">@drawable/mylight_btn_toggle_holo_light</item>
+        <item name="android:minHeight">48dip</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="ListViewmyLight" parent="android:Widget.ListView">
+        <item name="android:listSelector">@drawable/mylight_list_selector_holo_light</item>
+    </style>
+
+    <style name="ListViewmyLight.White" parent="android:Widget.ListView.White">
+        <item name="android:listSelector">@drawable/mylight_list_selector_holo_light</item>
+    </style>
+
+    <style name="SpinnerItemmyLight" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+        <item name="android:textColor">#000000</item>
+    </style>
+
+</resources>

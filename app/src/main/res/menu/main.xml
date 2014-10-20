@@ -1,14 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="build.agcy.test1.Main.MainActivity">
+    tools:context="com.agcy.eatwithme.Main.MainActivity">
     <item
         android:id="@+id/action_example"
-        android:icon="@drawable/refresh"
+        android:icon="@android:drawable/stat_notify_sync"
         android:title="@string/action_example"
+        android:visible="false"
+        android:enabled="false"
         android:showAsAction="withText|ifRoom" />
     <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
+        android:actionLayout="@layout/nav_drawer_item"
         android:orderInCategory="100"
         android:showAsAction="never" />
 </menu>

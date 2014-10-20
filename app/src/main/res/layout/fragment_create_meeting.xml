@@ -29,7 +29,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="182dp"
-            android:background="@color/violet_dark"
+            android:background="@color/green_dark"
             android:gravity="center_horizontal|bottom"
             android:layout_gravity="center_horizontal|bottom">
 
@@ -74,8 +74,8 @@
                     android:hint="Input here"
                     android:textSize="18sp"
                     android:background="@color/white"
-                    android:textColor="@color/violet_dark"
-                    android:textColorHint="@color/violet_dark"
+                    android:textColor="@color/green"
+                    android:textColorHint="@color/green"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textStyle="normal"
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@color/white"
-                android:textColor="@color/violet_dark" />
+                android:textColor="@color/green" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -121,13 +121,13 @@
                 android:textSize="18sp"
                 android:layout_height="60dp"
                 android:background="@color/white"
-                android:textColor="@color/violet_dark" />
+                android:textColor="@color/green" />
 
             <Button
                 android:id="@+id/create_meeting"
                 android:text="Create"
                 android:textSize="18sp"
-                android:background="@color/violet_dark"
+                android:background="@color/green"
                 android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="60dp" />

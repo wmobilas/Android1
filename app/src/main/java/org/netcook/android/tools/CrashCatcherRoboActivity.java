@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 
+import com.agcy.eatwithme.Main.MainActivity;
+
 import org.netcook.android.security.Crypter;
 import org.netcook.android.security.Crypter.EncryptResponse;
 import org.netcook.android.sysinfo.SystemInfoBuilder;
@@ -19,8 +21,6 @@ import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.Writer;
 import java.util.ArrayList;
-
-import build.agcy.test1.Main.MainActivity;
 
 /**
  * The Simple crash catcher activity for automatic send email report.

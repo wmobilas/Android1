@@ -21,7 +21,7 @@
     <TextView
         android:text="Confirmed"
         android:id="@+id/message"
-        android:textColor="@color/violet_dark"
+        android:textColor="@color/green_dark"
         android:alpha="0.9"
         android:background="@color/white"
         android:layout_width="match_parent"

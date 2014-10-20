@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:fitsSystemWindows="true"
-    tools:context="build.agcy.test1.Users.UserActivity$PlaceholderFragment"
+    tools:context="com.agcy.eatwithme.Users.UserActivity$PlaceholderFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
@@ -83,7 +83,7 @@
                 android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
-                android:textColor="@color/violet_dark"
+                android:textColor="@color/green_dark"
                 android:textSize="28sp"
                 android:layout_below="@+id/photo"
                 android:layout_centerHorizontal="true" />
@@ -91,7 +91,7 @@
             <ListView
                 android:id="@+id/message_list"
                 android:layout_height="match_parent"
-                android:textColor="@color/violet_dark"
+                android:textColor="@color/green_dark"
                 android:layout_width="match_parent"
                 android:background="@color/white"
                 android:layout_alignParentLeft="true"
@@ -131,7 +131,7 @@
                 android:background="@color/white"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
-                android:textColor="@color/violet_dark"
+                android:textColor="@color/green_dark"
                 android:text="Text here"
                 android:layout_weight="1"
                 android:inputType="text" />
@@ -139,7 +139,7 @@
             <Button
                 android:id="@+id/btn_Send"
                 android:layout_weight="2"
-                android:background="@color/violet_dark"
+                android:background="@color/green_dark"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"

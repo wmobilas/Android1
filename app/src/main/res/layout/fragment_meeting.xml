@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context="build.agcy.test1.Meetings.MeetingActivity$PlaceholderFragment"
+    tools:context="com.agcy.eatwithme.Meetings.MeetingActivity$PlaceholderFragment"
     android:gravity="center_horizontal"
     android:clipToPadding="false"
     android:fitsSystemWindows="true"
@@ -42,7 +42,7 @@
 
                 <TextView
                     android:text="by username"
-                    android:textColor="@color/violet_dark"
+                    android:textColor="@color/green_dark"
                     android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 android:id="@+id/description"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Description"
-                android:textColor="@color/violet_dark"
+                android:textColor="@color/green_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -119,15 +119,15 @@
             </RelativeLayout>
         </RelativeLayout>
 
-        <build.agcy.test1.Core.Helpers.CustomImageView
+        <com.agcy.eatwithme.Core.Helpers.OnLoadImageView
             android:id="@+id/image"
-            android:src="@color/white"
+            android:src="@color/transparent"
             android:background="@color/white"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/relativeLayout"
-            android:visibility="invisible" />
+            android:visibility="visible" />
     </RelativeLayout>
 
     <FrameLayout

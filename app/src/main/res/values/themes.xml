@@ -3,19 +3,19 @@
 
     <style name="AnimationActivity" parent="@style/AppTheme.Violet">
 
-        <item name="android:fragmentCloseEnterAnimation">@animator/comming_in</item>
-        <item name="android:fragmentOpenEnterAnimation">@animator/comming_in</item>
-        <item name="android:fragmentFadeEnterAnimation">@animator/comming_in</item>
-        <item name="android:fragmentFadeExitAnimation">@animator/comming_out</item>
-        <item name="android:fragmentCloseExitAnimation">@animator/comming_out</item>
-        <item name="android:fragmentOpenExitAnimation">@animator/comming_out</item>
-        <item name="android:activityCloseEnterAnimation">@animator/comming_in</item>
-        <item name="android:activityOpenEnterAnimation">@animator/pushdown_in</item>
-        <item name="android:activityOpenExitAnimation">@animator/pushdown_out</item>
-        <item name="android:activityCloseExitAnimation">@animator/comming_out</item>
-        <item name="android:inAnimation">@animator/comming_in</item>
-        <item name="android:outAnimation">@animator/comming_out</item>
-        <item name="android:popupAnimationStyle">@animator/pushdown_in</item>
+        <item name="android:fragmentCloseEnterAnimation">@anim/comming_in</item>
+        <item name="android:fragmentOpenEnterAnimation">@anim/comming_in</item>
+        <item name="android:fragmentFadeEnterAnimation">@anim/comming_in</item>
+        <item name="android:fragmentFadeExitAnimation">@anim/comming_out</item>
+        <item name="android:fragmentCloseExitAnimation">@anim/comming_out</item>
+        <item name="android:fragmentOpenExitAnimation">@anim/comming_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/comming_in</item>
+        <item name="android:activityOpenEnterAnimation">@anim/pushdown_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/pushdown_out</item>
+        <item name="android:activityCloseExitAnimation">@anim/comming_out</item>
+        <item name="android:inAnimation">@anim/comming_in</item>
+        <item name="android:outAnimation">@anim/comming_out</item>
+        <item name="android:popupAnimationStyle">@anim/pushdown_in</item>
     </style>
 
 </resources>

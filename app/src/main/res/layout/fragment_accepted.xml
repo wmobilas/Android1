@@ -4,9 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:gravity="center_horizontal|bottom"
-    android:background="@color/white"
     android:layout_height="60dp"
-    android:alpha="0.9"
     android:layout_gravity="center_horizontal">
 
     <LinearLayout
@@ -22,7 +20,7 @@
     <TextView
         android:text="You've already requested this meeting"
         android:id="@+id/message"
-        android:textColor="@color/violet_dark"
+        android:textColor="@color/green_dark"
         android:alpha="0.9"
         android:background="@color/white"
         android:layout_width="match_parent"

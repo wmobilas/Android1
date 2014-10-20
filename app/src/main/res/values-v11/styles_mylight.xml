@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AutoCompleteTextViewmyLight" parent="android:Widget.Holo.Light.AutoCompleteTextView">
+        <item name="android:dropDownSelector">@drawable/mylight_list_selector_holo_light</item>
+        <item name="android:background">@drawable/mylight_edit_text_holo_light</item>
+    </style>
+
+    <style name="ButtonmyLight" parent="android:Widget.Holo.Light.Button">
+        <item name="android:background">@drawable/mylight_btn_default_holo_light</item>
+    </style>
+
+    <style name="ImageButtonmyLight" parent="android:Widget.Holo.Light.ImageButton">
+        <item name="android:background">@drawable/mylight_btn_default_holo_light</item>
+    </style>
+
+    <style name="SpinnermyLight" parent="android:Widget.Holo.Light.Spinner">
+        <item name="android:background">@drawable/mylight_spinner_background_holo_light</item>
+        <item name="android:dropDownSelector">@drawable/mylight_list_selector_holo_light</item>
+    </style>
+
+    <style name="ProgressBarmyLight" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/mylight_progress_horizontal_holo_light
+        </item>
+        <item name="android:indeterminateDrawable">
+            @drawable/mylight_progress_indeterminate_horizontal_holo_light
+        </item>
+    </style>
+
+    <style name="SeekBarmyLight" parent="android:Widget.Holo.Light.SeekBar">
+        <item name="android:progressDrawable">
+            @drawable/mylight_scrubber_progress_horizontal_holo_light
+        </item>
+        <item name="android:indeterminateDrawable">
+            @drawable/mylight_scrubber_progress_horizontal_holo_light
+        </item>
+        <item name="android:thumb">@drawable/mylight_scrubber_control_selector_holo_light</item>
+    </style>
+
+    <style name="TogglemyLight" parent="android:Widget.Holo.Light.Button.Toggle">
+        <item name="android:background">@drawable/mylight_btn_toggle_holo_light</item>
+    </style>
+
+    <style name="myLight" parent="@style/_myLight" />
+
+    <style name="_myLight" parent="@style/Theme.Mylight">
+
+        <item name="android:editTextBackground">@drawable/mylight_edit_text_holo_light</item>
+
+        <item name="android:textColorHighlight">#993fb53f</item>
+        <item name="android:textSelectHandleLeft">@drawable/mylight_text_select_handle_left</item>
+        <item name="android:textSelectHandleRight">@drawable/mylight_text_select_handle_right</item>
+        <item name="android:textSelectHandle">@drawable/mylight_text_select_handle_middle</item>
+
+        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewmyLight</item>
+
+        <item name="android:listChoiceIndicatorMultiple">@drawable/mylight_btn_check_holo_light
+        </item>
+
+        <item name="android:buttonStyle">@style/ButtonmyLight</item>
+
+        <item name="android:imageButtonStyle">@style/ImageButtonmyLight</item>
+
+        <item name="android:dropDownSpinnerStyle">@style/SpinnermyLight</item>
+
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBarmyLight</item>
+
+        <item name="android:seekBarStyle">@style/SeekBarmyLight</item>
+
+        <item name="android:buttonStyleToggle">@style/TogglemyLight</item>
+
+        <item name="android:listChoiceBackgroundIndicator">
+            @drawable/mylight_list_selector_holo_light
+        </item>
+
+        <item name="android:activatedBackgroundIndicator">
+            @drawable/mylight_activated_background_holo_light
+        </item>
+
+        <item name="android:fastScrollThumbDrawable">@drawable/mylight_fastscroll_thumb_holo</item>
+
+    </style>
+</resources>

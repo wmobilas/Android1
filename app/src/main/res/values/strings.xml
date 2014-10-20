@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="black_light">#222222</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#1a1a1a</color>
     <color name="grey_darker">#555555</color>
+    <color name="grey">#999999</color>
     <color name="grey_default">#dddddd</color>
+    <color name="grey_light">#fafafa</color>
     <color name="transparent">#00000000</color>
-    <color name="violet">#aa66cc</color>
-    <color name="violet_dark">#9933cc</color>
+    <color name="green">#3fb53f</color>
+    <color name="green_dark">#309f32</color>
+    <color name="contrast">#b53fb5</color>
+    <color name="red_contrast">#b53f3f</color>
+    <color name="murmur">#3fb584</color>
+    <color name="blue">#3fa7b5</color>
+    <color name="dirty">#b5af3f</color>
 
     <string name="send">Send</string>
     <string name="type">Name your meeting</string>
-    <string name="app_name">EatWithMe</string>
+    <string name="app_name">eatwithme</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Main</string>

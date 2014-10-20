@@ -6,5 +6,5 @@
     android:divider="@android:color/transparent"
     android:dividerHeight="0dp"
     android:addStatesFromChildren="true"
-    android:background="@color/black_light"
-    tools:context="build.agcy.test1.Main.NavigationDrawerFragment" />
+    android:background="@color/white"
+    tools:context="com.agcy.eatwithme.Main.NavigationDrawerFragment" />

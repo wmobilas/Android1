@@ -10,9 +10,9 @@
         android:paddingTop="2dip"
         android:paddingBottom="3dip"
         android:layout_width="fill_parent"
-        android:background="@color/black_light"
+        android:background="@color/grey_default"
         android:layout_height="wrap_content"
-        android:textColor="@color/violet_dark" />
+        android:textColor="@color/green_dark" />
     <!--<TextView-->
     <!--android:id="@+id/listTextView"-->
     <!--android:layout_width="wrap_content"-->

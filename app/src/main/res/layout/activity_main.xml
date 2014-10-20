@@ -4,7 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="build.agcy.test1.Main.MainActivity">
+    tools:context="com.agcy.eatwithme.Main.MainActivity">
 
     <!-- As the main content view, the view below consumes the entire
          space available using match_parent in both dimensions. -->
@@ -30,7 +30,7 @@
         android:clipToPadding="false"
         android:fitsSystemWindows="true"
         android:layout_gravity="start"
-        android:name="build.agcy.test1.Main.NavigationDrawerFragment"
+        android:name="com.agcy.eatwithme.Main.NavigationDrawerFragment"
         tools:layout="@layout/fragment_navigation_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

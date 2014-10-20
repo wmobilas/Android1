@@ -40,7 +40,7 @@
         android:layout_toEndOf="@id/icon"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="@color/violet_dark"
+        android:textColor="@color/green_dark"
         android:gravity="center_vertical"
         android:paddingRight="40dp"
         android:paddingLeft="0dp"
@@ -57,7 +57,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
         android:layout_marginEnd="8dp"
-        android:textColor="@color/common_signin_btn_default_background"
+        android:textColor="@color/green_dark"
         android:visibility="invisible" />
 
     <LinearLayout
